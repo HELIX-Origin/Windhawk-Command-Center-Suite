@@ -24,10 +24,10 @@
 
 | Milestone | Target Version | Category | Status | Primary Focus |
 | :--- | :--- | :--- | :--- | :--- |
-| **M.01** | `v1.0.0-preview` | Governance | 🚧 Active | Multi-Agent Ecosystem, Mandatory Rules & Static Gate |
-| **M.02** | `v1.1.0-preview` | Theming | ⏳ Planned | Windows 11 Notification Center Styler Generation |
-| **M.03** | `v1.2.0-preview` | Theming | ⏳ Planned | Windows 11 File Explorer Styler Generation |
-| **M.04** | `v1.3.0` | Release | ⏳ Planned | Unified Suite General Availability & Live Verification |
+| **M.01** | `v1.0.0-preview` | Governance | ✅ Complete | Multi-Agent Ecosystem, Mandatory Rules & Static Gate |
+| **M.02** | `v1.1.0-preview` | Theming | ✅ Complete | Windows 11 Notification Center Styler Generation |
+| **M.03** | `v1.2.0-preview` | Theming | ⏸️ Shelved | Windows 11 File Explorer Styler (Deferred per user decision) |
+| **M.04** | `v1.3.0` | Release | ⏳ Planned | Unified Suite General Availability & Packaging |
 
 ---
 
@@ -63,22 +63,22 @@ Build a complete, production-grade agent ecosystem matching the patterns in `D:\
 
 ---
 
-## 📋 Planned Milestones
+## 📋 Milestones Status
 
-### Milestone M.02: Windows 11 Notification Center Styler Generation
+### ✅ Milestone M.02: Windows 11 Notification Center Styler Generation (Completed)
 
 - Implementation of `src/windows-11-notification-center-styler.yml`.
 - Frosted glass and rim border applied to Notification Center, Calendar, Control Center (Quick Actions), Media Controls, Toasts, and Taskbar Jump Lists.
-- Static gate validation and desktop verification checklist.
+- Compact media layout, ElementBackground tokens, and verified hover borders.
+- Static gate validation (0 errors, 0 warnings) and user desktop verification complete.
 
-### Milestone M.03: Windows 11 File Explorer Styler Generation
+### ⏸️ Milestone M.03: Windows 11 File Explorer Styler Generation (Shelved / Deferred)
 
-- Implementation of `src/windows-11-file-explorer-styler.yml`.
-- Whole-window translucent acrylic effect (`backgroundTranslucentEffectRegion: ""`) to theme the Win32 file list.
-- Frosted glass styling for WinUI 3 tabs, nav bar, breadcrumbs, search box, command bar, and modern context menus.
-- Static gate validation and desktop verification checklist.
+- Evaluated live styling on Windows 11 File Explorer.
+- Shelved per user directive: without intrusive third-party background injectors (e.g. TranslucentWindows) which affect other programs, File Explorer's Win32/WinUI 3 hybrid architecture cannot achieve a glass aesthetic that satisfies the suite's design standards.
+- File Explorer styler generation is deferred.
 
-### Milestone M.04: Unified Suite Release & Verification
+### ⏳ Milestone M.04: Unified Suite Release & Verification
 
 - Full suite verification across all four mods on Windows 11.
 - Release notes publication and documentation completion.

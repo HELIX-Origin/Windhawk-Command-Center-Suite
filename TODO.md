@@ -126,20 +126,18 @@ Implement the full Command Center Glass theme for `src/windows-11-notification-c
 - [x] Style Media Transport controls (`Grid#MediaTransportControlsRegion`, thumbnail art, transport buttons).
 - [x] Style notification popup toasts and taskbar jump lists (`Border#ToastBackgroundBorder`, `Border#JumpListRestyledAcrylic`).
 - [x] Validate with `tools/Test-WindhawkStyles.ps1` (0 errors, 0 warnings).
-- [ ] Complete live desktop verification checklist with user.
+- [x] Complete live desktop verification checklist with user (rebased on Matter selectors, ElementBackground, compact media, hover borders).
 
 ---
 
-### 📁 Workstream W.03: Windows 11 File Explorer Styler Generation (Safe Glass Chrome)
+### 📁 Workstream W.03: Windows 11 File Explorer Styler Generation (Shelved / Deferred)
+
+> ⏸️ **Status: Shelved / Deferred**: User evaluated live visual results and decided to drop File Explorer styling for now. Without intrusive third-party translucency injectors (like TranslucentWindows) which affect the entire OS, File Explorer cannot achieve a cohesive glass appearance that matches the suite.
 
 ```mermaid
 flowchart TD
-    W3_Native["Keep Native Explorer Frame (No Heavy Mods)"] --> W3_Tabs["Glass Tabs & Tab Bar"]
-    W3_Tabs --> W3_Nav["Navigation & Breadcrumb Bar"]
-    W3_Nav --> W3_CmdBar["Command Bar & Modern Actions (No Hidden Elements)"]
-    W3_CmdBar --> W3_Details["Details Pane & Context Flyouts"]
-    W3_Details --> W3_Validate["Test-WindhawkStyles.ps1 Validation"]
-    W3_Validate --> W3_Handoff["Desktop Verification Handoff"]
+    W3_Native["Keep Native Explorer Frame"] --> W3_Eval["Visual Evaluation with User"]
+    W3_Eval --> W3_Shelve["Shelved / Deferred per User Directive"]
 ```
 
 Implement the Command Center Glass theme for `src/windows-11-file-explorer-styler.yml` targeting the `windows-11-file-explorer-styler` mod, adhering strictly to the Safe Glass Chrome principle.
