@@ -12,11 +12,18 @@ styleConstants:
   - BorderThickness=0.3,1,0.3,1
   - PanelRadius=13
   - CardRadius=10
-  - ButtonRadius=8
   - ChipRadius=6
+  - thumbnailImageSize=300
 controlStyles:
-  # ─── 1. MAIN FLYOUT PANELS → Glass card surfaces ──────────────────────────
-  # PanelRadius=13: noticeable but not extreme — matches Control Center panel rounding.
+  # ─── Based on Matter theme by ZoraizLajwer (all selectors verified) ────────
+  # Design tokens swapped for Command Center Glass language:
+  #   $base     → $Background (WindhawkBlur Frosted)
+  #   $overlay  → $OverlayColor
+  #   $overlay2 → $OverlayColor2
+  #   $accentColor → $AccentColor
+  #   r1=18 → PanelRadius=13, r2=14 → CardRadius=10, r3=12 → ChipRadius=6
+  #   BorderBrush added to panel-level elements for gradient rim signature.
+
   - target: Grid#NotificationCenterGrid
     styles:
       - Background:=$Background
@@ -32,6 +39,48 @@ controlStyles:
       - BorderThickness=$BorderThickness
       - CornerRadius=$PanelRadius
       - Shadow:=
+      - Margin=0,6,0,6
+      - MinHeight=40
+
+  - target: ScrollViewer#CalendarControlScrollViewer
+    styles:
+      - Background:=$OverlayColor
+      - CornerRadius=$CardRadius
+      - Margin=-10,11,-10,-14
+      - Shadow:=
+
+  - target: Border#CalendarHeaderMinimizedOverlay
+    styles:
+      - Background:=$OverlayColor
+      - CornerRadius=$CardRadius
+      - Shadow:=
+      - Margin=-10,-6,-10,-8
+      - Height=45
+
+  - target: ActionCenter.FocusSessionControl#FocusSessionControl > Grid#FocusGrid
+    styles:
+      - Background:=$OverlayColor
+      - CornerRadius=$CardRadius
+      - Margin=6,7,6,6
+      - Shadow:=
+
+  - target: MenuFlyoutPresenter
+    styles:
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$ChipRadius
+      - Padding=1,2,1,2
+      - Shadow:=
+
+  - target: Border#JumpListRestyledAcrylic
+    styles:
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$ChipRadius
+      - Margin=-2,-2,-2,-2
+      - Shadow:=
 
   - target: Grid#ControlCenterRegion
     styles:
@@ -40,224 +89,333 @@ controlStyles:
       - BorderThickness=$BorderThickness
       - CornerRadius=$PanelRadius
       - Shadow:=
+      - Margin=0,0,0,-6
 
-  # ─── 2. INNER BACKGROUND RESETS → Prevent double-blur ────────────────────
-  # Confirmed via UWPSpy (ShellHost.exe, Win11 24H2):
-  # Border#RootGridBorder is the system-painted background inside
-  # ControlCenter.ControlCenterView > Grid#RootGrid. Cleared to prevent
-  # stacking a second blur layer over the outer ControlCenterRegion glass.
-  - target: ControlCenter.ControlCenterView > Grid#RootGrid > Border#RootGridBorder
+  - target: ContentPresenter#PageContent
     styles:
-      - Background:=Transparent
-      - BorderBrush:=Transparent
-      - BorderThickness=0
+      - Background:=<SolidColorBrush Color="Transparent"/>
+      - Shadow:=
 
-  - target: Grid#L1Grid
+  - target: ContentPresenter#PageContent > Grid > Border
     styles:
-      - Background:=Transparent
+      - Background:=$OverlayColor
+      - CornerRadius=$CardRadius
+      - Margin=8,0,8,2
+      - Shadow:=
+
+  - target: QuickActions.ControlCenter.AccessibleWindow#PageWindow > ContentPresenter > Grid#FullScreenPageRoot
+    styles:
+      - Background:=<SolidColorBrush Color="Transparent"/>
+      - Shadow:=
+
+  - target: QuickActions.ControlCenter.AccessibleWindow#PageWindow > ContentPresenter > Grid#FullScreenPageRoot > ContentPresenter#PageHeader
+    styles:
+      - Background:=$OverlayColor
+      - CornerRadius=$CardRadius
+      - Margin=7,7,7,7
+      - Shadow:=
 
   - target: ScrollViewer#ListContent
     styles:
-      - Background:=Transparent
-
-  - target: ActionCenter.FocusSessionControl#FocusSessionControl > Grid#FocusGrid
-    styles:
-      - Background:=Transparent
-      - BorderBrush:=Transparent
-      - BorderThickness=0
-
-  # Media controls region is a SIBLING of ControlCenterRegion under RootContent,
-  # not a child — it needs its own independent glass card.
-  - target: Windows.UI.Xaml.Controls.Grid#MediaTransportControlsRegion
-    styles:
-      - Background:=$Background
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$PanelRadius
-      - Shadow:=
-
-  # ─── 3. NOTIFICATION CENTER ELEMENTS ─────────────────────────────────────
-  - target: Border#CalendarHeaderMinimizedOverlay
-    styles:
-      - Visibility=1
-
-  # CardRadius=10: notification list items are inner cards — one step below the panel.
-  - target: ActionCenter.NotificationListViewItem
-    styles:
+      - Background:=$OverlayColor
       - CornerRadius=$CardRadius
-      - Margin=0,2,0,2
+      - Margin=8,0,8,0
+      - Shadow:=
 
   - target: ActionCenter.FlexibleToastView#FlexibleNormalToastView
     styles:
-      - Background:=Transparent
-      - BorderBrush:=Transparent
-      - BorderThickness=0
+      - Background:=<SolidColorBrush Color="Transparent"/>
+      - Shadow:=
 
-  # ChipRadius=6: small action buttons — dismiss, clear, expand/collapse.
-  - target: Button#DismissButton
-    styles:
-      - CornerRadius=$ChipRadius
-      - BorderThickness=$BorderThickness
-      - BorderBrush:=$BorderBrush
-      - Background@PointerOver:=$OverlayColor2
-      - Background@Pressed:=$OverlayColor
-      - RenderTransform@Pressed:=<ScaleTransform ScaleX="0.9" ScaleY="0.9" />
-      - RenderTransformOrigin=0.5,0.5
-
-  - target: Button#ClearAll
-    styles:
-      - CornerRadius=$ChipRadius
-      - BorderThickness=$BorderThickness
-      - BorderBrush:=$BorderBrush
-      - Background@PointerOver:=$OverlayColor2
-      - Background@Pressed:=$OverlayColor
-      - AccessKey=x
-
-  # ─── 4. TOAST NOTIFICATION CARDS ─────────────────────────────────────────
-  # CardRadius=10: toast popups are floating cards — same tier as notification items.
   - target: Border#ToastBackgroundBorder, Border#ToastBackgroundBorder2
     styles:
       - Background:=$Background
       - BorderBrush:=$BorderBrush
       - BorderThickness=$BorderThickness
       - CornerRadius=$CardRadius
+      - Shadow:=
 
-  # ─── 5. CALENDAR CENTER ELEMENTS ─────────────────────────────────────────
-  - target: Windows.UI.Xaml.Controls.StackPanel#CalendarHeader
+  - target: JumpViewUI.SystemItemListViewItem > Grid#LayoutRoot > Border#BackgroundBorder
     styles:
-      - Margin=0,4,0,4
-
-  # ChipRadius=6 + glass chip per day cell for "squared" calendar grid look.
-  # OverlayColor2 gives a very subtle tint on each day tile so the grid
-  # reads as a structured array of glass chips rather than bare text.
-  - target: Windows.UI.Xaml.Controls.CalendarViewDayItem > Windows.UI.Xaml.Controls.Border
-    styles:
-      - CornerRadius=4
-      - BorderThickness=0.3
-      - BorderBrush:=$BorderBrush
-      - Background:=$OverlayColor2
-
-  - target: Button#ExpandCollapseButton
-    styles:
-      - CornerRadius=$ChipRadius
-      - BorderThickness=$BorderThickness
-      - BorderBrush:=$BorderBrush
-      - Background:=$OverlayColor2
-      - Background@PointerOver:=$OverlayColor
-      - Background@Pressed:=$OverlayColor
-      - AccessKey=e
-
-  # ─── 6. QUICK SETTINGS TOGGLES ───────────────────────────────────────────
-  # Confirmed via UWPSpy (ShellHost.exe 24H2): ControlCenter.PaginatedToggleButton.
-  # ButtonRadius=8: toggle button tiles.
-  # Background:=$OverlayColor2 as default (inactive) tint — gives the tile a
-  # visible glass surface. Active/checked state color is managed by the control
-  # itself and is not overridden here.
-  # Note: BorderBrush/BorderThickness may not render if the custom template
-  # does not bind {TemplateBinding BorderBrush}. Logged in BUGS.md.
-  - target: ControlCenter.PaginatedToggleButton#ToggleButton, QuickActions.AccessibleToggleButton#ToggleButton
-    styles:
-      - CornerRadius=$ButtonRadius
-      - Background:=$OverlayColor2
-      - Background@PointerOver:=$OverlayColor
-      - Background@Pressed:=$OverlayColor
-
-  # Confirmed via UWPSpy: SplitL2Button is a sibling toggle in each GridViewItem.
-  - target: ControlCenter.PaginatedToggleButton#SplitL2Button, QuickActions.AccessibleToggleButton#SplitL2Button
-    styles:
-      - CornerRadius=$ButtonRadius
-      - Background:=$OverlayColor2
-      - Background@PointerOver:=$OverlayColor
-      - Background@Pressed:=$OverlayColor
-
-  # ChipRadius=6: footer settings button is a small chip-style action.
-  - target: Windows.UI.Xaml.Controls.Button#FooterButton
-    styles:
-      - CornerRadius=$ChipRadius
-      - BorderThickness=$BorderThickness
-      - BorderBrush:=$BorderBrush
-      - Background:=$OverlayColor2
-      - Background@PointerOver:=$OverlayColor
-      - Background@Pressed:=$OverlayColor
-
-  # ─── 7. SLIDERS (Volume & Brightness) ────────────────────────────────────
-  # Confirmed via UWPSpy: inside ControlCenter.AsyncSlider > Grid > Grid#SliderContainer.
-  - target: Windows.UI.Xaml.Shapes.Rectangle#HorizontalTrackRect
-    styles:
-      - Height=8
-      - Fill:=$OverlayColor
-
-  - target: Windows.UI.Xaml.Shapes.Rectangle#HorizontalDecreaseRect
-    styles:
-      - Height=8
-      - Fill:=$AccentColor
-
-  - target: Windows.UI.Xaml.Controls.Primitives.Thumb#HorizontalThumb
-    styles:
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-
-  # ─── 8. MEDIA TRANSPORT CONTROLS ─────────────────────────────────────────
-  # CardRadius=10: album art thumbnail is an inner card element.
-  - target: Windows.UI.Xaml.Controls.Grid#ThumbnailImage
-    styles:
-      - CornerRadius=$CardRadius
-
-  # ChipRadius=6: media action buttons (prev/play/next) are small chip controls.
-  - target: Windows.UI.Xaml.Controls.Primitives.RepeatButton#PreviousButton > Windows.UI.Xaml.Controls.ContentPresenter#ContentPresenter@CommonStates
-    styles:
-      - CornerRadius=$ChipRadius
-      - Background@PointerOver:=$OverlayColor2
-      - Background@Pressed:=$OverlayColor
-
-  - target: Windows.UI.Xaml.Controls.Button#PlayPauseButton > Windows.UI.Xaml.Controls.ContentPresenter#ContentPresenter@CommonStates
-    styles:
-      - CornerRadius=$ChipRadius
-      - Background@PointerOver:=$OverlayColor2
-      - Background@Pressed:=$OverlayColor
-
-  - target: Windows.UI.Xaml.Controls.Primitives.RepeatButton#NextButton > Windows.UI.Xaml.Controls.ContentPresenter#ContentPresenter@CommonStates
-    styles:
-      - CornerRadius=$ChipRadius
-      - Background@PointerOver:=$OverlayColor2
-      - Background@Pressed:=$OverlayColor
-
-  # ─── 9. JUMP LISTS & CONTEXT MENUS ───────────────────────────────────────
-  # ChipRadius=6: context menus and jump list items are compact flyout surfaces.
-  - target: Border#JumpListRestyledAcrylic
-    styles:
-      - Background:=$Background
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
+      - Background:=$OverlayColor
       - CornerRadius=$ChipRadius
 
   - target: JumpViewUI.JumpListListViewItem > Grid#LayoutRoot > Border#BackgroundBorder
     styles:
       - CornerRadius=$ChipRadius
-      - BorderThickness=$BorderThickness
-      - BorderBrush@PointerOver:=$BorderBrush
-      - BorderBrush@Pressed:=$BorderBrush
 
-  - target: JumpViewUI.SystemItemListViewItem > Grid#LayoutRoot > Border#BackgroundBorder
+  - target: ActionCenter.FlexibleItemView
     styles:
+      - CornerRadius=$CardRadius
+      - Shadow:=
+
+  # QS toggle buttons — confirmed via UWPSpy (ShellHost.exe 24H2).
+  # ControlCenter.PaginatedToggleButton is the 24H2 type;
+  # QuickActions.AccessibleToggleButton retained for 21H2–23H2.
+  - target: QuickActions.AccessibleToggleButton#ToggleButton, ControlCenter.PaginatedToggleButton#ToggleButton
+    styles:
+      - CornerRadius=$CardRadius
+      - BorderThickness=0
+
+  - target: QuickActions.AccessibleToggleButton#SplitL2Button, ControlCenter.PaginatedToggleButton#SplitL2Button
+    styles:
+      - CornerRadius=$CardRadius
+      - Margin=4,0,-4,0
+      - BorderThickness=0
+
+  - target: Grid#NotificationCenterTopBanner
+    styles:
+      - Background:=$OverlayColor
+      - CornerRadius=$CardRadius
+      - Margin=6
+
+  - target: Windows.UI.Xaml.Controls.Grid#L1Grid > Border
+    styles:
+      - Background:=<SolidColorBrush Color="Transparent"/>
+
+  - target: Windows.UI.Xaml.Controls.ContentPresenter
+    styles:
+      - BorderThickness=0
+
+  - target: Windows.UI.Xaml.Controls.Button#FooterButton[AutomationProperties.Name = Edit quick settings]
+    styles:
+      - Margin=0,0,8,0
       - CornerRadius=$ChipRadius
-      - BorderThickness=$BorderThickness
-      - BorderBrush@PointerOver:=$BorderBrush
-      - BorderBrush@Pressed:=$BorderBrush
 
-  - target: MenuFlyoutPresenter > Border
+  - target: Windows.UI.Xaml.Controls.Button[AutomationProperties.AutomationId = Microsoft.QuickAction.Battery]
     styles:
-      - Background:=$Background
+      - Margin=2,0,0,0
+      - CornerRadius=$ChipRadius
+
+  - target: Windows.UI.Xaml.Controls.Button#FooterButton[AutomationProperties.Name = All settings]
+    styles:
+      - Margin=0,0,-1,0
+      - CornerRadius=$PanelRadius
+
+  - target: Windows.UI.Xaml.Controls.Button[AutomationProperties.AutomationId = Microsoft.QuickAction.Volume]
+    styles:
+      - CornerRadius=$CardRadius
+
+  - target: Windows.UI.Xaml.Controls.Button#VolumeL2Button[AutomationProperties.Name = Select a sound output]
+    styles:
+      - CornerRadius=$CardRadius
+
+  # Sliders — confirmed via UWPSpy: inside ControlCenter.AsyncSlider > Grid > Grid#SliderContainer
+  - target: Windows.UI.Xaml.Shapes.Rectangle#HorizontalTrackRect
+    styles:
+      - Height=10
+      - Fill:=$OverlayColor
+      - RadiusY=3
+      - RadiusX=3
+
+  - target: Windows.UI.Xaml.Shapes.Rectangle#HorizontalDecreaseRect
+    styles:
+      - Height=10
+      - RadiusY=3
+      - RadiusX=3
+      - Margin=0
+      - Fill:=$AccentColor
+
+  - target: Windows.UI.Xaml.Controls.Primitives.Thumb#HorizontalThumb
+    styles:
+      - Visibility=1
+
+  # Media controls — confirmed via UWPSpy: sibling panel of ControlCenterRegion.
+  - target: Windows.UI.Xaml.Controls.Grid#MediaTransportControlsRegion
+    styles:
+      - Height=Auto
+      - CornerRadius=$PanelRadius
       - BorderBrush:=$BorderBrush
       - BorderThickness=$BorderThickness
-      - CornerRadius=$ChipRadius
+      - Background:=$Background
+      - Shadow:=
+      - Padding=0,0,0,12
+      - Margin=0,0,0,12
 
-  - target: MenuFlyoutItem
+  - target: Windows.UI.Xaml.Controls.Grid#ThumbnailImage
+    styles:
+      - Width=$thumbnailImageSize
+      - Height=$thumbnailImageSize
+      - HorizontalAlignment=Center
+      - VerticalAlignment=Top
+      - Grid.Column=1
+      - Margin=0,2,0,45
+      - CornerRadius=$CardRadius
+
+  - target: Windows.UI.Xaml.Controls.StackPanel#PrimaryAndSecondaryTextContainer
+    styles:
+      - VerticalAlignment=Bottom
+      - Margin=0,5,0,-5
+
+  - target: Windows.UI.Xaml.Controls.ListView#MediaButtonsListView
+    styles:
+      - VerticalAlignment=Top
+      - Height=48
+      - Margin=0,12,0,-12
+
+  - target: Windows.UI.Xaml.Controls.Primitives.RepeatButton#PreviousButton > Windows.UI.Xaml.Controls.ContentPresenter#ContentPresenter@CommonStates
+    styles:
+      - Background@Normal:=$OverlayColor2
+      - Background@PointerOver:=$AccentColor
+      - Background@Pressed:=$OverlayColor
+      - Width=40
+      - Height=30
+      - CornerRadius=$ChipRadius
+      - Margin=15,0,0,0
+
+  - target: Windows.UI.Xaml.Controls.Button#PlayPauseButton > Windows.UI.Xaml.Controls.ContentPresenter#ContentPresenter@CommonStates
+    styles:
+      - Background@Normal:=$OverlayColor2
+      - Background@PointerOver:=$AccentColor
+      - Background@Pressed:=$OverlayColor
+      - Width=40
+      - Height=40
+      - CornerRadius=$ChipRadius
+      - Margin=-10,0,0,0
+
+  - target: Windows.UI.Xaml.Controls.Primitives.RepeatButton#NextButton > Windows.UI.Xaml.Controls.ContentPresenter#ContentPresenter@CommonStates
+    styles:
+      - Background@Normal:=$OverlayColor2
+      - Background@PointerOver:=$AccentColor
+      - Background@Pressed:=$OverlayColor
+      - Width=40
+      - Height=30
+      - CornerRadius=$ChipRadius
+      - Margin=-20,0,0,0
+
+  - target: Grid#MediaTransportControlsRoot
+    styles:
+      - Background:=<SolidColorBrush Color="Transparent"/>
+
+  - target: Grid#ToastPeekRegion
+    styles:
+      - Background=
+      - RenderTransform:=<TranslateTransform Y="-495" X="395" />
+      - Grid.Column=0
+      - Grid.Row=2
+
+  # Calendar grid — CornerRadius=4 for tight squared chip look per day cell.
+  - target: Windows.UI.Xaml.Controls.CalendarViewDayItem > Windows.UI.Xaml.Controls.Border
+    styles:
+      - CornerRadius=4
+      - Margin=1,2,1,2
+
+  - target: Windows.UI.Xaml.Controls.CalendarViewDayItem
+    styles:
+      - CornerRadius=4
+
+  - target: Windows.UI.Xaml.Controls.Control > Windows.UI.Xaml.Controls.Border
+    styles:
+      - CornerRadius=4
+
+  - target: Windows.UI.Xaml.Controls.Primitives.CalendarViewItem
+    styles:
+      - CornerRadius=4
+
+  - target: Windows.UI.Xaml.Controls.ListViewHeaderItem
+    styles:
+      - Margin=50,6,50,2
+      - CornerRadius=4
+      - Height=35
+
+  - target: Windows.UI.Xaml.Controls.Button#SettingsButton
     styles:
       - CornerRadius=$ChipRadius
-      - Margin=4,0,4,0
 
-  - target: ToggleMenuFlyoutItem
+  - target: Windows.UI.Xaml.Controls.Button#DismissButton
     styles:
       - CornerRadius=$ChipRadius
+
+  - target: Windows.UI.Xaml.Controls.StackPanel#CalendarHeader
+    styles:
+      - Margin=6,0,0,0
+
+  - target: Windows.UI.Xaml.Controls.ScrollContentPresenter#ScrollContentPresenter
+    styles:
+      - Margin=1,2,1,2
+
+  - target: Windows.UI.Xaml.Controls.Grid#WeekDayNames
+    styles:
+      - Background:=<SolidColorBrush Color="{ThemeResource SystemAccentColorLight1}" Opacity="0.4" />
+      - CornerRadius=4
       - Margin=4,0,4,0
+      - Padding=0,-5,0,-3
+
+  - target: Windows.UI.Xaml.Controls.ListViewItem
+    styles:
+      - CornerRadius=$ChipRadius
+
+  - target: Windows.UI.Xaml.Controls.Grid#RootGrid > Windows.UI.Xaml.Controls.ContentPresenter#ContentPresenter
+    styles:
+      - Background:=$OverlayColor2
+      - BorderThickness=0
+      - CornerRadius=$ChipRadius
+
+  - target: Windows.UI.Xaml.Controls.Grid > Windows.UI.Xaml.Controls.Border#ItemOpaquePlating
+    styles:
+      - Background:=$OverlayColor2
+      - BorderThickness=0
+      - CornerRadius=$ChipRadius
+
+  - target: Windows.UI.Xaml.Controls.Grid#StandardHeroContainer
+    styles:
+      - Margin=12,0,12,0
+      - CornerRadius=0
+      - Height=150
+
+  - target: Windows.UI.Xaml.Controls.Primitives.ScrollBar#VerticalScrollBar
+    styles:
+      - Visibility=1
+
+  - target: Windows.UI.Xaml.Controls.Grid#SliderContainer
+    styles:
+      - Margin=0,-2,0,0
+
+  - target: Windows.UI.Xaml.Controls.Button#BackButton
+    styles:
+      - CornerRadius=$ChipRadius
+
+  - target: Windows.UI.Xaml.Shapes.Rectangle#OuterBorder
+    styles:
+      - RadiusX=6
+      - RadiusY=6
+      - Height=18
+
+  - target: Windows.UI.Xaml.Shapes.Rectangle#SwitchKnobOff
+    styles:
+      - RadiusY=3
+      - RadiusX=3
+
+  - target: Windows.UI.Xaml.Controls.Border#SwitchKnobOn
+    styles:
+      - CornerRadius=3
+
+  - target: Windows.UI.Xaml.Shapes.Rectangle#SwitchKnobBounds
+    styles:
+      - RadiusX=6
+      - RadiusY=6
+      - Height=18
+
+  - target: ActionCenter.NotificationListViewItem
+    styles:
+      - Margin=5,2,5,3
+
+  - target: Windows.UI.Xaml.Controls.Grid[AutomationProperties.LocalizedLandmarkType = Footer]
+    styles:
+      - BorderThickness=0
+
+  - target: NetworkUX.View.SettingsListViewItem > Windows.UI.Xaml.Controls.Primitives.ListViewItemPresenter#Root
+    styles:
+      - CornerRadius=$CardRadius
+
+  - target: Windows.UI.Xaml.Controls.ContentPresenter > Windows.UI.Xaml.Controls.Border
+    styles:
+      - BorderThickness=0
+
+  - target: Button#ClearAll
+    styles:
+      - AccessKey=x
+
+  - target: Button#ExpandCollapseButton
+    styles:
+      - AccessKey=e
