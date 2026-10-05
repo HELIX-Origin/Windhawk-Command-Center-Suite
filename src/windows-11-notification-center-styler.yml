@@ -66,13 +66,15 @@ controlStyles:
       - BorderBrush:=Transparent
       - BorderThickness=0
 
-  # Media controls region — separated from toggle area by a single top border line.
-  # No own blur layer; uses the outer panel glass.
+  # Media controls region is a SIBLING of ControlCenterRegion under RootContent,
+  # not a child — it needs its own independent glass card.
   - target: Windows.UI.Xaml.Controls.Grid#MediaTransportControlsRegion
     styles:
-      - Background:=Transparent
+      - Background:=$Background
       - BorderBrush:=$BorderBrush
-      - BorderThickness=0,1,0,0
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$PanelRadius
+      - Shadow:=
 
   # ─── 3. NOTIFICATION CENTER ELEMENTS ─────────────────────────────────────
   - target: Border#CalendarHeaderMinimizedOverlay
@@ -125,39 +127,47 @@ controlStyles:
     styles:
       - Margin=0,4,0,4
 
-  # ChipRadius=6: calendar day cells are small — tight radius keeps grid readable.
+  # ChipRadius=6 + glass chip per day cell for "squared" calendar grid look.
+  # OverlayColor2 gives a very subtle tint on each day tile so the grid
+  # reads as a structured array of glass chips rather than bare text.
   - target: Windows.UI.Xaml.Controls.CalendarViewDayItem > Windows.UI.Xaml.Controls.Border
     styles:
-      - CornerRadius=$ChipRadius
+      - CornerRadius=4
       - BorderThickness=0.3
+      - BorderBrush:=$BorderBrush
+      - Background:=$OverlayColor2
 
   - target: Button#ExpandCollapseButton
     styles:
       - CornerRadius=$ChipRadius
       - BorderThickness=$BorderThickness
       - BorderBrush:=$BorderBrush
-      - Background@PointerOver:=$OverlayColor2
+      - Background:=$OverlayColor2
+      - Background@PointerOver:=$OverlayColor
       - Background@Pressed:=$OverlayColor
       - AccessKey=e
 
   # ─── 6. QUICK SETTINGS TOGGLES ───────────────────────────────────────────
   # Confirmed via UWPSpy (ShellHost.exe 24H2): ControlCenter.PaginatedToggleButton.
-  # ButtonRadius=8: toggle buttons are medium-sized interactive tiles.
+  # ButtonRadius=8: toggle button tiles.
+  # Background:=$OverlayColor2 as default (inactive) tint — gives the tile a
+  # visible glass surface. Active/checked state color is managed by the control
+  # itself and is not overridden here.
+  # Note: BorderBrush/BorderThickness may not render if the custom template
+  # does not bind {TemplateBinding BorderBrush}. Logged in BUGS.md.
   - target: ControlCenter.PaginatedToggleButton#ToggleButton, QuickActions.AccessibleToggleButton#ToggleButton
     styles:
       - CornerRadius=$ButtonRadius
-      - BorderThickness=$BorderThickness
-      - BorderBrush:=$BorderBrush
-      - Background@PointerOver:=$OverlayColor2
+      - Background:=$OverlayColor2
+      - Background@PointerOver:=$OverlayColor
       - Background@Pressed:=$OverlayColor
 
   # Confirmed via UWPSpy: SplitL2Button is a sibling toggle in each GridViewItem.
   - target: ControlCenter.PaginatedToggleButton#SplitL2Button, QuickActions.AccessibleToggleButton#SplitL2Button
     styles:
       - CornerRadius=$ButtonRadius
-      - BorderThickness=$BorderThickness
-      - BorderBrush:=$BorderBrush
-      - Background@PointerOver:=$OverlayColor2
+      - Background:=$OverlayColor2
+      - Background@PointerOver:=$OverlayColor
       - Background@Pressed:=$OverlayColor
 
   # ChipRadius=6: footer settings button is a small chip-style action.
@@ -166,7 +176,8 @@ controlStyles:
       - CornerRadius=$ChipRadius
       - BorderThickness=$BorderThickness
       - BorderBrush:=$BorderBrush
-      - Background@PointerOver:=$OverlayColor2
+      - Background:=$OverlayColor2
+      - Background@PointerOver:=$OverlayColor
       - Background@Pressed:=$OverlayColor
 
   # ─── 7. SLIDERS (Volume & Brightness) ────────────────────────────────────
