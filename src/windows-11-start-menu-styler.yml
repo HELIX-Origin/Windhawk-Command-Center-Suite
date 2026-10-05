@@ -22,33 +22,39 @@ controlStyles:
       - Background:=$Background
       - BorderBrush:=$BorderBrush
       - BorderThickness=$BorderThickness
-      - CornerRadius=$PanelRadius
+      - CornerRadius=$CardRadius
       - Shadow:=
   - target: Grid#CalendarCenterGrid
     styles:
       - Background:=$Background
       - BorderBrush:=$BorderBrush
       - BorderThickness=$BorderThickness
-      - CornerRadius=$PanelRadius
+      - CornerRadius=$CardRadius
       - Shadow:=
       - Margin=0,6,0,6
       - MinHeight=40
   - target: ScrollViewer#CalendarControlScrollViewer
     styles:
-      - Background:=$ElementBackground
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
       - CornerRadius=$CardRadius
       - Margin=-10,11,-10,-14
       - Shadow:=
   - target: Border#CalendarHeaderMinimizedOverlay
     styles:
-      - Background:=$ElementBackground
+      - Background:=$Background
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
       - CornerRadius=$CardRadius
       - Shadow:=
       - Margin=-10,-6,-10,-8
       - Height=45
   - target: ActionCenter.FocusSessionControl#FocusSessionControl > Grid#FocusGrid
     styles:
-      - Background:=$ElementBackground
+      - Background:=$Background
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
       - CornerRadius=$CardRadius
       - Margin=6,7,6,6
       - Shadow:=
@@ -73,38 +79,50 @@ controlStyles:
       - Background:=$Background
       - BorderBrush:=$BorderBrush
       - BorderThickness=$BorderThickness
-      - CornerRadius=$PanelRadius
+      - CornerRadius=$CardRadius
       - Shadow:=
       - Margin=0,0,0,-6
   - target: ContentPresenter#PageContent
     styles:
-      - Background:=<SolidColorBrush Color="Transparent"/>
+      - Background:=Transparent
       - Shadow:=
   - target: ContentPresenter#PageContent > Grid > Border
     styles:
-      - Background:=$ElementBackground
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
       - CornerRadius=$CardRadius
       - Margin=8,0,8,2
       - Shadow:=
   - target: QuickActions.ControlCenter.AccessibleWindow#PageWindow > ContentPresenter > Grid#FullScreenPageRoot
     styles:
-      - Background:=<SolidColorBrush Color="Transparent"/>
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CardRadius
       - Shadow:=
   - target: QuickActions.ControlCenter.AccessibleWindow#PageWindow > ContentPresenter > Grid#FullScreenPageRoot > ContentPresenter#PageHeader
     styles:
-      - Background:=$ElementBackground
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
       - CornerRadius=$CardRadius
       - Margin=7,7,7,7
       - Shadow:=
   - target: ScrollViewer#ListContent
     styles:
-      - Background:=$ElementBackground
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
       - CornerRadius=$CardRadius
       - Margin=8,0,8,0
       - Shadow:=
   - target: ActionCenter.FlexibleToastView#FlexibleNormalToastView
     styles:
-      - Background:=<SolidColorBrush Color="Transparent"/>
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CardRadius
       - Shadow:=
   - target: Border#ToastBackgroundBorder, Border#ToastBackgroundBorder2
     styles:
@@ -115,30 +133,38 @@ controlStyles:
       - Shadow:=
   - target: JumpViewUI.SystemItemListViewItem > Grid#LayoutRoot > Border#BackgroundBorder
     styles:
-      - Background:=$ElementBackground
-      - CornerRadius=$ChipRadius
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CardRadius
   - target: JumpViewUI.JumpListListViewItem > Grid#LayoutRoot > Border#BackgroundBorder
     styles:
-      - CornerRadius=$ChipRadius
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CardRadius
   - target: ActionCenter.FlexibleItemView
     styles:
       - CornerRadius=$CardRadius
       - Shadow:=
   - target: QuickActions.AccessibleToggleButton#ToggleButton, ControlCenter.PaginatedToggleButton#ToggleButton
     styles:
-      - CornerRadius=$CardRadius
-      - BorderThickness=$BorderThickness
+      - Background:=$Background
       - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CardRadius
+      - CornerRadius=$CardRadiu
+      - BorderThickness=$BorderThickness
       - BorderBrush@PointerOver:=$BorderBrush
       - BorderBrush@Pressed:=$BorderBrush
-      - Background:=$ElementBackground
       - Background@PointerOver:=$OverlayColor2
       - Background@Pressed:=$OverlayColor
   - target: QuickActions.AccessibleToggleButton#ToggleButton > ContentPresenter, ControlCenter.PaginatedToggleButton#ToggleButton > ContentPresenter
     styles:
-      - CornerRadius=$CardRadius
+      - Background:=$Background
       - BorderThickness=$BorderThickness
       - BorderBrush:=$BorderBrush
+      - CornerRadius=$CardRadius
       - BorderBrush@PointerOver:=$BorderBrush
       - BorderBrush@Pressed:=$BorderBrush
   - target: QuickActions.AccessibleToggleButton#SplitL2Button, ControlCenter.PaginatedToggleButton#SplitL2Button
@@ -149,7 +175,6 @@ controlStyles:
       - BorderBrush:=$BorderBrush
       - BorderBrush@PointerOver:=$BorderBrush
       - BorderBrush@Pressed:=$BorderBrush
-      - Background:=$ElementBackground
       - Background@PointerOver:=$OverlayColor2
       - Background@Pressed:=$OverlayColor
   - target: QuickActions.AccessibleToggleButton#SplitL2Button > ContentPresenter, ControlCenter.PaginatedToggleButton#SplitL2Button > ContentPresenter
@@ -161,12 +186,15 @@ controlStyles:
       - BorderBrush@Pressed:=$BorderBrush
   - target: Grid#NotificationCenterTopBanner
     styles:
-      - Background:=$ElementBackground
+      - Background:=$Background
       - CornerRadius=$CardRadius
       - Margin=6
   - target: Windows.UI.Xaml.Controls.Grid#L1Grid > Border
     styles:
-      - Background:=<SolidColorBrush Color="Transparent"/>
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CardRadius
   - target: Windows.UI.Xaml.Controls.Button#FooterButton[AutomationProperties.Name = Edit quick settings]
     styles:
       - Margin=0,0,8,0
@@ -178,31 +206,35 @@ controlStyles:
   - target: Windows.UI.Xaml.Controls.Button[AutomationProperties.AutomationId = Microsoft.QuickAction.Battery]
     styles:
       - Margin=2,0,0,0
-      - CornerRadius=$ChipRadius
-      - BorderThickness=$BorderThickness
+      - Background:=$Background
       - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CardRadius
       - BorderBrush@PointerOver:=$BorderBrush
       - BorderBrush@Pressed:=$BorderBrush
   - target: Windows.UI.Xaml.Controls.Button#FooterButton[AutomationProperties.Name = All settings]
     styles:
       - Margin=0,0,-1,0
-      - CornerRadius=$PanelRadius
-      - BorderThickness=$BorderThickness
+      - Background:=$Background
       - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CardRadius
       - BorderBrush@PointerOver:=$BorderBrush
       - BorderBrush@Pressed:=$BorderBrush
   - target: Windows.UI.Xaml.Controls.Button[AutomationProperties.AutomationId = Microsoft.QuickAction.Volume]
     styles:
-      - CornerRadius=$CardRadius
-      - BorderThickness=$BorderThickness
+      - Background:=$Background
       - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CardRadius
       - BorderBrush@PointerOver:=$BorderBrush
       - BorderBrush@Pressed:=$BorderBrush
   - target: Windows.UI.Xaml.Controls.Button#VolumeL2Button[AutomationProperties.Name = Select a sound output]
     styles:
-      - CornerRadius=$CardRadius
-      - BorderThickness=$BorderThickness
+      - Background:=$Background
       - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CardRadius
       - BorderBrush@PointerOver:=$BorderBrush
       - BorderBrush@Pressed:=$BorderBrush
   - target: Windows.UI.Xaml.Shapes.Rectangle#HorizontalTrackRect
@@ -224,10 +256,10 @@ controlStyles:
   - target: Windows.UI.Xaml.Controls.Grid#MediaTransportControlsRegion
     styles:
       - Height=Auto
-      - CornerRadius=$PanelRadius
+      - Background:=$Background
       - BorderBrush:=$BorderBrush
       - BorderThickness=$BorderThickness
-      - Background:=$Background
+      - CornerRadius=$CardRadius
       - Shadow:=
       - Padding=0,0,0,12
       - Margin=0,0,0,12
@@ -252,46 +284,46 @@ controlStyles:
       - Margin=0,4,0,0
   - target: Windows.UI.Xaml.Controls.Primitives.RepeatButton#PreviousButton > Windows.UI.Xaml.Controls.ContentPresenter#ContentPresenter@CommonStates
     styles:
-      - Background@Normal:=$OverlayColor2
+      - Background@Normal:=$Background
       - Background@PointerOver:=$AccentColor
       - Background@Pressed:=$OverlayColor
       - BorderThickness=$BorderThickness
       - BorderBrush:=$BorderBrush
       - BorderBrush@PointerOver:=$BorderBrush
       - BorderBrush@Pressed:=$BorderBrush
-      - Width=36
-      - Height=28
+      - Width=40
+      - Height=40
       - CornerRadius=$ChipRadius
       - Margin=4,0,4,0
   - target: Windows.UI.Xaml.Controls.Button#PlayPauseButton > Windows.UI.Xaml.Controls.ContentPresenter#ContentPresenter@CommonStates
     styles:
-      - Background@Normal:=$OverlayColor2
+      - Background@Normal:=$Background
       - Background@PointerOver:=$AccentColor
       - Background@Pressed:=$OverlayColor
       - BorderThickness=$BorderThickness
       - BorderBrush:=$BorderBrush
       - BorderBrush@PointerOver:=$BorderBrush
       - BorderBrush@Pressed:=$BorderBrush
-      - Width=36
-      - Height=36
+      - Width=40
+      - Height=40
       - CornerRadius=$ChipRadius
       - Margin=4,0,4,0
   - target: Windows.UI.Xaml.Controls.Primitives.RepeatButton#NextButton > Windows.UI.Xaml.Controls.ContentPresenter#ContentPresenter@CommonStates
     styles:
-      - Background@Normal:=$OverlayColor2
+      - Background@Normal:=$Background
       - Background@PointerOver:=$AccentColor
       - Background@Pressed:=$OverlayColor
       - BorderThickness=$BorderThickness
       - BorderBrush:=$BorderBrush
       - BorderBrush@PointerOver:=$BorderBrush
       - BorderBrush@Pressed:=$BorderBrush
-      - Width=36
-      - Height=28
+      - Width=40
+      - Height=40
       - CornerRadius=$ChipRadius
       - Margin=4,0,4,0
   - target: Grid#MediaTransportControlsRoot
     styles:
-      - Background:=<SolidColorBrush Color="Transparent"/>
+      - Background:=Transparent
   - target: Grid#ToastPeekRegion
     styles:
       - Background=
@@ -301,34 +333,24 @@ controlStyles:
   - target: CalendarViewDayItem, Windows.UI.Xaml.Controls.CalendarViewDayItem
     styles:
       - CornerRadius=4
-      - BorderThickness=$BorderThickness
-      - BorderBrush:=$BorderBrush
-      - BorderBrush@PointerOver:=$BorderBrush
-      - BorderBrush@Pressed:=$BorderBrush
-      - Background:=$ElementBackground
-      - Background@PointerOver:=$OverlayColor2
-      - Background@Pressed:=$OverlayColor
+      - BorderThickness=0
+      - BorderBrush:=Transparent
   - target: CalendarViewDayItem > Border, Windows.UI.Xaml.Controls.CalendarViewDayItem > Windows.UI.Xaml.Controls.Border
     styles:
       - CornerRadius=4
       - Margin=1,2,1,2
-      - BorderThickness=$BorderThickness
-      - BorderBrush:=$BorderBrush
+      - BorderThickness=0
+      - BorderBrush:=Transparent
   - target: CalendarViewItem, Windows.UI.Xaml.Controls.Primitives.CalendarViewItem
     styles:
       - CornerRadius=4
-      - BorderThickness=$BorderThickness
-      - BorderBrush:=$BorderBrush
-      - BorderBrush@PointerOver:=$BorderBrush
-      - BorderBrush@Pressed:=$BorderBrush
-      - Background:=$ElementBackground
-      - Background@PointerOver:=$OverlayColor2
-      - Background@Pressed:=$OverlayColor
+      - BorderThickness=0
+      - BorderBrush:=Transparent
   - target: Control > Border, Windows.UI.Xaml.Controls.Control > Windows.UI.Xaml.Controls.Border
     styles:
       - CornerRadius=4
-      - BorderThickness=$BorderThickness
-      - BorderBrush:=$BorderBrush
+      - BorderThickness=0
+      - BorderBrush:=Transparent
   - target: Windows.UI.Xaml.Controls.ListViewHeaderItem
     styles:
       - Margin=50,6,50,2
@@ -336,13 +358,15 @@ controlStyles:
       - Height=35
   - target: Windows.UI.Xaml.Controls.Button#SettingsButton
     styles:
-      - CornerRadius=$ChipRadius
+      - Background:=$Background
       - BorderThickness=$BorderThickness
       - BorderBrush:=$BorderBrush
       - BorderBrush@PointerOver:=$BorderBrush
       - BorderBrush@Pressed:=$BorderBrush
+      - CornerRadius=$ChipRadius
   - target: Windows.UI.Xaml.Controls.Button#DismissButton
     styles:
+      - Background:=$Background
       - CornerRadius=$ChipRadius
       - BorderThickness=$BorderThickness
       - BorderBrush:=$BorderBrush
@@ -357,6 +381,8 @@ controlStyles:
   - target: Windows.UI.Xaml.Controls.Grid#WeekDayNames
     styles:
       - Background:=<SolidColorBrush Color="{ThemeResource SystemAccentColorLight1}" Opacity="0.4" />
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
       - CornerRadius=4
       - Margin=4,0,4,0
       - Padding=0,-5,0,-3
@@ -366,17 +392,19 @@ controlStyles:
   - target: Windows.UI.Xaml.Controls.Grid#RootGrid > Windows.UI.Xaml.Controls.ContentPresenter#ContentPresenter
     styles:
       - Background:=$OverlayColor2
-      - BorderThickness=0
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
       - CornerRadius=$ChipRadius
   - target: Windows.UI.Xaml.Controls.Grid > Windows.UI.Xaml.Controls.Border#ItemOpaquePlating
     styles:
       - Background:=$OverlayColor2
-      - BorderThickness=0
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
       - CornerRadius=$ChipRadius
   - target: Windows.UI.Xaml.Controls.Grid#StandardHeroContainer
     styles:
       - Margin=12,0,12,0
-      - CornerRadius=0
+      - CornerRadius=4
       - Height=150
   - target: Windows.UI.Xaml.Controls.Primitives.ScrollBar#VerticalScrollBar
     styles:
@@ -417,7 +445,7 @@ controlStyles:
       - BorderBrush@Pressed:=$BorderBrush
   - target: Windows.UI.Xaml.Controls.Grid[AutomationProperties.LocalizedLandmarkType = Footer]
     styles:
-      - BorderThickness=0
+      - BorderThickness=$BorderThickness
   - target: NetworkUX.View.SettingsListViewItem > Windows.UI.Xaml.Controls.Primitives.ListViewItemPresenter#Root
     styles:
       - CornerRadius=$CardRadius
