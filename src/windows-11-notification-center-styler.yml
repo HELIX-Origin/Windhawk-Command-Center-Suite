@@ -161,8 +161,17 @@ controlStyles:
       - BorderBrush:=$BorderBrush
       - BorderBrush@PointerOver:=$BorderBrush
       - BorderBrush@Pressed:=$BorderBrush
+      - Background:=$ElementBackground
       - Background@PointerOver:=$OverlayColor2
       - Background@Pressed:=$OverlayColor
+
+  - target: QuickActions.AccessibleToggleButton#ToggleButton > ContentPresenter, ControlCenter.PaginatedToggleButton#ToggleButton > ContentPresenter
+    styles:
+      - CornerRadius=$CardRadius
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+      - BorderBrush@PointerOver:=$BorderBrush
+      - BorderBrush@Pressed:=$BorderBrush
 
   - target: QuickActions.AccessibleToggleButton#SplitL2Button, ControlCenter.PaginatedToggleButton#SplitL2Button
     styles:
@@ -172,8 +181,17 @@ controlStyles:
       - BorderBrush:=$BorderBrush
       - BorderBrush@PointerOver:=$BorderBrush
       - BorderBrush@Pressed:=$BorderBrush
+      - Background:=$ElementBackground
       - Background@PointerOver:=$OverlayColor2
       - Background@Pressed:=$OverlayColor
+
+  - target: QuickActions.AccessibleToggleButton#SplitL2Button > ContentPresenter, ControlCenter.PaginatedToggleButton#SplitL2Button > ContentPresenter
+    styles:
+      - CornerRadius=$CardRadius
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+      - BorderBrush@PointerOver:=$BorderBrush
+      - BorderBrush@Pressed:=$BorderBrush
 
   - target: Grid#NotificationCenterTopBanner
     styles:
@@ -184,10 +202,6 @@ controlStyles:
   - target: Windows.UI.Xaml.Controls.Grid#L1Grid > Border
     styles:
       - Background:=<SolidColorBrush Color="Transparent"/>
-
-  - target: Windows.UI.Xaml.Controls.ContentPresenter
-    styles:
-      - BorderThickness=0
 
   - target: Windows.UI.Xaml.Controls.Button#FooterButton[AutomationProperties.Name = Edit quick settings]
     styles:
@@ -340,25 +354,40 @@ controlStyles:
       - Grid.Row=2
 
   # Calendar grid — CornerRadius=4 for tight squared chip look per day cell.
-  - target: Windows.UI.Xaml.Controls.CalendarViewDayItem > Windows.UI.Xaml.Controls.Border
+  - target: CalendarViewDayItem, Windows.UI.Xaml.Controls.CalendarViewDayItem
+    styles:
+      - CornerRadius=4
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+      - BorderBrush@PointerOver:=$BorderBrush
+      - BorderBrush@Pressed:=$BorderBrush
+      - Background:=$ElementBackground
+      - Background@PointerOver:=$OverlayColor2
+      - Background@Pressed:=$OverlayColor
+
+  - target: CalendarViewDayItem > Border, Windows.UI.Xaml.Controls.CalendarViewDayItem > Windows.UI.Xaml.Controls.Border
     styles:
       - CornerRadius=4
       - Margin=1,2,1,2
       - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+
+  - target: CalendarViewItem, Windows.UI.Xaml.Controls.Primitives.CalendarViewItem
+    styles:
+      - CornerRadius=4
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
       - BorderBrush@PointerOver:=$BorderBrush
       - BorderBrush@Pressed:=$BorderBrush
+      - Background:=$ElementBackground
+      - Background@PointerOver:=$OverlayColor2
+      - Background@Pressed:=$OverlayColor
 
-  - target: Windows.UI.Xaml.Controls.CalendarViewDayItem
+  - target: Control > Border, Windows.UI.Xaml.Controls.Control > Windows.UI.Xaml.Controls.Border
     styles:
       - CornerRadius=4
-
-  - target: Windows.UI.Xaml.Controls.Control > Windows.UI.Xaml.Controls.Border
-    styles:
-      - CornerRadius=4
-
-  - target: Windows.UI.Xaml.Controls.Primitives.CalendarViewItem
-    styles:
-      - CornerRadius=4
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
 
   - target: Windows.UI.Xaml.Controls.ListViewHeaderItem
     styles:
@@ -472,9 +501,6 @@ controlStyles:
     styles:
       - CornerRadius=$CardRadius
 
-  - target: Windows.UI.Xaml.Controls.ContentPresenter > Windows.UI.Xaml.Controls.Border
-    styles:
-      - BorderThickness=0
 
   - target: Button#ClearAll
     styles:
