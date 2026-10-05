@@ -1,3 +1,4 @@
+theme: ''
 styleConstants:
   - Translucent=<WindhawkBlur BlurAmount="15" TintColor="#10808080"/>
   - Glass=<WindhawkBlur BlurAmount="5" TintColor="{ThemeResource SystemChromeMediumColor}" TintOpacity="0.7" />
@@ -6,405 +7,453 @@ styleConstants:
   - Background=$Frosted
   - BorderBrush=<LinearGradientBrush StartPoint="0,0" EndPoint="0,1"><GradientStop Color="#60808080" Offset="0.0" /><GradientStop Color="#50404040" Offset="0.25" /><GradientStop Color="#40808080" Offset="1" /></LinearGradientBrush>
   - BorderBrush2=<WindhawkBlur BlurAmount="10" TintColor="#909090" TintOpacity="0.3"/>
-  - ClockBG=<SolidColorBrush Color="{ThemeResource SystemAccentColor}" Opacity="1"/>
+  - OverlayColor=<AcrylicBrush TintColor="{ThemeResource SystemAltLowColor}" TintOpacity="1" TintLuminosityOpacity="0.8" FallbackColor="{ThemeResource CardStrokeColorDefaultSolid}" />
+  - OverlayColor2=<AcrylicBrush TintColor="{ThemeResource SystemAltLowColor}" TintOpacity="1" TintLuminosityOpacity="0.5" FallbackColor="{ThemeResource CardStrokeColorDefaultSolid}" />
+  - AccentColor=<AcrylicBrush TintColor="{ThemeResource SystemAccentColor}" TintOpacity="1" TintLuminosityOpacity="0.5" FallbackColor="{ThemeResource CardStrokeColorDefaultSolid}" />
+  - ElementBackground=<SolidColorBrush Color="{ThemeResource SystemAltLowColor}" Opacity="0.25" />
   - BorderThickness=0.3,1,0.3,1
-  - CornerRadius=35
-  - SearchBoxRadius=25
-  - ElementCornerRadius=10
-  - FlyoutCornerRadius=6
-  - HoverCornerRadius=15
+  - PanelRadius=13
+  - CardRadius=10
+  - ChipRadius=6
+  - thumbnailImageSize=70
 controlStyles:
-  - target: StackPanel#TimeAndDatePanel
-    styles:
-      - VerticalAlignment=Top
-      - HorizontalAlignment=Center
-      - RenderTransform:=<TranslateTransform X="0" />
-  - target: StackPanel#TimePanel > TextBlock#Time
-    styles:
-      - HorizontalAlignment:=Center
-      - RenderTransform:=<TransformGroup><TranslateTransform X="-50" Y="20" /><ScaleTransform ScaleX="2.3" ScaleY="4" /></TransformGroup>
-      - FontFamily=Morganite SemiBold
-      - Foreground:=$ClockBG
-  - target: StackPanel#TimeAndDatePanel > TextBlock#Date
-    styles:
-      - HorizontalAlignment=Center
-      - RenderTransform:=<TranslateTransform X="0" Y="-110" />
-      - FontFamily=vivo Sans EN VF
-      - Foreground:=$ClockBG
-  - target: Grid#WidgetFrameGrid
+  - target: Grid#NotificationCenterGrid
     styles:
       - Background:=$Background
       - BorderBrush:=$BorderBrush
       - BorderThickness=$BorderThickness
-      - CornerRadius=$CornerRadius
-  - target: Grid#WidgetCanvasPanel
-    styles:
-      - HorizontalAlignment=Center
-      - RenderTransform:=<TranslateTransform X="0" Y="50" />
-  - target: Grid#MediaTransportControls
+      - CornerRadius=$PanelRadius
+      - Shadow:=
+  - target: Grid#CalendarCenterGrid
     styles:
       - Background:=$Background
       - BorderBrush:=$BorderBrush
       - BorderThickness=$BorderThickness
-      - CornerRadius=$CornerRadius
-  - target: Grid#MediaControlsContainer
+      - CornerRadius=$PanelRadius
+      - Shadow:=
+      - Margin=0,6,0,6
+      - MinHeight=40
+  - target: ScrollViewer#CalendarControlScrollViewer
     styles:
-      - Visibility=0
-      - RenderTransform:=<TranslateTransform X="0" Y="-250" />
-      - Margin=0,0,0,0
-      - CornerRadius=$CornerRadius
-  - target: FlyoutPresenter > Border#BackgroundElement
+      - Background:=$ElementBackground
+      - CornerRadius=$CardRadius
+      - Margin=-10,11,-10,-14
+      - Shadow:=
+  - target: Border#CalendarHeaderMinimizedOverlay
     styles:
-      - Background:=$Background
-      - BorderBrush:=$BorderBrush
-      - BorderThickness:=$BorderThickness
-      - CornerRadius=$FlyoutCornerRadius
-      - Padding=-1
-  - target: MenuFlyoutPresenter > Border#BackgroundElement
+      - Background:=$ElementBackground
+      - CornerRadius=$CardRadius
+      - Shadow:=
+      - Margin=-10,-6,-10,-8
+      - Height=45
+  - target: ActionCenter.FocusSessionControl#FocusSessionControl > Grid#FocusGrid
     styles:
-      - CornerRadius=$FlyoutCornerRadius
-  - target: Grid#AllListHeading > Microsoft.UI.Xaml.Controls.DropDownButton#ViewSelectionButton > Grid#RootGrid
-    styles:
-      - CornerRadius=$ElementCornerRadius
-      - Margin=-12,0,12,0
-  - target: MenuFlyoutItem
-    styles:
-      - CornerRadius=$FlyoutCornerRadius
-      - Margin=4,0,4,0
-  - target: ToggleMenuFlyoutItem
-    styles:
-      - CornerRadius=$FlyoutCornerRadius
-      - Margin=4,0,4,0
-  - target: Border#OverflowFlyoutBackgroundBorder
+      - Background:=$ElementBackground
+      - CornerRadius=$CardRadius
+      - Margin=6,7,6,6
+      - Shadow:=
+  - target: MenuFlyoutPresenter
     styles:
       - Background:=$Background
       - BorderBrush:=$BorderBrush
       - BorderThickness=$BorderThickness
-      - CornerRadius=$FlyoutCornerRadius
-  - target: MenuFlyoutPresenter > Border
+      - CornerRadius=$ChipRadius
+      - Padding=1,2,1,2
+      - Shadow:=
+  - target: Border#JumpListRestyledAcrylic
     styles:
       - Background:=$Background
       - BorderBrush:=$BorderBrush
       - BorderThickness=$BorderThickness
-      - CornerRadius=$FlyoutCornerRadius
-  - target: Grid#HoverFlyoutGrid > Border#HoverFlyoutBackground
+      - CornerRadius=$ChipRadius
+      - Margin=-2,-2,-2,-2
+      - Shadow:=
+  - target: Grid#ControlCenterRegion
     styles:
       - Background:=$Background
       - BorderBrush:=$BorderBrush
       - BorderThickness=$BorderThickness
-      - CornerRadius=$FlyoutCornerRadius
-  - target: StartMenu.FolderModal#StartFolderModal > Grid#Root
+      - CornerRadius=$PanelRadius
+      - Shadow:=
+      - Margin=0,0,0,-6
+  - target: ContentPresenter#PageContent
     styles:
-      - MaxHeight:=420
-      - MaxWidth:=420
+      - Background:=<SolidColorBrush Color="Transparent"/>
+      - Shadow:=
+  - target: ContentPresenter#PageContent > Grid > Border
+    styles:
+      - Background:=$ElementBackground
+      - CornerRadius=$CardRadius
+      - Margin=8,0,8,2
+      - Shadow:=
+  - target: QuickActions.ControlCenter.AccessibleWindow#PageWindow > ContentPresenter > Grid#FullScreenPageRoot
+    styles:
+      - Background:=<SolidColorBrush Color="Transparent"/>
+      - Shadow:=
+  - target: QuickActions.ControlCenter.AccessibleWindow#PageWindow > ContentPresenter > Grid#FullScreenPageRoot > ContentPresenter#PageHeader
+    styles:
+      - Background:=$ElementBackground
+      - CornerRadius=$CardRadius
+      - Margin=7,7,7,7
+      - Shadow:=
+  - target: ScrollViewer#ListContent
+    styles:
+      - Background:=$ElementBackground
+      - CornerRadius=$CardRadius
+      - Margin=8,0,8,0
+      - Shadow:=
+  - target: ActionCenter.FlexibleToastView#FlexibleNormalToastView
+    styles:
+      - Background:=<SolidColorBrush Color="Transparent"/>
+      - Shadow:=
+  - target: Border#ToastBackgroundBorder, Border#ToastBackgroundBorder2
+    styles:
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CardRadius
+      - Shadow:=
+  - target: JumpViewUI.SystemItemListViewItem > Grid#LayoutRoot > Border#BackgroundBorder
+    styles:
+      - Background:=$ElementBackground
+      - CornerRadius=$ChipRadius
+  - target: JumpViewUI.JumpListListViewItem > Grid#LayoutRoot > Border#BackgroundBorder
+    styles:
+      - CornerRadius=$ChipRadius
+  - target: ActionCenter.FlexibleItemView
+    styles:
+      - CornerRadius=$CardRadius
+      - Shadow:=
+  - target: QuickActions.AccessibleToggleButton#ToggleButton, ControlCenter.PaginatedToggleButton#ToggleButton
+    styles:
+      - CornerRadius=$CardRadius
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+      - BorderBrush@PointerOver:=$BorderBrush
+      - BorderBrush@Pressed:=$BorderBrush
+      - Background:=$ElementBackground
+      - Background@PointerOver:=$OverlayColor2
+      - Background@Pressed:=$OverlayColor
+  - target: QuickActions.AccessibleToggleButton#ToggleButton > ContentPresenter, ControlCenter.PaginatedToggleButton#ToggleButton > ContentPresenter
+    styles:
+      - CornerRadius=$CardRadius
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+      - BorderBrush@PointerOver:=$BorderBrush
+      - BorderBrush@Pressed:=$BorderBrush
+  - target: QuickActions.AccessibleToggleButton#SplitL2Button, ControlCenter.PaginatedToggleButton#SplitL2Button
+    styles:
+      - CornerRadius=$CardRadius
+      - Margin=4,0,-4,0
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+      - BorderBrush@PointerOver:=$BorderBrush
+      - BorderBrush@Pressed:=$BorderBrush
+      - Background:=$ElementBackground
+      - Background@PointerOver:=$OverlayColor2
+      - Background@Pressed:=$OverlayColor
+  - target: QuickActions.AccessibleToggleButton#SplitL2Button > ContentPresenter, ControlCenter.PaginatedToggleButton#SplitL2Button > ContentPresenter
+    styles:
+      - CornerRadius=$CardRadius
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+      - BorderBrush@PointerOver:=$BorderBrush
+      - BorderBrush@Pressed:=$BorderBrush
+  - target: Grid#NotificationCenterTopBanner
+    styles:
+      - Background:=$ElementBackground
+      - CornerRadius=$CardRadius
+      - Margin=6
+  - target: Windows.UI.Xaml.Controls.Grid#L1Grid > Border
+    styles:
+      - Background:=<SolidColorBrush Color="Transparent"/>
+  - target: Windows.UI.Xaml.Controls.Button#FooterButton[AutomationProperties.Name = Edit quick settings]
+    styles:
+      - Margin=0,0,8,0
+      - CornerRadius=$ChipRadius
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+      - BorderBrush@PointerOver:=$BorderBrush
+      - BorderBrush@Pressed:=$BorderBrush
+  - target: Windows.UI.Xaml.Controls.Button[AutomationProperties.AutomationId = Microsoft.QuickAction.Battery]
+    styles:
+      - Margin=2,0,0,0
+      - CornerRadius=$ChipRadius
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+      - BorderBrush@PointerOver:=$BorderBrush
+      - BorderBrush@Pressed:=$BorderBrush
+  - target: Windows.UI.Xaml.Controls.Button#FooterButton[AutomationProperties.Name = All settings]
+    styles:
+      - Margin=0,0,-1,0
+      - CornerRadius=$PanelRadius
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+      - BorderBrush@PointerOver:=$BorderBrush
+      - BorderBrush@Pressed:=$BorderBrush
+  - target: Windows.UI.Xaml.Controls.Button[AutomationProperties.AutomationId = Microsoft.QuickAction.Volume]
+    styles:
+      - CornerRadius=$CardRadius
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+      - BorderBrush@PointerOver:=$BorderBrush
+      - BorderBrush@Pressed:=$BorderBrush
+  - target: Windows.UI.Xaml.Controls.Button#VolumeL2Button[AutomationProperties.Name = Select a sound output]
+    styles:
+      - CornerRadius=$CardRadius
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+      - BorderBrush@PointerOver:=$BorderBrush
+      - BorderBrush@Pressed:=$BorderBrush
+  - target: Windows.UI.Xaml.Shapes.Rectangle#HorizontalTrackRect
+    styles:
+      - Height=10
+      - Fill:=$OverlayColor
+      - RadiusY=3
+      - RadiusX=3
+  - target: Windows.UI.Xaml.Shapes.Rectangle#HorizontalDecreaseRect
+    styles:
+      - Height=10
+      - RadiusY=3
+      - RadiusX=3
+      - Margin=0
+      - Fill:=$AccentColor
+  - target: Windows.UI.Xaml.Controls.Primitives.Thumb#HorizontalThumb
+    styles:
+      - Visibility=1
+  - target: Windows.UI.Xaml.Controls.Grid#MediaTransportControlsRegion
+    styles:
       - Height=Auto
-      - Width=Auto
-  - target: StartMenu.FolderModal#StartFolderModal > Grid#Root > ContentControl#ContentControl > ContentPresenter > StartMenu.UniversalTileContainer#UniversalTileContainer > Grid#GridViewContainer
-    styles:
-      - Width=360
-      - Height=400
-  - target: Grid#Root > Border
-    styles:
-      - Background:=$Background
+      - CornerRadius=$PanelRadius
       - BorderBrush:=$BorderBrush
       - BorderThickness=$BorderThickness
-      - CornerRadius=$CornerRadius
-  - target: StartMenu.ExpandedFolderList
+      - Background:=$Background
+      - Shadow:=
+      - Padding=0,0,0,12
+      - Margin=0,0,0,12
+  - target: Windows.UI.Xaml.Controls.Grid#ThumbnailImage
     styles:
-      - Margin=0,30,0,-120
-  - target: ListViewItem > Grid@CommonStates > Border#BorderBackground
+      - Width=$thumbnailImageSize
+      - Height=$thumbnailImageSize
+      - HorizontalAlignment=Right
+      - VerticalAlignment=Center
+      - Grid.Column=1
+      - Margin=0,0,8,0
+      - CornerRadius=$CardRadius
+  - target: Windows.UI.Xaml.Controls.StackPanel#PrimaryAndSecondaryTextContainer
     styles:
+      - VerticalAlignment=Center
+      - Margin=0,0,0,0
+      - Grid.Column=0
+  - target: Windows.UI.Xaml.Controls.ListView#MediaButtonsListView
+    styles:
+      - VerticalAlignment=Center
+      - Height=40
+      - Margin=0,4,0,0
+  - target: Windows.UI.Xaml.Controls.Primitives.RepeatButton#PreviousButton > Windows.UI.Xaml.Controls.ContentPresenter#ContentPresenter@CommonStates
+    styles:
+      - Background@Normal:=$OverlayColor2
+      - Background@PointerOver:=$AccentColor
+      - Background@Pressed:=$OverlayColor
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+      - BorderBrush@PointerOver:=$BorderBrush
+      - BorderBrush@Pressed:=$BorderBrush
+      - Width=36
+      - Height=28
+      - CornerRadius=$ChipRadius
+      - Margin=4,0,4,0
+  - target: Windows.UI.Xaml.Controls.Button#PlayPauseButton > Windows.UI.Xaml.Controls.ContentPresenter#ContentPresenter@CommonStates
+    styles:
+      - Background@Normal:=$OverlayColor2
+      - Background@PointerOver:=$AccentColor
+      - Background@Pressed:=$OverlayColor
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+      - BorderBrush@PointerOver:=$BorderBrush
+      - BorderBrush@Pressed:=$BorderBrush
+      - Width=36
+      - Height=36
+      - CornerRadius=$ChipRadius
+      - Margin=4,0,4,0
+  - target: Windows.UI.Xaml.Controls.Primitives.RepeatButton#NextButton > Windows.UI.Xaml.Controls.ContentPresenter#ContentPresenter@CommonStates
+    styles:
+      - Background@Normal:=$OverlayColor2
+      - Background@PointerOver:=$AccentColor
+      - Background@Pressed:=$OverlayColor
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+      - BorderBrush@PointerOver:=$BorderBrush
+      - BorderBrush@Pressed:=$BorderBrush
+      - Width=36
+      - Height=28
+      - CornerRadius=$ChipRadius
+      - Margin=4,0,4,0
+  - target: Grid#MediaTransportControlsRoot
+    styles:
+      - Background:=<SolidColorBrush Color="Transparent"/>
+  - target: Grid#ToastPeekRegion
+    styles:
+      - Background=
+      - RenderTransform:=<TranslateTransform Y="-495" X="395" />
+      - Grid.Column=0
+      - Grid.Row=2
+  - target: CalendarViewDayItem, Windows.UI.Xaml.Controls.CalendarViewDayItem
+    styles:
+      - CornerRadius=4
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+      - BorderBrush@PointerOver:=$BorderBrush
+      - BorderBrush@Pressed:=$BorderBrush
+      - Background:=$ElementBackground
+      - Background@PointerOver:=$OverlayColor2
+      - Background@Pressed:=$OverlayColor
+  - target: CalendarViewDayItem > Border, Windows.UI.Xaml.Controls.CalendarViewDayItem > Windows.UI.Xaml.Controls.Border
+    styles:
+      - CornerRadius=4
+      - Margin=1,2,1,2
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+  - target: CalendarViewItem, Windows.UI.Xaml.Controls.Primitives.CalendarViewItem
+    styles:
+      - CornerRadius=4
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+      - BorderBrush@PointerOver:=$BorderBrush
+      - BorderBrush@Pressed:=$BorderBrush
+      - Background:=$ElementBackground
+      - Background@PointerOver:=$OverlayColor2
+      - Background@Pressed:=$OverlayColor
+  - target: Control > Border, Windows.UI.Xaml.Controls.Control > Windows.UI.Xaml.Controls.Border
+    styles:
+      - CornerRadius=4
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+  - target: Windows.UI.Xaml.Controls.ListViewHeaderItem
+    styles:
+      - Margin=50,6,50,2
+      - CornerRadius=4
+      - Height=35
+  - target: Windows.UI.Xaml.Controls.Button#SettingsButton
+    styles:
+      - CornerRadius=$ChipRadius
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+      - BorderBrush@PointerOver:=$BorderBrush
+      - BorderBrush@Pressed:=$BorderBrush
+  - target: Windows.UI.Xaml.Controls.Button#DismissButton
+    styles:
+      - CornerRadius=$ChipRadius
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+      - BorderBrush@PointerOver:=$BorderBrush
+      - BorderBrush@Pressed:=$BorderBrush
+  - target: Windows.UI.Xaml.Controls.StackPanel#CalendarHeader
+    styles:
+      - Margin=6,0,0,0
+  - target: Windows.UI.Xaml.Controls.ScrollContentPresenter#ScrollContentPresenter
+    styles:
+      - Margin=1,2,1,2
+  - target: Windows.UI.Xaml.Controls.Grid#WeekDayNames
+    styles:
+      - Background:=<SolidColorBrush Color="{ThemeResource SystemAccentColorLight1}" Opacity="0.4" />
+      - CornerRadius=4
+      - Margin=4,0,4,0
+      - Padding=0,-5,0,-3
+  - target: Windows.UI.Xaml.Controls.ListViewItem
+    styles:
+      - CornerRadius=$ChipRadius
+  - target: Windows.UI.Xaml.Controls.Grid#RootGrid > Windows.UI.Xaml.Controls.ContentPresenter#ContentPresenter
+    styles:
+      - Background:=$OverlayColor2
+      - BorderThickness=0
+      - CornerRadius=$ChipRadius
+  - target: Windows.UI.Xaml.Controls.Grid > Windows.UI.Xaml.Controls.Border#ItemOpaquePlating
+    styles:
+      - Background:=$OverlayColor2
+      - BorderThickness=0
+      - CornerRadius=$ChipRadius
+  - target: Windows.UI.Xaml.Controls.Grid#StandardHeroContainer
+    styles:
+      - Margin=12,0,12,0
+      - CornerRadius=0
+      - Height=150
+  - target: Windows.UI.Xaml.Controls.Primitives.ScrollBar#VerticalScrollBar
+    styles:
+      - Visibility=1
+  - target: Windows.UI.Xaml.Controls.Grid#SliderContainer
+    styles:
+      - Margin=0,-2,0,0
+  - target: Windows.UI.Xaml.Controls.Button#BackButton
+    styles:
+      - CornerRadius=$ChipRadius
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+      - BorderBrush@PointerOver:=$BorderBrush
+      - BorderBrush@Pressed:=$BorderBrush
+  - target: Windows.UI.Xaml.Shapes.Rectangle#OuterBorder
+    styles:
+      - RadiusX=6
+      - RadiusY=6
+      - Height=18
+  - target: Windows.UI.Xaml.Shapes.Rectangle#SwitchKnobOff
+    styles:
+      - RadiusY=3
+      - RadiusX=3
+  - target: Windows.UI.Xaml.Controls.Border#SwitchKnobOn
+    styles:
+      - CornerRadius=3
+  - target: Windows.UI.Xaml.Shapes.Rectangle#SwitchKnobBounds
+    styles:
+      - RadiusX=6
+      - RadiusY=6
+      - Height=18
+  - target: ActionCenter.NotificationListViewItem
+    styles:
+      - Margin=5,2,5,3
+      - CornerRadius=$CardRadius
       - BorderThickness=$BorderThickness
       - BorderBrush@PointerOver:=$BorderBrush
       - BorderBrush@Pressed:=$BorderBrush
-      - CornerRadius=$ElementCornerRadius
-      - BackgroundSizing=InnerBorderEdge
-  - target: Border#ContentBorder@CommonStates > Grid > Border#BackgroundBorder
+  - target: Windows.UI.Xaml.Controls.Grid[AutomationProperties.LocalizedLandmarkType = Footer]
     styles:
+      - BorderThickness=0
+  - target: NetworkUX.View.SettingsListViewItem > Windows.UI.Xaml.Controls.Primitives.ListViewItemPresenter#Root
+    styles:
+      - CornerRadius=$CardRadius
+  - target: Button#ClearAll
+    styles:
+      - AccessKey=x
+      - CornerRadius=$ChipRadius
       - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
       - BorderBrush@PointerOver:=$BorderBrush
       - BorderBrush@Pressed:=$BorderBrush
-      - CornerRadius=$ElementCornerRadius
-      - BackgroundSizing=InnerBorderEdge
+      - Background@PointerOver:=$OverlayColor2
+      - Background@Pressed:=$OverlayColor
+  - target: Button#ExpandCollapseButton
+    styles:
+      - AccessKey=e
+      - CornerRadius=$ChipRadius
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+      - BorderBrush@PointerOver:=$BorderBrush
+      - BorderBrush@Pressed:=$BorderBrush
+      - Background@PointerOver:=$OverlayColor2
+      - Background@Pressed:=$OverlayColor
   - target: Button > Grid@CommonStates > Border#BackgroundBorder
     styles:
       - BorderThickness=$BorderThickness
       - BorderBrush@PointerOver:=$BorderBrush
       - BorderBrush@Pressed:=$BorderBrush
-      - CornerRadius=$ElementCornerRadius
+      - CornerRadius=$ChipRadius
       - BackgroundSizing=InnerBorderEdge
-  - target: Cortana.UI.Views.TaskbarSearchPage > Grid#RootGrid > Grid#OuterBorderGrid
+  - target: ListViewItem > Grid@CommonStates > Border#BackgroundBorder, ListViewItem > Grid@CommonStates > Border#BorderBackground
     styles:
-      - Background:=$Background
-      - BorderBrush:=$BorderBrush
       - BorderThickness=$BorderThickness
-      - CornerRadius=$CornerRadius
-  - target: Border#LayerBorder
-    styles:
-      - Visibility=1
-  - target: Border#AccentLayerBorder
-    styles:
-      - Visibility=1
-  - target: Border#dropshadow
-    styles:
-      - Visibility=1
-  - target: Border#AppBorder
-    styles:
-      - Visibility=1
-  - target: ToolTip > ContentPresenter#LayoutRoot
-    styles:
-      - Background:=$Background
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$ElementCornerRadius
-  - target: Border#AccentAppBorder
-    styles:
-      - Visibility=1
-  - target: Border#LayerBorder
-    styles:
-      - Visibility=1
-  - target: Border#AppBorder
-    styles:
-      - Background:=$Background
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$CornerRadius
-  - target: Grid#MainMenu > Border#AcrylicBorder
-    styles:
-      - Visibility=1
-  - target: Border#AcrylicOverlay
-    styles:
-      - Visibility=1
-  - target: StartDocked.StartSizingFrame
-    styles:
-      - Width=750
-  - target: Border#RootGridDropShadow
-    styles:
-      - Visibility=1
-  - target: Border#StartDropShadow
-    styles:
-      - Visibility=1
-  - target: Border#DropShadowDismissTarget
-    styles:
-      - Visibility=1
-  - target: Grid#UndockedRoot
-    styles:
-      - Visibility=0
-      - Width=650
-      - Canvas.ZIndex=1
-      - MaxHeight:=340
-  - target: StartDocked.SearchBoxToggleButton#StartMenuSearchBox > Grid > ContentPresenter#ContentPresenter > TextBlock#PlaceholderText
-    styles:
-      - Text=Search This Precision
-  - target: Grid#AllListHeading > TextBlock#AllListHeadingText
-    styles:
-      - Visibility=1
-  - target: Grid#TopLevelRoot > Grid
-    styles:
-      - Visibility=1
-  - target: StartDocked.NavigationPaneView#NavigationPane
-    styles:
-      - Width=550
-      - RenderTransform:=<TranslateTransform X="0" Y="10" />
-  - target: Button#ShowAllAppsButton
-    styles:
-      - Visibility=1
-  - target: Grid#TopLevelSuggestionsRoot
-    styles:
-      - Visibility=1
-  - target: StartMenu.PinnedList#StartMenuPinnedList > Grid#Root
-    styles:
-      - Background:=$Background
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$ElementCornerRadius
-  - target: StartMenu.SearchBoxToggleButton#SearchBoxToggleButton
-    styles:
-      - Height=50
-      - Width=350
-  - target: StartMenu.SearchBoxToggleButton#SearchBoxToggleButton > Grid > Border#BorderElement
-    styles:
-      - Background:=$Background
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$SearchBoxRadius
-  - target: Windows.UI.Xaml.Controls.Primitives.ToggleButton#ShowHideCompanion
-    styles:
-      - Visibility=1
-      - // Margin=-70,0,0,0
-  - target: // Windows.UI.Xaml.Controls.Primitives.ToggleButton#ShowHideCompanion > Border
-    styles:
-      - // Background:=Transparent
-      - // BorderBrush:=Transparent
-      - // BorderThickness=0
-  - target: TextBlock#PinnedListHeaderText
-    styles:
-      - Visibility=1
-  - target: Grid#AllListHeading
-    styles:
-      - Visibility=1
-  - target: Grid#AllListHeading > TextBlock#AllListHeadingText
-    styles:
-      - Visibility=1
-  - target: StartMenu.CategoryControl > Grid#RootGrid > Border
-    styles:
-      - Background:=$Background
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$ElementCornerRadius
-  - target: Windows.UI.Xaml.Controls.Primitives.ScrollBar
-    styles:
-      - Visibility=1
-  - target: StartDocked.UserTileView > StartDocked.NavigationPaneButton > Grid@CommonStates > Border
-    styles:
-      - Background:=$Background
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$ElementCornerRadius
-  - target: StartDocked.PowerOptionsView > StartDocked.NavigationPaneButton > Grid@CommonStates > Border
-    styles:
-      - Background:=$Background
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$CornerRadius
-  - target: Grid > LogosContainer > ItemsControl > ItemsPresenter > ItemsWrapGrid
-    styles:
-      - Background:=$Background
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$CornerRadius
-  - target: StartDocked.AppListView#NavigationPanePlacesListView > Border
-    styles:
-      - Background:=$Background
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$ElementCornerRadius
-      - Margin=10,0,10,0
-  - target: GridView#AllAppsGrid > ItemsWrapGrid
-    styles:
-      - Visibility=0
-  - target: Grid#TopLevelHeader > Grid > Button
-    styles:
-      - Visibility=1
-  - target: Button#SeeAllButton > Grid > Border#BackgroundBorder
-    styles:
-      - Background:=$Background
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$ElementCornerRadius
-      - Margin=18,4
-  - target: Grid#MainMenu
-    styles:
-      - Width=470
-      - Height=740
-  - target: StartMenu.PinnedList#StartMenuPinnedList
-    styles:
-      - Width=360
-      - MaxHeight=400
-      - MinHeight=200
-      - Height=Auto
-  - target: GridView#PinnedList > Border > ScrollViewer
-    styles:
-      - ScrollViewer.VerticalScrollMode=2
-      - MaxHeight:=336
-      - MinHeight:=100
-      - Width=300
-      - Padding=0,15
-      - Margin=-25,0,25,0
-  - target: TextBlock#PinnedListHeaderText
-    styles:
-      - Visibility=1
-  - target: StartMenu.StartMenuCompanion#RightCompanion
-    styles:
-      - Height=700
-  - target: Grid#CompanionRoot > Border#AcrylicBorder
-    styles:
-      - Background:=$Background
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$CornerRadius
-  - target: StartDocked.StartMenuCompanion#RightCompanion > Grid#CompanionRoot > Border#AcrylicBorder
-    styles:
-      - Visibility=1
-  - target: Border#RightCompanionDropShadow
-    styles:
-      - Visibility=1
-  - target: StartDocked.StartMenuCompanion#RightCompanion > Grid#CompanionRoot
-    styles:
-      - Height=700
-      - Padding=10,0,-2,0
-  - target: Windows.UI.Xaml.Controls.Grid#ActionsBar > Windows.UI.Xaml.Controls.Button#ActionBarOverflowButton
-    styles:
-      - Background:=$Background
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$ElementCornerRadius
-      - Height=40
-  - target: Border@CommonStates > Grid#DroppedFlickerWorkaroundWrapper > ContentPresenter > Grid > Grid#LogoContainer > Image
-    styles:
-      - RenderTransform@Pressed:=<ScaleTransform ScaleX="0.8" ScaleY="0.8" />
-      - RenderTransformOrigin=0.5,0.5
-  - target: Border#ContentBorder@CommonStates > Grid#DroppedFlickerWorkaroundWrapper > ContentPresenter > Grid > Grid#LogoContainer > Grid
-    styles:
-      - RenderTransform@Pressed:=<ScaleTransform ScaleX="0.8" ScaleY="0.8" />
-      - RenderTransformOrigin=0.5,0.5
-  - target: Grid#ContentBorder@CommonStates > Grid#DroppedFlickerWorkaroundWrapper > ContentPresenter > Grid > Grid#LogoContainer > Grid
-    styles:
-      - RenderTransform@Pressed:=<ScaleTransform ScaleX="0.8" ScaleY="0.8" />
-      - RenderTransformOrigin=0.5,0.5
-  - target: ScrollViewer#MenuFlyoutPresenterScrollViewer > Border > Grid > ScrollContentPresenter > ItemsPresenter > StackPanel
-    styles:
-      - ChildrenTransitions:=<TransitionCollection><EntranceThemeTransition IsStaggeringEnabled="False" FromHorizontalOffset="-25" FromVerticalOffset="0" /></TransitionCollection>
-  - target: Border@CommonStates > Grid#DroppedFlickerWorkaroundWrapper > ContentPresenter > Grid > Grid#LogoContainer > Image
-    styles:
-      - RenderTransform@Pressed:=<ScaleTransform ScaleX="0.8" ScaleY="0.8" />
-      - RenderTransformOrigin=0.5,0.5
-  - target: Grid#ContentBorder@CommonStates > ContentPresenter > Grid > Grid#LogoContainer > Grid
-    styles:
-      - RenderTransform@Pressed:=<ScaleTransform ScaleX="0.8" ScaleY="0.8" />
-      - RenderTransformOrigin=0.5,0.5
-  - target: Border#ContentBorder@CommonStates > Grid#DroppedFlickerWorkaroundWrapper > ContentPresenter#ContentPresenter > ContentControl > Grid#RootGrid > Border#LogoBackgroundPlate > Image#AllAppsItemLogo
-    styles:
-      - RenderTransform@Pressed:=<ScaleTransform ScaleX="0.8" ScaleY="0.8" />
-      - RenderTransformOrigin=0.5,0.5
-  - target: Border#BackgroundBorder
-    styles:
-      - BackgroundTransition:=<BrushTransition Duration="0:0:0.083" />
-  - target: Grid#LayoutRoot
-    styles:
-      - BackgroundTransition:=<BrushTransition Duration="0:0:0.083" />
-  - target: StartMenu.CategoryControl > Grid > Border
-    styles:
+      - BorderBrush@PointerOver:=$BorderBrush
+      - BorderBrush@Pressed:=$BorderBrush
+      - CornerRadius=$ChipRadius
       - BackgroundSizing=InnerBorderEdge
-  - target: Button#ZoomOutButton
-    styles:
-      - Visibility=1
-  - target: Button#ZoomInButton
-    styles:
-      - Visibility=1
-  - target: Cortana.UI.Views.CortanaRichSearchBox#SearchTextBox > Grid > Border#BorderElement
-    styles:
-      - Background=$Background
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=6
-  - target: Border#TaskbarSearchBackground
-    styles:
-      - CornerRadius=6
-      - Background:=Transparent
-      - BorderBrush:=Transparent
-      - BorderThickness=0
-  - target: Grid#SearchBoxOnTaskbarGleamContainer > Grid#SearchBoxOnTaskbarGleamImageContainer
-    styles:
-      - Visibility=1
-  - target: StartDocked.NavigationPaneButton#UserTileButton > Grid > ContentPresenter#ContentPresenter > Grid > Grid#UserTileIcon
-    styles:
-    - Height=24
-    - Width=24
-  - target: StartDocked.NavigationPaneButton#UserTileButton > Grid > ContentPresenter#ContentPresenter > Grid > TextBlock#UserTileNameText
-    styles:
-      - FontSize=12
-webContentStyles:
-  - target: '*'
-    styles:
-      - 'transition: background-color 0.083s ease-in-out !important'
+themeResourceVariables:
+  - ''
