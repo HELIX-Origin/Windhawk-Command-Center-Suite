@@ -88,21 +88,18 @@ The selector names `Border#NotificationCenterBorder` and `Border#CalendarCenterB
 ### 2026-10-05 — NC Styler: Quick Settings Card Background Not Applying (Grid#L1Grid Miss)
 
 - **Severity**: 🟠 High (glass material not applied to Quick Settings toggle panel)
-- **Status**: ⚠️ open
+- **Status**: ✅ resolved — commit `(pending)`
 - **Affected File**: `src/windows-11-notification-center-styler.yml`
-- **Reported Issue**: `Windows.UI.Xaml.Controls.Grid#L1Grid` target does not receive the `$Background` glass card material. The Quick Settings panel (toggle buttons grid) renders without a frosted glass card background — buttons appear floating with no glass container behind them.
+- **Reported Issue**: `Grid#L1Grid` was targeted as the Quick Settings card surface but the glass material was not applying.
 
-#### Root Cause Hypothesis
-`Grid#L1Grid` may not be the correct fully-qualified selector for the Quick Settings toggle grid in the current Windows version. The element name may differ between `ShellExperienceHost.exe` (21H2–23H2) and `ShellHost.exe` (24H2), or a longer ancestor chain may be required.
+#### Root Cause (Confirmed via UWPSpy — ShellHost.exe, Win11 24H2)
+`Grid#L1Grid` is a **layout container**, not the card background surface. The actual card background element is `Border#RootGridBorder`, a sibling of `Grid#L1Grid` under `ControlCenter.ControlCenterView > Grid#RootGrid`.
 
-#### Evidence
-- Screenshot at commit `f841203`: Quick Settings toggle buttons and slider visible but the glass card background behind them is absent — no `$BorderBrush` rim, no frosted blur container.
+**Note**: UWPSpy can only attach to `ShellHost.exe` on Win11 24H2. `ShellExperienceHost.exe` returns an error. The NC mod targets both processes but visual tree inspection must use `ShellHost.exe`.
 
-#### Proposed Fix
-1. Use UWPSpy to inspect `ShellHost.exe` (24H2) while Quick Settings flyout is open.
-2. Locate the direct-child `Grid` wrapping the 2×3 toggle button array.
-3. Confirm or correct the fully-qualified type name and `#Name`.
-4. Update selector in `src/windows-11-notification-center-styler.yml` and `docs/targets/notification-center-styler.md`.
+#### Resolution
+- Replaced `Grid#L1Grid → $Background` with approach: outer `Grid#ControlCenterRegion → $Background`, inner `Border#RootGridBorder → Transparent` (double-blur prevention).
+- `Grid#L1Grid` kept as `Background:=Transparent` layout reset.
 
 ---
 
