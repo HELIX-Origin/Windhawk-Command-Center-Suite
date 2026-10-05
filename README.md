@@ -10,11 +10,11 @@ The suite delivers a unified, dark/light-adaptive "Command Center Glass" visual 
 
 | Surface | Windhawk Mod ID | Configuration File | Status |
 |---|---|---|---|
-| **Taskbar** | [`windows-11-taskbar-styler`](https://windhawk.net/mods/windows-11-taskbar-styler) | `src/windows-11-taskbar-styler.yml` | ✅ Shipped Reference |
-| **Start Menu** | [`windows-11-start-menu-styler`](https://windhawk.net/mods/windows-11-start-menu-styler) | `src/windows-11-start-menu-styler.yml` | ✅ Shipped Reference |
-| **Notification Center** | [`windows-11-notification-center-styler`](https://windhawk.net/mods/windows-11-notification-center-styler) | `src/windows-11-notification-center-styler.yml` | 🧪 Generated (Ready for verification) |
+| **Taskbar** | [`windows-11-taskbar-styler`](https://windhawk.net/mods/windows-11-taskbar-styler) | `src/windows-11-taskbar-styler.yml` | ✅ Shipped |
+| **Start Menu** | [`windows-11-start-menu-styler`](https://windhawk.net/mods/windows-11-start-menu-styler) | `src/windows-11-start-menu-styler.yml` | ✅ Shipped |
+| **Notification Center** | [`windows-11-notification-center-styler`](https://windhawk.net/mods/windows-11-notification-center-styler) | `src/windows-11-notification-center-styler.yml` | 🚧 In-Progress |
 
-*Companion mod configurations are preserved in `src/extras/`.*
+*Companion mod configurations are stored in `src/extras/`.*
 
 ---
 
