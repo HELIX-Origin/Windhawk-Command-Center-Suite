@@ -333,24 +333,24 @@ controlStyles:
   - target: CalendarViewDayItem, Windows.UI.Xaml.Controls.CalendarViewDayItem
     styles:
       - CornerRadius=4
-      - BorderThickness=0
-      - BorderBrush:=Transparent
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
   - target: CalendarViewDayItem > Border, Windows.UI.Xaml.Controls.CalendarViewDayItem > Windows.UI.Xaml.Controls.Border
     styles:
       - CornerRadius=4
       - Margin=1,2,1,2
-      - BorderThickness=0
-      - BorderBrush:=Transparent
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
   - target: CalendarViewItem, Windows.UI.Xaml.Controls.Primitives.CalendarViewItem
     styles:
       - CornerRadius=4
-      - BorderThickness=0
-      - BorderBrush:=Transparent
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
   - target: Control > Border, Windows.UI.Xaml.Controls.Control > Windows.UI.Xaml.Controls.Border
     styles:
       - CornerRadius=4
-      - BorderThickness=0
-      - BorderBrush:=Transparent
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
   - target: Windows.UI.Xaml.Controls.ListViewHeaderItem
     styles:
       - Margin=50,6,50,2
