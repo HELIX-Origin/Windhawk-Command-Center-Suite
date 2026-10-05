@@ -62,18 +62,7 @@
 
 ## ⚠️ Active & Open Bugs
 
-### 2026-10-05 — Empty Style Placeholders in New Styler Scaffolds
 
-- **Severity**: 🟢 Low (Syntax Warning W105)
-- **Status**: 🚧 investigating (Queued for Workstreams W.02 & W.03)
-- **Reported Issue**: `windows-11-notification-center-styler.yml` and `windows-11-file-explorer-styler.yml` currently contain `- target: ''` and `- ''` empty placeholders.
-
-#### Root Cause
-1. **Initial File Scaffolding**: The files were scaffolded with empty placeholder entries awaiting the completion of the agent ecosystem and evidence collection.
-    - **Impact**: Generates warning W105 in `tools/Test-WindhawkStyles.ps1`.
-    - **Proposed Fix**: Replace empty placeholders with the canonical Command Center Glass recipes in Workstreams W.02 and W.03.
-
----
 
 ### 2026-10-05 — Duplicate Target Selectors in Shipped Reference Files
 

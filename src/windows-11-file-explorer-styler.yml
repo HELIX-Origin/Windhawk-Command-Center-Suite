@@ -10,17 +10,127 @@ styleConstants:
   - BorderBrush=<LinearGradientBrush StartPoint="0,0" EndPoint="0,1"><GradientStop Color="#60808080" Offset="0.0" /><GradientStop Color="#50404040" Offset="0.25" /><GradientStop Color="#40808080" Offset="1" /></LinearGradientBrush>
   - BorderBrushAlt=<WindhawkBlur BlurAmount="10" TintColor="#909090" TintOpacity="0.3"/>
   - BackgroundAlt=<SolidColorBrush Color="{ThemeResource SystemAccentColor}" Opacity="1"/>
+  - OverlayColor=<AcrylicBrush TintColor="{ThemeResource SystemAltLowColor}" TintOpacity="1" TintLuminosityOpacity="0.8" FallbackColor="{ThemeResource CardStrokeColorDefaultSolid}" />
+  - OverlayColor2=<AcrylicBrush TintColor="{ThemeResource SystemAltLowColor}" TintOpacity="1" TintLuminosityOpacity="0.5" FallbackColor="{ThemeResource CardStrokeColorDefaultSolid}" />
+  - AccentColor=<AcrylicBrush TintColor="{ThemeResource SystemAccentColor}" TintOpacity="1" TintLuminosityOpacity="0.5" FallbackColor="{ThemeResource CardStrokeColorDefaultSolid}" />
+  - ActiveColor=<AcrylicBrush TintColor="{ThemeResource SystemAltLowColor}" TintOpacity="1" TintLuminosityOpacity="1" FallbackColor="{ThemeResource CardStrokeColorDefaultSolid}" />
   - BorderThickness=0.3,1,0.3,1
   - CornerRadius=35
   - CornerRadiusAlt1=25
+  - CornerRadiusAlt4=15
   - CornerRadiusAlt2=10
   - CornerRadiusAlt3=6
-  - CornerRadiusAlt4=15
 controlStyles:
-  - target: ''
+  # 1. Tabs & Tab Strip (Floating Glass Tabs)
+  - target: TabViewItem > Grid#LayoutRoot@CommonStates
     styles:
-      - ''
-themeResourceVariables:
-  - ''
+      - Background@PointerOver:=$OverlayColor2
+      - Background@Pressed:=$OverlayColor
+      - CornerRadius=$CornerRadiusAlt2
+
+  - target: TabViewItem > Grid#LayoutRoot > Canvas > Path#SelectedBackgroundPath
+    styles:
+      - Fill:=$Background
+
+  - target: Grid#TabContainerGrid > Border > Button#AddButton
+    styles:
+      - CornerRadius=$CornerRadiusAlt3
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+      - Background@PointerOver:=$OverlayColor2
+      - Background@Pressed:=$OverlayColor
+
+  # 2. Navigation Bar & History Buttons
+  - target: AppBarButton#backButton, AppBarButton#forwardButton, AppBarButton#upButton, AppBarButton#refreshButton
+    styles:
+      - CornerRadius=$CornerRadiusAlt3
+      - Background@PointerOver:=$OverlayColor2
+      - Background@Pressed:=$OverlayColor
+      - RenderTransform@Pressed:=<ScaleTransform ScaleX="0.8" ScaleY="0.8" />
+      - RenderTransformOrigin=0.5,0.5
+
+  # 3. Address Bar & Breadcrumbs
+  - target: Grid#FileExplorerAddressBarGrid
+    styles:
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CornerRadiusAlt2
+
+  - target: AutoSuggestBox#PART_AutoSuggestBox > Grid#LayoutRoot > TextBox#TextBox
+    styles:
+      - CornerRadius=$CornerRadiusAlt2
+
+  # 4. Search Box (Command Center Pill)
+  - target: AutoSuggestBox#FileExplorerSearchBox
+    styles:
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CornerRadiusAlt1
+
+  - target: AutoSuggestBox#FileExplorerSearchBox > Grid#LayoutRoot > TextBox#TextBox
+    styles:
+      - CornerRadius=$CornerRadiusAlt1
+
+  # 5. Command Bar & Action Buttons
+  - target: Grid#CommandBarControlRootGrid, FileExplorerExtensions.CommandBarControl_Wave1 > Grid
+    styles:
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CornerRadiusAlt2
+
+  - target: CommandBar#FileExplorerCommandBar > Grid#LayoutRoot > Grid#ContentRoot
+    styles:
+      - Background:=Transparent
+
+  - target: Button#MoreButton
+    styles:
+      - CornerRadius=$CornerRadiusAlt3
+      - Background@PointerOver:=$OverlayColor2
+      - Background@Pressed:=$OverlayColor
+
+  # 6. Modern Context Menus & Flyouts
+  - target: CommandBarOverflowPresenter#SecondaryItemsControl > Grid#LayoutRoot
+    styles:
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CornerRadiusAlt3
+
+  - target: Microsoft.UI.Xaml.Controls.Primitives.CommandBarFlyoutCommandBar
+    styles:
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CornerRadiusAlt3
+
+  - target: MenuFlyoutPresenter > Border
+    styles:
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CornerRadiusAlt3
+
+  - target: MenuFlyoutItem
+    styles:
+      - CornerRadius=$CornerRadiusAlt3
+      - Margin=4,0,4,0
+
+  # 7. Details Pane & Tooltips
+  - target: Grid#DetailsViewControlRootGrid
+    styles:
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CornerRadiusAlt2
+
+  - target: ToolTip > ContentPresenter#LayoutRoot
+    styles:
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CornerRadiusAlt3
 explorerFrameContainerHeight: 0
 xamlDiagnosticsHandling: alert

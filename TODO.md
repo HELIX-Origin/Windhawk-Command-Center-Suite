@@ -118,15 +118,15 @@ Implement the full Command Center Glass theme for `src/windows-11-notification-c
 
 **Implementation checklist:**
 
-- [ ] Complete `src/windows-11-notification-center-styler.yml` with canonical Rule 03 tokens and materials.
-- [ ] Implement glass styling and rim borders on `Grid#NotificationCenterGrid` and `Grid#CalendarCenterGrid`.
-- [ ] Collapse native acrylic borders and double-shadows (`Border#CalendarHeaderMinimizedOverlay`, `Shadow:=`).
-- [ ] Style Quick Actions grid (`Grid#L1Grid > Border`, `PaginatedToggleButton`, `SplitL2Button`).
-- [ ] Implement styled volume and brightness sliders (`Rectangle#HorizontalTrackRect`, `Rectangle#HorizontalDecreaseRect`).
-- [ ] Style Media Transport controls (`Grid#MediaTransportControlsRegion`, thumbnail art, transport buttons).
-- [ ] Style notification popup toasts and taskbar jump lists (`Border#ToastBackgroundBorder`, `Border#JumpListRestyledAcrylic`).
-- [ ] Validate with `tools/Test-WindhawkStyles.ps1` (0 errors).
-- [ ] Generate desktop verification checklist for user evaluation.
+- [x] Complete `src/windows-11-notification-center-styler.yml` with canonical Rule 03 tokens and materials.
+- [x] Implement glass styling and rim borders on `Grid#NotificationCenterGrid` and `Grid#CalendarCenterGrid`.
+- [x] Collapse native acrylic borders and double-shadows (`Border#CalendarHeaderMinimizedOverlay`, `Shadow:=`).
+- [x] Style Quick Actions grid (`Grid#L1Grid > Border`, `PaginatedToggleButton`, `SplitL2Button`).
+- [x] Implement styled volume and brightness sliders (`Rectangle#HorizontalTrackRect`, `Rectangle#HorizontalDecreaseRect`).
+- [x] Style Media Transport controls (`Grid#MediaTransportControlsRegion`, thumbnail art, transport buttons).
+- [x] Style notification popup toasts and taskbar jump lists (`Border#ToastBackgroundBorder`, `Border#JumpListRestyledAcrylic`).
+- [x] Validate with `tools/Test-WindhawkStyles.ps1` (0 errors, 0 warnings).
+- [ ] Complete live desktop verification checklist with user.
 
 ---
 
@@ -149,25 +149,31 @@ Implement the Command Center Glass theme for `src/windows-11-file-explorer-style
 - "The file-explorer and notification-center styles need to be built. that is our plan for this project."
 - "Look at the start-menu-styler.yml and taskbar-styler.yml files to know what the style I am going for is."
 - "Due to File Explorer limitations, we won't be able to provide the transparent main bg without heavy Windows modification. That is something we want to avoid. So we will have to improvise and find a command center style for File Explorer that doesn't require us to make certain elements invisible or hidden."
+- "We also want to avoid using Translucent Windows, since it causes issues with some programs. So all of our styles need to use methods that don't require the TranslucentWindows mod to work."
 
 **Implementation checklist:**
 
-- [ ] Implement canonical Rule 03 tokens in `src/windows-11-file-explorer-styler.yml` (materials, rim gradients, radii scale).
-- [ ] Preserve the native Explorer window frame and file list (avoid heavy/unstable Windows modifications).
-- [ ] Ensure **zero** structural UI elements are made invisible or hidden (`Visibility=1` forbidden on functional controls).
-- [ ] Style tab strip, active tab, inactive tab, and "+" button (`FileExplorerExtensions.FileExplorerTabControl`, `TabViewItem`) as floating glass tabs.
-- [ ] Style navigation bar and history buttons (`NavigationBarControl`, `AppBarButton#backButton`).
-- [ ] Style address bar and search pill (`Grid#FileExplorerAddressBarGrid`, `AutoSuggestBox#FileExplorerSearchBox`) with rounded Command Center pill borders (`$CornerRadiusAlt1` / `$CornerRadiusAlt2`).
-- [ ] Style modern command bar row and action buttons (`Grid#CommandBarControlRootGrid`, `AppBarButton`) with subtle glass hover/press states.
-- [ ] Style modern context menus and flyouts (`CommandBarOverflowPresenter`, `CommandBarFlyoutCommandBar`) with frosted glass and rim highlight.
-- [ ] Validate with `tools/Test-WindhawkStyles.ps1` (0 errors).
-- [ ] Generate desktop verification checklist for user evaluation.
+- [x] Implement canonical Rule 03 tokens in `src/windows-11-file-explorer-styler.yml` (materials, rim gradients, radii scale).
+- [x] Preserve the native Explorer window frame and file list (avoid heavy/unstable Windows modifications).
+- [x] Ensure **zero** structural UI elements are made invisible or hidden (`Visibility=1` forbidden on functional controls).
+- [x] Style tab strip, active tab, inactive tab, and "+" button (`FileExplorerExtensions.FileExplorerTabControl`, `TabViewItem`) as floating glass tabs.
+- [x] Style navigation bar and history buttons (`NavigationBarControl`, `AppBarButton#backButton`).
+- [x] Style address bar and search pill (`Grid#FileExplorerAddressBarGrid`, `AutoSuggestBox#FileExplorerSearchBox`) with rounded Command Center pill borders (`$CornerRadiusAlt1` / `$CornerRadiusAlt2`).
+- [x] Style modern command bar row and action buttons (`Grid#CommandBarControlRootGrid`, `AppBarButton`) with subtle glass hover/press states.
+- [x] Style modern context menus and flyouts (`CommandBarOverflowPresenter`, `CommandBarFlyoutCommandBar`) with frosted glass and rim highlight.
+- [x] Validate with `tools/Test-WindhawkStyles.ps1` (0 errors, 0 warnings).
+- [ ] Complete live desktop verification checklist with user.
 
 ---
 
 ## ✅ Completed Workstreams
 
-*(Workstream W.01 is completing with this setup turn).*
+### ✅ Workstream W.01: Agent Ecosystem Foundation & Governance Architecture
+- Complete AI agent ecosystem ([`.agents/`](.agents/)) with Rules 00–09, Domain Skills, Agent Roles, and Templates.
+- Sourced target evidence records ([`docs/targets/`](docs/targets/)).
+- Automated static validation gate ([`tools/Test-WindhawkStyles.ps1`](tools/Test-WindhawkStyles.ps1)) and baseline tracking.
+- Central Operating Manual ([`AGENTS.md`](AGENTS.md)) and root tracking ledgers ([`TODO.md`](TODO.md), [`PLAN.md`](PLAN.md), [`BUGS.md`](BUGS.md), [`ROADMAP.md`](ROADMAP.md), [`README.md`](README.md)).
+- Remote GitHub repository initialized and synchronized at `https://github.com/HELIX-Origin/Windhawk-Command-Center-Suite`.
 
 ---
 

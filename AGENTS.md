@@ -20,8 +20,8 @@ The suite targets exactly **four** official Windhawk styler mods (one YAML confi
 |---|---|---|---|---|
 | `src/windows-11-taskbar-styler.yml` | `windows-11-taskbar-styler` | `explorer.exe` | WinUI 3 / XAML | ✅ Shipped reference |
 | `src/windows-11-start-menu-styler.yml` | `windows-11-start-menu-styler` | `StartMenuExperienceHost.exe` | UWP / WinUI 2 | ✅ Shipped reference |
-| `src/windows-11-notification-center-styler.yml` | `windows-11-notification-center-styler` | `ShellExperienceHost.exe` / `ShellHost.exe` | UWP `Windows.UI.Xaml` | 🚧 Scaffold in progress |
-| `src/windows-11-file-explorer-styler.yml` | `windows-11-file-explorer-styler` | `explorer.exe` | WinUI 3 `Microsoft.UI.Xaml` | 🚧 Empty in progress |
+| `src/windows-11-notification-center-styler.yml` | `windows-11-notification-center-styler` | `ShellExperienceHost.exe` / `ShellHost.exe` | UWP `Windows.UI.Xaml` | 🧪 Generated (Ready for verification) |
+| `src/windows-11-file-explorer-styler.yml` | `windows-11-file-explorer-styler` | `explorer.exe` | WinUI 3 `Microsoft.UI.Xaml` | 🧪 Generated (Ready for verification) |
 
 ### Core Design Philosophy: "Command Center Glass"
 - **Unified Frosted Blur**: Single-layer `WindhawkBlur` (amount 20, tinting via `{ThemeResource SystemChromeMediumColor}`) across all surfaces.
