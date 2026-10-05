@@ -1,0 +1,16 @@
+# Style Baseline Ledger
+# Pre-existing warnings in shipped reference files as of 2026-10-05.
+# These entries are tracked in BUGS.md. The baseline may only shrink;
+# new entries must not be added to suppress warnings in newly generated files.
+
+[windows-11-start-menu-styler.yml]
+W101: Duplicate target selector: 'Border@CommonStates > Grid#DroppedFlickerWorkaroundWrapper > ContentPresenter > Grid > Grid#LogoContainer > Image' (2 occurrences)
+W101: Duplicate target selector: 'Border#AppBorder' (2 occurrences)
+W101: Duplicate target selector: 'Border#LayerBorder' (2 occurrences)
+W101: Duplicate target selector: 'Grid#AllListHeading > TextBlock#AllListHeadingText' (2 occurrences)
+W101: Duplicate target selector: 'TextBlock#PinnedListHeaderText' (2 occurrences)
+
+[windows-11-taskbar-styler.yml]
+W101: Duplicate target selector: 'Windows.UI.Xaml.Controls.Border#SnapBarBorder' (2 occurrences)
+W101: Duplicate target selector: 'Windows.UI.Xaml.Shapes.Rectangle#HorizontalDecreaseRect' (2 occurrences)
+W101: Duplicate target selector: 'Windows.UI.Xaml.Shapes.Rectangle#HorizontalTrackRect' (2 occurrences)

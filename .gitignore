@@ -1,0 +1,14 @@
+# Operating System & Editor Files
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.tmp
+*~
+
+# Agent backups and temporary scratch directories
+.backups/
+scratch/
+*.log
+
+# Windows system folders
+$RECYCLE.BIN/

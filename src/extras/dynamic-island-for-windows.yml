@@ -1,0 +1,86 @@
+Appearance:
+  Position: top-center
+  TargetMonitor: primary
+  OffsetX: 0
+  OffsetY: 0
+  SeparateExpandedOffsetY: 0
+  OffsetYExpanded: 0
+  BorderMergedMode: 0
+  ShapeStyle: w11
+  SizeScale: '1.0'
+  AutoDpiScale: 1
+Behavior:
+  AlwaysOnTop: 0
+  ExpandOnHover: 1
+  AutoHideIdleSeconds: '0'
+  AutoHideFullscreen: 1
+  UnhideOnHover: 1
+Animations:
+  TargetFPS: auto
+  AnimationStyle: default
+  AnimationSpeed: normal
+Themes:
+  ThemePreset: graphite
+  PillOpacity: 96
+  TintIntensity: 72
+  BackdropMaterial: none
+  BackdropFillOpacity: 45
+  BackdropTint: 55
+  MaterialDepth: 1
+  DropShadow: 1
+  AccentBloom: 100
+  TextScale: 100
+  AccentColorMode: system
+  CustomAccentHex: '#4cc9f0'
+  CalendarAccent: system
+  ClockAccentGlow: 1
+  FontFamily: ''
+  ContourBorderMode: default
+  ContourBorderHex: '#1E1E22'
+  PillBgColor: '#08080A'
+  TextPrimaryColor: '#FFFFFF'
+  TextSecondaryColor: '#9B9BA5'
+Indicators:
+  PrivacyDots: 1
+  PrivacyDotsMic: 1
+  PrivacyDotsMicHex: '#FF9500'
+  PrivacyDotsCam: 1
+  PrivacyDotsCamHex: '#34C759'
+Modules:
+  Media: 1
+  MediaAutoExpand: 1
+  Volume: 1
+  CapsLock: 1
+  Battery: 1
+  BluetoothIndicator: 1
+  BluetoothShowBattery: 1
+  Progress: 1
+  TimerModule: 1
+  Clipboard: 1
+  StatusCountdownProgress: 1
+  DoNotDisturbIndicator: 1
+  NotificationRespectDnD: 1
+  HardwareMonitorModule: 1
+  GameOverlay: 0
+  ShowMetricText: 1
+  Weather: 1
+  WeatherCity: ''
+  WeatherFahrenheit: 1
+  Language: auto
+  ClockFormat: system
+  ShowSeconds: 0
+  DateFormat: dddd - MMMM dd yyyy
+  DateFirst: 0
+  FileTrayModule: 0
+  FileTrayMaxItems: 10
+  MediaExpandBlocklist: ''
+  GameOverlayShowFps: 1
+  GameOverlayShowCpu: 1
+  GameOverlayShowGpu: 1
+  GameOverlayShowRam: 1
+  GameOverlayShowDisk: 1
+  GameOverlayCompact: 1
+Shortcuts:
+  HideShowHotkeyEnabled: 1
+  HideShowModifiers: ctrl_alt
+  HideShowKey: D

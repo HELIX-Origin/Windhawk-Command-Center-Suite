@@ -1,0 +1,22 @@
+showCurrentFileProgressBar: 1
+customization:
+  enabled: 1
+  preset: system
+  footerStyle: solid
+  footerColorPreset: system
+  footerColor: ''
+  colors:
+    backgroundOverride: ''
+    accentOverride: ''
+    primaryTextOverride: ''
+    secondaryTextOverride: ''
+    inactiveOverride: ''
+  style:
+    circleThickness: 7
+    progressThickness: 8
+  text:
+    fontPreset: default
+    customFont: ''
+    bodySize: 11
+    summarySize: 23
+    percentSize: 26

@@ -1,0 +1,22 @@
+theme: ''
+styleConstants:
+  - Translucent=<WindhawkBlur BlurAmount="15" TintColor="#10808080"/>
+  - Glass=<WindhawkBlur BlurAmount="5" TintColor="{ThemeResource SystemChromeMediumColor}" TintOpacity="0.7" />
+  - Frosted=<WindhawkBlur BlurAmount="20" TintColor="{ThemeResource SystemChromeMediumColor}" TintOpacity="0.7" />
+  - Acrylic=<WindhawkBlur BlurAmount="30" TintColor="{ThemeResource SystemChromeMediumColor}" TintOpacity="0.8" />
+  - Background=$Frosted
+  - BorderBrush=<LinearGradientBrush StartPoint="0,0" EndPoint="0,1"><GradientStop Color="#60808080" Offset="0.0" /><GradientStop Color="#50404040" Offset="0.25" /><GradientStop Color="#40808080" Offset="1" /></LinearGradientBrush>
+  - BorderBrushAlt=<WindhawkBlur BlurAmount="10" TintColor="#909090" TintOpacity="0.3"/>
+  - BackgroundAlt=<SolidColorBrush Color="{ThemeResource SystemAccentColor}" Opacity="1"/>
+  - BorderThickness=0.3,1,0.3,1
+  - CornerRadius=35
+  - CornerRadiusAlt1=25
+  - CornerRadiusAlt2=10
+  - CornerRadiusAlt3=6
+  - CornerRadiusAlt4=15
+controlStyles:
+  - target: ''
+    styles:
+      - ''
+themeResourceVariables:
+  - ''

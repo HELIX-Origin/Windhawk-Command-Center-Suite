@@ -1,0 +1,76 @@
+logo:
+  enabled: 1
+  center: 1
+  x: 0
+  'y': 10
+  width: 0
+  height: -1
+  path: C:/Windows/System32/DisplaySystemToastIcon.png
+startPosition:
+  enabled: 1
+  center: 1
+  monitor: 0
+  x: 0
+  'y': 0
+windowSize:
+  enabled: 1
+  width: 0
+  height: 0
+  expandControls: 1
+  exceptionalOkButton: 1
+removeFirstFocus: 0
+alwaysOnTop: 0
+customIcon: shell32.dll;23
+removeTitleIcon: 1
+restoreCloseButton: 1
+windowColors:
+  title: 180,180,180
+  border: ''
+  bar: 30,30,30
+  background: 30,30,30
+  separator: ''
+  textColor: 180,180,180
+titleText: ' '
+modifyWindows:
+  - id: Spacer1
+    label: ''
+    hidden: 1
+    relativePosition: 0
+    position: ''
+    zIndex: ''
+    textColor: ''
+  - id: Spacer2
+    label: ''
+    hidden: 1
+    relativePosition: 0
+    position: ''
+    zIndex: ''
+    textColor: ''
+  - id: Separator
+    label: ''
+    hidden: 1
+    relativePosition: 0
+    position: ''
+    zIndex: ''
+    textColor: ''
+  - id: RegisteredUser1
+    label: ''
+    hidden: 1
+    relativePosition: 0
+    position: ''
+    zIndex: ''
+    textColor: ''
+  - id: RegisteredUser2
+    label: ''
+    hidden: 1
+    relativePosition: 0
+    position: ''
+    zIndex: ''
+    textColor: ''
+  - id: LicenseInfo
+    label: ''
+    hidden: 1
+    relativePosition: 0
+    position: ''
+    zIndex: ''
+    textColor: ''
