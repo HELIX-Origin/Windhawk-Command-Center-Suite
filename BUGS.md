@@ -62,7 +62,49 @@
 
 ## ⚠️ Active & Open Bugs
 
+---
 
+### 2026-10-05 — NC Styler: Inner Card Selectors Not Matching (Notification + Calendar Panels)
+
+- **Severity**: 🟠 High (glass material not applied to notification/calendar panels)
+- **Status**: ⚠️ open
+- **Affected File**: `src/windows-11-notification-center-styler.yml`
+- **Reported Issue**: `Border#NotificationCenterBorder` and `Border#CalendarCenterBorder` targets do not match any elements in the live visual tree. As a result, the Notification panel and Calendar panel receive no `$Background` glass material — they render with the system default dark surface. No wallpaper is visible between the two panels; they appear as a continuous unstyled block instead of two separate floating glass cards.
+
+#### Root Cause Hypothesis
+The selector names `Border#NotificationCenterBorder` and `Border#CalendarCenterBorder` were inferred from naming convention rather than confirmed via visual tree inspection. The real inner-card container names in `ShellExperienceHost.exe` / `ShellHost.exe` are unknown without UWPSpy or a confirmed community theme reference.
+
+#### Evidence
+- Screenshot at commit `f841203`: Notification + calendar panels show no frosted blur, no `$BorderBrush` rim, no wallpaper gap between them — system default dark surface only.
+- Outer container transparency (`Grid#NotificationCenterGrid`, `Grid#CalendarCenterGrid` → `Transparent`) result unclear without further inspection.
+
+#### Proposed Fix
+1. Use UWPSpy (on PATH) to inspect the live visual tree of `ShellHost.exe` while Notification Center is open.
+2. Identify the actual `Border` or `Grid` elements serving as the notification list card and calendar card surfaces.
+3. Update selectors in `src/windows-11-notification-center-styler.yml` and `docs/targets/notification-center-styler.md`.
+
+---
+
+### 2026-10-05 — NC Styler: Quick Settings Card Background Not Applying (Grid#L1Grid Miss)
+
+- **Severity**: 🟠 High (glass material not applied to Quick Settings toggle panel)
+- **Status**: ⚠️ open
+- **Affected File**: `src/windows-11-notification-center-styler.yml`
+- **Reported Issue**: `Windows.UI.Xaml.Controls.Grid#L1Grid` target does not receive the `$Background` glass card material. The Quick Settings panel (toggle buttons grid) renders without a frosted glass card background — buttons appear floating with no glass container behind them.
+
+#### Root Cause Hypothesis
+`Grid#L1Grid` may not be the correct fully-qualified selector for the Quick Settings toggle grid in the current Windows version. The element name may differ between `ShellExperienceHost.exe` (21H2–23H2) and `ShellHost.exe` (24H2), or a longer ancestor chain may be required.
+
+#### Evidence
+- Screenshot at commit `f841203`: Quick Settings toggle buttons and slider visible but the glass card background behind them is absent — no `$BorderBrush` rim, no frosted blur container.
+
+#### Proposed Fix
+1. Use UWPSpy to inspect `ShellHost.exe` (24H2) while Quick Settings flyout is open.
+2. Locate the direct-child `Grid` wrapping the 2×3 toggle button array.
+3. Confirm or correct the fully-qualified type name and `#Name`.
+4. Update selector in `src/windows-11-notification-center-styler.yml` and `docs/targets/notification-center-styler.md`.
+
+---
 
 ### 2026-10-05 — Duplicate Target Selectors in Shipped Reference Files
 
