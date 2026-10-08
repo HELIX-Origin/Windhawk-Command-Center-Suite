@@ -7,8 +7,16 @@ Desktop.ini
 
 # Agent backups and temporary scratch directories
 .backups/
-scratch/
 *.log
 
 # Windows system folders
 $RECYCLE.BIN/
+
+# Temp and scratch files
+temp/
+tmp/
+scratch/
+*.tmp
+*.bak
+*.temp
+*.backup

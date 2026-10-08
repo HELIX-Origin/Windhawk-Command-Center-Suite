@@ -1,5 +1,7 @@
 # 🎛️ Windhawk Command Center Suite
 
+![Windhawk Command Center Suite Desktop Overview](/assets/command-center-header.png)
+
 A cohesive, modern frosted glass customization suite for Windows 11 built for official [Windhawk](https://windhawk.net/) mods.
 
 The suite delivers a unified, dark/light-adaptive "Command Center Glass" visual theme across all primary Windows shell surfaces: top-lit gradient rim highlights, pixel-accurate `WindhawkBlur`, adaptive theme resource colors, and consistent corner radius scaling.
@@ -20,7 +22,7 @@ The suite delivers a unified, dark/light-adaptive "Command Center Glass" visual 
 
 ## 💎 Design System: "Command Center Glass"
 
-- **Surface Material**: Single-layer `WindhawkBlur` (amount 20, tint `{ThemeResource SystemChromeMediumColor}`, opacity 0.7) that automatically adapts to Windows Dark and Light modes.
+- **Surface Material**: Foundation `WindhawkBlur` (amount 20, tint `{ThemeResource SystemChromeMediumColor}`, opacity 0.7) that automatically adapts to Windows Dark and Light modes.
 - **Top-Lit Rim Border**: Signature vertical linear gradient (`#60808080 → #50404040 → #40808080`, thickness `0.3,1,0.3,1`) simulating overhead light catching a glass pane.
 - **Accent Integration**: Windows `SystemAccentColor` is reserved for active state indicators, volume/brightness slider fill bars, and clock highlights.
 - **Harmonized Radius Scale**:
@@ -29,7 +31,7 @@ The suite delivers a unified, dark/light-adaptive "Command Center Glass" visual 
   - `15px` — Grouped control regions and secondary cards.
   - `10px` — Buttons, tiles, list items, and tabs.
   - `6px` — Context menus, flyout presenters, and taskbar buttons.
-- **Zero Double-Blur**: Native chrome layers, hard backgrounds, and drop shadows are collapsed or reset to transparent to prevent muddy overlapping blur.
+- **Intentional Glass Layering**: Foundation frosted glass surfaces host layered glassy cards, pills, and tiles to establish rich depth and hierarchy; native opaque system fills and hard drop shadows are collapsed.
 
 ---
 

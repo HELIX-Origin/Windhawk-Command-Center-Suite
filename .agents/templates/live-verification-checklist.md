@@ -35,7 +35,7 @@ Use this checklist when preparing a handoff for the user to verify a style chang
 ### 2. Panel Chrome & Borders
 - [ ] **Outer Rim**: Panel border gradient displays the subtle top-lit rim highlight (`$BorderBrush`).
 - [ ] **Corner Radii**: Corners are cleanly rounded (`$CornerRadius`) without jagged clipping.
-- [ ] **Zero Double-Blur**: Inner containers are transparent; no muddy overlapping blur layers.
+- [ ] **Intentional Glass Layering**: Foundation frosted surface hosts layered glassy cards and controls cleanly; native opaque system fills are collapsed.
 - [ ] **Shadow Collapse**: Native drop shadows or hard acrylic plates are properly collapsed where intended.
 
 ### 3. Interactive States

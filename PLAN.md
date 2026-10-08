@@ -22,36 +22,43 @@
 
 ## 🎯 Active Sprints
 
-### 🚀 Sprint 1: Agent Ecosystem Foundation & Static Gate Establishment
+### 🚀 Sprint 2: Start Menu Alignment Refinements, Action Center Quick Settings Fixes & Snap Containers Theming
 
-> Complete the comprehensive agent ecosystem modeled after `D:\Projects`, establish mandatory rules and skills, compile target evidence records without requiring manual UWPSpy inspection, and establish static validation tooling.
+> High-precision alignment of Start Menu search and companion toggle, geometry tightening between panels, Action Center split-button theming fixes, and taskbar snap container glass styling.
 
-#### 📝 Tasks 
+#### 📝 Tasks
 
 ```mermaid
 flowchart TD
-    S1_Research["Mod Research & Target Extraction"] --> S1_Rules["Mandatory Rules (00-09)"]
-    S1_Rules --> S1_Ecosystem["Agent Catalog & Domain Skills"]
-    S1_Ecosystem --> S1_Gate["Static Gate: Test-WindhawkStyles.ps1"]
-    S1_Gate --> S1_Ledgers["Tracking Ledgers & Evidence Docs"]
+    S2_SM["Start Menu Alignments (Search & Phone Link)"] --> S2_NC["Action Center Button State Fixes"]
+    S2_NC --> S2_Snap["Taskbar Snap Container Theming"]
+    S2_Snap --> S2_Gate["Static Gate: Test-WindhawkStyles.ps1"]
+    S2_Gate --> S2_Verify["Desktop Verification"]
 ```
 
-1. **Multi-Agent Governance Architecture**:
-    - Establish Rules 00 through 09 under `.agents/rules/` covering safety, syntax, design language, target evidence, surface scope, Mermaid diagrams, validation, and documentation.
-    - Establish Domain Skills in `.agents/skills/` covering styler engineering, glass materials, notification center theming, file explorer theming, and visual inspection.
-    - Establish Focus-Area Primary & Sub-Agent specifications in `.agents/agents/`.
-    - Create root `AGENTS.md` operating manual.
-2. **Quality Gate & Evidence Compilation**:
-    - Implement `tools/Test-WindhawkStyles.ps1` static validation gate.
-    - Create baseline ledger `tools/style-baseline.txt`.
-    - Compile target evidence records in `docs/targets/` from official mod source code, eliminating manual UWPSpy requirements.
-    - Instantiate root tracking files (`TODO.md`, `PLAN.md`, `BUGS.md`, `ROADMAP.md`).
+1. **Start Menu Search & Phone Link Geometry Alignment**:
+    - **Top Card Vertical Alignment**: Move Phone Link companion cards up so they align flush with the top of the menu (bringing the search box into perfect horizontal alignment to their left).
+    - **Inter-Panel Gap Reduction**: Reduce extra horizontal spacing between the Start Menu main content and Phone Link companion section for a cohesive single-surface aesthetic.
+    - **Search Box & Toggle Sizing**: Shrink the search box width and adjust margins so that:
+        - The **left edge of the search box** aligns flush with the **left edge of the pinned apps section**.
+        - The **right edge of the companion toggle button** (`ToggleButton#ShowHideCompanion`) aligns flush with the **right edge of the pinned apps section**.
+2. **Notification / Action Center Button Color & Split Button Refinement**:
+    - Fix Quick Settings toggle buttons and split buttons (`SplitL2Button`, chevron button, toggle button) where colors are inconsistently applied across states (ref: `media_1791431699608_c575da8b.png`).
+    - Resolve the split-button mismatch where one half displays accent color and the chevron half displays bright high-contrast blue.
+    - Ensure unified `$ElementBackground`, `$BorderBrush`, and `$AccentColor` state styling across all quick action tiles (Wi-Fi, Bluetooth, Airplane mode, Accessibility, Energy saver, Live captions).
+3. **Taskbar Snap Layout Containers Theming**:
+    - Inspect and theme internal elements of the Snap Layout container (`SnapLayoutControl`, `LayoutBorder`, `LayoutGrid`) to ensure full Command Center glass cohesion without disrupting layout calculation coordinates.
+4. **Taskbar System Tray Overflow Grid Glass Background**:
+    - Restore frosted glass background (`$Background`), top-lit border (`$BorderBrush`), and matching corner radius to the system tray overflow flyout (`Grid#OverflowRootGrid > Border` and `Border#OverflowFlyoutBackgroundBorder`), repairing the missing background shown in `media_1791432063085_e18460b5.png`.
 
 ---
 
 ## ✅ Completed Sprints
 
-*(Sprint 1 is completing with this turn).*
+### ✅ Sprint 1: Agent Ecosystem Foundation & Static Gate Establishment
+- Established Rules 00–09, Domain Skills, Agent Specifications, and Governance Templates.
+- Automated static validation gate (`tools/Test-WindhawkStyles.ps1`) and baseline ledger.
+- Root tracking files initialized and synchronized with repository.
 
 ---
 

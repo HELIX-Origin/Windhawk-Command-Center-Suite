@@ -13,26 +13,32 @@ styleConstants:
   - BorderThickness=0.3,1,0.3,1
   - CornerRadius=6
   - CornerRadiusAlt1=20
-  - BaseHeight=38
-  - BaseWidth=38
+  - BaseHeight=32
+  - BaseWidth=34
 controlStyles:
-  - target: Taskbar.TaskbarFrame > Grid#RootGrid > Taskbar.TaskbarBackground > Grid > Rectangle#BackgroundFill
+  - target: Taskbar.TaskbarFrame > Grid#RootGrid > Taskbar.TaskbarBackground > Grid, Taskbar.TaskbarBackground > Grid, Taskbar.TaskbarBackground#BackgroundControl > Grid
+    styles:
+      - Margin=8,4,8,4
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CornerRadiusAlt1
+  - target: Taskbar.TaskbarFrame > Grid#RootGrid > Taskbar.TaskbarBackground > Grid > Rectangle#BackgroundFill, Taskbar.TaskbarBackground > Grid > Rectangle#BackgroundFill
     styles:
       - Visibility=1
   - target: Rectangle#BackgroundStroke
     styles:
       - Visibility=1
-  - target: Taskbar.TaskbarBackground#HoverFlyoutBackgroundControl
+  - target: Taskbar.TaskbarBackground#HoverFlyoutBackgroundControl, Taskbar.TaskbarBackground#HoverFlyoutBackgroundControl > Grid
     styles:
-      - Background:=$Background
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$CornerRadius
+      - Background:=Transparent
+      - BorderBrush:=Transparent
+      - BorderThickness=0
   - target: Taskbar.TaskListButtonPanel@CommonStates > Grid > Border#BackgroundElement, Taskbar.TaskListButtonPanel@CommonStates > Border#BackgroundElement
     styles:
-      - Padding=6
-      - Margin=2
-      - Background@ActiveNormal:=$ActiveColor
+      - Padding=6,4,6,4
+      - Margin=2,1,2,1
+      - Background@ActiveNormal:=$Background
       - Background@ActivePointerOver:=$OverlayColor
       - Background@ActivePressed:=$OverlayColor
       - Background@InactiveNormal:=$Background
@@ -40,7 +46,7 @@ controlStyles:
       - Background@InactivePressed:=$OverlayColor
       - Background@MultiWindowNormal:=$Background
       - Background@MultiWindowPointerOver:=$OverlayColorAlt
-      - Background@MultiWindowActive:=$ActiveColor
+      - Background@MultiWindowActive:=$Background
       - Background@MultiWindowPressed:=$OverlayColor
       - CornerRadius=$CornerRadius
   - target: SearchUx.SearchUI.SearchIconButton > SearchUx.SearchUI.SearchButtonRootGrid#SearchBoxButtonRootPanel
@@ -58,7 +64,7 @@ controlStyles:
     styles:
       - Width=$BaseWidth
       - Height=$BaseHeight
-      - Background@ActiveNormal:=$ActiveColor
+      - Background@ActiveNormal:=$Background
       - Background@ActivePointerOver:=$OverlayColor
       - Background@ActivePressed:=$OverlayColor
       - Background@InactiveNormal:=$Background
@@ -66,18 +72,54 @@ controlStyles:
       - Background@InactivePressed:=$OverlayColor
       - Background@MultiWindowNormal:=$Background
       - Background@MultiWindowPointerOver:=$OverlayColorAlt
-      - Background@MultiWindowActive:=$ActiveColor
+      - Background@MultiWindowActive:=$Background
       - Background@MultiWindowPressed:=$OverlayColor
       - CornerRadius=$CornerRadius
+  - target: Taskbar.ExperienceToggleButton#LaunchListButton[AutomationProperties.AutomationId=StartButton]
+    styles:
+      - VerticalAlignment=Center
+      - Margin=2,0,2,0
+  - target: Taskbar.ExperienceToggleButton#LaunchListButton[AutomationProperties.AutomationId=StartButton] > Taskbar.TaskListButtonPanel > Grid > Border#BackgroundElement, Taskbar.ExperienceToggleButton#LaunchListButton[AutomationProperties.AutomationId=StartButton] > Taskbar.TaskListButtonPanel > Border#BackgroundElement
+    styles:
+      - Width=$BaseWidth
+      - Height=$BaseHeight
+      - VerticalAlignment=Center
+      - HorizontalAlignment=Center
+      - Margin=0
+      - Padding=0
+      - CornerRadius=$CornerRadius
+  - target: Taskbar.ExperienceToggleButton#LaunchListButton[AutomationProperties.AutomationId=StartButton] > Taskbar.TaskListButtonPanel@CommonStates > Grid > Border#BackgroundElement, Taskbar.ExperienceToggleButton#LaunchListButton[AutomationProperties.AutomationId=StartButton] > Taskbar.TaskListButtonPanel@CommonStates > Border#BackgroundElement
+    styles:
+      - Width=$BaseWidth
+      - Height=$BaseHeight
+      - VerticalAlignment=Center
+      - HorizontalAlignment=Center
+      - Margin=0
+      - Padding=0
+      - CornerRadius=$CornerRadius
+      - Background@ActiveNormal:=$Background
+      - Background@ActivePointerOver:=$OverlayColor
+      - Background@ActivePressed:=$OverlayColor
+      - Background@InactiveNormal:=$Background
+      - Background@InactivePointerOver:=$OverlayColorAlt
+      - Background@InactivePressed:=$OverlayColor
+  - target: Taskbar.ExperienceToggleButton#LaunchListButton[AutomationProperties.AutomationId=StartButton] > Taskbar.TaskListButtonPanel > Grid > Microsoft.UI.Xaml.Controls.AnimatedVisualPlayer#Icon, Taskbar.ExperienceToggleButton#LaunchListButton[AutomationProperties.AutomationId=StartButton] > Taskbar.TaskListButtonPanel > Grid > AnimatedVisualPlayer#Icon, Taskbar.ExperienceToggleButton#LaunchListButton[AutomationProperties.AutomationId=StartButton] > Taskbar.TaskListButtonPanel > Microsoft.UI.Xaml.Controls.AnimatedVisualPlayer#Icon, Taskbar.ExperienceToggleButton#LaunchListButton[AutomationProperties.AutomationId=StartButton] > Taskbar.TaskListButtonPanel > AnimatedVisualPlayer#Icon
+    styles:
+      - RenderTransform:=<ScaleTransform ScaleX="0.8" ScaleY="0.8" />
+      - RenderTransformOrigin=0.5,0.5
+      - Width=18
+      - Height=18
   - target: Grid#IconPanel@RunningIndicatorStates > Rectangle#RunningIndicator, Taskbar.TaskListLabeledButtonPanel@RunningIndicatorStates > Rectangle#RunningIndicator
     styles:
       - RadiusX=1.5
       - RadiusY=1.5
-      - Height=1.5
+      - Height=2.5
       - Width=10
-      - Fill:=$ActiveColor
+      - Fill:=$OverlayColor
       - Fill@ActiveRunningIndicator:=$AccentColor
-      - Width@ActiveRunningIndicator=21
+      - Width@ActiveRunningIndicator=18
+      - VerticalAlignment=Bottom
+      - Margin=0,0,0,2
   - target: StackPanel#SystemTrayFrameGrid, Grid#SystemTrayFrameGrid
     styles:
       - Height=$BaseHeight
@@ -85,7 +127,9 @@ controlStyles:
       - BorderBrush:=Transparent
       - BorderThickness=0
       - Shadow:=
-      - Padding=-2
+      - Padding=0
+      - VerticalAlignment=Center
+      - Margin=0,0,4,0
   - target: Grid#OverflowRootGrid > Border
     styles:
       - Padding=6
@@ -97,10 +141,11 @@ controlStyles:
     styles:
       - Height=8
       - Margin=0
-      - Fill:=$OverlayColor
+      - Fill:=$Background
   - target: Windows.UI.Xaml.Shapes.Rectangle#HorizontalDecreaseRect
     styles:
       - Height=8
+      - Fill:=$AccentColor
   - target: Windows.UI.Xaml.Controls.TextBlock#volumeLevelText
     styles:
       - Margin=0,-2,0,0
@@ -136,15 +181,6 @@ controlStyles:
     styles:
       - MinHeight=4
       - Width=26
-  - target: Windows.UI.Xaml.Controls.ContentPresenter#ContentPresenter
-    styles:
-      - Padding=6
-      - Margin=2
-      - BorderThickness=$BorderThickness
-      - BorderBrush:=$BorderBrush
-      - Background:=$Background
-      - CornerRadius=$CornerRadius
-      - Shadow:=
   - target: Taskbar.Badge#BadgeControl
     styles:
       - Height=14
@@ -155,6 +191,12 @@ controlStyles:
     styles:
       - RadiusX=4
       - RadiusY=4
+  - target: FlyoutPresenter > Border#BackgroundElement, FlyoutPresenter > Border, FlyoutPresenter
+    styles:
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CornerRadius
   - target: MenuFlyoutPresenter > Border
     styles:
       - Background:=$Background
@@ -167,12 +209,6 @@ controlStyles:
       - BorderBrush:=$BorderBrush
       - BorderThickness=$BorderThickness
       - CornerRadius=$CornerRadius
-  - target: Windows.UI.Xaml.Shapes.Rectangle#HorizontalTrackRect
-    styles:
-      - Fill:=$Background
-  - target: Windows.UI.Xaml.Shapes.Rectangle#HorizontalDecreaseRect
-    styles:
-      - Fill:=$AccentColor
   - target: Grid#HoverFlyoutGrid > Border#HoverFlyoutBackground
     styles:
       - Background:=$Background
@@ -182,18 +218,28 @@ controlStyles:
   - target: Taskbar.TaskbarExtensionElement
     styles:
       - RenderTransform:=<TranslateTransform X="0" Y="0" />
-  - target: Windows.UI.Xaml.Controls.Border#SnapBarBorder
+  - target: Windows.UI.Xaml.Controls.Border#SnapBarBorder, Border#SnapBarBorder
     styles:
       - Background:=$Background
       - BorderBrush:=$BorderBrush
-      - CornerRadius=$CornerRadius
       - BorderThickness=$BorderThickness
-  - target: Windows.UI.Xaml.Controls.Border#SnapPickerBorder
+      - CornerRadius=$CornerRadius
+  - target: SnapLayout.SnapLayoutPickerControl, SnapLayout.SnapLayoutPickerControl > Grid, Windows.UI.Xaml.Controls.Border#SnapPickerBorder, Border#SnapPickerBorder
     styles:
       - Background:=$Background
       - BorderBrush:=$BorderBrush
-      - CornerRadius=$CornerRadius
       - BorderThickness=$BorderThickness
+      - CornerRadius=$CornerRadius
+  - target: SnapLayout.SnapLayoutControl
+    styles:
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CornerRadius
+  - target: SnapLayout.SnapLayoutControl@CommonStates > Windows.UI.Xaml.Controls.Border#LayoutBorder
+    styles:
+      - Background@PointerOver:=$AccentColor
+      - Background@Pressed:=$OverlayColor
   - target: SystemTray.DateTimeIconContent
     styles:
       - FontSize=9
@@ -212,28 +258,6 @@ controlStyles:
   - target: WindowsInternal.ComposableShell.Experiences.Switcher.NewVirtualDesktopElementThemed
     styles:
       - CornerRadius=$CornerRadius
-  - target: Windows.UI.Xaml.Controls.Border#SnapBarBorder
-    styles:
-      - Background:=$Background
-      - BorderThickness=$BorderThickness
-      - BorderBrush:=$BorderBrush
-      - CornerRadius=$CornerRadius
-  - target: SnapLayout.SnapLayoutPickerControl
-    styles:
-      - Background:=$Background
-      - BorderThickness=$BorderThickness
-      - BorderBrush:=$BorderBrush
-      - CornerRadius=$CornerRadius
-  - target: SnapLayout.SnapLayoutControl
-    styles:
-      - Background:=$Background
-      - BorderThickness=$BorderThickness
-      - BorderBrush:=$BorderBrush
-      - CornerRadius=$CornerRadius
-  - target: SnapLayout.SnapLayoutControl@CommonStates > Windows.UI.Xaml.Controls.Border#LayoutBorder
-    styles:
-      - Background@PointerOver:=$AccentColor
-      - Background@Pressed:=$Background
   - target: Grid#ConfirmatorMainGrid
     styles:
       - Background:=$Background
@@ -247,16 +271,33 @@ controlStyles:
       - BorderThickness=$BorderThickness
       - BorderBrush:=$BorderBrush
       - CornerRadius=$CornerRadius
-      - Margin=0,6
+      - Margin=2,0,2,0
+      - MaxHeight=$BaseHeight
+      - VerticalAlignment=Center
   - target: SearchUx.SearchUI.SearchButtonRootGrid#SearchBoxButtonRootPanel > Grid > Border#BackgroundElement, SearchUx.SearchUI.SearchButtonRootGrid#SearchBoxButtonRootPanel > Border#BackgroundElement
     styles:
       - Background:=Transparent
       - BorderBrush:=Transparent
       - BorderThickness=0
       - CornerRadius=$CornerRadius
-      - Margin=4,-5,6,-5
+      - Margin=0
+  - target: Taskbar.AugmentedEntryPointButton#AugmentedEntryPointButton
+    styles:
+      - Margin=12,2,6,2
+      - VerticalAlignment=Center
+  - target: Taskbar.AugmentedEntryPointButton#AugmentedEntryPointButton > Taskbar.TaskListButtonPanel#ExperienceToggleButtonRootPanel
+    styles:
+      - Padding=8,2,10,2
+      - Width=Auto
+      - CornerRadius=$CornerRadius
+      - VerticalAlignment=Center
+  - target: Windows.UI.Xaml.Controls.Grid#AugmentedEntryPointContentGrid
+    styles:
+      - Margin=4,0,4,0
+      - VerticalAlignment=Center
   - target: Taskbar.TaskListButtonPanel#ExperienceToggleButtonRootPanel
     styles:
+      - VerticalAlignment=Center
       - RenderTransform:=<TranslateTransform X="0" Y="0" />
   - target: SearchUx.SearchUI.SearchPillButton#SearchPill > SearchUx.SearchUI.SearchButtonRootGrid#SearchBoxButtonRootPanel
     styles:
@@ -276,7 +317,7 @@ controlStyles:
       - MaxHeight=$BaseHeight
       - Width=Auto
       - Height=Auto
-      - Margin=-4,-5,-6,-5
+      - Margin=0
   - target: Button#GleamEntryPointButton > Border > ContentPresenter#ContentPresenter
     styles:
       - Background:=Transparent

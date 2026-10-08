@@ -24,10 +24,10 @@ The suite targets exactly **four** official Windhawk styler mods (one YAML confi
 | `src/windows-11-file-explorer-styler.yml` | `windows-11-file-explorer-styler` | `explorer.exe` | WinUI 3 `Microsoft.UI.Xaml` | 🧪 Generated (Ready for verification) |
 
 ### Core Design Philosophy: "Command Center Glass"
-- **Unified Frosted Blur**: Single-layer `WindhawkBlur` (amount 20, tinting via `{ThemeResource SystemChromeMediumColor}`) across all surfaces.
+- **Unified Frosted Blur**: Consistent `WindhawkBlur` (amount 20, tinting via `{ThemeResource SystemChromeMediumColor}`) providing the base glass surface across all shells.
 - **Top-Lit Glass Rim**: Signature vertical gradient border (`LinearGradientBrush #60808080 → #50404040 → #40808080`, thickness `0.3,1,0.3,1`).
 - **Harmonized Radii Scale**: XL (`35`) for top-level panels, L (`25`) for search pills, M (`15`) for groups, S (`10`) for tiles/buttons, XS (`6`) for context menus.
-- **Zero Double-Blur**: Inner wrapper containers reset to transparent to eliminate muddy stacking.
+- **Intentional Glass Layering**: Foundation frosted glass surfaces host layered glassy cards, pills, and tiles to establish rich depth, contrast, and visual hierarchy; native opaque system fills and hard drop shadows are collapsed.
 
 ---
 

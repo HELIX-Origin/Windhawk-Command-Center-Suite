@@ -26,6 +26,7 @@
 | :--- | :--- | :--- | :--- | :--- |
 | **M.01** | `v1.0.0-preview` | Governance | ✅ Complete | Multi-Agent Ecosystem, Mandatory Rules & Static Gate |
 | **M.02** | `v1.1.0-preview` | Theming | ✅ Complete | Windows 11 Notification Center Styler Generation |
+| **M.02b** | `v1.1.5-preview` | Refinement | 🚀 Active | Suite Polish: Start Menu Header Alignment, Action Center Split Buttons & Snap Theming |
 | **M.03** | `v1.2.0-preview` | Theming | ⏸️ Shelved | Windows 11 File Explorer Styler (Deferred per user decision) |
 | **M.04** | `v1.3.0` | Release | ⏳ Planned | Unified Suite General Availability & Packaging |
 
@@ -33,33 +34,27 @@
 
 ## 🚀 Active Milestones
 
-### Milestone M.01: Agent Ecosystem Foundation & Static Gate Establishment
+### Milestone M.02b: Suite Polish & Cross-Styler Geometry Alignment
 
 ```mermaid
 flowchart TD
-    M1_Analysis["Examine D:/Projects & Windhawk Engine"] --> M1_Rules["Mandatory Rules (00-09)"]
-    M1_Rules --> M1_Specs["Agent & Sub-Agent Specs"]
-    M1_Specs --> M1_Skills["Domain Skills & Templates"]
-    M1_Skills --> M1_Tools["Static Validation Gate (Test-WindhawkStyles.ps1)"]
-    M1_Tools --> M1_Evidence["Target Evidence Ledgers (Zero UWPSpy Burden)"]
-    M1_Evidence --> M1_Done["Ecosystem Active - Unlock Theming Work"]
+    M2b_SM["Start Menu Alignments (Search & Phone Link)"] --> M2b_NC["Action Center Split Buttons & States"]
+    M2b_NC --> M2b_Snap["Taskbar Snap Container Theming"]
+    M2b_Snap --> M2b_Gate["Static Gate: Test-WindhawkStyles.ps1"]
+    M2b_Gate --> M2b_Release["v1.1.5-preview Verification"]
 ```
 
-Build a complete, production-grade agent ecosystem matching the patterns in `D:\Projects`, complete with 10 mandatory rules, domain skills, focus-area agent specifications, templates, static gate tooling, and sourced target evidence to establish an impenetrable foundation before theme generation begins.
+Refine spatial alignments, panel margins, split-button visual states, and internal container styling across the active styler mods:
+1. **Start Menu Header Geometry**: Move Phone Link companion cards up flush with menu top; tighten inter-panel horizontal gap; align search box left edge and companion toggle right edge flush with the pinned apps card.
+2. **Action Center Quick Settings**: Resolve split-button color mismatch (Wi-Fi/Bluetooth chevrons) and harmonize unselected button states (`media_1791431699608_c575da8b.png`).
+3. **Taskbar Snap Layout Containers**: Theme internal snap layout containers with Command Center glass while preserving layout calculations.
 
-#### 🧭 Architecture & Implementation Phases
+---
 
-1. **Governance & Architectural Invariants**:
-    - Establish Rules 00–09: Safety, Zero Unsolicited Injection, Syntax Standards, Command Center Glass tokens, Target Evidence, Surface Scope, Mermaid Diagrams, Verification, Documentation, and SemVer.
-    - Provide accessibility accommodation for the user's eyesight by eliminating manual UWPSpy requirements.
-2. **Domain Skills & Templates**:
-    - Provide 5 technical skill guides covering Windhawk engine hooks, glass recipes, Notification Center, File Explorer, and inspection.
-    - Implement blueprints, checklists, and tracking schemas.
-3. **Primary & Sub-Agent Specifications**:
-    - Define Orchestrator, Style Architect (with NC, FE, and Visual Inspector sub-agents), Verification Specialist (with Syntax Linter), and Docs Specialist (with Catalog Manager).
-4. **Automated Static Gate**:
-    - Create `tools/Test-WindhawkStyles.ps1` enforcing all syntax and token invariants without external modules.
-    - Create baseline tracking ledger `tools/style-baseline.txt`.
+## 📋 Milestones Status
+
+### ✅ Milestone M.01: Agent Ecosystem Foundation & Static Gate Establishment (Completed)
+- Established Rules 00–09, Domain Skills, Agent Roles, Templates, and Static Gate.
 
 ---
 

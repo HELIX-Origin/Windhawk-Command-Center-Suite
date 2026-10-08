@@ -11,9 +11,9 @@ Every surface in the suite must look like it was cut from the same sheet of glas
 
 ## 1. Design Principles
 
-1. **One glass layer per surface.** Native chrome (acrylic borders, drop shadows, layer borders, background fills) is collapsed so the suite's `WindhawkBlur` is the *only* material. Nested containers are reset to transparent so glass never stacks into muddy double-blur.
+1. **Layered Glass Hierarchy.** Command Center Glass intentionally layers frosted glass and acrylic materials to produce visual depth, separation, and structure. Outer flyouts, floating taskbar frames, and surface roots provide the foundational frosted glass pane, while internal controls (cards, quick action tiles, calendar day cells, taskbar button pills) layer their own glassy / acrylic backgrounds, borders, and rounded corners on top. Native opaque system chrome (opaque background fills, hard drop shadows, conflicting system acrylic) is collapsed (`Visibility=1` or `Shadow:=`) so the custom glass layers shine through cleanly.
 2. **Top-lit edge.** Every panel carries the same thin vertical-gradient border, thicker on top/bottom than on the sides, which reads as light catching the rim of a glass pane.
-3. **Theme-aware tint.** Tints come from `{ThemeResource SystemChromeMediumColor}` / `SystemAltLowColor` so the suite follows light/dark mode automatically. The **accent color** (`SystemAccentColor`) is reserved for *state and emphasis*: active indicators, slider fill, the clock, focus.
+3. **Theme-aware tint.** Tints come from `{ThemeResource SystemChromeMediumColor}` / `SystemAltLowColor` so the suite follows light/dark mode automatically. The **accent color** (`SystemAccentColor`) is reserved for *state and emphasis*: active indicators, active window markers, slider fill, the clock, focus.
 4. **Rounded hierarchy.** Big containers are very round, interactive items are moderately round, menus/tooltips are slightly round. Radius communicates hierarchy.
 5. **Quick, subtle motion.** 83 ms brush transitions, 0.8× press-scale on icons, short horizontal slide-in on menus. Nothing bouncy or slow.
 
@@ -90,10 +90,10 @@ Use these blocks verbatim (with the file's own token names).
       - CornerRadius=$CornerRadius
 ```
 
-### 3.2 Transparent Reset (inner containers under a glass panel)
+### 3.2 Redundant Wrapper Reset (when clearing intermediate system containers)
 
 ```yaml
-  - target: <nested container>
+  - target: <redundant system container>
     styles:
       - Background:=Transparent
       - BorderBrush:=Transparent
@@ -101,7 +101,18 @@ Use these blocks verbatim (with the file's own token names).
       - Shadow:=
 ```
 
-### 3.3 Native Chrome Collapse
+### 3.3 Intentional Layered Glass Card / Control (Depth & Hierarchy)
+
+```yaml
+  - target: <child card or button pill>
+    styles:
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CornerRadiusAlt1
+```
+
+### 3.4 Native Chrome Collapse
 
 ```yaml
   - target: Border#AcrylicBorder
@@ -176,7 +187,7 @@ Track `Fill:=$OverlayColor` (or `$Background`), decrease/fill rect `Fill:=$Accen
 - [ ] Header declares the four materials verbatim and in order
 - [ ] Surface/edge/thickness tokens use canonical values (§2.2)
 - [ ] Radii come only from the scale (§2.4)
-- [ ] Native chrome collapsed; nested containers reset transparent (no double-blur)
+- [ ] Native chrome collapsed; intentional glass layering preserved on cards, tiles, and interactive elements
 - [ ] Accent used only for state/emphasis
 - [ ] Display fonts only on hero numerals
 - [ ] Motion values match §3.7

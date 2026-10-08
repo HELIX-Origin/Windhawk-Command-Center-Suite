@@ -32,7 +32,7 @@
 ### 🚨 Severity
 
 - 🔴 **Critical**: *Bugs that cause shell crashes or visual unreadability.*
-- 🟠 **High**: *Bugs that significantly impact aesthetics or cause double-blur.*
+- 🟠 **High**: *Bugs that significantly impact aesthetics or cause layering glitches.*
 - 🟡 **Medium**: *Bugs that affect minor visual alignments or state transitions.*
 - 🟢 **Low**: *Minor warnings, duplicate selectors, or non-visual syntax quirks.*
 
@@ -64,7 +64,86 @@
 
 ---
 
-### 2026-10-05 — NC Styler: Inner Card Selectors Not Matching (Notification + Calendar Panels)
+### 2026-10-07 — Notification / Action Center Quick Settings Split Button Color Mismatch
+
+- **Severity**: 🟠 High (visual dissonance / state mismatch)
+- **Status**: ⚠️ open
+- **Affected File**: `src/windows-11-notification-center-styler.yml`
+- **Reported Issue**: Section buttons in the Action Center Quick Settings panel do not receive correct colors due to split-button template layering. In particular, split buttons (such as Wi-Fi and Bluetooth) show a color mismatch where the left toggle half displays an accent color and the right chevron half displays bright high-contrast blue (`media_1791431699608_c575da8b.png`). Unselected buttons also show inconsistent backgrounds.
+
+#### Root Cause
+Quick Settings split buttons in UWP (`SplitL2Button`, `PaginatedToggleButton`) have multi-part internal visual trees where the primary toggle button and the flyout chevron button inherit distinct visual state brushes (`CommonStates` vs `CheckedStates`). Current styling only partially overrides the container border, leaving the child chevron button template falling back to native high-contrast brushes.
+
+---
+
+### 2026-10-07 — Taskbar Snap Layout Internal Elements Theming
+
+- **Severity**: 🟡 Medium (incomplete theme coverage)
+- **Status**: ⚠️ open
+- **Affected File**: `src/windows-11-taskbar-styler.yml`
+- **Reported Issue**: Snap containers internal elements still lack full Command Center glass theming. While the individual layout cards receive backgrounds, internal buttons and container elements need refinement to match suite styling without disrupting layout coordinate calculations.
+
+#### Root Cause
+Snap layout elements inside `snaplayout.dll` rely on precise internal margins and hit-testing bounds. Target selectors must style visual properties (`Background`, `BorderBrush`, `BorderThickness`, `CornerRadius`) on `LayoutBorder` and button states without modifying internal layout padding or sizing dimensions.
+
+---
+
+### 2026-10-07 — Start Menu Search & Companion Header Geometry Alignment
+
+- **Severity**: 🟡 Medium (spatial alignment refinement)
+- **Status**: ⚠️ open
+- **Affected File**: `src/windows-11-start-menu-styler.yml`
+- **Reported Issue**:
+    1. Phone Link companion cards need to be moved up to align flush with the top of the Start Menu so the search box is aligned to the left of them.
+    2. The extra horizontal space between the main Start Menu section and the Phone Link companion section needs to be reduced.
+    3. The search box width needs to be shrunk so the Phone Link toggle button (`ShowHideCompanion`) lines up evenly with the pinned apps section below it (search box left edge flush with pinned apps left edge, and toggle button right edge flush with pinned apps right edge).
+
+#### Root Cause
+Current search box width is fixed at `340px` centered, while `StartMenu.PinnedList` is centered at `360px`. With `ToggleButton#ShowHideCompanion` at `40x40` with `Margin=0,16,16,8`, the combined header width and margins do not match the `360px` span of the pinned list. Companion vertical offset (`Padding=4,12,8,12`, `Margin=-20,0,20,0`) also positions the top card lower than the search bar.
+
+---
+
+### 2026-10-07 — Start Menu: Phone Link Companion Merged with Unified Glass Surface
+
+- **Severity**: 🟡 Medium (feature refinement / surface integration)
+- **Status**: ✅ resolved — commit `(pending)`
+- **Affected File**: `src/windows-11-start-menu-styler.yml`
+- **Reported Issue**: Phone Link panel appeared as a disconnected separate tile with its background clipping at 470px. User requested merging it into the Start Menu with a wider unified background and 3 distinct glass cards for its sub-sections (Device Status, Quick Actions, Recent Notifications).
+
+#### Root Cause
+Targeting `Grid#MainMenu > Border#AcrylicBorder` constrained the glass background to the 470px width of `Grid#MainMenu`. Per the `WindowGlass` architecture, the root outer glass surface must be anchored on `Border#DropShadowDismissTarget` inside `StartDocked.StartSizingFrame` at 750px width.
+
+#### Resolution
+- Moved `$Background` and top-lit rim gradient border to `Border#DropShadowDismissTarget` (width 750px, height 700px).
+- Set `Border#AcrylicBorder` (both in `Grid#MainMenu` and `CompanionRoot`) to `Transparent` / 0 thickness to remove the divider.
+- Structured Phone Link sub-sections into 3 Command Center Glass cards: Device Status (`PrimaryCardContainer`, `AdaptiveCardContent`), Quick Actions (`ActionsBar`), and Recent Notifications (`WholeItemsPanel > Border`).
+
+
+- **Severity**: 🟡 Medium (duplicate nested border rendering)
+- **Status**: ✅ resolved — commit `(pending)`
+- **Affected File**: `src/windows-11-start-menu-styler.yml`
+- **Reported Issue**: Folder popup modals (`StartMenu.FolderModal#StartFolderModal`) rendered with a double border: an outer rim on `Grid#Root` and an inner rim on `Grid#Root > Border`.
+
+#### Root Cause
+Both the outer container `StartMenu.FolderModal#StartFolderModal > Grid#Root` (with `Padding=12`) and its inner card element `Grid#Root > Border` were assigned `$BorderBrush` and `$BorderThickness`, creating concentric borders around the modal.
+
+#### Resolution
+- Removed border, background, and padding from `StartMenu.FolderModal#StartFolderModal > Grid#Root`, keeping only responsive bounds.
+- Maintained the single Command Center Glass background and top-lit rim gradient border exclusively on the inner card element `Grid#Root > Border`.
+
+---
+
+### 2026-10-07 — Start Menu: Collapsing Recent / Recommended Section
+
+- **Severity**: 🟡 Medium (layout decluttering)
+- **Status**: ✅ resolved — commit `(pending)`
+- **Affected File**: `src/windows-11-start-menu-styler.yml`
+- **Reported Issue**: Experimental sizing attempts on the Recommended section caused visual inconsistencies; user requested full collapse.
+
+#### Resolution
+- Replaced experimental recommendations rules with complete collapse (`Visibility=Collapsed`) on `Grid#TopLevelSuggestionsRoot`, `Grid#TopLevelSuggestionsContainerParent`, `Grid#TopLevelSuggestionsContainer`, and `Grid#TopLevelSuggestionsListHeader`.
+- Restored All Apps category and grid layout to upstream defaults without restrictive column-squishing constraints.
+
 
 - **Severity**: 🟠 High (glass material not applied to notification/calendar panels)
 - **Status**: ⚠️ open
@@ -103,16 +182,36 @@ The selector names `Border#NotificationCenterBorder` and `Border#CalendarCenterB
 
 ---
 
+### 2026-10-07 — Taskbar Styler Snap Layout Clipping, Floating Background & Deduplication
+
+- **Severity**: 🟠 High (visual clipping / layout distortion)
+- **Status**: ✅ resolved — commit `(pending)`
+- **Affected File**: `src/windows-11-taskbar-styler.yml`
+- **Reported Issue**: Snap Layout flyout was clipping through the top border with distorted tile proportions; duplicate selectors existed for `SnapBarBorder`, `HorizontalTrackRect`, and `HorizontalDecreaseRect`; taskbar lacked floating background.
+
+#### Root Cause
+1. **Over-Broad Selector**: Global `Windows.UI.Xaml.Controls.ContentPresenter#ContentPresenter` injected `Padding=6`, `Margin=2`, and borders into every internal tile of the Snap Layout popup.
+2. **Inner Snap Layout Override**: Intrusive styling on `SnapLayoutPickerControl`, `SnapLayoutControl`, and `LayoutBorder` disrupted `SnapLayout.dll` coordinate calculations.
+3. **Selector Duplication**: `SnapBarBorder`, `HorizontalTrackRect`, and `HorizontalDecreaseRect` were defined multiple times.
+
+#### Resolution
+- Introduced floating taskbar background on `Taskbar.TaskbarBackground > Grid` with `Margin=8,4,8,4`, `$Background`, `$BorderBrush`, and `$CornerRadiusAlt1`.
+- Sized taskbar elements (`BaseHeight=32`, `BaseWidth=34`, centered margins) to fit inside the floating background with ample clearance.
+- Completely removed the overbroad `ContentPresenter#ContentPresenter` block.
+- Removed intrusive inner SnapLayout rules and padding from `Border#SnapPickerBorder`, letting native layout sizing govern tiles smoothly while retaining frosted glass background and rim.
+- Deduplicated all target selectors; `tools/Test-WindhawkStyles.ps1 -Path src/windows-11-taskbar-styler.yml` now passes with 0 errors and 0 warnings.
+
+---
+
 ### 2026-10-05 — Duplicate Target Selectors in Shipped Reference Files
 
 - **Severity**: 🟢 Low (Baseline Warning W101)
-- **Status**: ⚠️ open (Baseline Ledger)
-- **Reported Issue**: `windows-11-start-menu-styler.yml` and `windows-11-taskbar-styler.yml` contain duplicate target selectors (recorded in `tools/style-baseline.txt`).
+- **Status**: ⚠️ partially resolved (`windows-11-taskbar-styler.yml` cleaned; `windows-11-start-menu-styler.yml` open)
+- **Reported Issue**: `windows-11-start-menu-styler.yml` and `windows-11-taskbar-styler.yml` contained duplicate target selectors.
 
-#### Root Cause
-1. **Historical Style Merging**: Previous iterative edits to the start menu and taskbar configurations added duplicate blocks for elements like `Border#AppBorder` and `SnapBarBorder`.
-    - **Impact**: Later blocks silently override earlier ones without breaking functionality.
-    - **Proposed Fix**: Surgical deduplication scheduled during future refactoring turns (preserving shipped visual parity per Rule 00).
+#### Resolution
+- `src/windows-11-taskbar-styler.yml` completely deduplicated (0 warnings).
+- `src/windows-11-start-menu-styler.yml` scheduled for future refactor.
 
 ---
 

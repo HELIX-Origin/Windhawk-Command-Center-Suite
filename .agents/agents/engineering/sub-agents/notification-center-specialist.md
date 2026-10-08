@@ -22,5 +22,5 @@ The **Notification Center Specialist Agent** is the domain engineer for `src/not
 3. **Invariants**:
    - Never inject `webContentStyles` or `explorerFrameContainerHeight`.
    - Do not use the `skip()` expression (unsupported in NC mod).
-   - Collapse native chrome backgrounds and shadows (`Shadow:=`, `Visibility=1`) to prevent double-blur.
+   - Collapse native chrome backgrounds and shadows (`Shadow:=`, `Visibility=1`) to let intentional layered glass and acrylic controls shine through cleanly.
    - Maintain full light and dark theme contrast.

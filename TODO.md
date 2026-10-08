@@ -22,7 +22,42 @@
 
 ## 🔥 Active Workstreams
 
-### 🤖 Workstream W.01: Agent Ecosystem Foundation & Governance Architecture
+### 🎯 Workstream W.04: Suite Refinements — Start Menu Alignment, Action Center Quick Settings Fixes & Snap Theming
+
+```mermaid
+flowchart TD
+    W4_SM["Start Menu Header & Gap Alignment"] --> W4_NC["Action Center Split Buttons & States"]
+    W4_NC --> W4_Snap["Taskbar Snap Container Theming"]
+    W4_Snap --> W4_Gate["Validation Gate (Test-WindhawkStyles.ps1)"]
+```
+
+Refine spatial alignment in the Start Menu and companion pane, resolve color mismatches on Action Center Quick Settings split buttons, and theme internal Snap Layout elements.
+
+**Locked user directives:**
+- "The phone link cards should be moved up so they align with the top of the menu (this way the search box is perfectly aligned to the left of them as well)."
+- "The extra space between the start menu sections and phone link sections needs to be reduced for improved visuals."
+- "The search box needs to have its width shrunk so the toggle button is evenly lined up with the pinned app section under it."
+- "Basically the left edge of the search box needs to align with the left edge of the pinned apps section while the right edge of the phone link toggle button should align with the right edge of the pinned apps section."
+- "The notification/action center needs a bit of fixing. some areas are not applied correctly... section buttons are not getting the correct colors due to how things are applied."
+- "Snap containers internal elements still aren't themed... we need to get that styled to match our styling."
+
+**Implementation checklist:**
+- [ ] **Start Menu Search & Companion Alignment**:
+    - [ ] Move Phone Link companion cards up to align flush with the top of the Start Menu.
+    - [ ] Reduce the horizontal gap between the main Start Menu panel and the Phone Link companion panel.
+    - [ ] Calculate and set search box width + margins so its left edge aligns flush with the left edge of `StartMenu.PinnedList#StartMenuPinnedList`.
+    - [ ] Position `ToggleButton#ShowHideCompanion` so its right edge aligns flush with the right edge of `StartMenu.PinnedList#StartMenuPinnedList`.
+- [ ] **Notification / Action Center Split Buttons & Colors**:
+    - [ ] Unify backgrounds and borders across both segments of Quick Settings split buttons (`SplitL2Button`, chevron button, toggle button).
+    - [ ] Fix color mismatch where one half displays `$AccentColor` and the chevron half displays bright high-contrast blue (`media_1791431699608_c575da8b.png`).
+    - [ ] Apply canonical `$ElementBackground` and `$BorderBrush` to unselected/inactive state tiles (Wi-Fi, Bluetooth, Airplane mode, Accessibility, Energy saver, Live captions).
+- [ ] **Taskbar Snap Layout Containers Theming**:
+    - [ ] Style internal snap containers (`SnapLayoutControl`, `LayoutBorder`, `Grid#LayoutGrid > Button`) with frosted glass and subtle borders without breaking tile coordinate calculations.
+- [ ] **Taskbar System Tray Overflow Grid Glass Background**:
+    - [ ] Restore frosted glass background (`$Background`), top-lit border (`$BorderBrush`), and matching corner radius to the system tray overflow flyout (`Grid#OverflowRootGrid > Border` and `Border#OverflowFlyoutBackgroundBorder`) per `media_1791432063085_e18460b5.png`.
+- [ ] **Validation & Quality Gate**:
+    - [ ] Pass `tools/Test-WindhawkStyles.ps1` with 0 errors and 0 warnings.
+    - [ ] Conduct live verification on user desktop.
 
 ```mermaid
 flowchart TD

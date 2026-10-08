@@ -1,6 +1,6 @@
 # 🎨 Styler Theme Blueprint Template
 
-Use this blueprint when creating or refactoring a styler YAML file for a Windhawk styler mod. It includes the mandatory Rule 03 material headers, edge brushes, standard radii scale, and the canonical target blocks.
+Use this blueprint when creating or refactoring a styler YAML file for a Windhawk styler mods. It includes the mandatory Rule 03 material headers, edge brushes, standard radii scale, and the canonical target blocks.
 
 ---
 
@@ -37,15 +37,23 @@ controlStyles:
       - BorderThickness=$BorderThickness
       - CornerRadius=$CornerRadius
 
-  # 2. Transparent Reset on Inner Containers (Prevent double-blur)
-  - target: Selector#InnerContainer
+  # 2. Redundant System Wrapper Reset (Clear intermediate system wrappers)
+  - target: Selector#InnerWrapper
     styles:
       - Background:=Transparent
       - BorderBrush:=Transparent
       - BorderThickness=0
       - Shadow:=
 
-  # 3. Native Chrome Collapse
+  # 3. Layered Glass Elements / Cards (Depth & Hierarchy)
+  - target: Selector#ChildCard
+    styles:
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CornerRadiusAlt1
+
+  # 4. Native Chrome Collapse
   - target: Border#AcrylicBorder
     styles:
       - Visibility=1

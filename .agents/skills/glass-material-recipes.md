@@ -40,13 +40,12 @@ controlStyles:
 
 ---
 
-## 3. Recipe R2: Inner Layer Reset (Preventing "Double-Blur")
+## 3. Recipe R2: Redundant Intermediate Wrapper Reset
 
-Windows 11 surfaces often wrap controls in multiple nested `Border` and `Grid` elements, each carrying default background brushes or drop shadows. If left intact, applying a glass blur to the root causes a muddy, opaque "double-blur".
+Windows 11 surfaces often wrap controls in redundant intermediate layout containers carrying opaque system fills or drop shadows. While intentional child cards and controls layer their own glass backgrounds on top of the root panel (Recipe R1 & R4), any redundant intermediate wrapper containers should be reset to transparent so the layered hierarchy remains crisp:
 
-Always identify inner containers and reset them:
 ```yaml
-  - target: Selector#InnerContainer
+  - target: Selector#InnerWrapperContainer
     styles:
       - Background:=Transparent
       - BorderBrush:=Transparent
@@ -84,4 +83,18 @@ controlStyles:
       - BorderBrush@PointerOver:=$BorderBrush
       - BorderBrush@Pressed:=$BorderBrush
       - CornerRadius=10
+```
+
+---
+
+## 6. Recipe R5: Intentional Layered Glass Cards & Controls (Depth & Hierarchy)
+
+Command Center Glass intentionally layers glass and acrylic elements over the base surface pane to establish visual structure (e.g. notification cards, calendar controls, quick settings tiles, floating taskbar button pills):
+```yaml
+  - target: Selector#ChildCard
+    styles:
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CornerRadiusAlt1
 ```

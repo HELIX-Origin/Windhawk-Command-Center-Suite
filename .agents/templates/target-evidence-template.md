@@ -22,6 +22,7 @@ This document records the empirical evidence, visual tree inspection, and verifi
 ### Legend
 
 #### Evidence Tiers
+
 - **T1 — Live Tree**: Directly observed in the user's running visual tree using UWPSpy or Visual Studio XAML Diagnostics.
 - **T2 — Shipped Suite**: Proven working in an existing, shipped suite file for the **same** mod.
 - **T3 — User Scaffold**: Explicitly identified by the user in a project scaffold file.
@@ -29,6 +30,7 @@ This document records the empirical evidence, visual tree inspection, and verifi
 - **T5 — Inference**: Derived from standard WinUI/UWP template hierarchies. Requires T1 live verification.
 
 #### Verification Status
+
 - 🟢 **Confirmed**: Verified functional and visually correct on user desktop.
 - 🟡 **Unverified**: Implemented based on T3/T4 evidence, awaiting user live verification.
 - 🔴 **Broken / Changed**: Known to fail or deprecated by a Windows update (logged in `BUGS.md`).
@@ -38,6 +40,7 @@ This document records the empirical evidence, visual tree inspection, and verifi
 ## 🛠️ Inspection Instructions
 
 To inspect and capture new targets for this surface:
+
 1. Launch **UWPSpy** (or Visual Studio Live Visual Tree).
 2. Select target process: `{{ target.process }}`.
 3. Select target framework: `{{ xaml.framework }}`.
