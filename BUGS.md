@@ -67,12 +67,23 @@
 ### 2026-10-07 — Notification / Action Center Quick Settings Split Button Color Mismatch
 
 - **Severity**: 🟠 High (visual dissonance / state mismatch)
-- **Status**: ⚠️ open
+- **Status**: 🚧 fix applied (pending live desktop verification)
 - **Affected File**: `src/windows-11-notification-center-styler.yml`
 - **Reported Issue**: Section buttons in the Action Center Quick Settings panel do not receive correct colors due to split-button template layering. In particular, split buttons (such as Wi-Fi and Bluetooth) show a color mismatch where the left toggle half displays an accent color and the right chevron half displays bright high-contrast blue (`media_1791431699608_c575da8b.png`). Unselected buttons also show inconsistent backgrounds.
 
 #### Root Cause
 Quick Settings split buttons in UWP (`SplitL2Button`, `PaginatedToggleButton`) have multi-part internal visual trees where the primary toggle button and the flyout chevron button inherit distinct visual state brushes (`CommonStates` vs `CheckedStates`). Current styling only partially overrides the container border, leaving the child chevron button template falling back to native high-contrast brushes.
+
+#### Resolution Applied
+1. Reset outer button backgrounds and borders to `Background:=Transparent`, `BorderThickness=0` on `ControlCenter.PaginatedToggleButton#ToggleButton`, `QuickActions.AccessibleToggleButton#ToggleButton`, `ControlCenter.PaginatedToggleButton#SplitL2Button`, and `Button#SplitL2Button`.
+2. Routed all state styling through `ContentPresenter#ContentPresenter@CommonStates` across both `#ToggleButton` and `#SplitL2Button`.
+3. Applied canonical Command Center tokens:
+   - `Normal` / `Disabled`: `$ElementBackground` with `$BorderBrush`
+   - `PointerOver`: `$OverlayColor2` with `$BorderBrush`
+   - `Pressed`: `$OverlayColor` with `$BorderBrush`
+   - `Checked` / `CheckedPointerOver`: `$AccentColor` with `$BorderBrush`
+   - `CheckedPressed`: `$OverlayColor` with `$BorderBrush`
+4. Maintained `Margin=4,0,-4,0` on `#SplitL2Button` to preserve clean pill separation.
 
 ---
 
@@ -89,33 +100,36 @@ Snap layout elements inside `snaplayout.dll` rely on precise internal margins an
 ### 2026-10-07 — Taskbar System Tray Overflow Flyout Missing Glass Background
 
 - **Severity**: 🟡 Medium (visual regression / missing surface)
-- **Status**: ⚠️ open
+- **Status**: 🚧 fix applied (pending live desktop verification)
 - **Affected File**: `src/windows-11-taskbar-styler.yml`
-- **Reported Issue**: The system tray overflow grid (the chevron popup holding overflow notification icons) lost its background styling (`media_1791432063085_e18460b5.png`).
+- **Reported Issue**: The system tray overflow grid (the chevron popup holding overflow notification icons) lost its background styling (`media_1791432063085_e18460b5.png`, `media_1791491404487_b1aea40b.png`).
 
 #### Root Cause
 In `src/windows-11-taskbar-styler.yml`, `Grid#OverflowRootGrid > Border` was explicitly set to `Background:=Transparent`, `BorderBrush:=Transparent`, `BorderThickness=0`, which stripped both the frosted glass backdrop and border from the overflow flyout.
 
+#### Resolution Applied
+Restored `Background:=$Background`, `BorderBrush:=$BorderBrush`, `BorderThickness=$BorderThickness`, `CornerRadius=$CornerRadius`, and collapsed hard system shadows (`Shadow:=`) on `Grid#OverflowRootGrid > Border`.
+
 ---
 
-### 2026-10-07 — Start Menu Search & Companion Header Geometry Alignment
+### 2026-10-07 — Start Menu Search & Companion Geometry and Panel Width Alignment
 
-- **Severity**: 🟡 Medium (spatial alignment refinement)
-- **Status**: ⚠️ open
+- **Severity**: 🟡 Medium (spatial alignment & width refinement)
+- **Status**: 🚧 fix applied (pending live desktop verification)
 - **Affected File**: `src/windows-11-start-menu-styler.yml`
 - **Reported Issue**:
-    1. Phone Link companion cards need to be moved up to align flush with the top of the Start Menu so the search box is aligned to the left of them.
-    2. The extra horizontal space between the main Start Menu section and the Phone Link companion section needs to be reduced.
-    3. The search box width needs to be shrunk so the Phone Link toggle button (`ShowHideCompanion`) lines up evenly with the pinned apps section below it (search box left edge flush with pinned apps left edge, and toggle button right edge flush with pinned apps right edge).
-    4. Right Companion elements are moved too far to the right and practically bordering the edge of the menu; they need to be properly centered with symmetric padding matching the pinned apps section padding.
-    5. The overall height is too tall (currently 700px) and needs to be shrunk down similar to the Down Aero theme (`Grid#FrameRoot` `MaxHeight=520`).
-    6. Background layering needs to follow the Notification Center / Action Center style: solid card elements (`$ElementBackground`) on top of transparent/frosted container sections.
+    1. Start Menu redesign felt too wide (`Width=910`, 5 pin columns, 3 category columns per `media_1791492109151_4e5f4a21.png`).
+    2. User requested reverting to the compact preferred width (`media_1791492134279_cf79372d.png`): 750px total panel width, 470px MainMenu, 360px PinnedList (3 pin columns, 2 category columns), crisp vertical divider between MainMenu and Phone Link companion, and cohesive Command Center Glass styling.
 
 #### Root Cause
-1. Current search box width is fixed at `340px` centered, while `StartMenu.PinnedList` is centered at `360px`. With `ToggleButton#ShowHideCompanion` at `40x40` with `Margin=0,16,16,8`, the combined header width and margins do not match the `360px` span of the pinned list.
-2. Companion elements currently use asymmetrical margins (`Margin=-20,0,20,0` and `Margin=19,0,8,12` on `ActionsBar`), which shoves the cards against the right border.
-3. Sizing frames (`StartDocked.StartSizingFrame`, `Grid#MainMenu`, `RightCompanion`) have hardcoded `Height=700`, which stretches the menu excessively instead of using `Grid#FrameRoot` `MaxHeight=520`.
-4. Card containers lack explicit `$ElementBackground` and transparent intermediate fills to establish cohesive glass layering.
+Stretched layout used `StartDocked.StartSizingFrame Width=910`, `Grid#MainMenu MaxWidth=650`, and `StartMenu.PinnedList MaxWidth=550`, which inflated the pin grid to 5 columns and category cards to 3 columns, while collapsing the vertical divider border.
+
+#### Resolution Applied
+1. Restored compact panel width: `StartDocked.StartSizingFrame Width=750, Height=700`.
+2. Set `Grid#MainMenu Width=470, Height=700`.
+3. Set `StartMenu.PinnedList#StartMenuPinnedList Width=360` and `ScrollViewer Width=360` (yielding 3 pin columns and 2 category columns).
+4. Restored native vertical divider border (`Border#MainMenuHighContrastBorder`) separating the Main Menu from the Right Companion.
+5. Preserved unified frosted glass backdrop (`Border#DropShadowDismissTarget`) and styled Phone Link cards (`$ElementBackground`, `$BorderBrush`, `$BorderThickness`, `$CardRadius`).
 
 ---
 

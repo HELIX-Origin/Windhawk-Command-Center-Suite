@@ -133,9 +133,10 @@ controlStyles:
   - target: Grid#OverflowRootGrid > Border
     styles:
       - Padding=6
-      - Background:=Transparent
-      - BorderBrush:=Transparent
-      - BorderThickness=0
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CornerRadius
       - Shadow:=
   - target: Windows.UI.Xaml.Shapes.Rectangle#HorizontalTrackRect
     styles:

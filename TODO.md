@@ -43,13 +43,11 @@ Refine spatial alignment in the Start Menu and companion pane, resolve color mis
 
 **Implementation checklist:**
 - [ ] **Start Menu Search & Companion Alignment & Layering**:
-    - [ ] Shrink Start Menu and Phone Link height down similar to Down Aero (`Grid#FrameRoot` `MaxHeight=520` or compact sizing).
-    - [ ] Center Right Companion elements properly with even padding/margins so cards are not bordering the right edge of the glass panel.
-    - [ ] Implement solid layered card styling (`$ElementBackground` + `$BorderBrush` + `$CardRadius`) on top of transparent container sections.
-    - [ ] Move Phone Link companion cards up to align flush with the top of the Start Menu.
-    - [ ] Reduce the horizontal gap between the main Start Menu panel and the Phone Link companion panel.
-    - [ ] Calculate and set search box width + margins so its left edge aligns flush with the left edge of `StartMenu.PinnedList#StartMenuPinnedList`.
-    - [ ] Position `ToggleButton#ShowHideCompanion` so its right edge aligns flush with the right edge of `StartMenu.PinnedList#StartMenuPinnedList`.
+    - [x] Restore compact panel width (470px MainMenu, 3-column pins, 2-column categories) per user preference.
+    - [x] Eliminate right drift and center pinned apps within card with balanced padding.
+    - [x] Align search box width and spacing to avoid clipping into Phone Link toggle button.
+    - [x] Adjust overall height (`MaxHeight=790`) so panel is slightly taller than wide.
+    - [x] Preserve all custom styling, cards, and status icons intact.
 - [ ] **Notification / Action Center Split Buttons & Colors**:
     - [ ] Unify backgrounds and borders across both segments of Quick Settings split buttons (`SplitL2Button`, chevron button, toggle button).
     - [ ] Fix color mismatch where one half displays `$AccentColor` and the chevron half displays bright high-contrast blue (`media_1791431699608_c575da8b.png`).

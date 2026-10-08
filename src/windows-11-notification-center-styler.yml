@@ -147,39 +147,59 @@ controlStyles:
       - CornerRadius=$CardRadius
       - BorderThickness=$BorderThickness
       - BorderBrush:=$BorderBrush
+      - BorderBrush@Normal:=$BorderBrush
       - BorderBrush@PointerOver:=$BorderBrush
       - BorderBrush@Pressed:=$BorderBrush
-      - Background:=$ElementBackground
-      - Background@PointerOver:=$OverlayColor2
-      - Background@Pressed:=$OverlayColor
+      - BorderBrush@Checked:=$BorderBrush
+      - BorderBrush@CheckedPointerOver:=$BorderBrush
+      - BorderBrush@CheckedPressed:=$BorderBrush
+      - BackgroundSizing=InnerBorderEdge
+      - Background:=Transparent
 
-  - target: QuickActions.AccessibleToggleButton#ToggleButton > ContentPresenter, ControlCenter.PaginatedToggleButton#ToggleButton > ContentPresenter
-    styles:
-      - CornerRadius=$CardRadius
-      - BorderThickness=$BorderThickness
-      - BorderBrush:=$BorderBrush
-      - BorderBrush@PointerOver:=$BorderBrush
-      - BorderBrush@Pressed:=$BorderBrush
-
-  - target: QuickActions.AccessibleToggleButton#SplitL2Button, ControlCenter.PaginatedToggleButton#SplitL2Button
+  - target: QuickActions.AccessibleToggleButton#SplitL2Button, ControlCenter.PaginatedToggleButton#SplitL2Button, Button#SplitL2Button, Windows.UI.Xaml.Controls.Button#SplitL2Button
     styles:
       - CornerRadius=$CardRadius
       - Margin=4,0,-4,0
       - BorderThickness=$BorderThickness
       - BorderBrush:=$BorderBrush
+      - BorderBrush@Normal:=$BorderBrush
       - BorderBrush@PointerOver:=$BorderBrush
       - BorderBrush@Pressed:=$BorderBrush
-      - Background:=$ElementBackground
+      - BorderBrush@Checked:=$BorderBrush
+      - BorderBrush@CheckedPointerOver:=$BorderBrush
+      - BorderBrush@CheckedPressed:=$BorderBrush
+      - BackgroundSizing=InnerBorderEdge
+      - Background:=Transparent
+
+  - target: ControlCenter.PaginatedToggleButton > ContentPresenter#ContentPresenter@CommonStates, ControlCenter.PaginatedToggleButton > ContentPresenter@CommonStates, QuickActions.AccessibleToggleButton > ContentPresenter#ContentPresenter@CommonStates, QuickActions.AccessibleToggleButton > ContentPresenter@CommonStates, Button#SplitL2Button > ContentPresenter#ContentPresenter@CommonStates, Button#SplitL2Button > ContentPresenter@CommonStates, Windows.UI.Xaml.Controls.Button#SplitL2Button > Windows.UI.Xaml.Controls.ContentPresenter#ContentPresenter@CommonStates
+    styles:
+      - CornerRadius=$CardRadius
+      - BorderThickness=$BorderThickness
+      - BorderBrush:=$BorderBrush
+      - BorderBrush@Normal:=$BorderBrush
+      - BorderBrush@PointerOver:=$BorderBrush
+      - BorderBrush@Pressed:=$BorderBrush
+      - BorderBrush@Checked:=$BorderBrush
+      - BorderBrush@CheckedPointerOver:=$BorderBrush
+      - BorderBrush@CheckedPressed:=$BorderBrush
+      - BackgroundSizing=InnerBorderEdge
+      - Background@Normal:=$ElementBackground
       - Background@PointerOver:=$OverlayColor2
       - Background@Pressed:=$OverlayColor
+      - Background@Checked:=$AccentColor
+      - Background@CheckedPointerOver:=$AccentColor
+      - Background@CheckedPressed:=$OverlayColor
+      - Background@Disabled:=$ElementBackground
+      - Background@CheckedDisabled:=$ElementBackground
 
-  - target: QuickActions.AccessibleToggleButton#SplitL2Button > ContentPresenter, ControlCenter.PaginatedToggleButton#SplitL2Button > ContentPresenter
+  - target: QuickActions.AccessibleToggleButton#ToggleButton > ContentPresenter, ControlCenter.PaginatedToggleButton#ToggleButton > ContentPresenter, QuickActions.AccessibleToggleButton#SplitL2Button > ContentPresenter, ControlCenter.PaginatedToggleButton#SplitL2Button > ContentPresenter, Button#SplitL2Button > ContentPresenter, Windows.UI.Xaml.Controls.Button#SplitL2Button > Windows.UI.Xaml.Controls.ContentPresenter
     styles:
       - CornerRadius=$CardRadius
       - BorderThickness=$BorderThickness
       - BorderBrush:=$BorderBrush
       - BorderBrush@PointerOver:=$BorderBrush
       - BorderBrush@Pressed:=$BorderBrush
+      - BackgroundSizing=InnerBorderEdge
 
   - target: Grid#NotificationCenterTopBanner
     styles:
@@ -376,8 +396,8 @@ controlStyles:
 
   - target: Windows.UI.Xaml.Controls.ListViewHeaderItem
     styles:
-      - Margin=50,6,50,2
-      - CornerRadius=4
+      - Margin=5,6,5,2
+      - CornerRadius=$CardRadius
       - Height=35
 
   - target: Windows.UI.Xaml.Controls.Button#SettingsButton
