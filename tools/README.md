@@ -8,11 +8,35 @@ desktop.
 |---|---|---|
 | [`Test-WindhawkStyles.ps1`](Test-WindhawkStyles.ps1) | **Static validation gate (Rule 07)** — YAML syntax, constant ordering, token checks for every styler file in `src/`. Must pass with 0 errors before handoff. | `pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1` |
 | [`style-baseline.ini`](style-baseline.ini) | Baseline ledger of pre-existing static-gate warnings in shipped files. Read by the gate; may only shrink (Rule 07 §2). | *(consumed automatically)* |
-| [`inspect_xaml.py`](inspect_xaml.py) | **Headless visual tree inspector** — dumps the UI Automation trees of the approved UWP / WinUI 3 shell processes as text, JSON, or Markdown for selector discovery and evidence (Rule 04). | `python tools/inspect_xaml.py --help` |
+| [`native/bin/xaml_dump.exe`](native/bin/xaml_dump.exe) | **Native C++ XAML inspector** — connects directly to UWP / WinUI 3 XAML runtimes via official Microsoft COM diagnostics (`xamlOM.h`). Dumps complete live visual trees including layout containers (`Grid`, `Border`, `Canvas`, `ContentPresenter`). | `.\tools\native\bin\xaml_dump.exe --help` |
+| [`inspect_xaml.py`](inspect_xaml.py) | **CLI wrapper** — forwards CLI commands directly to the high-performance native `xaml_dump.exe` binary. | `python tools/inspect_xaml.py --help` |
 
 ---
 
-## `inspect_xaml.py` — headless UWP / WinUI 3 inspector
+## Native C++ XAML Inspector (`tools/native/`)
+
+High-performance native toolchain for programmatically dumping the live visual trees of Windows 11 shell processes with zero manual user interaction.
+
+### Architecture
+
+1. **`xaml_dump.exe`** (`tools/native/src/xaml_dump.cpp`):
+   - Command-line driver compiled with MSVC 2026.
+   - Enforces Rule 01 approved target processes (`StartMenuExperienceHost.exe`, `SearchHost.exe`, `ShellHost.exe`, `ShellExperienceHost.exe`, `explorer.exe`).
+   - Creates a non-blocking overlapped Named Pipe with AppContainer & Everyone permissions (`D:(A;;GA;;;WD)(A;;GA;;;AC)`).
+   - Injects `xaml_dump_agent.dll` via `CreateRemoteThread(..., LoadLibraryW, ...)`.
+   - Reads the serialized tree JSON stream, parses hierarchy, and formats output as text, JSON, or Markdown.
+
+2. **`xaml_dump_agent.dll`** (`tools/native/src/xaml_dump_agent.cpp`):
+   - In-process TAP agent implementing `IObjectWithSite`, `IClassFactory`, and `IVisualTreeServiceCallback2` from `xamlOM.h`.
+   - Discovers `InitializeXamlDiagnosticsEx` in `Windows.UI.Xaml.dll` / `Microsoft.UI.Xaml.dll`.
+   - Listens to `OnVisualTreeChange` for full element enumeration (`Handle`, `Type`, `Name`, `NumChildren`, `Parent`, `ChildIndex`).
+   - Self-unloads cleanly using `FreeLibraryAndExitThread` upon completion.
+   - Granted AppContainer permissions (`*S-1-15-2-1:(RX)`) during build.
+
+3. **Building**:
+   ```powershell
+   pwsh -NoProfile -File tools/native/build.ps1
+   ```
 
 Programmatic replacement for manual UWPSpy sessions: it reads the live UIA
 trees and writes them to stdout or a file. **Read-only by default: no

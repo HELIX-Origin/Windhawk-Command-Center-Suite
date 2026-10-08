@@ -7,6 +7,7 @@ styleConstants:
   - Background=$Frosted
   - BorderBrush=<LinearGradientBrush StartPoint="0,0" EndPoint="0,1"><GradientStop Color="#60808080" Offset="0.0" /><GradientStop Color="#50404040" Offset="0.25" /><GradientStop Color="#40808080" Offset="1" /></LinearGradientBrush>
   - BorderBrush2=<WindhawkBlur BlurAmount="10" TintColor="#909090" TintOpacity="0.3"/>
+  - HighlightBorder=<SolidColorBrush Color="{ThemeResource SystemAccentColor}" Opacity="0.8"/>
   - OverlayColor=<AcrylicBrush TintColor="{ThemeResource SystemAltLowColor}" TintOpacity="1" TintLuminosityOpacity="0.8" FallbackColor="{ThemeResource CardStrokeColorDefaultSolid}" />
   - OverlayColor2=<AcrylicBrush TintColor="{ThemeResource SystemAltLowColor}" TintOpacity="1" TintLuminosityOpacity="0.5" FallbackColor="{ThemeResource CardStrokeColorDefaultSolid}" />
   - AccentColor=<AcrylicBrush TintColor="{ThemeResource SystemAccentColor}" TintOpacity="1" TintLuminosityOpacity="0.5" FallbackColor="{ThemeResource CardStrokeColorDefaultSolid}" />
@@ -14,10 +15,10 @@ styleConstants:
   - ClockBG=<SolidColorBrush Color="{ThemeResource SystemAccentColor}" Opacity="1"/>
   - BorderThickness=0.3,1,0.3,1
   - CornerRadius=35
-  - PanelRadius=15
-  - CardRadius=10
-  - ChipRadius=6
-  - SearchBoxRadius=10
+  - PanelRadius=35
+  - CardRadius=15
+  - ChipRadius=10
+  - SearchBoxRadius=25
 controlStyles:
   # LockApp.exe (Lock Screen Clock, Date, Widgets, Media Controls)
   - target: StackPanel#TimeAndDatePanel
@@ -66,37 +67,77 @@ controlStyles:
       - Margin=0,0,0,0
       - CornerRadius=$CornerRadius
 
-  # Foundation Start Menu Background & Sizing (StartMenuExperienceHost.exe)
+  # Foundation Start Menu Sizing & Merged Frame
   - target: StartDocked.StartSizingFrame
     styles:
-      - Width=750
-      - Height=700
+      - Width=910
 
-  - target: Grid#MainMenu
+  - target: Grid#FrameRoot
     styles:
-      - Width=470
-      - Height=700
+      - MaxHeight=520
 
+  - target: TextBlock#ZoomedOutHeading
+    styles:
+      - Visibility=Collapsed
+
+  - target: Windows.UI.Xaml.Controls.Grid#TopLevelSuggestionsListHeader
+    styles:
+      - Height=0
+      - Visibility=>showMoreSuggestionsVisible
+
+  - target: Grid#ShowMoreSuggestions
+    styles:
+      - Visibility={{showMoreSuggestionsVisible}}
+
+  - target: Button#ShowMoreSuggestionsButton
+    styles:
+      - Margin=0,-77,147,0
+      - Height=32
+
+  - target: Button#ShowMoreSuggestionsButton > Grid > Border#BackgroundBorder
+    styles:
+      - Visibility=Collapsed
+
+  - target: Windows.UI.Xaml.Controls.Grid#NoTopLevelSuggestionsText
+    styles:
+      - Height=0
+
+  - target: Button#ShowMoreSuggestionsButton > Grid > ContentPresenter
+    styles:
+      - VerticalAlignment=Center
+
+  - target: Button#ShowMoreSuggestionsButton > Grid > ContentPresenter > StackPanel
+    styles:
+      - VerticalAlignment=Center
+      - Orientation=Horizontal
+      - Margin=10,0,8,0
+
+  - target: Button#ShowMoreSuggestionsButton > Grid > ContentPresenter > StackPanel > TextBlock
+    styles:
+      - Text=Recommended
+      - Visibility=Visible
+      - VerticalAlignment=Center
+      - Margin=0,0,4,0
+
+  - target: StartMenu.SearchBoxToggleButton
+    styles:
+      - Visibility=Collapsed
+
+  # Outer Unified Frosted Glass Window (wraps both panels seamlessly)
   - target: Border#DropShadowDismissTarget
     styles:
       - Background:=$Background
       - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$PanelRadius
+      - BorderThickness=0.3,1,0,1
+      - CornerRadius=35
       - Margin=0
       - Padding=0
 
-  - target: Grid#MainMenu > Border#AcrylicBorder, Border#AcrylicBorder
-    styles:
-      - Background:=Transparent
-      - BorderBrush:=Transparent
-      - BorderThickness=0
-
-  - target: Border#AcrylicOverlay
+  - target: Border#StartDropShadow, Border#RightCompanionDropShadow, Border#RootGridDropShadow, Border#dropshadow
     styles:
       - Visibility=Collapsed
 
-  - target: Border#RootGridDropShadow, Border#StartDropShadow, Border#RightCompanionDropShadow, Border#dropshadow
+  - target: Border#MainMenuHighContrastBorder, Border#RightCompanionHighContrastBorder
     styles:
       - Visibility=Collapsed
 
@@ -104,58 +145,161 @@ controlStyles:
     styles:
       - Visibility=Collapsed
 
-  # Start Menu Top Search Pill (aligned with cards, non-clipping)
-  - target: StartMenu.SearchBoxToggleButton#SearchBoxToggleButton
+  # Reset intermediate system borders to eliminate internal overlays and seams
+  - target: Border#AcrylicBorder, Grid#MainMenu > Border#AcrylicBorder, Grid#CompanionRoot > Border#AcrylicBorder
     styles:
-      - Height=40
-      - Width=340
-      - HorizontalAlignment=Center
-      - Margin=0,16,0,8
-
-  - target: StartMenu.SearchBoxToggleButton#SearchBoxToggleButton > Grid > Border#BorderElement
-    styles:
-      - Background:=$Background
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$SearchBoxRadius
-
-  - target: StartDocked.SearchBoxToggleButton#StartMenuSearchBox > Grid > ContentPresenter#ContentPresenter > TextBlock#PlaceholderText
-    styles:
-      - Text=Search This Precision
-
-  # Selected Style for Taskbar Search Box (matches taskbar theme height 32, chip radius 6, centered)
-  - target: Cortana.UI.Views.CortanaRichSearchBox#SearchTextBox
-    styles:
-      - Height=32
-      - MaxHeight=32
-      - VerticalAlignment=Center
-
-  - target: Cortana.UI.Views.CortanaRichSearchBox#SearchTextBox > Grid > Border#BorderElement
-    styles:
-      - Background:=$Background
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$ChipRadius
-      - Height=32
-      - VerticalAlignment=Center
-
-  - target: Border#TaskbarSearchBackground
-    styles:
-      - CornerRadius=$ChipRadius
-      - Height=32
-      - VerticalAlignment=Center
       - Background:=Transparent
       - BorderBrush:=Transparent
       - BorderThickness=0
 
-  - target: Cortana.UI.Views.TaskbarSearchPage > Grid#RootGrid > Grid#OuterBorderGrid
+  # Drop Two-Tone Upper Body Overlays
+  - target: Border#AcrylicOverlay
     styles:
-      - Background:=$Background
+      - Visibility=Collapsed
+
+  - target: Windows.UI.Xaml.Controls.Grid#AllAppsRoot
+    styles:
+      - Margin=0,-90,0,90
+
+  - target: Grid#MainContent
+    styles:
+      - Grid.Row=0
+      - VerticalAlignment=0
+      - MinHeight=Auto
+
+  - target: StartDocked.AppListView#NavigationPanePlacesListView > Windows.UI.Xaml.Controls.Border
+    styles:
+      - Background:=$ElementBackground
       - BorderBrush:=$BorderBrush
       - BorderThickness=$BorderThickness
-      - CornerRadius=$PanelRadius
+      - CornerRadius=18
+      - Margin=0,0,15,0
 
-  # Layered Category Cards (View: Category)
+  - target: StartDocked.NavigationPaneButton#PowerButton > Windows.UI.Xaml.Controls.Grid@CommonStates > Windows.UI.Xaml.Controls.Border#BackgroundBorder
+    styles:
+      - Background:=$ElementBackground
+      - BorderBrush@Normal:=$BorderBrush
+      - CornerRadius=30
+      - BorderThickness=$BorderThickness
+      - Margin=0
+      - BorderBrush@PointerOver:=$HighlightBorder
+
+  - target: StartDocked.NavigationPaneButton#UserTileButton > Grid > Border#BackgroundBorder
+    styles:
+      - Background:=$ElementBackground
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=18
+
+  - target: Grid#TopLevelHeader > Grid > Button[AutomationProperties.Name=Show all] > Grid@CommonStates > Border
+    styles:
+      - Background@Normal:=$ElementBackground
+      - Background@PointerOver:=$OverlayColor
+      - Padding=10,7
+      - Margin=0,0,-5,0
+      - CornerRadius=0,15,15,0
+      - BorderThickness=0
+      - Width=85
+
+  - target: Windows.UI.Xaml.Controls.Button#ShowMoreSuggestionsButton > Windows.UI.Xaml.Controls.Grid@CommonStates, Button#ShowMoreSuggestionsButton > Grid@CommonStates
+    styles:
+      - BorderBrush:=$BorderBrush
+      - Background:=$ElementBackground
+      - BorderThickness=2,2,0,2
+      - CornerRadius=15,0,0,15
+      - Height=32
+      - Margin=0,0,-2,0
+      - BorderBrush@PointerOver:=$BorderBrush
+      - Background@PointerOver:=$OverlayColor
+      - BorderBrush@Pressed:=$BorderBrush
+      - Background@Pressed:=$OverlayColor
+
+  - target: Windows.UI.Xaml.Controls.Button#ShowMoreSuggestionsButton@CommonStates, Button#ShowMoreSuggestionsButton@CommonStates
+    styles:
+      - Background@PointerOver:=$OverlayColor
+      - BorderBrush@PointerOver:=$BorderBrush
+      - Background@Pressed:=$OverlayColor
+      - BorderBrush@Pressed:=$BorderBrush
+
+  - target: Windows.UI.Xaml.Controls.Button#HideMoreSuggestionsButton
+    styles:
+      - Background:=$ElementBackground
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CardRadius
+
+  - target: StartDocked.NavigationPaneView > Windows.UI.Xaml.Controls.Grid#RootPanel
+    styles:
+      - Grid.Row=2
+
+  - target: Windows.UI.Xaml.Controls.Frame
+    styles:
+      - Margin=0,-65,0,0
+
+  - target: Grid#MainMenu
+    styles:
+      - MaxWidth=650
+
+  - target: TextBlock#PinnedListHeaderText
+    styles:
+      - Text=
+
+  - target: TextBlock#AllListHeadingText
+    styles:
+      - Text=
+      - Margin=63,-184,12,0
+
+  - target: Windows.UI.Xaml.Controls.GridView#RecommendedList
+    styles:
+      - Visibility=Collapsed
+
+  - target: Windows.UI.Xaml.Controls.GridView#AllAppsGrid > Border > Windows.UI.Xaml.Controls.ScrollViewer > Border > Grid > Windows.UI.Xaml.Controls.ScrollContentPresenter > Windows.UI.Xaml.Controls.ItemsPresenter > Windows.UI.Xaml.Controls.ItemsWrapGrid
+    styles:
+      - Margin=45,-180,45,0
+
+  - target: Microsoft.UI.Xaml.Controls.DropDownButton > Grid@CommonStates
+    styles:
+      - BorderBrush:=$BorderBrush
+      - Background:=$ElementBackground
+      - BorderThickness={{showMoreSuggestionsVisible*2}},2,2,2
+      - CornerRadius={{showMoreSuggestionsVisible*15}},15,15,{{showMoreSuggestionsVisible*15}}
+      - Height=32
+      - BorderBrush@PointerOver:=$BorderBrush
+      - Background@PointerOver:=$OverlayColor
+
+  - target: StartMenu.PinnedList
+    styles:
+      - Margin=0,20,12,180
+      - MaxWidth=550
+      - MinHeight=115
+      - ActualHeight=>pinnedListHeight
+
+  - target: StartMenu.PinnedList > Grid#Root > GridView#PinnedList > Border, GridView#PinnedList > Border
+    styles:
+      - Background:=$ElementBackground
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CardRadius
+      - Padding=10,12
+
+  - target: Grid#TopLevelSuggestionsRoot
+    styles:
+      - Grid.Row=1
+
+  - target: Microsoft.UI.Xaml.Controls.DropDownButton
+    styles:
+      - RenderTransform:=<TranslateTransform X="-5" Y="{{-254 - pinnedListHeight}}" />
+      - MaxWidth=100
+
+  - target: Microsoft.UI.Xaml.Controls.DropDownButton > Grid > ContentPresenter > TextBlock
+    styles:
+      - Margin=8,0,8,0
+      - Text=View
+
+  - target: StartMenu.CategoryControl
+    styles:
+      - Margin=15,0,-15,0
+
   - target: StartMenu.CategoryControl > Grid#RootGrid > Border
     styles:
       - Background:=$ElementBackground
@@ -163,159 +307,46 @@ controlStyles:
       - BorderThickness=$BorderThickness
       - CornerRadius=$CardRadius
 
-  - target: StartMenu.CategoryControl > Grid > Border
+  - target: Grid#TopLevelHeader > Grid > Button
     styles:
-      - BackgroundSizing=InnerBorderEdge
+      - Margin=-430,0,430,0
+      - Height=32
+      - CornerRadius=15
+      - BorderThickness=0,2,2,2
 
-  - target: Button#SeeAllButton > Grid > Border#BackgroundBorder
-    styles:
-      - Background:=$ElementBackground
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$ChipRadius
-      - Margin=18,4
-
-  - target: Grid > LogosContainer > ItemsControl > ItemsPresenter > ItemsWrapGrid
-    styles:
-      - Background:=$ElementBackground
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$CardRadius
-
-  # Section Header Texts (Hidden per Command Center design)
-  - target: TextBlock#PinnedListHeaderText, TextBlock#TopLevelSuggestionsListLeaderText, Grid#TopLevelSuggestionsListHeader > TextBlock, TextBlock#AllListHeadingText, Grid#AllListHeading > TextBlock, TextBlock#AllAppsHeader
+  - target: Windows.UI.Xaml.Controls.Primitives.ScrollBar
     styles:
       - Visibility=Collapsed
 
-  # Pinned List Card
-  - target: StartMenu.PinnedList#StartMenuPinnedList > Grid#Root
+  - target: Grid#TopLevelHeader > Grid > Button > Grid@CommonStates > Border
     styles:
       - Background:=$ElementBackground
       - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$CardRadius
-
-  - target: StartMenu.PinnedList#StartMenuPinnedList
-    styles:
-      - Width=360
-      - MaxHeight=400
-      - MinHeight=200
-      - Height=Auto
-      - HorizontalAlignment=Center
-
-  - target: GridView#PinnedList > Border > ScrollViewer
-    styles:
-      - ScrollViewer.VerticalScrollMode=2
-      - MaxHeight:=336
-      - MinHeight:=100
-      - Width=360
-      - Padding=0,10
-      - Margin=0
-      - HorizontalAlignment=Center
-
-  # Recent / Recommended Section (Hidden per Command Center design)
-  - target: Grid#TopLevelSuggestionsRoot, Grid#TopLevelSuggestionsContainerParent, Grid#TopLevelSuggestionsContainer, Grid#TopLevelSuggestionsListHeader, Windows.UI.Xaml.Controls.Grid#TopLevelSuggestionsListHeader, Windows.UI.Xaml.Controls.Grid#NoTopLevelSuggestionsText, Windows.UI.Xaml.Controls.GridView#RecommendedList, Windows.UI.Xaml.Controls.Grid#ShowMoreSuggestions
-    styles:
-      - Visibility=Collapsed
-
-  # All Apps Views & View Selection Button
-  - target: Button#ShowAllAppsButton, Grid#TopLevelHeader > Grid > Button
-    styles:
-      - Visibility=1
-
-  - target: Grid#AllListHeading
-    styles:
-      - Margin=16,6,16,4
-
-  - target: Grid#AllListHeading > Microsoft.UI.Xaml.Controls.DropDownButton#ViewSelectionButton > Grid#RootGrid
-    styles:
-      - CornerRadius=$ChipRadius
-      - Margin=-12,0,12,0
-
-  - target: GridView#AllAppsGrid > ItemsWrapGrid
-    styles:
-      - Visibility=0
-
-  - target: GridViewHeaderItem, ListViewHeaderItem
-    styles:
-      - Foreground:={ThemeResource SystemControlPageTextBaseHighBrush}
-      - FontSize=12
-      - Margin=10,6,0,2
-  
-  # Hide "Most used" Section Header in All Apps Views
-  - target: Button#Header[Content=Most used], Button[Content=Most used], GridViewHeaderItem[Content=Most used], ListViewHeaderItem[Content=Most used], TextBlock[Text=Most used], TextBlock#Text[Text=Most used]
-    styles:
-      - Visibility=Collapsed
-      - Height=0
-
-  # All Apps List View Items (View: List)
-  - target: StartDocked.AppListViewItem, StartDocked.AppListViewItem > Grid@CommonStates > Border
-    styles:
-      - Background@PointerOver:=$OverlayColor2
-      - Background@Pressed:=$OverlayColor
+      - Background@PointerOver:=$OverlayColor
       - BorderBrush@PointerOver:=$BorderBrush
-      - BorderBrush@Pressed:=$BorderBrush
       - BorderThickness=$BorderThickness
-      - CornerRadius=$ChipRadius
 
-  - target: StartDocked.AppListView#NavigationPanePlacesListView > Border
+  - target: Windows.UI.Xaml.Controls.Primitives.ToggleButton
     styles:
-      - Background:=$ElementBackground
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$CardRadius
-      - Margin=10,0,10,0
+      - Margin=12,7,-12,-7
 
-  - target: StartDocked.NavigationPaneView#NavigationPane
+  - target: Grid#MainMenu > Grid#MainContent > Grid
     styles:
-      - Width=550
-      - RenderTransform:=<TranslateTransform X="0" Y="10" />
+      - Canvas.ZIndex=1
 
-  # Right Companion (Phone Link panel - Merged into Start Menu glass surface)
-  - target: StartMenu.StartMenuCompanion#RightCompanion
+  # Phone Link Companion Merged Integration (No internal gap)
+  - target: StartDocked.StartMenuCompanion#RightCompanion > Grid#CompanionRoot, StartMenu.StartMenuCompanion#RightCompanion > Grid#CompanionRoot
     styles:
-      - Height=700
-
-  - target: Grid#CompanionRoot > Border#AcrylicBorder, StartDocked.StartMenuCompanion#RightCompanion > Grid#CompanionRoot > Border#AcrylicBorder
-    styles:
-      - Background:=Transparent
-      - BorderBrush:=Transparent
-      - BorderThickness=0
-
-  - target: Grid#CompanionRoot > Border#AcrylicOverlay, Grid#CompanionRoot > Grid#MainContent > Border#AcrylicOverlay
-    styles:
-      - Visibility=Collapsed
-
-  - target: Border#RightCompanionDropShadow, Border#RightCompanionDropShadowDismissTarget
-    styles:
-      - Visibility=Collapsed
-
-  - target: StartDocked.StartMenuCompanion#RightCompanion > Grid#CompanionRoot
-    styles:
-      - Height=700
+      - CornerRadius=0,35,35,0
       - Margin=-20,0,20,0
-      - Padding=4,12,8,12
+      - Padding=0
 
-  # Hide All Scrollbars (Clean scrolling without unstylable WinUI scrollbars)
-  - target: Windows.UI.Xaml.Controls.Primitives.ScrollBar, Primitives.ScrollBar, ScrollBar
+
+  - target: StartMenu.StartMenuCompanion#RightCompanion > Grid#CompanionRoot > Grid#MainContent > ContentPresenter#PrimaryCardContainer, StartDocked.StartMenuCompanion#RightCompanion > Grid#CompanionRoot > Grid#MainContent > ContentPresenter#PrimaryCardContainer
     styles:
-      - Visibility=1
+      - Margin=4,12,8,12
 
-  # Phone Link Companion Toggle Button (Aligned with 40px search box)
-  - target: Windows.UI.Xaml.Controls.Primitives.ToggleButton#ShowHideCompanion, ToggleButton#ShowHideCompanion
-    styles:
-      - Height=40
-      - Width=40
-      - Margin=0,16,16,8
-
-  - target: Windows.UI.Xaml.Controls.Primitives.ToggleButton#ShowHideCompanion > Border, ToggleButton#ShowHideCompanion > Border, ScrollViewer > ScrollContentPresenter > Border > StartMenu.StartBlendedFlexFrame > Grid#FrameRoot > Grid#AnimationRoot > Grid#MainMenu > Grid#MainContent > Grid > Windows.UI.Xaml.Controls.Primitives.ToggleButton#ShowHideCompanion > Border
-    styles:
-      - Background:=$ElementBackground
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$CardRadius
-
-  # Phone Link: Hide Phone Graphic & iPhone Device Header Text
+  # Phone Link: Hide Phone Graphic, Device Header & Recent text (leaving only clean glass cards)
   - target: ScrollViewer > ScrollContentPresenter > Border > StartMenu.StartBlendedFlexFrame > Grid#FrameRoot > Grid#AnimationRoot > Grid#RightCompanionContainerGrid > StartMenu.StartMenuCompanion#RightCompanion > Grid#CompanionRoot > Grid#MainContent > ContentPresenter#PrimaryCardContainer > Grid > Grid > Border
     styles:
       - Visibility=1
@@ -324,45 +355,32 @@ controlStyles:
     styles:
       - Visibility=1
 
-  # Phone Link: Hide "Recent" Section Leader Text
   - target: ScrollViewer > ScrollContentPresenter > Border > StartMenu.StartBlendedFlexFrame > Grid#FrameRoot > Grid#AnimationRoot > Grid#RightCompanionContainerGrid > StartMenu.StartMenuCompanion#RightCompanion > Grid#CompanionRoot > Grid#MainContent > ContentPresenter#PrimaryCardContainer > Grid > Grid > Grid > ScrollViewer > Border#Root > Grid > ScrollContentPresenter#ScrollContentPresenter > AdaptiveCards.Rendering.Uwp.WholeItemsPanel > Border > AdaptiveCards.Rendering.Uwp.WholeItemsPanel > Grid > Border > AdaptiveCards.Rendering.Uwp.WholeItemsPanel > TextBlock
     styles:
       - Visibility=1
 
   # Phone Link Card 1: Quick Actions (Messages, Calls, Send files)
-  # This section needs to be moved further elft. Right now it is too close to the right edge
-  - target: ScrollViewer > ScrollContentPresenter > Border > StartMenu.StartBlendedFlexFrame > Grid#FrameRoot > Grid#AnimationRoot > Grid#RightCompanionContainerGrid > StartMenu.StartMenuCompanion#RightCompanion > Grid#CompanionRoot > Grid#MainContent > ContentPresenter#PrimaryCardContainer > Grid > Grid > Grid > ScrollViewer > Border#Root > Grid > ScrollContentPresenter#ScrollContentPresenter > AdaptiveCards.Rendering.Uwp.WholeItemsPanel > Border > AdaptiveCards.Rendering.Uwp.WholeItemsPanel
+  - target: ScrollViewer > ScrollContentPresenter > Border > StartMenu.StartBlendedFlexFrame > Grid#FrameRoot > Grid#AnimationRoot > Grid#RightCompanionContainerGrid > StartMenu.StartMenuCompanion#RightCompanion > Grid#CompanionRoot > Grid#MainContent > ContentPresenter#PrimaryCardContainer > Grid > Grid > Border, StartMenu.StartMenuCompanion#RightCompanion > Grid#CompanionRoot > Grid#MainContent > ContentPresenter#PrimaryCardContainer > Grid > Grid > Border, StartDocked.StartMenuCompanion#RightCompanion > Grid#CompanionRoot > Grid#MainContent > ContentPresenter#PrimaryCardContainer > Grid > Grid > Border
     styles:
       - Background:=$ElementBackground
       - BorderBrush:=$BorderBrush
       - BorderThickness=$BorderThickness
       - CornerRadius=$CardRadius
 
-  # Phone Link Card 2: Recent Activity List (recent notifications)
-  # This section needs to be moved further elft. Right now it is too close to the right edge
-  - target: ScrollViewer > ScrollContentPresenter > Border > StartMenu.StartBlendedFlexFrame > Grid#FrameRoot > Grid#AnimationRoot > Grid#RightCompanionContainerGrid > StartMenu.StartMenuCompanion#RightCompanion > Grid#CompanionRoot > Grid#MainContent > ContentPresenter#PrimaryCardContainer > Grid > Grid > Grid > ScrollViewer > Border#Root > Grid > ScrollContentPresenter#ScrollContentPresenter > AdaptiveCards.Rendering.Uwp.WholeItemsPanel > Border > AdaptiveCards.Rendering.Uwp.WholeItemsPanel > Grid > Border > AdaptiveCards.Rendering.Uwp.WholeItemsPanel > Grid > ListView > Border, ScrollViewer > ScrollContentPresenter > Border > StartMenu.StartBlendedFlexFrame > Grid#FrameRoot > Grid#AnimationRoot > Grid#RightCompanionContainerGrid > StartMenu.StartMenuCompanion#RightCompanion > Grid#CompanionRoot > Grid#MainContent > ContentPresenter#PrimaryCardContainer > Grid > Grid > Grid > ScrollViewer > Border#Root > Grid > ScrollContentPresenter#ScrollContentPresenter > AdaptiveCards.Rendering.Uwp.WholeItemsPanel > Border > AdaptiveCards.Rendering.Uwp.WholeItemsPanel > Border > AdaptiveCards.Rendering.Uwp.WholeItemsPanel > Border > AdaptiveCards.Rendering.Uwp.WholeItemsPanel > Grid > Border > AdaptiveCards.Rendering.Uwp.WholeItemsPanel > Grid > ListView > Border
+  # Phone Link Card 2: Recent Activity List (notifications)
+  - target: ScrollViewer > ScrollContentPresenter > Border > StartMenu.StartBlendedFlexFrame > Grid#FrameRoot > Grid#AnimationRoot > Grid#RightCompanionContainerGrid > StartMenu.StartMenuCompanion#RightCompanion > Grid#CompanionRoot > Grid#MainContent > ContentPresenter#PrimaryCardContainer > Grid > Grid > Grid > ScrollViewer > Border#Root > Grid > ScrollContentPresenter#ScrollContentPresenter > AdaptiveCards.Rendering.Uwp.WholeItemsPanel > Border > AdaptiveCards.Rendering.Uwp.WholeItemsPanel > Grid > Border > AdaptiveCards.Rendering.Uwp.WholeItemsPanel > Grid > ListView > Border, StartDocked.StartMenuCompanion#RightCompanion > Grid#CompanionRoot > Grid#MainContent > ContentPresenter#PrimaryCardContainer > Grid > Grid > Grid > ScrollViewer > Border#Root > Grid > ScrollContentPresenter#ScrollContentPresenter > AdaptiveCards.Rendering.Uwp.WholeItemsPanel > Border > AdaptiveCards.Rendering.Uwp.WholeItemsPanel > Border > AdaptiveCards.Rendering.Uwp.WholeItemsPanel > Border > AdaptiveCards.Rendering.Uwp.WholeItemsPanel > Grid > Border > AdaptiveCards.Rendering.Uwp.WholeItemsPanel > Grid > ListView > Border
     styles:
       - Background:=$ElementBackground
       - BorderBrush:=$BorderBrush
       - BorderThickness=$BorderThickness
       - CornerRadius=$CardRadius
 
-  # Phone Link Scroll Container Constraint (Protects bottom bar from being pushed down)
-  # This section needs to be moved further elft. Right now it is too close to the right edge
-  - target: StartMenu.StartMenuCompanion#RightCompanion > Grid#CompanionRoot > Grid#MainContent > ContentPresenter#PrimaryCardContainer, StartDocked.StartMenuCompanion#RightCompanion > Grid#CompanionRoot > Grid#MainContent > ContentPresenter#PrimaryCardContainer, ContentPresenter#PrimaryCardContainer
-    styles:
-      - MaxHeight=570
-      - VerticalAlignment=Top
-      - Margin=0,0,0,54
-
-  # Phone Link Bottom Card: ActionsBar (Anchored 42px bottom bar aligned flush with cards)
+  # Phone Link ActionsBar in Bottom Shelf
   - target: Windows.UI.Xaml.Controls.Grid#ActionsBar, StartMenu.StartMenuCompanion#RightCompanion > Grid#CompanionRoot > Grid#MainContent > Grid#ActionsBar, StartDocked.StartMenuCompanion#RightCompanion > Grid#CompanionRoot > Grid#MainContent > Grid#ActionsBar
     styles:
-      - Height=42
-      - MinHeight=42
+      - Height=38
       - VerticalAlignment=Bottom
-      - Margin=19,0,8,12
-      - Padding=6,2
+      - Margin=14,0,14,12
       - Background:=$ElementBackground
       - BorderBrush:=$BorderBrush
       - BorderThickness=$BorderThickness
@@ -371,7 +389,6 @@ controlStyles:
   - target: Windows.UI.Xaml.Controls.Grid#ActionsBar > Windows.UI.Xaml.Controls.Button#ActionBarOverflowButton, Windows.UI.Xaml.Controls.Grid#ActionsBar > Windows.UI.Xaml.Controls.Button#PrimaryActionBarButton, Grid#ActionsBar > Button
     styles:
       - Height=32
-      - MinHeight=32
       - Width=40
       - VerticalAlignment=Center
       - HorizontalAlignment=Right
@@ -380,32 +397,7 @@ controlStyles:
       - CornerRadius=$ChipRadius
       - Visibility=Visible
 
-  # User Tile and Power Options
-  - target: StartDocked.UserTileView > StartDocked.NavigationPaneButton > Grid@CommonStates > Border
-    styles:
-      - Background:=$ElementBackground
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$CardRadius
-
-  - target: StartDocked.PowerOptionsView > StartDocked.NavigationPaneButton > Grid@CommonStates > Border
-    styles:
-      - Background:=$ElementBackground
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$CardRadius
-
-  - target: StartDocked.NavigationPaneButton#UserTileButton > Grid > ContentPresenter#ContentPresenter > Grid > Grid#UserTileIcon
-    styles:
-      - Height=24
-      - Width=24
-
-  - target: StartDocked.NavigationPaneButton#UserTileButton > Grid > ContentPresenter#ContentPresenter > Grid > TextBlock#UserTileNameText
-    styles:
-      - FontSize=12
-
-  # Action Bar, Flyouts, Modals & Item States
-
+  # Flyouts, Menus & Tooltips
   - target: FlyoutPresenter > Border#BackgroundElement
     styles:
       - Background:=$Background
@@ -439,6 +431,38 @@ controlStyles:
       - BorderBrush:=$BorderBrush
       - BorderThickness=$BorderThickness
       - CornerRadius=$ChipRadius
+
+  # Taskbar Search Box Matching Style
+  - target: Cortana.UI.Views.CortanaRichSearchBox#SearchTextBox
+    styles:
+      - Height=32
+      - MaxHeight=32
+      - VerticalAlignment=Center
+
+  - target: Cortana.UI.Views.CortanaRichSearchBox#SearchTextBox > Grid > Border#BorderElement
+    styles:
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$ChipRadius
+      - Height=32
+      - VerticalAlignment=Center
+
+  - target: Border#TaskbarSearchBackground
+    styles:
+      - CornerRadius=$ChipRadius
+      - Height=32
+      - VerticalAlignment=Center
+      - Background:=Transparent
+      - BorderBrush:=Transparent
+      - BorderThickness=0
+
+  - target: Cortana.UI.Views.TaskbarSearchPage > Grid#RootGrid > Grid#OuterBorderGrid
+    styles:
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$PanelRadius
 
   # Folder Modal Popup Glass Background & Layout
   - target: StartMenu.FolderModal#StartFolderModal > Grid#Root

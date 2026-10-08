@@ -42,7 +42,10 @@ Refine spatial alignment in the Start Menu and companion pane, resolve color mis
 - "Snap containers internal elements still aren't themed... we need to get that styled to match our styling."
 
 **Implementation checklist:**
-- [ ] **Start Menu Search & Companion Alignment**:
+- [ ] **Start Menu Search & Companion Alignment & Layering**:
+    - [ ] Shrink Start Menu and Phone Link height down similar to Down Aero (`Grid#FrameRoot` `MaxHeight=520` or compact sizing).
+    - [ ] Center Right Companion elements properly with even padding/margins so cards are not bordering the right edge of the glass panel.
+    - [ ] Implement solid layered card styling (`$ElementBackground` + `$BorderBrush` + `$CardRadius`) on top of transparent container sections.
     - [ ] Move Phone Link companion cards up to align flush with the top of the Start Menu.
     - [ ] Reduce the horizontal gap between the main Start Menu panel and the Phone Link companion panel.
     - [ ] Calculate and set search box width + margins so its left edge aligns flush with the left edge of `StartMenu.PinnedList#StartMenuPinnedList`.

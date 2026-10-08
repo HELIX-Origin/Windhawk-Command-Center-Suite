@@ -2,6 +2,17 @@
 
 All notable changes to **Windhawk Command Center Suite** are documented here. One entry per update (`## YYYY-MM-DD - HH:MM`), newest first. Each entry has at most one `Added`, `Removed`, `Changed`, and `Fixed` section — omit sections with no items, and put every item of a type in that type's single list (never a second section of the same type). Items are `- **Title**: description` with nested `**Title**: description` sub-items as needed. Tracking is done via `ROADMAP.md`, `PLAN.md`, `TODO.md`, and `BUGS.md` rather than formal releases.
 
+## 2026-10-08 - 03:16
+
+### Added
+- **Native C++ XAML inspector** (`tools/native/`): High-performance headless toolchain consisting of `xaml_dump.exe` (CLI driver) and `xaml_dump_agent.dll` (in-process TAP agent) built with MSVC 2026 and Windows 11 SDK `10.0.26100.0`. Uses Microsoft's official COM diagnostics APIs (`xamlOM.h`, `InitializeXamlDiagnosticsEx`, `IVisualTreeServiceCallback2`) to capture true live visual trees including layout containers (`Grid`, `Border`, `Canvas`, `ContentPresenter`) that standard UI Automation hides.
+- **Overlapped IPC & AppContainer security**: Implements non-blocking overlapped Named Pipe IPC with SDDL `D:(A;;GA;;;WD)(A;;GA;;;AC)` and AppContainer file permissions (`*S-1-15-2-1:(RX)`), enabling zero-interaction dumps of sandboxed UWP processes (`StartMenuExperienceHost.exe`, `SearchHost.exe`, etc.) without hangs.
+- **Native build & lifecycle automation** (`tools/native/build.ps1`): Self-contained build script that isolates compiler objects into `tools/native/build/`, outputs binaries to `tools/native/bin/`, and automatically unloads active agent instances before recompilation.
+
+### Changed
+- **CLI launcher** (`tools/inspect_xaml.py`): Updated to directly delegate CLI commands to the high-performance native `tools/native/bin/xaml_dump.exe` binary.
+- **`tools/README.md`**: Documented native C++ inspector architecture, compiler toolchain, and CLI usage.
+
 ## 2026-10-08 - 01:09
 
 ### Added

@@ -107,9 +107,15 @@ In `src/windows-11-taskbar-styler.yml`, `Grid#OverflowRootGrid > Border` was exp
     1. Phone Link companion cards need to be moved up to align flush with the top of the Start Menu so the search box is aligned to the left of them.
     2. The extra horizontal space between the main Start Menu section and the Phone Link companion section needs to be reduced.
     3. The search box width needs to be shrunk so the Phone Link toggle button (`ShowHideCompanion`) lines up evenly with the pinned apps section below it (search box left edge flush with pinned apps left edge, and toggle button right edge flush with pinned apps right edge).
+    4. Right Companion elements are moved too far to the right and practically bordering the edge of the menu; they need to be properly centered with symmetric padding matching the pinned apps section padding.
+    5. The overall height is too tall (currently 700px) and needs to be shrunk down similar to the Down Aero theme (`Grid#FrameRoot` `MaxHeight=520`).
+    6. Background layering needs to follow the Notification Center / Action Center style: solid card elements (`$ElementBackground`) on top of transparent/frosted container sections.
 
 #### Root Cause
-Current search box width is fixed at `340px` centered, while `StartMenu.PinnedList` is centered at `360px`. With `ToggleButton#ShowHideCompanion` at `40x40` with `Margin=0,16,16,8`, the combined header width and margins do not match the `360px` span of the pinned list. Companion vertical offset (`Padding=4,12,8,12`, `Margin=-20,0,20,0`) also positions the top card lower than the search bar.
+1. Current search box width is fixed at `340px` centered, while `StartMenu.PinnedList` is centered at `360px`. With `ToggleButton#ShowHideCompanion` at `40x40` with `Margin=0,16,16,8`, the combined header width and margins do not match the `360px` span of the pinned list.
+2. Companion elements currently use asymmetrical margins (`Margin=-20,0,20,0` and `Margin=19,0,8,12` on `ActionsBar`), which shoves the cards against the right border.
+3. Sizing frames (`StartDocked.StartSizingFrame`, `Grid#MainMenu`, `RightCompanion`) have hardcoded `Height=700`, which stretches the menu excessively instead of using `Grid#FrameRoot` `MaxHeight=520`.
+4. Card containers lack explicit `$ElementBackground` and transparent intermediate fills to establish cohesive glass layering.
 
 ---
 

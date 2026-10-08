@@ -20,3 +20,11 @@ scratch/
 *.bak
 *.temp
 *.backup
+
+# Build artifacts and intermediates
+*.obj
+*.exp
+*.lib
+*.pdb
+tools/native/build/
+tools/native/bin/
