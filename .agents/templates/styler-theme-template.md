@@ -1,6 +1,6 @@
 # 🎨 Styler Theme Blueprint Template
 
-Use this blueprint when creating or refactoring a styler YAML file for a Windhawk styler mods. It includes the mandatory Rule 03 material headers, edge brushes, standard radii scale, and the canonical target blocks.
+Use this blueprint when creating or refactoring a styler YAML file for a Windhawk styler mod. It includes the mandatory Rule 03 material headers, edge brushes, standard radii scale, and the canonical target blocks.
 
 ---
 
@@ -58,7 +58,7 @@ controlStyles:
     styles:
       - Visibility=1
 
-  # 4. Interactive Item States
+  # 5. Interactive Item States
   - target: Selector#Item@CommonStates > Border#BackgroundBorder
     styles:
       - BorderThickness=$BorderThickness
@@ -67,7 +67,7 @@ controlStyles:
       - CornerRadius=$CornerRadiusAlt2
       - BackgroundSizing=InnerBorderEdge
 
-  # 5. Flyouts & Context Menus
+  # 6. Flyouts & Context Menus
   - target: MenuFlyoutPresenter > Border
     styles:
       - Background:=$Background

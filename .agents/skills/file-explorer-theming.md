@@ -1,8 +1,14 @@
 # Skill: File Explorer Theming
 
+> ⏸️ **DEFERRED (ROADMAP M.03) — reference material**
+>
+> File Explorer styling is deferred. Official rationale (user, 2026-10-07): "deferred due to lack of plausible customizations. there are other already existing styles that are too similar and as such there is no real benefit to having our own file explorer style just yet."
+>
+> No styler file exists for this surface. This guide is retained as reference material for a possible resumption of the workstream — it is not active engineering.
+
 ## Purpose
 
-Domain-specific technical architecture and visual tree guide for theming Windows 11 File Explorer using `windows-11-file-explorer-styler`.
+Reference domain architecture and visual tree guide for **possible resumption** of Windows 11 File Explorer theming using `windows-11-file-explorer-styler` (currently deferred, ROADMAP M.03).
 
 ---
 

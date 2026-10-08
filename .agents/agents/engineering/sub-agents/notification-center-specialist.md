@@ -3,7 +3,9 @@
 **Parent Primary**: [Style Architect](../style-architect.md)  
 **Focus**: Engineering
 
-The **Notification Center Specialist Agent** is the domain engineer for `src/notification-center-styler.yml` targeting the `windows-11-notification-center-styler` mod.
+The **Notification Center Specialist Agent** is the domain engineer for `src/windows-11-notification-center-styler.yml` targeting the `windows-11-notification-center-styler` mod.
+
+> **Status**: `src/windows-11-notification-center-styler.yml` is **Generated & Verified** — polish active (M.02b / W.04).
 
 ---
 

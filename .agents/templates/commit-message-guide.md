@@ -27,14 +27,14 @@ Guidelines for clear, human-readable commit messages and PR titles with fitting 
 | 🧪 | test | Static test suite or validation checks | 🧪 test(gate): add validation rule for constant declaration order |
 | ♻️ | refactor | Clean up selectors without visual change | ♻️ refactor(taskbar): deduplicate common visual state targets |
 | 🔧 | chore | Repo maintenance, tooling, templates | 🔧 chore(tools): update static check script for CRLF enforcement |
-| 🚀 | release | Suite version release or milestone | 🚀 release: v1.1.0-preview Notification Center support |
+| 🚀 | milestone | Milestone/sprint completion | 🚀 milestone: complete M.02b suite polish |
 
 ---
 
 ## Scopes
 
 Target the exact surface or subsystem:
-- **Surfaces**: `taskbar`, `start`, `notification`, `explorer`
+- **Surfaces**: `taskbar`, `start`, `notification`, `explorer` (File Explorer deferred — reserved)
 - **Subsystems**: `tokens`, `materials`, `evidence`, `rules`, `agents`, `templates`, `tools`, `docs`
 
 ---

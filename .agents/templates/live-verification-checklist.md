@@ -6,7 +6,7 @@ Use this checklist when preparing a handoff for the user to verify a style chang
 
 ## 🎯 Verification Scope
 
-- **Surface**: `{{ surface.name }}` (e.g. Notification Center / File Explorer)
+- **Surface**: `{{ surface.name }}` (e.g. Notification Center)
 - **Target File**: `{{ target.file }}`
 - **Windhawk Mod**: `{{ mod.name }}` (`{{ mod.id }}`)
 - **Target Process**: `{{ target.process }}` (`explorer.exe` / `ShellExperienceHost.exe`)
@@ -21,7 +21,8 @@ Use this checklist when preparing a handoff for the user to verify a style chang
 3. Switch to the **Settings** or **Advanced** tab.
 4. Replace or merge the YAML content with the newly generated `{{ target.file }}` content.
 5. Click **Save** (Windhawk applies styles live without restarting processes in most cases).
-6. *(If testing File Explorer background changes)*: Open a new File Explorer window (`Win + E`).
+<!-- Reference only — File Explorer deferred (ROADMAP M.03); do not verify unless the surface is resumed -->
+6. *(If testing File Explorer background changes — reference only, File Explorer deferred)*: Open a new File Explorer window (`Win + E`).
 
 ---
 
@@ -56,7 +57,8 @@ Use this checklist when preparing a handoff for the user to verify a style chang
 - [ ] **Media Controls**: Album art thumbnail and playback transport buttons render properly.
 - [ ] **Jump Lists**: Right-clicking taskbar items shows styled glass jump lists.
 
-#### File Explorer
+<!-- Reference only — File Explorer deferred (ROADMAP M.03); do not verify unless the surface is resumed -->
+#### File Explorer (Reference only — deferred, ROADMAP M.03)
 - [ ] **Tab Bar**: Active tab, inactive tab, and hover states render with rounded glass.
 - [ ] **Add Tab Button**: "+" button matches tab bar styling.
 - [ ] **Navigation Bar**: Back, Forward, Up, and Refresh buttons display clean icons without solid box artifacts.

@@ -2,7 +2,9 @@
 
 ## Purpose
 
-Comprehensive technical guide for engineering, modifying, and troubleshooting style files for Windhawk styler mods (`windows-11-taskbar-styler`, `windows-11-start-menu-styler`, `windows-11-notification-center-styler`, `windows-11-file-explorer-styler`).
+Comprehensive technical guide for engineering, modifying, and troubleshooting style files for the three active Windhawk styler mods (`windows-11-taskbar-styler`, `windows-11-start-menu-styler`, `windows-11-notification-center-styler`).
+
+> `windows-11-file-explorer-styler` is approved but deferred (ROADMAP M.03) — no styler file is maintained.
 
 ---
 

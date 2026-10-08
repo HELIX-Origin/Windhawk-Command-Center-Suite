@@ -15,7 +15,7 @@
 - **Active Items First**: The currently active milestone, sprint, task, or workstream must always be placed at the top of the content sections.
 - **Regular Updates**: Ensure that the roadmap is regularly updated to reflect the latest developments and changes in the project.
 - **Improve User Directives**: Continuously refine and clarify user directives to ensure they are easily understood and actionable.
-- **Universal Direct Store Links**: Every game alert, giveaway, or deal **MUST** resolve to the actual storefront page of the game.
+- **Accessibility Invariant**: Accommodate the user's poor eyesight by exhausting official mod sources and community themes first to avoid manual visual tree inspection.
 - **Always Track Everything**: Every new feature request, enhancement, or bug report must be logged in [`BUGS.md`](./BUGS.md), [`TODO.md`](./TODO.md), and [`ROADMAP.md`](./ROADMAP.md) before execution.
 
 ---
@@ -53,7 +53,7 @@
 ## ✅ Completed Sprints
 
 <!--
-    ... Completed sprints with verified deliverables and release milestones ...
+    ... Completed sprints with verified deliverables and milestone summaries ...
 -->
 
 ### {{ emoji }} Sprint {{ sprint.number }}: {{ sprint.title }}
@@ -65,13 +65,14 @@
 
 ## 🛠️ Verification Commands
 
-```bash
-{{ verification.commands }}
+```powershell
+# Run the complete static validation gate
+pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1
 ```
 
 ---
 
 ## 🔖 Metadata
 
-- **Project**: {{ project.name }} · **version** {{ project.version }}
-- **Agent Ecosystem:** [`AGENTS`](./AGENTS) and [`.agents/`](.agents/) are tracked directly in repository git tracking.
+- **Project**: {{ project.name }} · tracked via milestones/sprints (no versioned releases)
+- **Agent Ecosystem:** [`AGENTS.md`](./AGENTS.md) and [`.agents/`](.agents/) are tracked directly in repository git tracking.

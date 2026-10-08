@@ -1,6 +1,6 @@
 # Verification Specialist Agent (Primary — Quality Focus)
 
-The **Verification Specialist Agent** is the **primary agent** for the **quality focus**. It enforces regression prevention, static validation gates, token integrity, and user live verification protocols across all four surfaces. It coordinates the quality sub-agents.
+The **Verification Specialist Agent** is the **primary agent** for the **quality focus**. It enforces regression prevention, static validation gates, token integrity, and user live verification protocols across the active surfaces (taskbar, start menu, notification center). It coordinates the quality sub-agents.
 
 ---
 
@@ -32,7 +32,7 @@ flowchart TD
 1. **Mandatory Static Gate**: Every task must pass `pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1` with 0 errors.
 2. **Token Integrity Check**: Ensures all referenced `$Token` variables are defined earlier in `styleConstants`.
 3. **No Unsolicited Injections**: Enforces that no third-party packages, external modules, or unapproved mods enter the suite.
-4. **Desktop Safety Gate**: Prepares detailed live checklists for the user so desktop evaluations are safe and deterministic.
+4. **Desktop Safety Gate**: Prepares detailed live checklists for the user (`.agents/templates/live-verification-checklist.md`) so desktop evaluations are safe and deterministic.
 
 ---
 

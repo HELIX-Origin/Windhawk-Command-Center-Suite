@@ -23,14 +23,14 @@ This directory defines the agent team specifications for **Windhawk Command Cent
 
 ```mermaid
 flowchart TD
-    UserGoal(["User Goal / Issue"]) --> Orchestrator["Orchestrator (Primary)"]
+    Orchestrator["Orchestrator (Primary)"]
 
     Orchestrator --> Engineering["Style Architect (Primary)"]
     Orchestrator --> Quality["Verification Specialist (Primary)"]
     Orchestrator --> Documentation["Docs Specialist (Primary)"]
 
     Engineering --> NC["Notification Center Specialist (Sub)"]
-    Engineering --> FE["File Explorer Specialist (Sub)"]
+    Engineering --> FE["File Explorer Specialist (Sub) (deferred)"]
     Engineering --> Inspect["Visual Inspector (Sub)"]
 
     Quality --> Linter["Syntax Linter (Sub)"]
@@ -60,8 +60,21 @@ flowchart TD
 
 | Sub-Agent | Primary | Key Responsibilities | Specification |
 |---|---|---|---|
-| **Notification Center Specialist** | Style Architect | `src/notification-center-styler.yml`, UWP XAML visual tree | [engineering/sub-agents/notification-center-specialist](engineering/sub-agents/notification-center-specialist.md) |
-| **File Explorer Specialist** | Style Architect | `src/file-explorer.styler.yml`, WinUI 3 XAML tabs, nav, command bar | [engineering/sub-agents/file-explorer-specialist](engineering/sub-agents/file-explorer-specialist.md) |
+| **Notification Center Specialist** | Style Architect | `src/windows-11-notification-center-styler.yml` (Generated & Verified — polish active), UWP XAML visual tree | [engineering/sub-agents/notification-center-specialist](engineering/sub-agents/notification-center-specialist.md) |
+| **File Explorer Specialist** | Style Architect | **Deferred (ROADMAP M.03 — no styler file)**; dormant WinUI 3 XAML tabs, nav, command bar reference | [engineering/sub-agents/file-explorer-specialist](engineering/sub-agents/file-explorer-specialist.md) |
 | **Visual Inspector** | Style Architect | UWPSpy diagnostics, live visual tree discovery, target verification | [engineering/sub-agents/visual-inspector](engineering/sub-agents/visual-inspector.md) |
 | **Syntax Linter** | Verification Specialist | `tools/Test-WindhawkStyles.ps1` checks, constant ordering, syntax | [quality/sub-agents/syntax-linter](quality/sub-agents/syntax-linter.md) |
-| **Catalog Manager** | Docs Specialist | Agent indexes, tracking file template adherence, release notes | [documentation/sub-agents/catalog-manager](documentation/sub-agents/catalog-manager.md) |
+| **Catalog Manager** | Docs Specialist | Folder `README.md` catalog sync, tracking file template adherence, milestone summaries | [documentation/sub-agents/catalog-manager](documentation/sub-agents/catalog-manager.md) |
+
+---
+
+## 🎯 Surface Ownership Matrix
+
+| Surface / Styler File | Windhawk Mod | Status | Owner |
+|---|---|---|---|
+| `src/windows-11-taskbar-styler.yml` | `windows-11-taskbar-styler` | Shipped | Style Architect |
+| `src/windows-11-start-menu-styler.yml` | `windows-11-start-menu-styler` | Shipped | Style Architect |
+| `src/windows-11-notification-center-styler.yml` | `windows-11-notification-center-styler` | Generated & Verified (polish M.02b) | Notification Center Specialist (under Style Architect) |
+| File Explorer surface | `windows-11-file-explorer-styler` | Deferred (ROADMAP M.03) — no styler file | — (specialist spec retained for future resumption) |
+
+> Four styler mods are approved under Rule 01's boundary; **three active styler files** exist in `src/` today. The File Explorer mod remains approved but deferred (TODO W.03).

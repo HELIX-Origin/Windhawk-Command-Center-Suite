@@ -10,7 +10,7 @@ The Orchestrator delegates work to three focus-area primary agents:
 
 | Primary Agent | Focus | Owns Sub-Agents |
 |---|---|---|
-| [Style Architect](../engineering/style-architect.md) | Engineering | Notification Center Specialist, File Explorer Specialist, Visual Inspector |
+| [Style Architect](../engineering/style-architect.md) | Engineering | Notification Center Specialist, File Explorer Specialist (deferred — ROADMAP M.03), Visual Inspector |
 | [Verification Specialist](../quality/verification-specialist.md) | Quality | Syntax Linter |
 | [Docs Specialist](../documentation/docs-specialist.md) | Documentation | Catalog Manager |
 
@@ -28,7 +28,7 @@ flowchart TD
     StaticGate -->|"Fail"| Rollback["Automated Diagnosis & Correction"]
     Rollback --> Exec
     StaticGate -->|"Pass"| LiveGate{"Live Checklist Handoff"}
-    LiveGate -->|"User Confirms"| Sync["Docs & Roadmap Sync"]
+    LiveGate -->|"User Confirms"| Sync["Docs, CHANGELOG & Roadmap Sync"]
     Sync --> Done(["Milestone Resolved"])
 ```
 
@@ -39,7 +39,7 @@ flowchart TD
    - Phase 4: User Live Desktop Verification & Sync
 2. **Strict Workflow Gatekeeping**: Enforces that no styler code is written or merged until the agent ecosystem, target evidence, and validation rules are satisfied.
 3. **Rollback & Safety**: Immediately halts execution if unauthorized dependencies or destructive file changes are detected (Rule 00 & Rule 01).
-4. **Tracking Synchronization**: Maintains real-time status in `PLAN.md`, `TODO.md`, `BUGS.md`, and `ROADMAP.md`.
+4. **Tracking Synchronization**: Maintains real-time status in `PLAN.md`, `TODO.md`, `BUGS.md`, `ROADMAP.md`, and date-grouped entries in `CHANGELOG.md`.
 
 ---
 
