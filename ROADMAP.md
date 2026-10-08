@@ -58,14 +58,13 @@ Refine spatial alignments, panel margins, split-button visual states, and intern
 
 ---
 
-## 📋 Milestones Status
-
 ### ✅ Milestone M.02: Windows 11 Notification Center Styler Generation (Completed)
 
-- Implementation of `src/windows-11-notification-center-styler.yml`.
+- Implementation of `src/windows-11-notification-center-styler.yml` targeting `windows-11-notification-center-styler`.
 - Frosted glass and rim border applied to Notification Center, Calendar, Control Center (Quick Actions), Media Controls, Toasts, and Taskbar Jump Lists.
 - Compact media layout, ElementBackground tokens, and verified hover borders.
 - Static gate validation (0 errors, 0 warnings) and user desktop verification complete.
+- *Active follow-up polish, split-button theming, and button color fixes are actively tracked in Milestone M.02b.*
 
 ### ⏸️ Milestone M.03: Windows 11 File Explorer Styler Generation (Shelved / Deferred)
 

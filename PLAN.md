@@ -55,6 +55,12 @@ flowchart TD
 
 ## ✅ Completed Sprints
 
+### ✅ Sprint 1.5: Windows 11 Notification Center Styler Initial Generation
+- Full initial generation of `src/windows-11-notification-center-styler.yml` targeting `windows-11-notification-center-styler`.
+- Frosted glass and rim highlights applied across Notification Center panel, Calendar grid, Quick Actions, Sliders, and Toasts.
+- Static gate validation (`tools/Test-WindhawkStyles.ps1`) verified passing with 0 errors and 0 warnings.
+- *Active follow-up polish, split-button theming, and chevron state fixes are actively tracked in Sprint 2.*
+
 ### ✅ Sprint 1: Agent Ecosystem Foundation & Static Gate Establishment
 - Established Rules 00–09, Domain Skills, Agent Specifications, and Governance Templates.
 - Automated static validation gate (`tools/Test-WindhawkStyles.ps1`) and baseline ledger.

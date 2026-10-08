@@ -2,21 +2,21 @@
 
 ## Mandatory Standards
 
-1. **Documentation Locations**:
-   - `README.md` — user-facing: what the suite is, screenshots, how to apply each style.
-   - `docs/` — technical documentation: per-surface guides (`docs/surfaces/`), target evidence tables (`docs/targets/`), design token reference.
-   - `AGENTS.md` + `.agents/` — agent operating manual, rules, skills, templates.
-   - Root tracking files — `PLAN.md`, `TODO.md`, `BUGS.md`, `ROADMAP.md`, `CHANGELOG.md`.
+1. **Documentation Locations** (No `docs/` folder):
+   - `README.md` — user-facing: what the suite is, desktop hero preview, primary and companion mod tables, and installation guide.
+   - `src/extras/README.md` — companion mods technical documentation: full configuration breakdown, themes, modules, and options for all 8 companion mods.
+   - `AGENTS.md` + `.agents/` — agent operating manual, rules (Rules 00–09), domain skills, templates, and agent specs.
+   - Root tracking files — `PLAN.md`, `TODO.md`, `BUGS.md`, `ROADMAP.md`.
 
 2. **Synchronization Triggers** — update all affected locations in the same change when:
 
    | Change | Must update |
    |---|---|
-   | New/changed design token or recipe | Rule 03, `docs/design-tokens.md`, affected styler files' headers |
-   | New/changed target | `docs/targets/<file>.md` evidence table |
-   | Surface status change (scaffold → shipped) | Rule 01 table, `AGENTS.md`, `README.md`, `ROADMAP.md`, `CHANGELOG.md` |
+   | New/changed design token or recipe | Rule 03, affected styler files' headers |
+   | New/changed companion mod config | `src/extras/README.md`, `README.md`, `TODO.md` |
+   | Surface status change (scaffold → shipped) | Rule 01 table, `AGENTS.md`, `README.md`, `ROADMAP.md` |
    | New agent/rule/skill/template | The folder's `README.md` **and** `index.md`, `AGENTS.md`, `.agents/README.md` |
-   | Windows update breaks a target | `BUGS.md` (with build number), evidence table status |
+   | Windows update breaks a target | `BUGS.md` (with build number), `PLAN.md`, `TODO.md` |
 
 3. **Tracking Files First**: Before starting any fix or feature, update `TODO.md` (and `BUGS.md` / `PLAN.md` / `ROADMAP.md` as applicable) using the matching `root-*-file-template`. Planned behavior is never described as shipped.
 

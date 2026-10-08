@@ -122,48 +122,12 @@ Build the comprehensive, production-grade AI agent ecosystem modeled after the m
     - [x] Docs Specialist Primary Agent (`documentation/docs-specialist.md`).
         - [x] Catalog Manager Sub-Agent (`documentation/sub-agents/catalog-manager.md`).
     - [x] Agent team catalog and index (`index.md`, `README.md`).
-- [x] Implement Static Validation Tooling (`tools/Test-WindhawkStyles.ps1` & `tools/style-baseline.txt`).
-- [x] Compile Sourced Target Evidence Ledgers in `docs/targets/`:
-    - [x] Notification Center evidence ledger (`docs/targets/notification-center-styler.md`).
-    - [x] File Explorer evidence ledger (`docs/targets/file-explorer.styler.md`).
-- [x] Instantiate Central Operating Manual (`AGENTS.md`) and Root Tracking Ledgers (`TODO.md`, `PLAN.md`, `BUGS.md`, `ROADMAP.md`, `README.md`).
+- [x] Source verified target selectors from official Windhawk mod source code and community themes without manual UWPSpy inspection burden.
+- [x] Instantiate Central Operating Manual (`AGENTS.md`), companion mod documentation (`src/extras/README.md`), and Root Tracking Ledgers (`TODO.md`, `PLAN.md`, `BUGS.md`, `ROADMAP.md`, `README.md`).
 
 ---
 
-## 📋 Upcoming Workstreams
-
-### 🔔 Workstream W.02: Windows 11 Notification Center Styler Generation
-
-```mermaid
-flowchart TD
-    W2_Tokens["Extract Rule 03 Tokens"] --> W2_Panels["NC & Calendar Glass Panels"]
-    W2_Panels --> W2_QuickSettings["Quick Settings Toggles & Sliders"]
-    W2_QuickSettings --> W2_Toasts["Rounded Toast Cards & Jump Lists"]
-    W2_Toasts --> W2_Validate["Test-WindhawkStyles.ps1 Validation"]
-    W2_Validate --> W2_Handoff["Desktop Verification Handoff"]
-```
-
-Implement the full Command Center Glass theme for `src/windows-11-notification-center-styler.yml` targeting the `windows-11-notification-center-styler` mod.
-
-**Locked user directives:**
-
-- "The file-explorer and notification-center styles need to be built. that is our plan for this project."
-- "Look at the start-menu-styler.yml and taskbar-styler.yml files to know what the style I am going for is."
-- "Until the agents ecosystem is built and completed, we don't generate the yml code at all."
-
-**Implementation checklist:**
-
-- [x] Complete `src/windows-11-notification-center-styler.yml` with canonical Rule 03 tokens and materials.
-- [x] Implement glass styling and rim borders on `Grid#NotificationCenterGrid` and `Grid#CalendarCenterGrid`.
-- [x] Collapse native acrylic borders and double-shadows (`Border#CalendarHeaderMinimizedOverlay`, `Shadow:=`).
-- [x] Style Quick Actions grid (`Grid#L1Grid > Border`, `PaginatedToggleButton`, `SplitL2Button`).
-- [x] Implement styled volume and brightness sliders (`Rectangle#HorizontalTrackRect`, `Rectangle#HorizontalDecreaseRect`).
-- [x] Style Media Transport controls (`Grid#MediaTransportControlsRegion`, thumbnail art, transport buttons).
-- [x] Style notification popup toasts and taskbar jump lists (`Border#ToastBackgroundBorder`, `Border#JumpListRestyledAcrylic`).
-- [x] Validate with `tools/Test-WindhawkStyles.ps1` (0 errors, 0 warnings).
-- [x] Complete live desktop verification checklist with user (rebased on Matter selectors, ElementBackground, compact media, hover borders).
-
----
+## ⏸️ Shelved / Deferred Workstreams
 
 ### 📁 Workstream W.03: Windows 11 File Explorer Styler Generation (Shelved / Deferred)
 
@@ -199,13 +163,57 @@ Implement the Command Center Glass theme for `src/windows-11-file-explorer-style
 
 ---
 
+## 📋 Upcoming Workstreams
+
+### ⏳ Workstream W.05: Unified Suite General Availability & Packaging
+- Harmonized multi-styler deployment validation across supported Windows 11 builds.
+- Unified release documentation, screenshot gallery, and user-facing installation instructions.
+- Styler theme bundling and suite-level distribution.
+
+---
+
 ## ✅ Completed Workstreams
+
+### ✅ Workstream W.02: Windows 11 Notification Center Styler Generation
+
+> ✅ **Status: Completed**: Initial theme generation of `src/windows-11-notification-center-styler.yml` is complete and verified. Active follow-up fixes and polish (Quick Settings split-button state colors and chevron styling) are actively tracked under **Workstream W.04** / **Sprint 2**.
+
+```mermaid
+flowchart TD
+    W2_Tokens["Extract Rule 03 Tokens"] --> W2_Panels["NC & Calendar Glass Panels"]
+    W2_Panels --> W2_QuickSettings["Quick Settings Toggles & Sliders"]
+    W2_QuickSettings --> W2_Toasts["Rounded Toast Cards & Jump Lists"]
+    W2_Toasts --> W2_Validate["Test-WindhawkStyles.ps1 Validation"]
+    W2_Validate --> W2_Handoff["Desktop Verification Handoff (Complete)"]
+```
+
+Implement the full Command Center Glass theme for `src/windows-11-notification-center-styler.yml` targeting the `windows-11-notification-center-styler` mod.
+
+**Locked user directives:**
+
+- "The file-explorer and notification-center styles need to be built. that is our plan for this project."
+- "Look at the start-menu-styler.yml and taskbar-styler.yml files to know what the style I am going for is."
+- "Until the agents ecosystem is built and completed, we don't generate the yml code at all."
+
+**Implementation checklist:**
+
+- [x] Complete `src/windows-11-notification-center-styler.yml` with canonical Rule 03 tokens and materials.
+- [x] Implement glass styling and rim borders on `Grid#NotificationCenterGrid` and `Grid#CalendarCenterGrid`.
+- [x] Collapse native acrylic borders and double-shadows (`Border#CalendarHeaderMinimizedOverlay`, `Shadow:=`).
+- [x] Style Quick Actions grid (`Grid#L1Grid > Border`, `PaginatedToggleButton`, `SplitL2Button`).
+- [x] Implement styled volume and brightness sliders (`Rectangle#HorizontalTrackRect`, `Rectangle#HorizontalDecreaseRect`).
+- [x] Style Media Transport controls (`Grid#MediaTransportControlsRegion`, thumbnail art, transport buttons).
+- [x] Style notification popup toasts and taskbar jump lists (`Border#ToastBackgroundBorder`, `Border#JumpListRestyledAcrylic`).
+- [x] Validate with `tools/Test-WindhawkStyles.ps1` (0 errors, 0 warnings).
+- [x] Complete live desktop verification checklist with user (rebased on Matter selectors, ElementBackground, compact media, hover borders).
+
+---
 
 ### ✅ Workstream W.01: Agent Ecosystem Foundation & Governance Architecture
 - Complete AI agent ecosystem ([`.agents/`](.agents/)) with Rules 00–09, Domain Skills, Agent Roles, and Templates.
-- Sourced target evidence records ([`docs/targets/`](docs/targets/)).
-- Automated static validation gate ([`tools/Test-WindhawkStyles.ps1`](tools/Test-WindhawkStyles.ps1)) and baseline tracking.
-- Central Operating Manual ([`AGENTS.md`](AGENTS.md)) and root tracking ledgers ([`TODO.md`](TODO.md), [`PLAN.md`](PLAN.md), [`BUGS.md`](BUGS.md), [`ROADMAP.md`](ROADMAP.md), [`README.md`](README.md)).
+- Sourced target selectors from official Windhawk mod source code and community themes.
+- Automated static validation gate ([`tools/Test-WindhawkStyles.ps1`](tools/Test-WindhawkStyles.ps1)).
+- Central Operating Manual ([`AGENTS.md`](AGENTS.md)), companion docs ([`src/extras/README.md`](src/extras/README.md)), and root tracking ledgers ([`TODO.md`](TODO.md), [`PLAN.md`](PLAN.md), [`BUGS.md`](BUGS.md), [`ROADMAP.md`](ROADMAP.md), [`README.md`](README.md)).
 - Remote GitHub repository initialized and synchronized at `https://github.com/HELIX-Origin/Windhawk-Command-Center-Suite`.
 
 ---

@@ -8,15 +8,28 @@ The suite delivers a unified, dark/light-adaptive "Command Center Glass" visual 
 
 ---
 
-## 🎨 Supported Surfaces & Windhawk Mods
+## 🎨 Primary Styler Mods
 
 | Surface | Windhawk Mod ID | Configuration File | Status |
 |---|---|---|---|
-| **Taskbar** | [`windows-11-taskbar-styler`](https://windhawk.net/mods/windows-11-taskbar-styler) | `src/windows-11-taskbar-styler.yml` | ✅ Shipped |
-| **Start Menu** | [`windows-11-start-menu-styler`](https://windhawk.net/mods/windows-11-start-menu-styler) | `src/windows-11-start-menu-styler.yml` | ✅ Shipped |
-| **Notification Center** | [`windows-11-notification-center-styler`](https://windhawk.net/mods/windows-11-notification-center-styler) | `src/windows-11-notification-center-styler.yml` | 🚧 In-Progress |
+| **Taskbar** | [`windows-11-taskbar-styler`](https://windhawk.net/mods/windows-11-taskbar-styler) | [`src/windows-11-taskbar-styler.yml`](src/windows-11-taskbar-styler.yml) | ✅ Shipped |
+| **Start Menu** | [`windows-11-start-menu-styler`](https://windhawk.net/mods/windows-11-start-menu-styler) | [`src/windows-11-start-menu-styler.yml`](src/windows-11-start-menu-styler.yml) | ✅ Shipped |
+| **Notification Center** | [`windows-11-notification-center-styler`](https://windhawk.net/mods/windows-11-notification-center-styler) | [`src/windows-11-notification-center-styler.yml`](src/windows-11-notification-center-styler.yml) | 🚧 In-Progress |
 
-*Companion mod configurations are stored in `src/extras/`.*
+### 🧩 Companion & Supplemental Mods (`src/extras/`)
+
+The suite includes curated configurations for **8 companion Windhawk mods** that extend Command Center aesthetics across desktop utilities, status indicators, and system dialogs. See the [**Extras Guide**](src/extras/README.md) for full documentation:
+
+| Companion Mod | Target Area | Configuration File |
+|---|---|---|
+| **Dynamic Island for Windows** | Top-center status, media, & hardware pill | [`src/extras/dynamic-island-for-windows.yml`](src/extras/dynamic-island-for-windows.yml) |
+| **Enhanced Disk Usage** | File Explorer drive capacity meter bars | [`src/extras/enhanced-disk-usage.yml`](src/extras/enhanced-disk-usage.yml) |
+| **File Operations Styler** | Copy/move/delete progress dialogs | [`src/extras/file-operations-styler.yml`](src/extras/file-operations-styler.yml) |
+| **Fully Customizable Winver** | Minimalist slate About Windows card | [`src/extras/fully-customizeable-winver.yml`](src/extras/fully-customizeable-winver.yml) |
+| **Shell Flyout Positions** | Flyout tray and boundary alignment | [`src/extras/shell-flyout-positions.yml`](src/extras/shell-flyout-positions.yml) |
+| **Start Button Colorizer** | Accent-tinted taskbar Start glyph | [`src/extras/start-button-colorizer.yml`](src/extras/start-button-colorizer.yml) |
+| **Taskbar Clock Customization** | Seconds format & hardware telemetry HUD | [`src/extras/taskbar-clock-customization.yml`](src/extras/taskbar-clock-customization.yml) |
+| **Taskbar Tray and Icon Tweaks** | System tray decluttering & icon filtering | [`src/extras/taskbar-tray-and-icon-tweaks.yml`](src/extras/taskbar-tray-and-icon-tweaks.yml) |
 
 ---
 

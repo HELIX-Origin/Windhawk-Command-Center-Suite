@@ -2,7 +2,7 @@
 
 This document is the central entry point and operating manual for all AI agents, coding assistants, and automated agents working on **Windhawk Command Center Suite**.
 
-> **Tracking Files**: `PLAN.md` (current session plan), `TODO.md` (task checklist), `BUGS.md` (bug & issue tracker), and `ROADMAP.md` (suite milestones) are repository-tracked planning files that hold active workstream state. All architecture rules, standards, and permanent documentation reside in `AGENTS.md`, `.agents/`, and `docs/`.
+> **Tracking Files**: `PLAN.md` (current session plan), `TODO.md` (task checklist), `BUGS.md` (bug & issue tracker), and `ROADMAP.md` (suite milestones) are repository-tracked planning files that hold active workstream state. All architecture rules, standards, and permanent documentation reside in root Markdown files, `src/extras/README.md`, `AGENTS.md`, and `.agents/` (there is no separate `docs/` folder).
 >
 > **Bug & Issue Tracking**: Active bug/problem tracking lives in the `BUGS.md` tracker (only still-open bugs are listed; closed or superseded entries are removed). `AGENTS.md` is the agent ecosystem entry point, not a tracker.
 
@@ -90,7 +90,7 @@ All agents have access to and must leverage the repository's standard execution 
    pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1
    ```
 3. **Live Checklist Preparation**: Generate comprehensive desktop verification checklists using `.agents/templates/live-verification-checklist.md`.
-4. **Target Evidence Logging**: Record visual tree sources and inspection status in `docs/targets/`.
+4. **Target Evidence Sourcing**: Source all target selectors from official Windhawk mod source code, settings schemas, and community theme references without manual UWPSpy inspection burden.
 
 ---
 
@@ -101,9 +101,9 @@ All agent actions are bound by `.agents/rules/`:
 - **Rule 01 (`zero-unsolicited-injection`)**: Runtime boundary — exactly four styler mods; no unapproved packages or tools.
 - **Rule 02 (`windhawk-styler-syntax`)**: YAML and XAML syntax standards, quoting, constant declaration order.
 - **Rule 03 (`design-language-standards`)**: Canonical "Command Center Glass" tokens, materials, and radius scales.
-- **Rule 04 (`target-evidence-protocol`)**: Sourced selectors only (UWPSpy / official mod themes). No guessing.
+- **Rule 04 (`target-evidence-protocol`)**: Sourced selectors only (official mod themes & source code). No guessing.
 - **Rule 05 (`surface-scope-standards`)**: Process targets (`explorer.exe` vs `ShellExperienceHost.exe`), WinUI 3 vs UWP.
 - **Rule 06 (`mermaid-standards`)**: GitHub-compatible Mermaid diagrams, quoted special characters, max 12 nodes.
 - **Rule 07 (`verification-standards`)**: Mandatory static gate (`tools/Test-WindhawkStyles.ps1`) and user live checklist.
-- **Rule 08 (`documentation-standards`)**: Docs locations, tracking file rules, sync triggers.
+- **Rule 08 (`documentation-standards`)**: Documentation architecture (root Markdown files, `src/extras/README.md`, and `.agents/` ecosystem; no `docs/` folder).
 - **Rule 09 (`release-standards`)**: Suite-level SemVer, compatibility ledger, and structured release notes.

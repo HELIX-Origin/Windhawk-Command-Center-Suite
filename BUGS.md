@@ -86,6 +86,16 @@ Quick Settings split buttons in UWP (`SplitL2Button`, `PaginatedToggleButton`) h
 #### Root Cause
 Snap layout elements inside `snaplayout.dll` rely on precise internal margins and hit-testing bounds. Target selectors must style visual properties (`Background`, `BorderBrush`, `BorderThickness`, `CornerRadius`) on `LayoutBorder` and button states without modifying internal layout padding or sizing dimensions.
 
+### 2026-10-07 — Taskbar System Tray Overflow Flyout Missing Glass Background
+
+- **Severity**: 🟡 Medium (visual regression / missing surface)
+- **Status**: ⚠️ open
+- **Affected File**: `src/windows-11-taskbar-styler.yml`
+- **Reported Issue**: The system tray overflow grid (the chevron popup holding overflow notification icons) lost its background styling (`media_1791432063085_e18460b5.png`).
+
+#### Root Cause
+In `src/windows-11-taskbar-styler.yml`, `Grid#OverflowRootGrid > Border` was explicitly set to `Background:=Transparent`, `BorderBrush:=Transparent`, `BorderThickness=0`, which stripped both the frosted glass backdrop and border from the overflow flyout.
+
 ---
 
 ### 2026-10-07 — Start Menu Search & Companion Header Geometry Alignment
@@ -160,7 +170,7 @@ The selector names `Border#NotificationCenterBorder` and `Border#CalendarCenterB
 #### Proposed Fix
 1. Use UWPSpy (on PATH) to inspect the live visual tree of `ShellHost.exe` while Notification Center is open.
 2. Identify the actual `Border` or `Grid` elements serving as the notification list card and calendar card surfaces.
-3. Update selectors in `src/windows-11-notification-center-styler.yml` and `docs/targets/notification-center-styler.md`.
+3. Update selectors in `src/windows-11-notification-center-styler.yml` and verify against the static gate.
 
 ---
 
