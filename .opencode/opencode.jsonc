@@ -1,0 +1,44 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "bash": {
+      "*": "allow",
+      "git add*": "ask",
+      "git commit*": "ask",
+      "git push*": "ask",
+      "git tag*": "ask",
+      "gh pr create*": "ask",
+      "gh issue create*": "ask",
+      "gh release create*": "ask",
+      "rm *": "ask",
+      "rm -rf *": "ask",
+      "sudo *": "ask",
+      "git reset --hard*": "ask",
+      "git checkout --*": "ask",
+      "git clean*": "ask",
+      "magick*": "allow"
+    },
+    "external_directory": "allow",
+    "webfetch": "allow",
+    "websearch": "allow"
+  },
+  "plugin": [
+    "@tarquinen/opencode-dcp@latest",
+    "@plannotator/opencode@latest",
+    "@franlol/opencode-md-table-formatter@latest",
+    "opencode-agent-skills@latest",
+    "opencode-websearch-cited@latest"
+  ],
+  "instructions": [
+    "AGENTS.md",
+    "https://raw.githubusercontent.com/JRedeker/opencode-shell-strategy/trunk/shell_strategy.md"
+  ],
+  "formatter": true,
+  "autoupdate": true,
+  "compaction": {
+    "auto": true
+  },
+  "logLevel": "DEBUG",
+  "autoshare": true,
+  "snapshot": true
+}

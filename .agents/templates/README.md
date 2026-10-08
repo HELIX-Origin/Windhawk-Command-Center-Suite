@@ -25,7 +25,7 @@ All templates adhere strictly to:
 |---|---|---|
 | [**`live-verification-checklist`**](live-verification-checklist.md) | Quality Gate | Mandatory checklist for user desktop verification of light/dark themes, accent changes, and interactive states |
 | [**`commit-message-guide`**](commit-message-guide.md) | Git Commits | Conventional commit standard with surface scopes and emojis |
-| [**`release-notes-template`**](release-notes-template.md) | Release Notes | Structured release announcement blueprint with per-surface status |
+| [**`milestone-summary-template`**](milestone-summary-template.md) | Milestone Summary | Milestone/sprint completion blueprint with per-surface status |
 
 ---
 
@@ -36,4 +36,5 @@ All templates adhere strictly to:
 | [**`root-plan-file-template`**](root-plan-file-template.md) | `PLAN.md` | Active sprint planning, Mermaid task flows, and verification commands |
 | [**`root-todo-file-template`**](root-todo-file-template.md) | `TODO.md` | Active workstreams, locked user directives, and implementation checklists |
 | [**`root-bugs-file-template`**](root-bugs-file-template.md) | `BUGS.md` | Open bug ledger, severity markers, root causes, and wontfix limitations |
-| [**`root-roadmap-file-template`**](root-roadmap-file-template.md) | `ROADMAP.md` | High-level suite vision, phased milestones, and release status |
+| [**`root-roadmap-file-template`**](root-roadmap-file-template.md) | `ROADMAP.md` | High-level suite vision, phased milestones, and milestone status |
+| [**`root-changelog-file-template`**](root-changelog-file-template.md) | `CHANGELOG.md` | Date-grouped change log blueprint (no versioned releases) |

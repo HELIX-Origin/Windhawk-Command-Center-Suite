@@ -1,6 +1,6 @@
-# Windhawk Command Center Suite — Suite Roadmap & Release Milestones
+# Windhawk Command Center Suite — Suite Roadmap & Milestones
 
-> 🗺️ **Living Source of Truth**: Comprehensive roadmap, phased delivery milestones, and version status for the Windhawk Command Center Suite.
+> 🗺️ **Living Source of Truth**: Comprehensive roadmap, phased delivery milestones, and progress status for the Windhawk Command Center Suite. The project tracks progress via milestones and sprints — it does not use versioned releases.
 
 > [!IMPORTANT]
 > AI agents strictly required to update this page and all related pages **before** working on any new bug fixes or features and push it to the remote first, without exception. Failure to do so may result in working with outdated information and potentially introducing conflicts or redundant work. 
@@ -22,13 +22,13 @@
 
 ## 🗺️ Repository Milestone Overview
 
-| Milestone | Target Version | Category | Status | Primary Focus |
-| :--- | :--- | :--- | :--- | :--- |
-| **M.01** | `v1.0.0-preview` | Governance | ✅ Complete | Multi-Agent Ecosystem, Mandatory Rules & Static Gate |
-| **M.02** | `v1.1.0-preview` | Theming | ✅ Complete | Windows 11 Notification Center Styler Generation |
-| **M.02b** | `v1.1.5-preview` | Refinement | 🚀 Active | Suite Polish: Start Menu Header Alignment, Action Center Split Buttons & Snap Theming |
-| **M.03** | `v1.2.0-preview` | Theming | ⏸️ Shelved | Windows 11 File Explorer Styler (Deferred per user decision) |
-| **M.04** | `v1.3.0` | Release | ⏳ Planned | Unified Suite General Availability & Packaging |
+| Milestone | Category | Status | Primary Focus |
+| :--- | :--- | :--- | :--- |
+| **M.01** | Governance | ✅ Complete | Multi-Agent Ecosystem, Mandatory Rules & Static Gate |
+| **M.02** | Theming | ✅ Complete | Windows 11 Notification Center Styler Generation |
+| **M.02b** | Refinement | 🚀 Active | Suite Polish: Start Menu Header Alignment, Action Center Split Buttons & Snap Theming |
+| **M.03** | Theming | ⏸️ Shelved | Windows 11 File Explorer Styler (Deferred per user decision) |
+| **M.04** | Verification | ⏳ Planned | Unified Suite Verification & Documentation Completion |
 
 ---
 
@@ -41,7 +41,7 @@ flowchart TD
     M2b_SM["Start Menu Alignments (Search & Phone Link)"] --> M2b_NC["Action Center Split Buttons & States"]
     M2b_NC --> M2b_Snap["Taskbar Snap Container Theming"]
     M2b_Snap --> M2b_Gate["Static Gate: Test-WindhawkStyles.ps1"]
-    M2b_Gate --> M2b_Release["v1.1.5-preview Verification"]
+    M2b_Gate --> M2b_Release["M.02b Verification"]
 ```
 
 Refine spatial alignments, panel margins, split-button visual states, and internal container styling across the active styler mods:
@@ -72,10 +72,10 @@ Refine spatial alignments, panel margins, split-button visual states, and intern
 - Shelved per user directive: without intrusive third-party background injectors (e.g. TranslucentWindows) which affect other programs, File Explorer's Win32/WinUI 3 hybrid architecture cannot achieve a glass aesthetic that satisfies the suite's design standards.
 - File Explorer styler generation is deferred.
 
-### ⏳ Milestone M.04: Unified Suite Release & Verification
+### ⏳ Milestone M.04: Unified Suite Verification & Completion
 
 - Full suite verification across all four mods on Windows 11.
-- Release notes publication and documentation completion.
+- Changelog entries and documentation completion.
 
 ---
 
@@ -90,5 +90,5 @@ pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1
 
 ## 🔖 Metadata
 
-- **Project**: Windhawk Command Center Suite · **version** 1.0.0-preview
+- **Project**: Windhawk Command Center Suite · tracked via milestones/sprints (no versioned releases)
 - **Agent Ecosystem:** [`AGENTS.md`](./AGENTS.md) and [`.agents/`](.agents/) are tracked directly in repository git tracking.

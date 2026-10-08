@@ -1,57 +1,62 @@
-# 🚀 Release Notes Template
+# 📌 Milestone Summary Template
 
-Use this template when publishing a new version of the **Windhawk Command Center Suite**.
-
----
-
-# Windhawk Command Center Suite v{{ version }}
-
-> 🌟 {{ release.summary }}
+Use this template when a milestone/sprint of the **Windhawk Command Center Suite** completes. The suite does not use versioned releases — progress is tracked via milestones/sprints in `ROADMAP.md`, `PLAN.md`, `TODO.md`, and `BUGS.md`.
 
 ---
 
-## 🎨 Surface Status Overview
+# Milestone Summary — {{ milestone.id }}: {{ milestone.title }}
 
-| Surface / Styler File | Windhawk Mod | Version | Windows 11 Build | Status |
+- **Date**: {{ YYYY-MM-DD }}
+- **Status**: {{ milestone.status }}
+
+---
+
+## Overview
+
+{{ milestone.summary }}
+
+---
+
+## Per-Surface Status
+
+| Surface / Styler File | Windhawk Mod | Mod Version | Windows 11 Build | Status |
 |---|---|---|---|---|
-| `src/taskbar-customizer.yml` | Windows 11 Taskbar Styler | 1.10+ | 23H2 / 24H2 | {{ status }} |
-| `src/start-menu-customizer.yml` | Windows 11 Start Menu Styler | 1.7+ | 23H2 / 24H2 | {{ status }} |
-| `src/notification-center-styler.yml` | Windows 11 Notification Center Styler | 1.7+ | 23H2 / 24H2 | {{ status }} |
-| `src/file-explorer.styler.yml` | Windows 11 File Explorer Styler | 1.7+ | 23H2 / 24H2 | {{ status }} |
+| `src/windows-11-taskbar-styler.yml` | Windows 11 Taskbar Styler | 1.10+ | 23H2 / 24H2 | {{ status }} |
+| `src/windows-11-start-menu-styler.yml` | Windows 11 Start Menu Styler | 1.7+ | 23H2 / 24H2 | {{ status }} |
+| `src/windows-11-notification-center-styler.yml` | Windows 11 Notification Center Styler | 1.7+ | 23H2 / 24H2 | {{ status }} |
+| File Explorer | Windows 11 File Explorer Styler | 1.7+ | 23H2 / 24H2 | Deferred (ROADMAP M.03) — no styler file |
+
+*Mod versions are external Windhawk mod versions, not suite versions.*
 
 ---
 
-## ✨ What's New
+## Changes
 
-### 🔔 Notification Center
+### Added
 - {{ list.item }}
 
-### 📁 File Explorer
+### Changed
 - {{ list.item }}
 
-### ⚡ Taskbar & Start Menu Refinements
+### Fixed
 - {{ list.item }}
 
 ---
 
-## 🛠️ Verification & Quality Gate
+## Verification
 
-- [x] **Static Validation Gate**: `pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1` (0 errors, 0 warnings).
-- [x] **Design Token Compliance**: Rule 03 material and radius scales strictly adhered to.
-- [x] **Target Evidence**: All selectors verified against official mod sources or live visual tree.
-- [x] **Live Desktop Verification**: Verified on Windows 11 (Build {{ build.number }}).
+- [ ] **Static Validation Gate**: `pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1` passed with target 0 errors.
+- [ ] **Live Checklist**: `.agents/templates/live-verification-checklist.md` completed for each changed surface (taskbar / start menu / notification center).
 
 ---
 
-## 📥 How to Install / Upgrade
+## Known Issues
 
-1. Open **Windhawk**.
-2. For each mod you want to update, click on the mod card and go to **Details → Advanced**.
-3. Copy the YAML text from the corresponding file in `src/` into the Settings editor.
-4. Click **Save**.
+- {{ bug.item }} (tracked in `BUGS.md`)
+- {{ deferred.item }} (tracked in `ROADMAP.md`, `TODO.md`)
 
 ---
 
-## 🐛 Known Issues & Limitations
+## Next Steps
 
-- {{ bug.item }} (Tracked in [`BUGS.md`](./BUGS.md))
+- {{ next.step }} (see `ROADMAP.md` and `PLAN.md` for the next active milestone/sprint).
