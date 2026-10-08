@@ -14,7 +14,7 @@ Rule 00 and [Rule 01](zero-unsolicited-injection.md) supersede every other rule.
    - The YAML files in `src/` are the product. Never delete, truncate, rename, or wholesale-overwrite an existing style file without explicit user authorization.
    - Edits to an existing style file are **surgical**: change only the targets/constants the task requires. Never reformat, reorder, or "clean up" unrelated blocks.
    - Never "fix" a perceived bug in a file the task does not cover. Log it in `BUGS.md` instead (see [Rule 07](verification-standards.md)).
-   - Before any destructive or bulk edit, copy the original into `.backups/<yyyy-mm-dd>/<file>` (git-ignored) when the repository has no version control.
+   - The repository **is** under Git version control — Git history is the primary safety net: before any destructive or bulk edit, commit or stash current work and review `git diff` so the original state stays recoverable. Copying originals into `.backups/<yyyy-mm-dd>/<file>` is a **fallback for non-git contexts only** and is not used in this repository.
 
 2. **Live System Protection**:
    - Agents **never** write to the user's live Windhawk configuration (`%ProgramData%\Windhawk\`, the `HKLM\SOFTWARE\Windhawk` registry tree, or any mod settings store).
@@ -22,8 +22,8 @@ Rule 00 and [Rule 01](zero-unsolicited-injection.md) supersede every other rule.
    - Agents never install, uninstall, enable, or disable Windhawk mods on the user's machine. Applying a style is a **user action**: the agent hands over YAML; the user pastes/imports it into the mod's **Advanced → Settings** editor.
 
 3. **Repository Safety**:
-   - When the repository is under Git: **never** force-push, never discard or reset uncommitted user work, and always inspect `git status` / `git diff` before staging.
-   - When the repository is **not** under Git (current state as of 2026-10-04), treat every overwrite as irreversible and apply the backup rule above.
+   - The repository **is** under Git — this is the current, active procedure: **never** force-push, never discard or reset uncommitted user work, and always inspect `git status` / `git diff` before staging.
+   - Only if the repository ever loses Git tracking (a non-git context): treat every overwrite as irreversible and fall back to the `.backups/` copy rule in §1.1.
 
 4. **Personal Data Protection**:
    - Style files and documentation must never contain user names, local paths containing a user profile (`C:\Users\<name>\…`), machine names, account emails, or tokens.

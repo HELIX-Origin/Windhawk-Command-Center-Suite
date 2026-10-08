@@ -94,23 +94,23 @@ Build the comprehensive, production-grade AI agent ecosystem modeled after the m
     - [x] Rule 06: GitHub-Flavored Mermaid & Diagram Standards (`mermaid-standards.md`).
     - [x] Rule 07: Verification Standards (Static Gate + Live Checklist) (`verification-standards.md`).
     - [x] Rule 08: Documentation Standards & Ecosystem Synchronization (`documentation-standards.md`).
-    - [x] Rule 09: Semantic Versioning & Release Standards (`release-standards.md`).
-    - [x] Rules index and catalog (`index.md`, `README.md`).
+    - [x] Rule 09: Milestone & Sprint Tracking Standards (`milestone-standards.md`; originally `release-standards.md`, reworked 2026-10-07 — the project uses milestones/sprints, not versioned releases).
+    - [x] Rules catalog (`README.md`; `index.md` files were removed repo-wide — folder `README.md` files are the canonical indexes).
 - [x] Establish Engineering Governance Templates (`.agents/templates/`):
     - [x] Styler Theme Blueprint Template (`styler-theme-template.md`).
     - [x] Target Evidence Ledger Template (`target-evidence-template.md`).
     - [x] Live Desktop Verification Checklist Template (`live-verification-checklist.md`).
     - [x] Commit Message & PR Title Guide (`commit-message-guide.md`).
-    - [x] Release Notes Template (`release-notes-template.md`).
-    - [x] Root Tracking Templates (`root-plan-file-template.md`, `root-todo-file-template.md`, `root-bugs-file-template.md`, `root-roadmap-file-template.md`).
-    - [x] Templates index and catalog (`index.md`, `README.md`).
+    - [x] Milestone Summary Template (`milestone-summary-template.md`; originally `release-notes-template.md`, renamed 2026-10-07).
+    - [x] Root Tracking Templates (`root-plan-file-template.md`, `root-todo-file-template.md`, `root-bugs-file-template.md`, `root-roadmap-file-template.md`, `root-changelog-file-template.md`).
+    - [x] Templates catalog (`README.md`; `index.md` removed repo-wide).
 - [x] Establish Domain Skills Guides (`.agents/skills/`):
     - [x] Windhawk Styler Engineering (`windhawk-styler-engineering.md`).
     - [x] Glass Material & Chrome Recipes (`glass-material-recipes.md`).
     - [x] Notification Center Theming (`notification-center-theming.md`).
     - [x] File Explorer Theming (`file-explorer-theming.md`).
     - [x] Live Visual Inspection (`live-visual-inspection.md`).
-    - [x] Skills index and catalog (`index.md`, `README.md`).
+    - [x] Skills catalog (`README.md`; `index.md` removed repo-wide).
 - [x] Establish Focus-Area Agent Specifications (`.agents/agents/`):
     - [x] Orchestrator Primary Agent (`orchestrator/orchestrator.md`).
     - [x] Style Architect Primary Agent (`engineering/style-architect.md`).
@@ -121,7 +121,7 @@ Build the comprehensive, production-grade AI agent ecosystem modeled after the m
         - [x] Syntax Linter Sub-Agent (`quality/sub-agents/syntax-linter.md`).
     - [x] Docs Specialist Primary Agent (`documentation/docs-specialist.md`).
         - [x] Catalog Manager Sub-Agent (`documentation/sub-agents/catalog-manager.md`).
-    - [x] Agent team catalog and index (`index.md`, `README.md`).
+    - [x] Agent team catalog (`README.md`; `index.md` removed repo-wide — Surface Ownership Matrix merged into `README.md`).
 - [x] Source verified target selectors from official Windhawk mod source code and community themes without manual UWPSpy inspection burden.
 - [x] Instantiate Central Operating Manual (`AGENTS.md`), companion mod documentation (`src/extras/README.md`), and Root Tracking Ledgers (`TODO.md`, `PLAN.md`, `BUGS.md`, `ROADMAP.md`, `README.md`).
 
@@ -131,7 +131,7 @@ Build the comprehensive, production-grade AI agent ecosystem modeled after the m
 
 ### 📁 Workstream W.03: Windows 11 File Explorer Styler Generation (Shelved / Deferred)
 
-> ⏸️ **Status: Shelved / Deferred**: User evaluated live visual results and decided to drop File Explorer styling for now. Without intrusive third-party translucency injectors (like TranslucentWindows) which affect the entire OS, File Explorer cannot achieve a cohesive glass appearance that matches the suite.
+> ⏸️ **Status: Shelved / Deferred**: User directive (2026-10-07): File Explorer styling is deferred due to a lack of plausible customizations — other already-existing styles are too similar, so there is no real benefit to having our own File Explorer style just yet. The styler file was generated, then discontinued (git `1cc49e9`). Standing constraint for any future attempt: avoid intrusive third-party translucency injectors (like TranslucentWindows) that affect the entire OS.
 
 ```mermaid
 flowchart TD
@@ -139,7 +139,7 @@ flowchart TD
     W3_Eval --> W3_Shelve["Shelved / Deferred per User Directive"]
 ```
 
-Implement the Command Center Glass theme for `src/windows-11-file-explorer-styler.yml` targeting the `windows-11-file-explorer-styler` mod, adhering strictly to the Safe Glass Chrome principle.
+Historical note: the styler file was generated, then discontinued (git `1cc49e9`). This workstream is retained as a dormant record; any resumed work targets a future `src/windows-11-file-explorer-styler.yml` adhering strictly to the Safe Glass Chrome principle.
 
 **Locked user directives:**
 
@@ -167,7 +167,7 @@ Implement the Command Center Glass theme for `src/windows-11-file-explorer-style
 
 ### ⏳ Workstream W.05: Unified Suite General Availability & Packaging
 - Harmonized multi-styler deployment validation across supported Windows 11 builds.
-- Unified release documentation, screenshot gallery, and user-facing installation instructions.
+- Unified documentation, screenshot gallery, and user-facing installation instructions.
 - Styler theme bundling and suite-level distribution.
 
 ---
@@ -232,5 +232,5 @@ pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1 -Path src/windows-11-notific
 
 ## 🔖 Metadata
 
-- **Project**: Windhawk Command Center Suite · **version** 1.0.0-preview
+- **Project**: Windhawk Command Center Suite · tracked via milestones/sprints (no versioned releases)
 - **Agent Ecosystem:** [`AGENTS.md`](./AGENTS.md) and [`.agents/`](.agents/) are tracked directly in repository git tracking.

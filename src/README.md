@@ -2,7 +2,7 @@
 
 This directory contains the core Windhawk Styler mod configurations that implement the **"Command Center Glass"** unified dark/light frosted-glass design language for Windows 11.
 
-> **Note:** The File Explorer styler (`windows-11-file-explorer-styler.yml`) is referenced in `AGENTS.md` as generated/ready for verification and may be present in the working tree as part of the suite. See the [File Explorer](#4-windows-11-file-explorer-styler) section for target details.
+> **Note:** The File Explorer styler is **deferred** (ROADMAP M.03) — no styler file exists in this directory. The mod remains approved under Rule 01's four-mod boundary, but the file was generated and then discontinued (git `1cc49e9`) due to a lack of plausible customizations (existing styles too similar; no real benefit yet). See the [File Explorer](#4-windows-11-file-explorer-styler-yml-deferred) section.
 
 ## Table of Contents
 
@@ -17,7 +17,7 @@ This directory contains the core Windhawk Styler mod configurations that impleme
   - [1. windows-11-taskbar-styler.yml](#1-windows-11-taskbar-styler-yml)
   - [2. windows-11-start-menu-styler.yml](#2-windows-11-start-menu-styler-yml)
   - [3. windows-11-notification-center-styler.yml](#3-windows-11-notification-center-styler-yml)
-  - [4. windows-11-file-explorer-styler.yml](#4-windows-11-file-explorer-styler-yml)
+  - [4. windows-11-file-explorer-styler.yml (deferred)](#4-windows-11-file-explorer-styler-yml-deferred)
 - [Style Constants Reference](#style-constants-reference)
 - [Installation & Usage](#installation--usage)
 - [Validation & Quality Gates](#validation--quality-gates)
@@ -26,16 +26,16 @@ This directory contains the core Windhawk Styler mod configurations that impleme
 
 ## Overview
 
-The suite targets exactly **four** official Windhawk Styler mods (one YAML per mod). Each file uses Windhawk's Styler syntax (`styleConstants` + `controlStyles` with target selectors and per-state styles) to restyle the targeted shell surface with a consistent frosted-glass treatment.
+The suite is approved for exactly **four** official Windhawk Styler mods — **three active styler files** exist here (one YAML per active mod); File Explorer is deferred. Each file uses Windhawk's Styler syntax (`styleConstants` + `controlStyles` with target selectors and per-state styles) to restyle the targeted shell surface with a consistent frosted-glass treatment.
 
 | Styler File | Windhawk Mod ID | Target Process | Framework | Status |
 |---|---|---|---|---|
 | `windows-11-taskbar-styler.yml` | `windows-11-taskbar-styler` | `explorer.exe` | WinUI 3 / XAML | ✅ Shipped reference |
 | `windows-11-start-menu-styler.yml` | `windows-11-start-menu-styler` | `StartMenuExperienceHost.exe` (LockApp surfaces also targeted) | UWP / WinUI 2 | ✅ Shipped reference |
-| `windows-11-notification-center-styler.yml` | `windows-11-notification-center-styler` | `ShellExperienceHost.exe` / `ShellHost.exe` | UWP `Windows.UI.Xaml` | 🧪 Generated (Ready for verification) |
-| `windows-11-file-explorer-styler.yml` | `windows-11-file-explorer-styler` | `explorer.exe` | WinUI 3 `Microsoft.UI.Xaml` | 🧪 Generated (Ready for verification) |
+| `windows-11-notification-center-styler.yml` | `windows-11-notification-center-styler` | `ShellExperienceHost.exe` / `ShellHost.exe` | UWP `Windows.UI.Xaml` | ✅ Generated & verified (polish active — M.02b / W.04) |
+| *— (no styler file)* | `windows-11-file-explorer-styler` | `explorer.exe` | WinUI 3 `Microsoft.UI.Xaml` | ⏸️ Deferred (ROADMAP M.03) |
 
-All surfaces share the same canonical tokens and materials to preserve a unified "Command Center" look across taskbar, Start menu/lock widgets, Notification Center/Quick Settings, and File Explorer chrome.
+All active surfaces share the same canonical tokens and materials to preserve a unified "Command Center" look across taskbar, Start menu/lock widgets, and Notification Center/Quick Settings.
 
 ## Design Philosophy: "Command Center Glass"
 
@@ -155,21 +155,21 @@ All surfaces share the same canonical tokens and materials to preserve a unified
 
 **Notes:** Emphasizes inner `ElementBackground` cards to create frosted layering inside the main glass panels; removes shadows and neutralizes some page backgrounds to let the unified glass show through.
 
-### 4. `windows-11-file-explorer-styler.yml`
+### 4. `windows-11-file-explorer-styler.yml` (deferred)
 
 - **Windhawk Mod ID:** `windows-11-file-explorer-styler`
 - **Target Process:** `explorer.exe`
 - **Framework:** WinUI 3 `Microsoft.UI.Xaml`
-- **Status:** 🧪 Generated (Ready for verification) — per `AGENTS.md`
-- **Goal:** Command Center Glass treatment for File Explorer chrome (navigation, tabs, command bar, address bar, file list chrome, panes, flyouts) while keeping the Win32 file list area behavior respectful and avoiding over-styling native list content.
+- **Status:** ⏸️ Deferred (ROADMAP M.03) — **no styler file exists** in this directory.
+- **Rationale (user directive, 2026-10-07):** Deferred due to a lack of plausible customizations — other already-existing styles are too similar, so there is no real benefit to having our own File Explorer style just yet. The styler file was generated, then discontinued (git `1cc49e9`).
 
-**Intended coverage (from suite architecture):** WinUI 3 tabs, navigation, command bar, Win32 file list boundary. (Specific selector set to be finalized/verified against current Explorer builds; treat as generated baseline until live verification.)
+**Dormant reference:** Should the surface be resumed, intended coverage is WinUI 3 tabs, navigation, command bar, address bar, file list chrome, panes, and flyouts, respecting the Win32 file list boundary and the Safe Glass Chrome principle. Domain selector reference lives in [`.agents/skills/file-explorer-theming.md`](../.agents/skills/file-explorer-theming.md).
 
-**Notes:** Generated baseline to be validated with Visual Inspector + live checklist. Keep Win32 file list boundary in mind to avoid visual breakage.
+**Notes:** Any future attempt must avoid intrusive third-party translucency injectors (e.g. TranslucentWindows) that affect other programs. Do not scaffold a File Explorer styler file without a new explicit user directive.
 
 ## Style Constants Reference
 
-All four files define the same core constants (with small additive tokens where needed). Use `$Token` references in `styles` for consistency.
+All three active files define the same core constants (with small additive tokens where needed). Use `$Token` references in `styles` for consistency.
 
 | Constant | Type | Purpose |
 |---|---|---|
@@ -197,11 +197,11 @@ All four files define the same core constants (with small additive tokens where 
    - Taskbar: `windows-11-taskbar-styler`
    - Start Menu: `windows-11-start-menu-styler`
    - Notification Center: `windows-11-notification-center-styler`
-   - File Explorer: `windows-11-file-explorer-styler`
+   - *(File Explorer: `windows-11-file-explorer-styler` is approved but deferred — no suite config exists yet.)*
 3. **Apply the YAML**: In each mod's settings, import/copy the corresponding YAML from `src/`. Each YAML is self-contained with `styleConstants` and `controlStyles`.
 4. **Theme awareness**: Styles read Windows theme resources and should adapt to light/dark automatically.
 
-> **Process targets:** Taskbar+File Explorer → `explorer.exe`. Start Menu → `StartMenuExperienceHost.exe`. Notification Center → `ShellExperienceHost.exe`/`ShellHost.exe`.
+> **Process targets:** Taskbar → `explorer.exe`. Start Menu → `StartMenuExperienceHost.exe`. Notification Center → `ShellExperienceHost.exe`/`ShellHost.exe`. (File Explorer would target `explorer.exe` if resumed.)
 
 ## Validation & Quality Gates
 
@@ -217,7 +217,7 @@ This repo enforces static validation and live verification.
 
 - **Live verification:** Use the template checklist to validate on desktop:
   - Template: `.agents/templates/live-verification-checklist.md`
-  - Covers each surface (Taskbar, Start Menu/Lock, Notification Center/Quick Settings, File Explorer), states (normal/hover/active), theme switching, and regression spots.
+  - Covers each active surface (Taskbar, Start Menu/Lock, Notification Center/Quick Settings), states (normal/hover/active), theme switching, and regression spots. (File Explorer sections in the template are reference-only — that surface is deferred.)
 
 - **Target evidence (Rule 04):** Selectors must be sourced from official Windhawk mod source code, settings schemas, or community theme references. Avoid guessing; prefer evidence-backed targets.
 
@@ -225,14 +225,14 @@ This repo enforces static validation and live verification.
 
 All changes must comply with `.agents/rules/` and repo standards:
 
-- **Rule 01 – Zero unsolicited injection:** Exactly four styler mods; no unapproved packages/tools.
+- **Rule 01 – Zero unsolicited injection:** Four approved styler mods (three active files; File Explorer deferred); no unapproved packages/tools.
 - **Rule 02 – Windhawk Styler syntax:** YAML/XAML syntax, quoting, constant declaration order, no inline syntax errors.
 - **Rule 03 – Design language standards:** Use canonical "Command Center Glass" tokens/materials and radius scales above.
 - **Rule 04 – Target evidence protocol:** Sourced selectors only; document evidence when adding/changing targets.
 - **Rule 05 – Surface scope standards:** Respect process targets and WinUI 3 vs UWP boundaries.
 - **Rule 07 – Verification standards:** Mandatory static gate + user live checklist.
-- **Rule 08 – Documentation standards:** Root Markdown files + `src/extras/README.md` + `.agents/`; no `docs/` folder.
-- **Rule 09 – Tracking standards:** Work is tracked via milestones/sprints in the planning files (`ROADMAP.md`, `PLAN.md`, `TODO.md`, `BUGS.md`) — the project does not use formal versioned releases.
+- **Rule 08 – Documentation standards:** Root Markdown files + `src/extras/README.md` + `.agents/` (folder `README.md` files are the canonical indexes); `docs/` is a planned future GitHub Pages site, deferred until style work is complete.
+- **Rule 09 – Milestone & sprint tracking:** Work is tracked via milestones/sprints in the planning files (`ROADMAP.md`, `PLAN.md`, `TODO.md`, `BUGS.md`) and date/time-grouped `CHANGELOG.md` entries — the project does not use formal versioned releases.
 
 ## Related Documentation
 
@@ -241,4 +241,4 @@ All changes must comply with `.agents/rules/` and repo standards:
 - **Agent ecosystem:** [`.agents/agents/README.md`](../.agents/agents/README.md), [`.agents/rules/`](../.agents/rules/)
 - **Validation tool:** [`tools/Test-WindhawkStyles.ps1`](../tools/Test-WindhawkStyles.ps1)
 - **Live checklist template:** [`.agents/templates/live-verification-checklist.md`](../.agents/templates/live-verification-checklist.md)
-- **Changelog:** [`CHANGELOG.md`](../CHANGELOG.md) — chronological log of completed work (tracked via milestones/sprints, not versioned releases)
+- **Changelog:** [`CHANGELOG.md`](../CHANGELOG.md) — chronological log of completed work (entries grouped by date and time; tracked via milestones/sprints, not versioned releases)

@@ -68,9 +68,10 @@ Refine spatial alignments, panel margins, split-button visual states, and intern
 
 ### ⏸️ Milestone M.03: Windows 11 File Explorer Styler Generation (Shelved / Deferred)
 
-- Evaluated live styling on Windows 11 File Explorer.
-- Shelved per user directive: without intrusive third-party background injectors (e.g. TranslucentWindows) which affect other programs, File Explorer's Win32/WinUI 3 hybrid architecture cannot achieve a glass aesthetic that satisfies the suite's design standards.
-- File Explorer styler generation is deferred.
+- Evaluated live styling on Windows 11 File Explorer; styler file was generated, then discontinued (git `1cc49e9`).
+- Shelved per user directive (2026-10-07): deferred due to a lack of plausible customizations — other already-existing styles are too similar, so there is no real benefit to maintaining our own File Explorer style just yet.
+- Additional standing constraint: any future attempt must avoid intrusive third-party translucency injectors (e.g. TranslucentWindows) that affect other programs.
+- File Explorer styler generation remains deferred until a differentiated design direction is identified.
 
 ### ⏳ Milestone M.04: Unified Suite Verification & Completion
 

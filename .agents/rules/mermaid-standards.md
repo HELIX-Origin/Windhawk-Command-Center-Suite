@@ -1,6 +1,6 @@
 # Rule 06: GitHub-Flavored Mermaid & Diagram Standards
 
-This standard governs **every Mermaid diagram** in this repository — `AGENTS.md`, `.agents/`, `docs/`, `README.md`, and root tracking files. Diagrams target **GitHub's Mermaid renderer**, so they must use syntax it supports and be structured for legibility.
+This standard governs **every Mermaid diagram** in this repository — `AGENTS.md`, `.agents/`, `README.md`, and root tracking files, plus the planned `docs/` GitHub Pages site (future — see Rule 08). Diagrams target **GitHub's Mermaid renderer**, so they must use syntax it supports and be structured for legibility.
 
 ## Baseline
 

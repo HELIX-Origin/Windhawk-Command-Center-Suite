@@ -3,7 +3,7 @@
 This directory contains the operational specifications, mandatory engineering rules, domain skills, and code templates for AI agents, coding assistants, and contributors working on **Windhawk Command Center Suite**.
 
 > 📖 **Primary Operating Manual**: For high-level project status, architectural mandates, and current issue tracking, refer to the root entry point: [**`AGENTS.md`**](../AGENTS.md).  
-> 📝 **Tracking Files**: `PLAN.md` (current sprint plan), `TODO.md` (workstream checklist), `BUGS.md` (bug & issue tracker), and `ROADMAP.md` (milestone roadmap) hold active workstream state.
+> 📝 **Tracking Files**: `PLAN.md` (current sprint plan), `TODO.md` (workstream checklist), `BUGS.md` (bug & issue tracker), `ROADMAP.md` (milestone roadmap), and `CHANGELOG.md` (date/time-grouped history) hold active workstream state.
 
 ---
 
@@ -15,7 +15,7 @@ This directory contains the operational specifications, mandatory engineering ru
 | [**`rules/`**](rules/) | **Mandatory Rules** | Non-negotiable safety, syntax, design language, and verification rules (Rules 00–09) | [Browse Rules](rules/README.md) |
 | [**`skills/`**](skills/) | **Domain Skills** | In-depth technical guides for Windhawk engine, materials, and surface visual trees | [Browse Skills](skills/README.md) |
 | [**`templates/`**](templates/) | **Code & Workflow Templates** | Blueprints for themes, target evidence, live checklists, and root tracking files | [Browse Templates](templates/README.md) |
-| **`targets/`** | **Target Evidence Records** | Interim home for selector evidence tables (schema: [`target-evidence-template`](templates/target-evidence-template.md)); former `docs/targets/` references resolve here — the `docs/` GitHub Pages site is *planned* but deferred until style work is complete | Interim (no folder README yet) |
+| **`targets/`** | **Target Evidence Records** | Interim home for selector evidence tables (schema: [`target-evidence-template`](templates/target-evidence-template.md)); former `docs/targets/` references resolve here — the `docs/` GitHub Pages site is *planned* but deferred until style work is complete | Interim (2 records) |
 
 > 📍 **Target Evidence Migration Note**: Target evidence lives in **`.agents/targets/`** (interim location, schema: `.agents/templates/target-evidence-template.md`). Older references to `docs/targets/` point here. The `docs/` directory is a **planned** future GitHub Pages site — deferred until style work is complete — and does not exist yet.
 

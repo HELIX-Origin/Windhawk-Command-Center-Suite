@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Every surface in the suite must look like it was cut from the same sheet of glass. This rule is the **canonical, extracted specification** of the visual language already shipped in `src/start-menu-customizer.yml` and `src/taskbar-customizer.yml`. New styles (Notification Center, File Explorer) **must** be built from these tokens and recipes. Inventing new values is a violation unless the user approves it and this rule is updated first.
+Every surface in the suite must look like it was cut from the same sheet of glass. This rule is the **canonical, extracted specification** of the visual language already shipped in `src/windows-11-start-menu-styler.yml` and `src/windows-11-taskbar-styler.yml`. The Notification Center file (`src/windows-11-notification-center-styler.yml`, generated & verified) **must** also be built from these tokens and recipes. File Explorer is **deferred** — no styler file exists, so its mentions here are reference-only (§5) and nothing may be created without a new explicit user directive. Inventing new values is a violation unless the user approves it and this rule is updated first.
 
 > [!IMPORTANT]
 > The shipped files are the reference implementation. If this rule and a shipped file disagree, the shipped file wins and this rule is the bug — fix the rule (and record the change in `BUGS.md`), never "correct" the shipped file to match a stale rule.
@@ -61,7 +61,7 @@ The four material constants are **always declared verbatim, in this order, as th
 | S — Item | `10` | `R2` | `CornerRadiusAlt2` | Buttons, list items, tiles, tooltips |
 | XS — Menu | `6` | `R3` | `CornerRadiusAlt3` | Context menus, menu items, flyout presenters |
 
-The taskbar deliberately uses a compact scale (`R1=6` buttons/flyouts, `R2=20` pills/badges) because it is 38 px tall. File Explorer chrome is similarly dense — see §5.
+The taskbar deliberately uses a compact scale (`R1=6` buttons/flyouts, `R2=20` pills/badges) because it is 38 px tall. The deferred File Explorer chrome (reference only — see §5) is similarly dense.
 
 ### 2.5 Typography
 
@@ -165,7 +165,7 @@ Track `Fill:=$OverlayColor` (or `$Background`), decrease/fill rect `Fill:=$Accen
 
 ## 4. Token Naming for New Files
 
-1. New styler files use the **descriptive** names already scaffolded in `src/notification-center-styler.yml` (`Background`, `BorderBrush`, `BorderBrushAlt`, `BackgroundAlt`, `BorderThickness`, `CornerRadius`, `CornerRadiusAlt1…4`), plus the taskbar's state brushes (`OverlayColor`, `OverlayColor2`, `AccentColor`, `ActiveColor`) when interaction states are needed.
+1. New styler files use the **descriptive** names already used in `src/windows-11-notification-center-styler.yml` (`Background`, `BorderBrush`, `BorderBrushAlt`, `BackgroundAlt`, `BorderThickness`, `CornerRadius`, `CornerRadiusAlt1…4`), plus the taskbar's state brushes (`OverlayColor`, `OverlayColor2`, `AccentColor`, `ActiveColor`) when interaction states are needed.
 2. Existing shipped files are **not** renamed as a side effect of other work (Rule 00 §1.1). A token-name unification is its own workstream and needs user approval.
 3. Every declared token must be used, or commented in the file header as intentionally reserved (the four materials are always reserved-allowed).
 
@@ -178,7 +178,7 @@ Track `Fill:=$OverlayColor` (or `$Background`), decrease/fill rect `Fill:=$Accen
 | Start Menu (reference) | 35 | 10 | 6 | Shipped |
 | Taskbar (reference) | 6 | 6 | 6 | Compact; 20 for pills |
 | Notification Center | 35 (`NotificationCenterGrid`, `CalendarCenterGrid`, `ControlCenterRegion`) | 10 (toasts, quick-action tiles, list items) | 6 | Pairs visually with Start; the toggle-tile accent = `$AccentColor` |
-| File Explorer | 10 (tabs, address bar, search pill) | 6 (action buttons) | 6 (context menus) | **Safe Glass Chrome**: The native window background remains unmolested. No elements hidden. Tabs, address bar, search box, command bar buttons, and menus styled as floating Command Center Glass controls. |
+| File Explorer *(deferred — no file; reference only, ROADMAP M.03)* | 10 (tabs, address bar, search pill) | 6 (action buttons) | 6 (context menus) | **Safe Glass Chrome** *(locked directive — future-dormant while deferred)*: The native window background remains unmolested. No elements hidden. Tabs, address bar, search box, command bar buttons, and menus styled as floating Command Center Glass controls. |
 
 ---
 

@@ -4,6 +4,8 @@
 
 Windhawk styler files are YAML documents whose leaf values are interpreted by each mod's internal parser into Windows XAML property assignments, XAML snippet inflations, and visual-state animations. This rule defines the **exact grammar, naming rules, quoting conventions, and formatting** required for all styler files in this repository.
 
+Throughout this rule, **NC** and **FE** abbreviate the Windhawk mods `windows-11-notification-center-styler` and `windows-11-file-explorer-styler`, and version floors such as NC v1.5+ / FE v1.7+ describe **external mod capabilities only**. The suite has **no File Explorer styler file** (deferred — [Rule 05](surface-scope-standards.md) §2.2); nothing in this rule authorizes creating one.
+
 ---
 
 ## 1. Top-Level YAML Structure

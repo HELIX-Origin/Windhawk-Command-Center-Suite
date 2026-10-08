@@ -37,4 +37,4 @@ All templates adhere strictly to:
 | [**`root-todo-file-template`**](root-todo-file-template.md) | `TODO.md` | Active workstreams, locked user directives, and implementation checklists |
 | [**`root-bugs-file-template`**](root-bugs-file-template.md) | `BUGS.md` | Open bug ledger, severity markers, root causes, and wontfix limitations |
 | [**`root-roadmap-file-template`**](root-roadmap-file-template.md) | `ROADMAP.md` | High-level suite vision, phased milestones, and milestone status |
-| [**`root-changelog-file-template`**](root-changelog-file-template.md) | `CHANGELOG.md` | Date-grouped change log blueprint (no versioned releases) |
+| [**`root-changelog-file-template`**](root-changelog-file-template.md) | `CHANGELOG.md` | Date/time-grouped change log blueprint (`Added`/`Removed`/`Changed`/`Fixed`, no versioned releases) |

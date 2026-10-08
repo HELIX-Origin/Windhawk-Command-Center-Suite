@@ -1,35 +1,24 @@
 # Changelog
 
-All notable changes to **{{ project.name }}** are documented here. Changes are grouped by date as work is completed. Tracking is done via `ROADMAP.md`, `PLAN.md`, `TODO.md`, and `BUGS.md` rather than formal releases.
+All notable changes to **{{ project.name }}** are documented here. One entry per update (`## YYYY-MM-DD - HH:MM`), newest first. Each entry has at most one `Added`, `Removed`, `Changed`, and `Fixed` section — omit sections with no items, and put every item of a type in that type's single list (never a second section of the same type). Items are `- **Title**: description` with nested `**Title**: description` sub-items as needed. Tracking is done via `ROADMAP.md`, `PLAN.md`, `TODO.md`, and `BUGS.md` rather than formal releases.
 
-## {{ YYYY-MM-DD }}
+## {{ YYYY-MM-DD }} - {{ HH:MM }}
 
 ### Added
-- {{ list.item }}
-- {{ list.item }}
+- **{{ list.item.title }}**: {{ list.item.description }}
+  - **{{ sublist.item.title }}**: {{ sublist.item.description }}
+
+### Removed
+- **{{ list.item.title }}**: {{ list.item.description }}
 
 ### Changed
-- {{ list.item }}
-- {{ list.item }}
+- **{{ list.item.title }}**: {{ list.item.description }}
+  - **{{ sublist.item.title }}**: {{ sublist.item.description }}
 
 ### Fixed
-- {{ list.item }}
-- {{ list.item }}
+- **{{ list.item.title }}**: {{ list.item.description }}
 
-### Known
-- {{ known.item }} *(open items mirrored in `BUGS.md` / `TODO.md`)*
-
-### Notes
-- Static validation gate: `pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1` must pass with 0 errors.
-- Live verification: use `.agents/templates/live-verification-checklist.md` for desktop validation.
-
-## {{ YYYY-MM-DD }} (Earlier)
+## {{ YYYY-MM-DD }} - {{ HH:MM }}
 
 ### Added
-- {{ list.item }}
-
-### Changed
-- {{ list.item }}
-
-### Known
-- {{ known.item }}
+- **{{ list.item.title }}**: {{ list.item.description }}

@@ -22,7 +22,7 @@ flowchart TD
 
 ```powershell
 pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1            # all in-scope styler files
-pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1 -Path src/notification-center-styler.yml
+pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1 -Path src/windows-11-notification-center-styler.yml
 ```
 
 The gate enforces:
@@ -45,7 +45,7 @@ The gate enforces:
 | `W106` | Warning | Localized `AutomationProperties.Name` selector (EN-only, Rule 04 §2.3) |
 
 1. **Errors fail the gate.** Warnings must be resolved or justified in the handoff.
-2. Pre-existing issues in **shipped** files are listed in `tools/style-baseline.txt` and tracked in `BUGS.md`. The baseline may only shrink; adding an entry to hide a new problem is a Rule 00 violation.
+2. Pre-existing issues in **shipped** files are listed in `tools/style-baseline.ini` and tracked in `BUGS.md`. The baseline may only shrink; adding an entry to hide a new problem is a Rule 00 violation.
 3. YAML well-formedness: the gate performs a structural line check (no PowerShell Gallery YAML module is permitted — Rule 01). Because of that, agents must also keep files in the strict house format of [Rule 02](windhawk-styler-syntax.md) so the line check is meaningful.
 
 ---
@@ -55,7 +55,7 @@ The gate enforces:
 1. Every style handoff includes a filled-in [`live-verification-checklist`](../templates/live-verification-checklist.md): how to apply, which windows/states to open, what each region should look like, and what to report back.
 2. Checks must cover **light and dark mode**, at least one **accent color change**, and every visual state the edit touched (hover, pressed, selected, disabled, expanded/collapsed).
 3. Notification Center checks include: notifications present vs. empty, calendar expanded vs. collapsed, Quick Settings main page vs. a sub-page (Wi-Fi/Bluetooth/volume output), media controls active vs. absent, a live toast.
-4. File Explorer checks include: single vs. multiple tabs, Home vs. a folder vs. Gallery, address bar edit mode, search box focused, details/preview pane open, a context menu, window focused vs. unfocused.
+4. File Explorer checks *(reference only — File Explorer deferred, ROADMAP M.03; apply only if a styler file is ever created under a new explicit user directive)*: single vs. multiple tabs, Home vs. a folder vs. Gallery, address bar edit mode, search box focused, details/preview pane open, a context menu, window focused vs. unfocused.
 
 ---
 

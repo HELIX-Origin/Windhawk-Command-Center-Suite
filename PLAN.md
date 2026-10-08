@@ -79,5 +79,5 @@ pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1
 
 ## 🔖 Metadata
 
-- **Project**: Windhawk Command Center Suite · **version** 1.0.0-preview
+- **Project**: Windhawk Command Center Suite · tracked via milestones/sprints (no versioned releases)
 - **Agent Ecosystem:** [`AGENTS.md`](./AGENTS.md) and [`.agents/`](.agents/) are tracked directly in repository git tracking.
