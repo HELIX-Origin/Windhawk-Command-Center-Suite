@@ -2,6 +2,17 @@
 
 All notable changes to **Windhawk Command Center Suite** are documented here. One entry per update (`## YYYY-MM-DD - HH:MM`), newest first. Each entry has at most one `Added`, `Removed`, `Changed`, and `Fixed` section — omit sections with no items, and put every item of a type in that type's single list (never a second section of the same type). Items are `- **Title**: description` with nested `**Title**: description` sub-items as needed. Tracking is done via `ROADMAP.md`, `PLAN.md`, `TODO.md`, and `BUGS.md` rather than formal releases.
 
+## 2026-10-08 - 01:09
+
+### Added
+- **Headless visual tree inspector** (`tools/inspect_xaml.py` + `tools/xaml_inspect/`): Programmatic UWPSpy-style dumps of the seven approved shell processes' live UIA trees as text / JSON / Markdown (per-window 3 s UIA timeouts for hung providers, message-only window inclusion, filter/framework pruning, UTF-8-safe output) — selector discovery without manual inspection burden (Rule 04).
+- **`tools/README.md`**: Catalog for all three tools documenting the inspector's three-tier safety contract, consent-gated surface opening, options, and package layout.
+- **Consent-gated UI automation**: `--permit-ui-automation` unlocks tier-2 input injection (`SendInput` / `SetCursorPos`) for `--open-surface start|search|action-center|notification-center` (Win / Win+S / Win+A / Win+N) and `--click X Y` (no-shortcut fallback); runs are refused without the flag (exit 3), consent is per-run and never stored, opened surfaces are closed with Escape afterwards (`--leave-open` to skip) — Rule 00.
+
+### Changed
+- **Rule 00 (safety)**: Added the UI automation consent policy — explicit per-instance user permission required before each automation run, `LockApp.exe` / the lock screen barred from all automation (locks the system; research-only).
+- **Ecosystem docs synced**: `AGENTS.md` capability item 5, Rule 01 approved-tooling line, and the live-visual-inspection skill now describe read-only-by-default with consent-gated surface opening (headless tool preferred; UWPSpy remains fallback).
+
 ## 2026-10-07 - 23:13
 
 ### Added

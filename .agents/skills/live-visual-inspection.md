@@ -6,11 +6,36 @@ Standard operating procedure for inspecting the live XAML visual trees of Window
 
 ---
 
-## 1. Primary Tool: UWPSpy
+## 1. Preferred Tool: Headless Inspector (`tools/inspect_xaml.py`)
 
-UWPSpy is the community standard tool for inspecting Windows shell XAML trees.
+The repository's own inspector is the first choice: by default it dumps UIA trees as text / JSON / Markdown **without opening windows, without screenshots, and without touching input** — fully respecting the accessibility invariant (no manual UWPSpy burden on the user). See [`tools/README.md`](../../../tools/README.md) for options.
 
-### 1.1 Process & Framework Selection
+```powershell
+python tools/inspect_xaml.py --list
+python tools/inspect_xaml.py -p explorer.exe --window-class Shell_TrayWnd
+python tools/inspect_xaml.py -p ShellHost.exe -f "NotificationCenter|ControlCenter"
+```
+
+Approved targets only: `StartMenuExperienceHost.exe`, `SearchHost.exe`, `SearchApp.exe`, `LockApp.exe`, `ShellExperienceHost.exe`, `ShellHost.exe`, `explorer.exe` (Rule 01). Closed/hidden surfaces are inspected as-is whenever possible.
+
+### Consent-gated surface opening (Rule 00)
+
+Only when a surface truly cannot be inspected closed — and only after asking the user *for that specific run* — the inspector can open it (and best-effort closes it with Escape afterwards):
+
+```powershell
+# Ask the user first, every time; consent is never stored between runs.
+python tools/inspect_xaml.py -p StartMenuExperienceHost.exe --permit-ui-automation --open-surface start
+```
+
+Surfaces: `start` (Win) · `search` (Win+S) · `action-center` (Win+A) · `notification-center` (Win+N). For anything without a shortcut, `--click X Y` presses at pixel coordinates from a previous dump's bounding rects (`--leave-open` skips the closing Escape). **Never automate `LockApp.exe` / the lock screen** — it locks the system and cannot be inspected as a result. Mouse/keyboard automation outside the tool's own consent-gated path remains forbidden.
+
+---
+
+## 2. Fallback Tool: UWPSpy
+
+UWPSpy remains the community standard for deep XAML property inspection when the headless tool's UIA-level data is insufficient (e.g. XAML property values, brush resolution). Launch it only when needed; the user should never have to drive it.
+
+### 2.1 Process & Framework Selection
 
 | Surface | Process to Select | Target Framework |
 |---|---|---|
@@ -21,7 +46,7 @@ UWPSpy is the community standard tool for inspecting Windows shell XAML trees.
 
 ---
 
-## 2. Step-by-Step Inspection Procedure
+## 3. Step-by-Step UWPSpy Inspection Procedure
 
 1. Launch **UWPSpy** as administrator.
 2. Select the target process and framework from the dropdown.
@@ -35,7 +60,7 @@ UWPSpy is the community standard tool for inspecting Windows shell XAML trees.
 
 ---
 
-## 3. Selector Quality Checklist
+## 4. Selector Quality Checklist
 
 - [ ] Does the selector uniquely identify the intended control without bleeding into unrelated controls?
 - [ ] Is it anchored with a `#Name` or property filter rather than a bare common type?

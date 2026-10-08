@@ -91,6 +91,12 @@ All agents have access to and must leverage the repository's standard execution 
    ```
 3. **Live Checklist Preparation**: Generate comprehensive desktop verification checklists using `.agents/templates/live-verification-checklist.md`.
 4. **Target Evidence Sourcing**: Source all target selectors from official Windhawk mod source code, settings schemas, and community theme references without manual UWPSpy inspection burden.
+5. **Headless Visual Tree Inspection**: Programmatically dump the live UWP / WinUI 3 trees of the seven approved shell processes (read-only by default — no screenshots ever; opening a surface or injecting input only behind explicit per-run user consent, Rule 00; `LockApp.exe` / the lock screen is never automated) using:
+   ```powershell
+   python tools/inspect_xaml.py --list
+   python tools/inspect_xaml.py -p ShellHost.exe -f "NotificationCenter"
+   ```
+   See [`tools/README.md`](tools/README.md) for options and the enforced read-only contract.
 
 ---
 

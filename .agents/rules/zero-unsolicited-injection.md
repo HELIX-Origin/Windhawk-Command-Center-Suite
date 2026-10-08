@@ -39,7 +39,7 @@ These files live in `src/extras/` and are **not** part of the suite and are **no
 
 ## 3. Tooling
 
-1. **Approved tooling**: Windows PowerShell 7 (`pwsh`) and the repository's own scripts in `tools/`. The static gate (`tools/Test-WindhawkStyles.ps1`) uses no modules beyond what ships with PowerShell.
+1. **Approved tooling**: Windows PowerShell 7 (`pwsh`), Python 3 with the already-installed `comtypes` package, and the repository's own scripts in `tools/` (the static gate `tools/Test-WindhawkStyles.ps1` uses no modules beyond what ships with PowerShell; the headless inspector `tools/inspect_xaml.py` is read-only by default, with UI automation only behind explicit per-run user consent — see `tools/README.md`).
 2. **Forbidden without approval**: `npm`/`pip`/`winget`/`choco`/`scoop` installs, PowerShell Gallery modules (including `powershell-yaml`), CI services, formatters, or linters.
 3. **Inspection tools on the user's machine** (e.g. UWPSpy) are **user-run**. Agents may recommend them and explain how to read their output; agents never download or execute them.
 
