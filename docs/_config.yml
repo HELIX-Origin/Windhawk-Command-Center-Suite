@@ -73,15 +73,15 @@ titles_from_headings:
   collections: true
 
 # Jekyll Collections Registration
-# - docs: Developer documentation guides (_docs/ -> /docs/:path.html)
-# - wiki: Technical target catalogs and schemas (_wiki/ -> /wiki/:path.html)
+# - docs: Developer documentation guides (_docs/ -> /docs/:path/)
+# - wiki: Technical target catalogs and schemas (_wiki/ -> /wiki/:path/)
 collections:
   docs:
     output: true
-    permalink: /docs/:path.html
+    permalink: /docs/:path/
   wiki:
     output: true
-    permalink: /wiki/:path.html
+    permalink: /wiki/:path/
 
 # Build Inclusions & Exclusions
 # Note: docs/README.md is strictly repo-only and excluded from GitHub Pages deployment.

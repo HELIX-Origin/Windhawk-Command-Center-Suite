@@ -69,7 +69,7 @@
         </a>
 
         <div class="docs-wiki-banner">
-          <a href="{{ '/wiki/README.html' | relative_url }}" class="docs-wiki-banner-link">
+          <a href="{{ '/wiki/' | relative_url }}" class="docs-wiki-banner-link">
             <span>📚 Styler Target Wiki</span>
             <small>XAML Trees & Schemas →</small>
           </a>
@@ -86,13 +86,8 @@
             <h2 class="docs-nav-heading">{{ group.section }}</h2>
             <ul>
               {%- for entry in group_pages %}
-              {%- if entry.path == "index.md" -%}
-                {%- assign entry_url = "/" | relative_url -%}
-              {%- elsif entry.path contains "_docs/" -%}
-                {%- assign entry_url = entry.path | replace: "_docs/", "docs/" | replace: ".md", ".html" | prepend: "/" | relative_url -%}
-              {%- else -%}
-                {%- assign entry_url = entry.path | replace: ".md", ".html" | prepend: "/" | relative_url -%}
-              {%- endif -%}
+              {%- assign entry_doc = all_site_docs | where: "path", entry.path | first -%}
+              {%- assign entry_url = entry_doc.url | default: entry.path | relative_url -%}
               <li><a href="{{ entry_url }}"{% if entry.path == page.path %} class="active" aria-current="page"{% endif %}>{{ entry.title | escape }}</a></li>
               {%- endfor %}
             </ul>
@@ -105,8 +100,9 @@
         <div class="separator" aria-hidden="true"></div>
 
         <div class="sidebar__footer">
-          <a href="{{ '/' | relative_url }}">🏠 Documentation Home</a>
-          <a href="{{ '/wiki/README.html' | relative_url }}">📚 Community Wiki</a>
+          <a href="{{ '/' | relative_url }}">🏠 Portal Home</a>
+          <a href="{{ '/docs/' | relative_url }}">📖 Documentation Directory</a>
+          <a href="{{ '/wiki/' | relative_url }}">📚 Community Wiki</a>
           <a href="https://github.com/HELIX-Origin/Windhawk-Themes">📦 GitHub Repository</a>
           <a href="https://github.com/HELIX-Origin/Windhawk-Themes/releases">🏷️ Releases</a>
           <a href="https://github.com/HELIX-Origin/Windhawk-Themes/blob/main/{{ edit_path }}">✏️ Edit on GitHub ↗</a>
@@ -131,7 +127,7 @@
               <nav class="navbar" aria-label="Site navigation">
                 <ul class="navbar-list">
                   <li><a class="navbar-link active" href="{{ '/' | relative_url }}">Docs</a></li>
-                  <li><a class="navbar-link" href="{{ '/wiki/README.html' | relative_url }}">Wiki</a></li>
+                  <li><a class="navbar-link" href="{{ '/wiki/' | relative_url }}">Wiki</a></li>
                   <li><a class="navbar-link" href="https://github.com/HELIX-Origin/Windhawk-Themes/releases">Releases ↗</a></li>
                 </ul>
               </nav>
@@ -152,26 +148,16 @@
         {%- if previous_entry or next_entry %}
         <nav class="pager docs-pager" aria-label="Previous and next documentation pages">
           {%- if previous_entry %}
-          {%- if previous_entry.path == "index.md" -%}
-            {%- assign prev_url = "/" | relative_url -%}
-          {%- elsif previous_entry.path contains "_docs/" -%}
-            {%- assign prev_url = previous_entry.path | replace: "_docs/", "docs/" | replace: ".md", ".html" | prepend: "/" | relative_url -%}
-          {%- else -%}
-            {%- assign prev_url = previous_entry.path | replace: ".md", ".html" | prepend: "/" | relative_url -%}
-          {%- endif -%}
+          {%- assign prev_doc = all_site_docs | where: "path", previous_entry.path | first -%}
+          {%- assign prev_url = prev_doc.url | default: previous_entry.path | relative_url -%}
           <a class="pager-previous" href="{{ prev_url }}">
             <span>Previous</span>
             {{ previous_entry.title | escape }}
           </a>
           {%- endif %}
           {%- if next_entry %}
-          {%- if next_entry.path == "index.md" -%}
-            {%- assign next_url = "/" | relative_url -%}
-          {%- elsif next_entry.path contains "_docs/" -%}
-            {%- assign next_url = next_entry.path | replace: "_docs/", "docs/" | replace: ".md", ".html" | prepend: "/" | relative_url -%}
-          {%- else -%}
-            {%- assign next_url = next_entry.path | replace: ".md", ".html" | prepend: "/" | relative_url -%}
-          {%- endif -%}
+          {%- assign next_doc = all_site_docs | where: "path", next_entry.path | first -%}
+          {%- assign next_url = next_doc.url | default: next_entry.path | relative_url -%}
           <a class="pager-next" href="{{ next_url }}">
             <span>Next</span>
             {{ next_entry.title | escape }}

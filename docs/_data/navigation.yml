@@ -1,7 +1,9 @@
 - section: Overview
   pages:
-    - title: Documentation Home
+    - title: Home
       path: index.md
+    - title: Documentation Directory
+      path: _docs/index.md
     - title: Getting Started
       path: _docs/Getting-Started.md
     - title: Architecture & Design
@@ -54,15 +56,15 @@
 - section: Community Wiki
   pages:
     - title: Wiki Home & Directory
-      path: _wiki/README.md
+      path: _wiki/index.md
     - title: Start Menu Styler Overview
-      path: _wiki/start-menu-styler/README.md
+      path: _wiki/start-menu-styler/overview.md
     - title: "  ↳ Start Menu Targets"
       path: _wiki/start-menu-styler/targets/elements.md
     - title: "  ↳ Start Menu Configuration"
       path: _wiki/start-menu-styler/configurations/schema.md
     - title: Taskbar Styler Overview
-      path: _wiki/taskbar-styler/README.md
+      path: _wiki/taskbar-styler/overview.md
     - title: "  ↳ Taskbar Targets"
       path: _wiki/taskbar-styler/targets/elements.md
     - title: "  ↳ Taskbar Configuration"
@@ -70,13 +72,13 @@
     - title: "  ↳ Taskbar Companions"
       path: _wiki/taskbar-styler/companions/settings.md
     - title: Notification Center Styler Overview
-      path: _wiki/notification-center-styler/README.md
+      path: _wiki/notification-center-styler/overview.md
     - title: "  ↳ Notification Center Targets"
       path: _wiki/notification-center-styler/targets/elements.md
     - title: "  ↳ Notification Center Configuration"
       path: _wiki/notification-center-styler/configurations/schema.md
     - title: File Explorer Styler Overview
-      path: _wiki/file-explorer-styler/README.md
+      path: _wiki/file-explorer-styler/overview.md
     - title: "  ↳ File Explorer Targets"
       path: _wiki/file-explorer-styler/targets/elements.md
     - title: "  ↳ File Explorer Configuration"
@@ -84,7 +86,7 @@
     - title: "  ↳ File Explorer Companions"
       path: _wiki/file-explorer-styler/companions/settings.md
     - title: Settings Styler Overview
-      path: _wiki/settings-styler/README.md
+      path: _wiki/settings-styler/overview.md
     - title: "  ↳ Settings Targets"
       path: _wiki/settings-styler/targets/elements.md
     - title: "  ↳ Settings Configuration"

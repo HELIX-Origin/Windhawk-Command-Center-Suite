@@ -2,6 +2,16 @@
 
 All notable changes to **Windhawk Themes** are documented here. One entry per update (`## YYYY-MM-DD - HH:MM`), newest first. Each entry has at most one `Added`, `Removed`, `Changed`, and `Fixed` section — omit sections with no items, and put every item of a type in that type's single list (never a second section of the same type). Items are `- **Title**: description` with nested `**Title**: description` sub-items as needed. Releases use milestone tags (e.g. `M.01`, `M.02b`) with zero attached assets.
 
+## 2026-10-09 - 13:55
+
+### Added
+- **Collection Index Pages**: Created `docs/_docs/index.md` (`permalink: /docs/`) and `docs/_wiki/index.md` (`permalink: /wiki/`) to guarantee clean, 404-free directory entry points for both collections.
+
+### Changed
+- **Extensionless Directory Permalinks**: Updated `docs/_config.yml` collection permalinks from `:path.html` to clean `:path/` (`/:collection/:path/`), resolving GitHub Pages 404 routing errors.
+- **Purpose-Named Site Pages**: Renamed all wiki overview files from `README.md` to `overview.md` and `index.md`, enforcing the architectural rule that `README.md` files are strictly repo-only indexes and excluded from GitHub Pages builds.
+- **Dynamic Liquid URL Resolution**: Refactored `default.html`, `docs.html`, and `wiki.html` to eliminate hardcoded `.html` extensions and resolve URLs natively via `doc.url`.
+
 ## 2026-10-09 - 13:45
 
 ### Added

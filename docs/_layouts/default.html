@@ -44,15 +44,8 @@
             <h2 class="docs-nav-heading">{{ group.section }}</h2>
             <ul>
               {%- for entry in group_pages %}
-              {%- if entry.path == "index.md" -%}
-                {%- assign entry_url = "/" | relative_url -%}
-              {%- elsif entry.path contains "_docs/" -%}
-                {%- assign entry_url = entry.path | replace: "_docs/", "docs/" | replace: ".md", ".html" | prepend: "/" | relative_url -%}
-              {%- elsif entry.path contains "_wiki/" -%}
-                {%- assign entry_url = entry.path | replace: "_wiki/", "wiki/" | replace: ".md", ".html" | prepend: "/" | relative_url -%}
-              {%- else -%}
-                {%- assign entry_url = entry.path | replace: ".md", ".html" | prepend: "/" | relative_url -%}
-              {%- endif -%}
+              {%- assign entry_doc = all_site_docs | where: "path", entry.path | first -%}
+              {%- assign entry_url = entry_doc.url | default: entry.path | relative_url -%}
               <li><a href="{{ entry_url }}"{% if entry.path == page.path %} class="active" aria-current="page"{% endif %}>{{ entry.title | escape }}</a></li>
               {%- endfor %}
             </ul>
@@ -64,8 +57,9 @@
         <div class="separator" aria-hidden="true"></div>
 
         <div class="sidebar__footer">
-          <a href="{{ '/' | relative_url }}">🏠 Documentation Home</a>
-          <a href="{{ '/wiki/README.html' | relative_url }}">📚 Community Wiki</a>
+          <a href="{{ '/' | relative_url }}">🏠 Portal Home</a>
+          <a href="{{ '/docs/' | relative_url }}">📖 Documentation Directory</a>
+          <a href="{{ '/wiki/' | relative_url }}">📚 Community Wiki</a>
           <a href="https://github.com/HELIX-Origin/Windhawk-Themes">📦 GitHub repository</a>
           <a href="https://github.com/HELIX-Origin/Windhawk-Themes/releases">🏷️ Releases</a>
           <a href="https://github.com/HELIX-Origin/Windhawk-Themes/blob/main/{{ edit_path }}">✏️ Edit on GitHub ↗</a>
@@ -78,7 +72,7 @@
           <nav class="navbar" aria-label="Site navigation">
             <ul class="navbar-list">
               <li><a class="navbar-link active" href="{{ '/' | relative_url }}">Docs</a></li>
-              <li><a class="navbar-link" href="{{ '/wiki/README.html' | relative_url }}">Wiki</a></li>
+              <li><a class="navbar-link" href="{{ '/wiki/' | relative_url }}">Wiki</a></li>
               <li><a class="navbar-link" href="https://github.com/HELIX-Origin/Windhawk-Themes/releases">Releases ↗</a></li>
             </ul>
             {% include translate-control.html %}

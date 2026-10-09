@@ -1,6 +1,7 @@
-﻿---
+---
 layout: wiki
 title: Target & Configuration Wiki
+permalink: /wiki/
 ---
 
 # Windhawk Styler Wiki: Development Knowledge Base
