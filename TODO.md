@@ -126,6 +126,17 @@ Build the comprehensive, production-grade AI agent ecosystem modeled after the m
 - [x] Source verified target selectors from official Windhawk mod source code and community themes without manual UWPSpy inspection burden.
 - [x] Instantiate Central Operating Manual (`AGENTS.md`), companion mod documentation (`projects/command-center/extras/README.md`), and Root Tracking Ledgers (`TODO.md`, `PLAN.md`, `BUGS.md`, `ROADMAP.md`, `README.md`).
 
+### ⏳ Workstream W.05: Theme Catalog Architecture & Showcase Integration (Planned)
+
+```mermaid
+flowchart TD
+    W5_Docs["docs Collection (_docs/)"] --> W5_Catalog["Theme Catalog Engine"]
+    W5_Catalog --> W5_Galleries["Surface Galleries & Project Showcases"]
+```
+
+- [ ] **Docs Collection Catalog Engine**: Utilize the Jekyll `docs` collection (`docs/_docs/`) in future updates to author and publish multi-suite theme catalogs, visual showcases, and surface galleries.
+- [ ] **Project Asset Integration**: Support referencing theme suite assets, color tokens, and preview captures within catalog pages while preserving public theme neutrality in core guides.
+
 ---
 
 ## ⏸️ Shelved / Deferred Workstreams

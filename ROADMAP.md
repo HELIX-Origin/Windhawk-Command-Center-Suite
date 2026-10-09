@@ -73,10 +73,11 @@ Refine spatial alignments, panel margins, split-button visual states, and intern
 - Additional standing constraint: any future attempt must avoid intrusive third-party translucency injectors (e.g. TranslucentWindows) that affect other programs.
 - File Explorer styler generation remains deferred until a differentiated design direction is identified.
 
-### ⏳ Milestone M.04: Unified Suite Verification & Completion
+### ⏳ Milestone M.04: Unified Suite Verification & Theme Catalog Integration
 
-- Full suite verification across all four mods on Windows 11.
-- Changelog entries and documentation completion.
+- Full suite verification across all active mods on Windows 11.
+- **Theme Catalog Generation (`docs/_docs/`)**: In future updates, the `docs` collection will serve as the engine to generate and publish comprehensive theme catalogs, surface galleries, and suite showcases.
+- Changelog entries and final documentation verification.
 
 ---
 
