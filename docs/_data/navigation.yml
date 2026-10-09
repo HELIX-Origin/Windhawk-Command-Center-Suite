@@ -50,3 +50,19 @@
       path: Evidence-Protocol.md
     - title: Verification & Quality Gates
       path: Verification.md
+
+- section: Community Wiki
+  pages:
+    - title: Wiki Home & Directory
+      path: wiki/README.md
+    - title: Start Menu Styler
+      path: wiki/start-menu-styler/README.md
+    - title: Taskbar Styler
+      path: wiki/taskbar-styler/README.md
+    - title: Notification Center Styler
+      path: wiki/notification-center-styler/README.md
+    - title: File Explorer Styler
+      path: wiki/file-explorer-styler/README.md
+    - title: Settings Styler
+      path: wiki/settings-styler/README.md
+

@@ -32,6 +32,14 @@ Welcome to the **Windhawk Themes** engineering documentation. This site covers t
 - **[Target Evidence Protocol](Evidence-Protocol.md)** — Selector verification tiers (T1–T5), avoiding guessed targets, and accessibility protocols.
 - **[Verification & Quality Gates](Verification.md)** — Automated static test runner (`Test-WindhawkStyles.ps1`) and desktop live checklists.
 
+### 📚 Community Wiki
+- **[Wiki Home](wiki/README.md)** — Community-driven living knowledge base of verified targets and options.
+- **[Start Menu Styler Wiki](wiki/start-menu-styler/README.md)** — Detailed selector ledgers and positioning settings.
+- **[Taskbar Styler Wiki](wiki/taskbar-styler/README.md)** — Taskbar frames, items, trays, and companion tweak metrics.
+- **[Notification Center Styler Wiki](wiki/notification-center-styler/README.md)** — Quick settings, sliders, calendar cells, and toasts.
+- **[File Explorer Styler Wiki](wiki/file-explorer-styler/README.md)** — Tabs, breadcrumbs, command bar, and backdrop effects.
+- **[Settings Styler Wiki](wiki/settings-styler/README.md)** — Split views, setting cards, and navigation items.
+
 ---
 
 ## 📦 Supported Windhawk Mods
