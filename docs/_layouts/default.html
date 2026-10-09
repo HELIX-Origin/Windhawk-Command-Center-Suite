@@ -71,7 +71,8 @@
         <header class="page-header">
           <nav class="navbar" aria-label="Site navigation">
             <ul class="navbar-list">
-              <li><a class="navbar-link active" href="{{ '/' | relative_url }}">Docs</a></li>
+              <li><a class="navbar-link" href="{{ '/' | relative_url }}">Home</a></li>
+              <li><a class="navbar-link active" href="{{ '/docs/' | relative_url }}">Docs</a></li>
               <li><a class="navbar-link" href="{{ '/wiki/' | relative_url }}">Wiki</a></li>
               <li><a class="navbar-link" href="https://github.com/HELIX-Origin/Windhawk-Themes/releases">Releases ↗</a></li>
             </ul>
@@ -82,13 +83,13 @@
           <h1>{{ page_title | escape }}</h1>
         </header>
 
-        <article class="doc-section documentation-content{% if page.path == 'index.md' %} home-content{% endif %}">
+        <article class="doc-section documentation-content">
           {{ content }}
         </article>
 
         <footer class="site-footer">
           <span>Windhawk Themes · Built by HELIX Origin</span>
-          <a href="{{ '/' | relative_url }}">← Back to Theme home</a>
+          <a href="{{ '/' | relative_url }}">← Back to Home</a>
         </footer>
       </main>
 

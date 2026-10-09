@@ -1,4 +1,4 @@
-﻿---
+---
 layout: docs
 title: Shell Flyouts & Positions
 ---

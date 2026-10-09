@@ -1,4 +1,4 @@
-﻿---
+---
 layout: wiki
 title: "Wiki: Settings Styler"
 ---

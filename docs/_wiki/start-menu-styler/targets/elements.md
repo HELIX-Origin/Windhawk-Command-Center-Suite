@@ -1,4 +1,4 @@
-﻿---
+---
 layout: wiki
 title: "Wiki: Start Menu Element Targets"
 ---

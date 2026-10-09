@@ -115,7 +115,8 @@
           <div class="docs-header-top">
             <nav class="docs-breadcrumbs" aria-label="Breadcrumb navigation">
               <ol class="breadcrumb-list">
-                <li><a href="{{ '/' | relative_url }}">Docs</a></li>
+                <li><a href="{{ '/' | relative_url }}">Home</a></li>
+                <li><a href="{{ '/docs/' | relative_url }}">Docs</a></li>
                 {%- if current_section != "Overview" and current_section != "General" %}
                 <li><span>{{ current_section }}</span></li>
                 {%- endif %}
@@ -126,7 +127,8 @@
             <div class="docs-header-actions">
               <nav class="navbar" aria-label="Site navigation">
                 <ul class="navbar-list">
-                  <li><a class="navbar-link active" href="{{ '/' | relative_url }}">Docs</a></li>
+                  <li><a class="navbar-link" href="{{ '/' | relative_url }}">Home</a></li>
+                  <li><a class="navbar-link active" href="{{ '/docs/' | relative_url }}" aria-current="location">Docs</a></li>
                   <li><a class="navbar-link" href="{{ '/wiki/' | relative_url }}">Wiki</a></li>
                   <li><a class="navbar-link" href="https://github.com/HELIX-Origin/Windhawk-Themes/releases">Releases ↗</a></li>
                 </ul>

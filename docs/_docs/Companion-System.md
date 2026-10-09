@@ -1,4 +1,4 @@
-﻿---
+---
 layout: docs
 title: System & Translucency Mods
 ---

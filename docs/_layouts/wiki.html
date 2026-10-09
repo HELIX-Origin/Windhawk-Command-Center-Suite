@@ -211,11 +211,13 @@
         <div class="separator" aria-hidden="true"></div>
 
         <div class="sidebar__footer wiki-sidebar-footer">
-          <a href="{{ '/' | relative_url }}">🏠 Documentation Home</a>
-          <a href="{{ '/docs/' | relative_url }}">📖 Documentation Guides</a>
+          <a href="{{ '/' | relative_url }}">🏠 Home</a>
+          <a href="{{ '/docs/' | relative_url }}">📖 Documentation</a>
+          <a href="{{ '/wiki/' | relative_url }}">📚 Styler Wiki</a>
           <a href="https://github.com/HELIX-Origin/Windhawk-Themes">📦 GitHub Repository</a>
           <a href="https://github.com/HELIX-Origin/Windhawk-Themes/releases">🏷️ Releases</a>
           <a href="https://github.com/HELIX-Origin/Windhawk-Themes/blob/main/{{ edit_path }}">✏️ Edit on GitHub ↗</a>
+          <a href="https://helix-origin.github.io/">🧬 HELIX Origin</a>
         </div>
       </aside>
 
@@ -224,7 +226,7 @@
           <div class="wiki-header-top">
             <nav class="wiki-breadcrumbs" aria-label="Breadcrumb navigation">
               <ol class="breadcrumb-list">
-                <li><a href="{{ '/' | relative_url }}">Docs</a></li>
+                <li><a href="{{ '/' | relative_url }}">Home</a></li>
                 <li><a href="{{ '/wiki/' | relative_url }}">Wiki</a></li>
                 {%- if styler_name != "" %}
                 <li><span>{{ styler_name }}</span></li>
@@ -234,8 +236,9 @@
             </nav>
 
             <div class="wiki-header-actions">
-              <a href="https://github.com/HELIX-Origin/Windhawk-Themes/blob/main/{{ edit_path }}" class="wiki-action-link" target="_blank" rel="noopener noreferrer">✏️ Edit on GitHub</a>
+              <a href="{{ '/' | relative_url }}" class="wiki-action-link">🏠 Home</a>
               <a href="{{ '/docs/' | relative_url }}" class="wiki-action-link">📖 Documentation</a>
+              <a href="https://github.com/HELIX-Origin/Windhawk-Themes/blob/main/{{ edit_path }}" class="wiki-action-link" target="_blank" rel="noopener noreferrer">✏️ Edit on GitHub</a>
               {% include translate-control.html %}
             </div>
           </div>

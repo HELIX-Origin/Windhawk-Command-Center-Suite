@@ -1,4 +1,4 @@
-﻿---
+---
 layout: docs
 title: Companion Mods Overview
 ---

@@ -118,11 +118,11 @@ defaults:
       layout: default
       comments: false
 
-  # Portal Home Page Scope (index.md)
+  # Portal Home Page Scope (index.html)
   - scope:
-      path: "index.md"
+      path: "index.html"
     values:
-      layout: default
+      layout: null
       page_class: page--home
 
   # Docs Collection Default (All Documents in _docs/)
