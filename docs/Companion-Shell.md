@@ -57,7 +57,7 @@ Inspired by mobile dynamic status pills, `dynamic-island` injects an interactive
 * **Compact Notification Badges**: Non-intrusive notification badges without triggering full toast cards.
 
 ### Visual Harmony
-To align `dynamic-island` with the Command Center frosted glass design language:
+To align `dynamic-island` with universal frosted glass theme design standards:
 * Match the corner radius scale (**L / M tier**, 12–16px).
 * Align the dark glass tint (`#07111F` or `#0D1B2D`) and border highlight (`#25FFFFFF`) with taskbar and start menu panels.
 

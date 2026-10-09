@@ -46,7 +46,7 @@ Core stylers alter the appearance and structure of XAML visual trees. In contras
 The companion mods documented in this framework are grouped into three primary categories:
 
 ### 1. Taskbar Utility Mods
-Detailed guide: [Taskbar Utility Mods](file:///d:/Projects/Windhawk-Command-Center-Suite/docs/Companion-Taskbar.md)
+Detailed guide: [Taskbar Utility Mods](Companion-Taskbar.md)
 
 * **Taskbar Clock Customization** (`taskbar-clock-customization`): Custom date/time formatting, custom fonts, multi-line clocks, and millisecond display.
 * **Taskbar Tray and Icon Tweaks** (`taskbar-tray-and-icon-tweaks`): Customize padding, visibility, and behaviors of taskbar items and tray icons.
@@ -55,14 +55,14 @@ Detailed guide: [Taskbar Utility Mods](file:///d:/Projects/Windhawk-Command-Cent
 * **Taskbar Labels for Windows 11** (`taskbar-labels-for-windows-11`): Classic taskbar button labels and uncombining options.
 
 ### 2. Shell Flyouts & Positions
-Detailed guide: [Shell Flyouts & Positions](file:///d:/Projects/Windhawk-Command-Center-Suite/docs/Companion-Shell.md)
+Detailed guide: [Shell Flyouts & Positions](Companion-Shell.md)
 
 * **Shell Flyout Positions** (`shell-flyout-positions`): Relocate Start Menu, Notification Center, Quick Settings, and search flyouts to custom screen positions, monitor corners, or centered docking.
 * **Dynamic Island for Windows** (`dynamic-island`): Adaptive top-screen pill widget for media playback, notifications, and status monitoring.
 * **Start Button Colorizer** (`start-button-colorizer`): Dynamic tinting and color effects for the native Start orb.
 
 ### 3. System & Translucency Mods
-Detailed guide: [System & Translucency Mods](file:///d:/Projects/Windhawk-Command-Center-Suite/docs/Companion-System.md)
+Detailed guide: [System & Translucency Mods](Companion-System.md)
 
 * **Translucent Windows** (`translucent-windows`): Applies Acrylic, Mica, or transparent DWM blur to classic Win32 windows and non-WinUI applications.
 * **Resource Redirect** (`resource-redirect`): Non-destructive DLL/EXE resource replacement for shell icons, cursors, bitmaps, and sounds.

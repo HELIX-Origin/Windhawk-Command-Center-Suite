@@ -9,8 +9,8 @@ title: UWPSpy Manual Inspection Guide
 > [!NOTE]
 > **Manual Inspection vs. AI-Assisted Vibe Coding**:  
 > In this repository, we provide two distinct inspection paradigms:
-> - **[UWPSpy](file:///d:/Projects/Windhawk-Command-Center-Suite/docs/UWPSpy.md)** *(this guide)*: Intended for **human designers** who prefer an interactive GUI to visually click on shell components, explore parent-child element hierarchies, and inspect properties live.
-> - **[Hybrid C++/Python Toolchain](file:///d:/Projects/Windhawk-Command-Center-Suite/docs/Toolchain.md)**: Intended for **developers who use AI tools to vibe code their projects**. It uses automated UI automation to wake up background shell processes, activate and render the surfaces, dump their complete XAML visual trees into structured JSON, and cleanly close them, allowing AI agents to query selectors autonomously without manual inspection burden.
+> - **[UWPSpy](UWPSpy.md)** *(this guide)*: Intended for **human designers** who prefer an interactive GUI to visually click on shell components, explore parent-child element hierarchies, and inspect properties live.
+> - **[Hybrid C++/Python Toolchain](Toolchain.md)**: Intended for **developers who use AI tools to vibe code their projects**. It uses automated UI automation to wake up background shell processes, activate and render the surfaces, dump their complete XAML visual trees into structured JSON, and cleanly close them, allowing AI agents to query selectors autonomously without manual inspection burden.
 
 ---
 

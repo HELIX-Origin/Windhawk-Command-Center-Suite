@@ -8,9 +8,9 @@ The **Windhawk Themes** repository features a high-performance hybrid C++/Python
 
 > [!IMPORTANT]
 > **Not Intended for Manual Interactive Inspection**:  
-> This hybrid toolchain is **not** a visual GUI debugger or a replacement for manual interactive inspection tools like [UWPSpy](file:///d:/Projects/Windhawk-Command-Center-Suite/docs/UWPSpy.md). Instead, it is purpose-built for automated agentic loops: it leverages programmatic **UI automation** to wake background shell processes, activate target surfaces (Start, Action Center, Search), dump the live XAML visual trees directly into structured JSON, and close them cleanly. This allows AI assistants and automated scripts to discover, query, and verify selectors with zero human clicking.
+> This hybrid toolchain is **not** a visual GUI debugger or a replacement for manual interactive inspection tools like [UWPSpy](UWPSpy.md). Instead, it is purpose-built for automated agentic loops: it leverages programmatic **UI automation** to wake background shell processes, activate target surfaces (Start, Action Center, Search), dump the live XAML visual trees directly into structured JSON, and close them cleanly. This allows AI assistants and automated scripts to discover, query, and verify selectors with zero human clicking.
 >
-> If you are a human designer wishing to manually click, point, and explore element hierarchies interactively on your desktop, use **[UWPSpy](file:///d:/Projects/Windhawk-Command-Center-Suite/docs/UWPSpy.md)**.
+> If you are a human designer wishing to manually click, point, and explore element hierarchies interactively on your desktop, use **[UWPSpy](UWPSpy.md)**.
 
 ```mermaid
 flowchart LR
@@ -100,7 +100,7 @@ To build and run the native tools:
 The Python CLI (`tools/inspect_xaml.py`) requires:
 - **Python 3.10+** (64-bit recommended).
 - **Dependencies**: The CLI uses Python standard library modules (`ctypes`, `subprocess`, `json`, `argparse`, `pathlib`).
-- Optional dependencies and environment details are tracked in [`tools/requirements.txt`](file:///d:/Projects/Windhawk-Command-Center-Suite/tools/requirements.txt):
+- Optional dependencies and environment details are tracked in `tools/requirements.txt`:
   ```powershell
   pip install -r tools/requirements.txt
   ```

@@ -17,7 +17,7 @@ Run the automated test runner to validate all style files:
 pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1
 
 # Validate a specific styler file
-pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1 -Path projects/command-center/windows-11-taskbar-styler.yml
+pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1 -Path projects/<project>/windows-11-taskbar-styler.yml
 ```
 
 ### Static Gate Error Codes:

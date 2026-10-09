@@ -4,9 +4,9 @@ title: Architecture & Design
 
 # Architecture & Design Philosophy
 
-The **Windhawk Themes** framework approaches Windows 11 customization through a unified design philosophy: **Command Center Glass & Modern Acrylic**.
+The **Windhawk Themes** framework approaches Windows 11 customization through a universal engineering model: structured XAML style injection, predictable token systems, and modular visual layers.
 
-Rather than applying ad-hoc visual tweaks that look inconsistent or break across shell flyouts, every surface adheres to a strict visual contract governed by four core pillars.
+Rather than applying ad-hoc visual tweaks that look inconsistent or break across shell updates, themes engineered with this framework adhere to a strict visual contract governed by core styling pillars.
 
 ---
 

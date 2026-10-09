@@ -87,7 +87,7 @@ webContentStyles:
 
 ## 4. Separated-Island Architecture
 
-In our Command Center Glass reference theme, the Start Menu utilizes a **separated-island architecture**:
+Modern custom themes frequently utilize a **separated-island architecture** on the Start Menu:
 1. The outer master frame (`Border#DropShadowDismissTarget`) is collapsed to transparent with zero border thickness.
 2. The top header and navigation elements render as distinct, floating frosted islands (`Border#AcrylicBorder` and `Border#AcrylicOverlay`).
-3. Companion panels (such as Phone Link) float alongside with matching top-lit specular rims without clipping against the main flyout.
+3. Companion panels (such as Phone Link) float alongside with matching specular rims without clipping against the main flyout.

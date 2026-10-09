@@ -2,60 +2,61 @@
 title: Getting Started
 ---
 
-# Getting Started with Windhawk Themes
+# Getting Started with the Theme Engineering Framework
 
-This guide walks you through setting up Windhawk and applying theme styles to your Windows 11 system.
+The **Windhawk Themes** repository provides the scaffolding, multi-agent ecosystem, and hybrid inspection toolset for creating, testing, and maintaining your own custom Windows 11 theme suites.
 
 ---
 
-## 1. Prerequisites
+## 1. What This Repository Provides
 
-1. **Windows 11** (21H2, 22H2, 23H2, or 24H2 build 26100+).
+When engineering theme suites for Windhawk, this repository equips you with:
+1. **Hybrid C++/Python Visual Tree Inspector**: Uses UI automation to wake shell processes and dump XAML trees to structured JSON for AI vibe coding without manual inspection burden.
+2. **Multi-Agent Architecture**: Dedicated agent specifications (`.agents/agents/`) and skills (`.agents/skills/`) to collaborate with AI coding assistants.
+3. **Automated Static Quality Gate**: `tools/Test-WindhawkStyles.ps1` verifies YAML syntax, constant ordering, and token references across all projects.
+4. **Universal Surface Target Reference**: Empirical selector documentation across the 5 base Windhawk stylers and companion mods.
+
+---
+
+## 2. Setting Up Your Development Environment
+
+### Prerequisites:
+1. **Windows 11** (21H2 through 24H2 build 26100+).
 2. **[Windhawk](https://windhawk.net/)** installed on your system.
-3. Official Windhawk Styler mods installed from the Windhawk in-app mod browser:
+3. Official Windhawk Styler mods installed from the in-app mod browser:
    - **Windows 11 Taskbar Styler** (`windows-11-taskbar-styler`)
    - **Windows 11 Start Menu Styler** (`windows-11-start-menu-styler`)
    - **Windows 11 Notification Center Styler** (`windows-11-notification-center-styler`)
-   - *(Optional)* **Windows 11 Settings Styler** (`windows-11-settings-styler`)
+   - **Windows 11 Settings Styler** (`windows-11-settings-styler`)
+   - **Windows 11 File Explorer Styler** (`windows-11-file-explorer-styler`)
+4. **Visual Studio 2022 / 2026** (C++ Desktop development workload for XAML Diagnostics headers) and **Python 3.10+**.
 
 ---
 
-## 2. Applying Theme Styles
+## 3. Engineering a New Theme Suite
 
-All theme configurations are distributed as clean, self-contained YAML files organized by theme project (e.g., `projects/command-center/`).
+To build a new theme suite using this framework:
 
-### Step-by-Step Import:
+1. **Scaffold a Project Folder**:
+   Create a dedicated subfolder under `projects/<your-theme-name>/`.
+2. **Define Styler YAML Files**:
+   Create styler configuration files matching the Windhawk mod IDs you wish to theme:
+   - `projects/<your-theme-name>/windows-11-taskbar-styler.yml`
+   - `projects/<your-theme-name>/windows-11-start-menu-styler.yml`
+   - `projects/<your-theme-name>/windows-11-notification-center-styler.yml`
+3. **Inspect Shell Trees Using the Toolchain**:
+   Run the hybrid inspector or query saved dumps to discover selectors:
+   ```powershell
+   # Inspect live Start Menu via automated activation
+   python tools/inspect_xaml.py -p StartMenuExperienceHost.exe --find ActionsBar
 
-1. Open the **Windhawk** client application.
-2. Locate the installed mod you wish to style (e.g. *Windows 11 Taskbar Styler*).
-3. Click on the mod card and navigate to the **Settings** tab.
-4. In the upper-right corner of the settings pane, click **Advanced** (or switch to the **Textual** editor mode).
-5. Open the corresponding `.yml` file from this repository:
-   - Taskbar: `projects/command-center/windows-11-taskbar-styler.yml`
-   - Start Menu: `projects/command-center/windows-11-start-menu-styler.yml`
-   - Notification Center: `projects/command-center/windows-11-notification-center-styler.yml`
-6. Copy the entire contents of the YAML file and paste it into the Windhawk editor.
-7. Click **Save** (and accept the elevation prompt if prompted).
-8. The styles will apply immediately in real time!
-
----
-
-## 3. Light & Dark Mode Compatibility
-
-All themes in this suite are built using dynamic Windows XAML `{ThemeResource ...}` references:
-- Tints dynamically derive from `{ThemeResource SystemChromeMediumColor}` and `{ThemeResource SystemAltLowColor}`.
-- Text brushes map to `{ThemeResource TextFillColorPrimaryBrush}`.
-- Accent colors derive from `{ThemeResource SystemAccentColor}`.
-
-When you switch between Windows Light and Dark modes in Windows Settings, all shell surfaces automatically update without requiring mod restarts or file edits.
-
----
-
-## 4. Companion Mod Enhancements
-
-For users seeking additional desktop polish, curated companion mod configurations are provided under `projects/<project>/extras/`:
-- **Dynamic Island for Windows**: Media and hardware status pill.
-- **Enhanced Disk Usage**: Drive capacity meters in File Explorer.
-- **File Operations Styler**: Translucent copy/move progress dialogs.
-- **Start Button Colorizer**: Accent-tinted taskbar Start glyph.
-- **Taskbar Clock Customization**: Telemetry HUD and custom seconds formatting.
+   # Inspect live Notification Center / Calendar on Win11 24H2
+   python tools/inspect_xaml.py -p ShellHost.exe --surface notification-center
+   ```
+4. **Run the Static Validation Gate**:
+   Ensure your theme styles adhere to syntax and token rules:
+   ```powershell
+   pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1
+   ```
+5. **Import into Windhawk & Verify**:
+   Copy your YAML configuration into the **Advanced (Textual)** editor of the target mod in Windhawk and verify live desktop rendering.

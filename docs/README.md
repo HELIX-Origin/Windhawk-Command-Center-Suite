@@ -4,15 +4,15 @@ title: Documentation Home
 
 # Windhawk Themes Documentation
 
-Welcome to the **Windhawk Themes** engineering documentation. This site covers the architecture, surface guides, material recipes, and diagnostics toolchain for managing cohesive Windows 11 themes with official Windhawk styler mods.
+Welcome to the **Windhawk Themes** engineering documentation. This site covers the developer framework, multi-agent ecosystem, hybrid inspection toolchain, and universal target references for creating and maintaining your own custom Windows 11 theme suites using official Windhawk styler mods.
 
 ---
 
 ## 🧭 Navigation & Topic Guides
 
 ### 🌟 Overview
-- **[Getting Started](Getting-Started.md)** — Installation, importing YAML styles into Windhawk, and configuring themes.
-- **[Architecture & Design](Architecture.md)** — Core design philosophy, glass layering, top-lit specular rims, and color token dynamics.
+- **[Getting Started](Getting-Started.md)** — Setting up the framework, using the inspection tools, and scaffolding a new theme suite.
+- **[Architecture & Design](Architecture.md)** — Universal shell architecture, visual hierarchy, specular rim dynamics, and framework boundaries.
 
 ### 🪟 Shell Surfaces
 - **[Start Menu Styler](Start-Menu.md)** — Separated-island flyout layout, category groupings, view pills, and Phone Link companion cards.

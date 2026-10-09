@@ -10,7 +10,7 @@ Understanding the live visual tree of Windows 11 shell components is essential f
 > **Built for AI Vibe Coding & Automated Workflows**:  
 > The diagnostic tools here (`tools/inspect_xaml.py` and `xaml_dump.exe`) are designed specifically for developers using AI tools to "vibe code" Windhawk themes. Instead of requiring human visual inspection, the toolchain uses **UI automation** to programmatically trigger shell surfaces (Start, Notification Center, Quick Settings, Search), wait for the trees to populate, dump the complete hierarchy into structured JSON, and dismiss the surface. AI coding assistants can then parse and query this JSON directly to verify selector syntax and hierarchy depth without human intervention.
 >
-> For human developers who prefer manual, point-and-click inspection, see [UWPSpy Manual Inspection Guide](file:///d:/Projects/Windhawk-Command-Center-Suite/docs/UWPSpy.md).
+> For human developers who prefer manual, point-and-click inspection, see [UWPSpy Manual Inspection Guide](UWPSpy.md).
 
 ---
 
