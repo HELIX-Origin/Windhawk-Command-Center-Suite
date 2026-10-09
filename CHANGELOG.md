@@ -2,6 +2,12 @@
 
 All notable changes to **Windhawk Themes** are documented here. One entry per update (`## YYYY-MM-DD - HH:MM`), newest first. Each entry has at most one `Added`, `Removed`, `Changed`, and `Fixed` section — omit sections with no items, and put every item of a type in that type's single list (never a second section of the same type). Items are `- **Title**: description` with nested `**Title**: description` sub-items as needed. Releases use milestone tags (e.g. `M.01`, `M.02b`) with zero attached assets.
 
+## 2026-10-09 - 13:15
+
+### Changed
+- **Mandatory Theme Neutrality Invariant (Rule 08)**: Codified strict requirements in `Rule 08` (`documentation-standards.md`), `AGENTS.md`, and `docs-specialist.md` mandating that all documentation (`docs/`) and community wiki pages (`docs/wiki/`) remain completely neutral and ignorant of custom themes in `projects/`, focusing exclusively on valid visual tree targets and official mod schemas.
+- **Site Theme Boundary**: Formally delineated that non-wiki pages in `docs/` rely exclusively on our custom GitHub Pages site theme, while the `just-the-docs` Jekyll theme is scoped strictly to the `docs/wiki/` folder.
+
 ## 2026-10-09 - 13:10
 
 ### Added

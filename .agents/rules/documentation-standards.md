@@ -2,8 +2,9 @@
 
 ## Mandatory Standards
 
-1. **Documentation Locations** — documentation lives in root Markdown files, the GitHub Pages documentation site (`docs/`), `projects/<project>/extras/README.md`, and `.agents/`:
-   - `docs/` — active Jekyll GitHub Pages documentation site (deployed from `/docs` on `main`; includes theme guides, surface specifications, toolchain docs, and engineering standards).
+1. **Documentation Locations & Theme Boundary**:
+   - `docs/` — active GitHub Pages site (deployed from `/docs` on `main`). All root non-wiki pages (`docs/*.md`, `Start-Menu.md`, `Taskbar.md`, `Architecture.md`, etc.) strictly use our **original custom GitHub Pages site theme** (`docs/_layouts/documentation.html`, `assets/css/site.css`) and are intentionally minimal/high-level.
+   - `docs/wiki/` — community and development wiki pages. The wiki folder can leverage the `just-the-docs` Jekyll theme (or dedicated deep documentation layouts), while everything outside `wiki/` relies strictly on our own custom site theme. All wiki pages must be detailed and extensive.
    - `README.md` — user-facing: what the framework is, shell architecture overview, and quick installation guide.
    - `projects/<project>/extras/README.md` — companion mods technical documentation: configuration breakdown, themes, modules, and options for companion mods.
    - `AGENTS.md` + `.agents/` — agent operating manual, rules (Rules 00–09), domain skills, templates, and agent specs. Each `.agents/` subdirectory's `README.md` is its canonical index (`index.md` files are not used).
@@ -27,6 +28,11 @@
    - Mermaid diagrams follow [Rule 06](mermaid-standards.md).
    - Links between `.agents/` files use relative paths with the `.md` extension.
 
-5. **No Personal Data**: No user names, profile paths, machine names, or emails in docs (Rule 00 §1.4).
+5. **Complete Theme Neutrality Invariant**:
+   - The documentation (`docs/`), community wiki (`docs/wiki/`), rules, and agent instructions must **never** assume that configurations or visual treatments found in `projects/` represent the focus, defaults, or purpose of the repository.
+   - All documentation and wiki pages must remain **completely ignorant of specific theme projects** (e.g. Command Center). Their purpose is exclusively to explain valid XAML visual tree targets, mod capabilities, supported dependency properties, and official mod/system schemas.
+   - Theme options and XAML capabilities are not limited to any user's personal themes. Never use private or project-specific themes as the source of truth, defaults, or recommendations for documentation or wiki pages.
 
-6. **Commit Messages**: Follow [`commit-message-guide`](../templates/commit-message-guide.md).
+6. **No Personal Data**: No user names, profile paths, machine names, or emails in docs (Rule 00 §1.4).
+
+7. **Commit Messages**: Follow [`commit-message-guide`](../templates/commit-message-guide.md).
