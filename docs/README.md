@@ -11,34 +11,34 @@ Welcome to the **Windhawk Themes** engineering documentation. This site covers t
 ## 🧭 Navigation & Topic Guides
 
 ### 🌟 Overview
-- **[Getting Started](Getting-Started.md)** — Setting up the framework, using the inspection tools, and scaffolding a new theme suite.
-- **[Architecture & Design](Architecture.md)** — Universal shell architecture, visual hierarchy, specular rim dynamics, and framework boundaries.
+- **[Getting Started](_docs/Getting-Started.md)** — Setting up the framework, using the inspection tools, and scaffolding a new theme suite.
+- **[Architecture & Design](_docs/Architecture.md)** — Universal shell architecture, visual hierarchy, specular rim dynamics, and framework boundaries.
 
 ### 🪟 Shell Surfaces
-- **[Start Menu Styler](Start-Menu.md)** — Separated-island flyout layout, category groupings, view pills, and Phone Link companion cards.
-- **[Taskbar Styler](Taskbar.md)** — Floating taskbar frame, grouped task list button pills, system tray styling, and hardware telemetry HUDs.
-- **[Notification Center & Quick Settings](Notification-Center.md)** — Quick action tiles, sliders, calendar flyout, toast popups, and jump lists.
-- **[Settings Styler](Settings.md)** — Windows 11 modern Settings app (`SystemSettings.exe`), navigation cards, and search box styling.
-- **[File Explorer Styler](File-Explorer.md)** — WinUI 3 tab controls, address bar, breadcrumbs, search pills, and classic Win32 boundaries.
+- **[Start Menu Styler](_docs/Start-Menu.md)** — Separated-island flyout layout, category groupings, view pills, and Phone Link companion cards.
+- **[Taskbar Styler](_docs/Taskbar.md)** — Floating taskbar frame, grouped task list button pills, system tray styling, and hardware telemetry HUDs.
+- **[Notification Center & Quick Settings](_docs/Notification-Center.md)** — Quick action tiles, sliders, calendar flyout, toast popups, and jump lists.
+- **[Settings Styler](_docs/Settings.md)** — Windows 11 modern Settings app (`SystemSettings.exe`), navigation cards, and search box styling.
+- **[File Explorer Styler](_docs/File-Explorer.md)** — WinUI 3 tab controls, address bar, breadcrumbs, search pills, and classic Win32 boundaries.
 
 ### 🛠️ Toolchain & Inspection
-- **[Hybrid XAML Inspector](Toolchain.md)** — The native C++ TAP injection engine (`xaml_dump.exe`) and unified Python CLI (`inspect_xaml.py`).
-- **[Visual Tree Diagnostics](Diagnostics.md)** — Querying elements, automated surface activation, and ShareX screenshot capture.
-- **[UWPSpy Manual Inspection](UWPSpy.md)** — Interactive GUI visual tree inspection guide for live UWP and WinUI 3 trees.
+- **[Hybrid XAML Inspector](_docs/Toolchain.md)** — The native C++ TAP injection engine (`xaml_dump.exe`) and unified Python CLI (`inspect_xaml.py`).
+- **[Visual Tree Diagnostics](_docs/Diagnostics.md)** — Querying elements, automated surface activation, and ShareX screenshot capture.
+- **[UWPSpy Manual Inspection](_docs/UWPSpy.md)** — Interactive GUI visual tree inspection guide for live UWP and WinUI 3 trees.
 
 ### 📐 Engineering Standards
-- **[Style Syntax & Tokens](Syntax-Standards.md)** — YAML syntax rules, strict constant ordering, and token declarations.
-- **[Glass Material Recipes](Glass-Recipes.md)** — `WindhawkBlur` shaders, `AcrylicBrush` usage, gradient rims, and chrome collapsing.
-- **[Target Evidence Protocol](Evidence-Protocol.md)** — Selector verification tiers (T1–T5), avoiding guessed targets, and accessibility protocols.
-- **[Verification & Quality Gates](Verification.md)** — Automated static test runner (`Test-WindhawkStyles.ps1`) and desktop live checklists.
+- **[Style Syntax & Tokens](_docs/Syntax-Standards.md)** — YAML syntax rules, strict constant ordering, and token declarations.
+- **[Glass Material Recipes](_docs/Glass-Recipes.md)** — `WindhawkBlur` shaders, `AcrylicBrush` usage, gradient rims, and chrome collapsing.
+- **[Target Evidence Protocol](_docs/Evidence-Protocol.md)** — Selector verification tiers (T1–T5), avoiding guessed targets, and accessibility protocols.
+- **[Verification & Quality Gates](_docs/Verification.md)** — Automated static test runner (`Test-WindhawkStyles.ps1`) and desktop live checklists.
 
 ### 📚 Community Wiki
-- **[Wiki Home](wiki/README.md)** — Community-driven living knowledge base of verified targets and options.
-- **[Start Menu Styler Wiki](wiki/start-menu-styler/README.md)** — Detailed selector ledgers and positioning settings.
-- **[Taskbar Styler Wiki](wiki/taskbar-styler/README.md)** — Taskbar frames, items, trays, and companion tweak metrics.
-- **[Notification Center Styler Wiki](wiki/notification-center-styler/README.md)** — Quick settings, sliders, calendar cells, and toasts.
-- **[File Explorer Styler Wiki](wiki/file-explorer-styler/README.md)** — Tabs, breadcrumbs, command bar, and backdrop effects.
-- **[Settings Styler Wiki](wiki/settings-styler/README.md)** — Split views, setting cards, and navigation items.
+- **[Wiki Home](_wiki/README.md)** — Community-driven living knowledge base of verified targets and options.
+- **[Start Menu Styler Wiki](_wiki/start-menu-styler/README.md)** — Detailed selector ledgers and positioning settings.
+- **[Taskbar Styler Wiki](_wiki/taskbar-styler/README.md)** — Taskbar frames, items, trays, and companion tweak metrics.
+- **[Notification Center Styler Wiki](_wiki/notification-center-styler/README.md)** — Quick settings, sliders, calendar cells, and toasts.
+- **[File Explorer Styler Wiki](_wiki/file-explorer-styler/README.md)** — Tabs, breadcrumbs, command bar, and backdrop effects.
+- **[Settings Styler Wiki](_wiki/settings-styler/README.md)** — Split views, setting cards, and navigation items.
 
 ---
 

@@ -1,0 +1,304 @@
+{%- assign all_site_docs = site.pages | concat: site.docs | concat: site.wiki -%}
+{%- assign site_paths = all_site_docs | map: "path" -%}
+{%- assign page_title = page.title | default: "Windhawk Styler Wiki" -%}
+{%- if page.source_path -%}
+  {%- assign edit_path = page.source_path -%}
+{%- else -%}
+  {%- assign edit_path = page.path | prepend: "docs/" -%}
+{%- endif -%}
+{%- assign wiki_pages = "" | split: "" -%}
+{%- for group in site.data.navigation -%}
+  {%- if group.section == "Community Wiki" -%}
+    {%- for entry in group.pages -%}
+      {%- if site_paths contains entry.path -%}
+        {%- assign wiki_pages = wiki_pages | push: entry -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign current_entry = nil -%}
+{%- assign previous_entry = nil -%}
+{%- assign next_entry = nil -%}
+{%- for entry in wiki_pages -%}
+  {%- if entry.path == page.path -%}
+    {%- assign current_entry = entry -%}
+    {%- unless forloop.first -%}
+      {%- assign previous_index = forloop.index0 | minus: 1 -%}
+      {%- assign previous_entry = wiki_pages[previous_index] -%}
+    {%- endunless -%}
+    {%- unless forloop.last -%}
+      {%- assign next_entry = wiki_pages[forloop.index] -%}
+    {%- endunless -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign styler_name = "" -%}
+{%- if page.path contains "start-menu-styler" -%}
+  {%- assign styler_name = "Start Menu Styler" -%}
+{%- elsif page.path contains "taskbar-styler" -%}
+  {%- assign styler_name = "Taskbar Styler" -%}
+{%- elsif page.path contains "notification-center-styler" -%}
+  {%- assign styler_name = "Notification Center Styler" -%}
+{%- elsif page.path contains "file-explorer-styler" -%}
+  {%- assign styler_name = "File Explorer Styler" -%}
+{%- elsif page.path contains "settings-styler" -%}
+  {%- assign styler_name = "Settings Styler" -%}
+{%- endif -%}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Windhawk Styler Wiki: {{ page_title | escape }} - XAML targets, element trees, and configuration schemas">
+    <meta name="theme-color" content="#081426">
+    <title>{{ page_title | escape }} | Windhawk Themes Wiki</title>
+    <link rel="icon" href="https://github.com/HELIX-Origin.png?size=64">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+  </head>
+  <body class="is-wiki wiki-theme{% if page.page_class %} {{ page.page_class }}{% endif %}" data-page-layout="wiki">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell site-shell--wiki wiki-layout">
+
+      <aside class="sidebar wiki-sidebar" aria-label="Wiki navigation sidebar">
+        <a class="brand wiki-brand" href="{{ '/wiki/README.html' | relative_url }}" aria-label="Windhawk Styler Wiki directory">
+          <span class="brand__mark" aria-hidden="true">
+            <img src="https://github.com/HELIX-Origin.png?size=150" alt="" width="150" height="150">
+          </span>
+          <span>
+            <strong>Windhawk Styler Wiki</strong>
+            <small class="wiki-tag">Knowledge Base</small>
+          </span>
+        </a>
+
+        <div class="wiki-search-box">
+          <input type="search" id="wiki-filter-input" placeholder="Filter wiki targets..." aria-label="Filter wiki targets and schemas">
+          <span class="wiki-search-icon" aria-hidden="true">🔍</span>
+        </div>
+
+        <div class="separator" aria-hidden="true"></div>
+
+        <nav class="wiki-nav-tree" aria-label="Wiki hierarchy">
+          <div class="wiki-nav-section">
+            <span class="wiki-nav-section-title">Directory</span>
+            <ul class="wiki-nav-list">
+              <li class="wiki-nav-item">
+                <a href="{{ '/wiki/README.html' | relative_url }}" class="wiki-nav-link{% if page.path contains 'README.md' and styler_name == '' %} active{% endif %}">
+                  <span class="wiki-nav-icon">📚</span>
+                  <span>Wiki Index & Overview</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="wiki-nav-section">
+            <span class="wiki-nav-section-title">Start Menu Styler</span>
+            <ul class="wiki-nav-list">
+              <li class="wiki-nav-item">
+                <a href="{{ '/wiki/start-menu-styler/README.html' | relative_url }}" class="wiki-nav-link{% if page.path contains 'start-menu-styler/README.md' %} active{% endif %}">
+                  <span>Overview & Architecture</span>
+                </a>
+              </li>
+              <li class="wiki-nav-item">
+                <a href="{{ '/wiki/start-menu-styler/targets/elements.html' | relative_url }}" class="wiki-nav-link{% if page.path contains 'start-menu-styler/targets/elements.md' %} active{% endif %}">
+                  <span>Target Elements & Visual Tree</span>
+                </a>
+              </li>
+              <li class="wiki-nav-item">
+                <a href="{{ '/wiki/start-menu-styler/configurations/schema.html' | relative_url }}" class="wiki-nav-link{% if page.path contains 'start-menu-styler/configurations/schema.md' %} active{% endif %}">
+                  <span>Configuration Schema</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="wiki-nav-section">
+            <span class="wiki-nav-section-title">Taskbar Styler</span>
+            <ul class="wiki-nav-list">
+              <li class="wiki-nav-item">
+                <a href="{{ '/wiki/taskbar-styler/README.html' | relative_url }}" class="wiki-nav-link{% if page.path contains 'taskbar-styler/README.md' %} active{% endif %}">
+                  <span>Overview & Architecture</span>
+                </a>
+              </li>
+              <li class="wiki-nav-item">
+                <a href="{{ '/wiki/taskbar-styler/targets/elements.html' | relative_url }}" class="wiki-nav-link{% if page.path contains 'taskbar-styler/targets/elements.md' %} active{% endif %}">
+                  <span>Target Elements & Visual Tree</span>
+                </a>
+              </li>
+              <li class="wiki-nav-item">
+                <a href="{{ '/wiki/taskbar-styler/configurations/schema.html' | relative_url }}" class="wiki-nav-link{% if page.path contains 'taskbar-styler/configurations/schema.md' %} active{% endif %}">
+                  <span>Configuration Schema</span>
+                </a>
+              </li>
+              <li class="wiki-nav-item">
+                <a href="{{ '/wiki/taskbar-styler/companions/settings.html' | relative_url }}" class="wiki-nav-link{% if page.path contains 'taskbar-styler/companions/settings.md' %} active{% endif %}">
+                  <span>Companion Mod Settings</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="wiki-nav-section">
+            <span class="wiki-nav-section-title">Notification Center Styler</span>
+            <ul class="wiki-nav-list">
+              <li class="wiki-nav-item">
+                <a href="{{ '/wiki/notification-center-styler/README.html' | relative_url }}" class="wiki-nav-link{% if page.path contains 'notification-center-styler/README.md' %} active{% endif %}">
+                  <span>Overview & Architecture</span>
+                </a>
+              </li>
+              <li class="wiki-nav-item">
+                <a href="{{ '/wiki/notification-center-styler/targets/elements.html' | relative_url }}" class="wiki-nav-link{% if page.path contains 'notification-center-styler/targets/elements.md' %} active{% endif %}">
+                  <span>Target Elements & Visual Tree</span>
+                </a>
+              </li>
+              <li class="wiki-nav-item">
+                <a href="{{ '/wiki/notification-center-styler/configurations/schema.html' | relative_url }}" class="wiki-nav-link{% if page.path contains 'notification-center-styler/configurations/schema.md' %} active{% endif %}">
+                  <span>Configuration Schema</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="wiki-nav-section">
+            <span class="wiki-nav-section-title">File Explorer Styler</span>
+            <ul class="wiki-nav-list">
+              <li class="wiki-nav-item">
+                <a href="{{ '/wiki/file-explorer-styler/README.html' | relative_url }}" class="wiki-nav-link{% if page.path contains 'file-explorer-styler/README.md' %} active{% endif %}">
+                  <span>Overview & Architecture</span>
+                </a>
+              </li>
+              <li class="wiki-nav-item">
+                <a href="{{ '/wiki/file-explorer-styler/targets/elements.html' | relative_url }}" class="wiki-nav-link{% if page.path contains 'file-explorer-styler/targets/elements.md' %} active{% endif %}">
+                  <span>Target Elements & Visual Tree</span>
+                </a>
+              </li>
+              <li class="wiki-nav-item">
+                <a href="{{ '/wiki/file-explorer-styler/configurations/schema.html' | relative_url }}" class="wiki-nav-link{% if page.path contains 'file-explorer-styler/configurations/schema.md' %} active{% endif %}">
+                  <span>Configuration Schema</span>
+                </a>
+              </li>
+              <li class="wiki-nav-item">
+                <a href="{{ '/wiki/file-explorer-styler/companions/settings.html' | relative_url }}" class="wiki-nav-link{% if page.path contains 'file-explorer-styler/companions/settings.md' %} active{% endif %}">
+                  <span>Companion Mod Settings</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="wiki-nav-section">
+            <span class="wiki-nav-section-title">Settings Styler</span>
+            <ul class="wiki-nav-list">
+              <li class="wiki-nav-item">
+                <a href="{{ '/wiki/settings-styler/README.html' | relative_url }}" class="wiki-nav-link{% if page.path contains 'settings-styler/README.md' %} active{% endif %}">
+                  <span>Overview & Architecture</span>
+                </a>
+              </li>
+              <li class="wiki-nav-item">
+                <a href="{{ '/wiki/settings-styler/targets/elements.html' | relative_url }}" class="wiki-nav-link{% if page.path contains 'settings-styler/targets/elements.md' %} active{% endif %}">
+                  <span>Target Elements & Visual Tree</span>
+                </a>
+              </li>
+              <li class="wiki-nav-item">
+                <a href="{{ '/wiki/settings-styler/configurations/schema.html' | relative_url }}" class="wiki-nav-link{% if page.path contains 'settings-styler/configurations/schema.md' %} active{% endif %}">
+                  <span>Configuration Schema</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <div class="separator" aria-hidden="true"></div>
+
+        <div class="sidebar__footer wiki-sidebar-footer">
+          <a href="{{ '/' | relative_url }}">🏠 Documentation Home</a>
+          <a href="https://github.com/HELIX-Origin/Windhawk-Themes">📦 GitHub Repository</a>
+          <a href="https://github.com/HELIX-Origin/Windhawk-Themes/releases">🏷️ Releases</a>
+          <a href="https://github.com/HELIX-Origin/Windhawk-Themes/blob/main/{{ edit_path }}">✏️ Edit on GitHub ↗</a>
+        </div>
+      </aside>
+
+      <main id="main" class="main-content wiki-main">
+        <header class="wiki-header">
+          <div class="wiki-header-top">
+            <nav class="wiki-breadcrumbs" aria-label="Breadcrumb navigation">
+              <ol class="breadcrumb-list">
+                <li><a href="{{ '/' | relative_url }}">Docs</a></li>
+                <li><a href="{{ '/wiki/README.html' | relative_url }}">Wiki</a></li>
+                {%- if styler_name != "" %}
+                <li><span>{{ styler_name }}</span></li>
+                {%- endif %}
+                <li class="breadcrumb-current" aria-current="page"><span>{{ page_title | escape }}</span></li>
+              </ol>
+            </nav>
+
+            <div class="wiki-header-actions">
+              <a href="https://github.com/HELIX-Origin/Windhawk-Themes/blob/main/{{ edit_path }}" class="wiki-action-link" target="_blank" rel="noopener noreferrer">✏️ Edit on GitHub</a>
+              <a href="{{ '/' | relative_url }}" class="wiki-action-link">📖 Documentation</a>
+              {% include translate-control.html %}
+            </div>
+          </div>
+
+          <div class="wiki-title-block">
+            <p class="eyebrow">Knowledge Base · Target Reference</p>
+            <h1>{{ page_title | escape }}</h1>
+          </div>
+        </header>
+
+        <article class="doc-section documentation-content wiki-content">
+          {{ content }}
+        </article>
+
+        {%- if previous_entry or next_entry %}
+        <nav class="pager wiki-pager" aria-label="Wiki previous and next pages">
+          {%- if previous_entry %}
+          {%- assign prev_url = previous_entry.path | replace: "_wiki/", "wiki/" | replace: ".md", ".html" | prepend: "/" | relative_url -%}
+          <a class="pager-previous" href="{{ prev_url }}">
+            <span>Previous Wiki Topic</span>
+            {{ previous_entry.title | escape }}
+          </a>
+          {%- endif %}
+          {%- if next_entry %}
+          {%- assign next_url = next_entry.path | replace: "_wiki/", "wiki/" | replace: ".md", ".html" | prepend: "/" | relative_url -%}
+          <a class="pager-next" href="{{ next_url }}">
+            <span>Next Wiki Topic</span>
+            {{ next_entry.title | escape }}
+          </a>
+          {%- endif %}
+        </nav>
+        {%- endif %}
+
+        <footer class="site-footer wiki-footer">
+          <span>Windhawk Themes Wiki · Maintained by HELIX Origin</span>
+          <a href="#main">Back to top ↑</a>
+        </footer>
+      </main>
+
+    </div>
+    <div id="google_translate_element" class="translation-host" hidden></div>
+    <script type="module" src="{{ '/assets/js/mermaid-init.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/translate.js' | relative_url }}" defer></script>
+    <script>
+      (function() {
+        const searchInput = document.getElementById('wiki-filter-input');
+        if (!searchInput) return;
+        searchInput.addEventListener('input', function(e) {
+          const query = e.target.value.toLowerCase().trim();
+          const items = document.querySelectorAll('.wiki-nav-item');
+          const sections = document.querySelectorAll('.wiki-nav-section');
+
+          items.forEach(function(item) {
+            const text = item.textContent.toLowerCase();
+            const matches = query === '' || text.indexOf(query) !== -1;
+            item.style.display = matches ? '' : 'none';
+          });
+
+          sections.forEach(function(section) {
+            const visibleItems = section.querySelectorAll('.wiki-nav-item:not([style*="display: none"])');
+            section.style.display = (visibleItems.length > 0 || query === '') ? '' : 'none';
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

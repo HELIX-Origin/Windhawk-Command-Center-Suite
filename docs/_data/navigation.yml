@@ -1,91 +1,91 @@
 - section: Overview
   pages:
     - title: Documentation Home
-      path: README.md
+      path: index.md
     - title: Getting Started
-      path: Getting-Started.md
+      path: _docs/Getting-Started.md
     - title: Architecture & Design
-      path: Architecture.md
+      path: _docs/Architecture.md
 
 - section: Core Styler Mods
   pages:
     - title: Windows 11 Start Menu Styler
-      path: Start-Menu.md
+      path: _docs/Start-Menu.md
     - title: Windows 11 Taskbar Styler
-      path: Taskbar.md
+      path: _docs/Taskbar.md
     - title: Windows 11 Notification Center Styler
-      path: Notification-Center.md
+      path: _docs/Notification-Center.md
     - title: Windows 11 Settings Styler
-      path: Settings.md
+      path: _docs/Settings.md
     - title: Windows 11 File Explorer Styler
-      path: File-Explorer.md
+      path: _docs/File-Explorer.md
 
 - section: Companion & Shell Mods
   pages:
     - title: Companion Mods Overview
-      path: Companion-Mods.md
+      path: _docs/Companion-Mods.md
     - title: Taskbar Utility Mods
-      path: Companion-Taskbar.md
+      path: _docs/Companion-Taskbar.md
     - title: Shell Flyouts & Positions
-      path: Companion-Shell.md
+      path: _docs/Companion-Shell.md
     - title: System & Translucency Mods
-      path: Companion-System.md
+      path: _docs/Companion-System.md
 
 - section: Toolchain & Inspection
   pages:
     - title: Hybrid XAML Inspector
-      path: Toolchain.md
+      path: _docs/Toolchain.md
     - title: Visual Tree Diagnostics
-      path: Diagnostics.md
+      path: _docs/Diagnostics.md
     - title: UWPSpy Manual Inspection
-      path: UWPSpy.md
+      path: _docs/UWPSpy.md
 
 - section: Standards & Engineering
   pages:
     - title: Style Syntax & Tokens
-      path: Syntax-Standards.md
+      path: _docs/Syntax-Standards.md
     - title: Glass Material Recipes
-      path: Glass-Recipes.md
+      path: _docs/Glass-Recipes.md
     - title: Target Evidence Protocol
-      path: Evidence-Protocol.md
+      path: _docs/Evidence-Protocol.md
     - title: Verification & Quality Gates
-      path: Verification.md
+      path: _docs/Verification.md
 
 - section: Community Wiki
   pages:
     - title: Wiki Home & Directory
-      path: wiki/README.md
+      path: _wiki/README.md
     - title: Start Menu Styler Overview
-      path: wiki/start-menu-styler/README.md
+      path: _wiki/start-menu-styler/README.md
     - title: "  ↳ Start Menu Targets"
-      path: wiki/start-menu-styler/targets/elements.md
+      path: _wiki/start-menu-styler/targets/elements.md
     - title: "  ↳ Start Menu Configuration"
-      path: wiki/start-menu-styler/configurations/schema.md
+      path: _wiki/start-menu-styler/configurations/schema.md
     - title: Taskbar Styler Overview
-      path: wiki/taskbar-styler/README.md
+      path: _wiki/taskbar-styler/README.md
     - title: "  ↳ Taskbar Targets"
-      path: wiki/taskbar-styler/targets/elements.md
+      path: _wiki/taskbar-styler/targets/elements.md
     - title: "  ↳ Taskbar Configuration"
-      path: wiki/taskbar-styler/configurations/schema.md
+      path: _wiki/taskbar-styler/configurations/schema.md
     - title: "  ↳ Taskbar Companions"
-      path: wiki/taskbar-styler/companions/settings.md
+      path: _wiki/taskbar-styler/companions/settings.md
     - title: Notification Center Styler Overview
-      path: wiki/notification-center-styler/README.md
+      path: _wiki/notification-center-styler/README.md
     - title: "  ↳ Notification Center Targets"
-      path: wiki/notification-center-styler/targets/elements.md
+      path: _wiki/notification-center-styler/targets/elements.md
     - title: "  ↳ Notification Center Configuration"
-      path: wiki/notification-center-styler/configurations/schema.md
+      path: _wiki/notification-center-styler/configurations/schema.md
     - title: File Explorer Styler Overview
-      path: wiki/file-explorer-styler/README.md
+      path: _wiki/file-explorer-styler/README.md
     - title: "  ↳ File Explorer Targets"
-      path: wiki/file-explorer-styler/targets/elements.md
+      path: _wiki/file-explorer-styler/targets/elements.md
     - title: "  ↳ File Explorer Configuration"
-      path: wiki/file-explorer-styler/configurations/schema.md
+      path: _wiki/file-explorer-styler/configurations/schema.md
     - title: "  ↳ File Explorer Companions"
-      path: wiki/file-explorer-styler/companions/settings.md
+      path: _wiki/file-explorer-styler/companions/settings.md
     - title: Settings Styler Overview
-      path: wiki/settings-styler/README.md
+      path: _wiki/settings-styler/README.md
     - title: "  ↳ Settings Targets"
-      path: wiki/settings-styler/targets/elements.md
+      path: _wiki/settings-styler/targets/elements.md
     - title: "  ↳ Settings Configuration"
-      path: wiki/settings-styler/configurations/schema.md
+      path: _wiki/settings-styler/configurations/schema.md

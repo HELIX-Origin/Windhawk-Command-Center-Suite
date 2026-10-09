@@ -1,12 +1,214 @@
-url: https://helix-origin.github.io
-baseurl: /Windhawk-Themes
-defaults:
-  - scope:
-      path: ""
-      type: pages
-    values:
-      layout: documentation
+# ==============================================================================
+# Windhawk Themes - Jekyll & GitHub Pages Site Configuration
+# ==============================================================================
+# Production configuration supporting multi-collection and multi-layout architecture:
+# - home.html: Portal landing layout based on original design (index.md)
+# - docs.html: Developer documentation & surface guides reading layout (_docs/)
+# - wiki.html: Just-the-docs style knowledge base sidebar & directory (_wiki/)
+# ==============================================================================
+
+# Site Identity & Canonical URLs
+title: Windhawk Themes
+tagline: Universal Windows 11 Theme Engineering Framework & Wiki
+description: "A comprehensive developer framework, hybrid C++/Python inspection toolchain, and developer knowledge base for engineering cohesive Windows 11 themes across official Windhawk styler mods."
+url: "https://helix-origin.github.io"
+baseurl: "/Windhawk-Themes"
+repository: "HELIX-Origin/Windhawk-Themes"
+github_username: "HELIX-Origin"
+
+# Author & Publisher Metadata
+author:
+  name: "HELIX Origin"
+  url: "https://helix-origin.github.io"
+  github: "HELIX-Origin"
+
+# Build Settings & Encodings
+encoding: "utf-8"
+timezone: "UTC"
+markdown: kramdown
+highlighter: rouge
+strict_front_matter: false
+
+# Kramdown (GitHub Flavored Markdown) Processor Configuration
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: true
+  entity_output: as_char
+  smart_quotes: ["lsquo", "rsquo", "ldquo", "rdquo"]
+  toc_levels: [2, 3, 4]
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    default_lang: yaml
+    guess_lang: true
+    line_numbers: false
+    wrap: true
+
+# Sass / CSS Asset Compilation
+sass:
+  sass_dir: assets/css
+  style: compressed
+
+# GitHub Pages Core Plugin Whitelist
+plugins:
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
+  - jekyll-titles-from-headings
+  - jekyll-default-layout
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Plugin Configurations
 relative_links:
   enabled: true
+  collections: true
+
 optional_front_matter:
   remove_originals: true
+
+titles_from_headings:
+  enabled: true
+  strip_title: true
+  collections: true
+
+# Jekyll Collections Registration
+# - docs: Developer documentation guides (_docs/ -> /docs/:path.html)
+# - wiki: Technical target catalogs and schemas (_wiki/ -> /wiki/:path.html)
+collections:
+  docs:
+    output: true
+    permalink: /docs/:path.html
+  wiki:
+    output: true
+    permalink: /wiki/:path.html
+
+# Build Inclusions & Exclusions
+# Note: docs/README.md is strictly repo-only and excluded from GitHub Pages deployment.
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - tools
+  - projects
+  - src
+  - .agents
+  - .github
+  - .vscode
+  - scratch
+  - "*.ps1"
+  - "*.bat"
+  - "*.py"
+  - "*.yml.bak"
+  - "*.tmp"
+
+include:
+  - .nojekyll
+  - assets
+
+# Frontmatter Cascade Defaults
+# Automatically assigns layouts, section tags, and surface metadata across docs and wiki collections.
+defaults:
+  # Universal Fallback Default
+  - scope:
+      path: ""
+    values:
+      layout: default
+      comments: false
+
+  # Portal Home Page Scope (index.md)
+  - scope:
+      path: "index.md"
+    values:
+      layout: default
+      page_class: page--home
+
+  # Docs Collection Default (All Documents in _docs/)
+  - scope:
+      type: docs
+    values:
+      layout: docs
+      page_class: page--doc
+      section: docs
+
+  # Community Wiki Collection Default (All Documents in _wiki/)
+  - scope:
+      type: wiki
+    values:
+      layout: wiki
+      page_class: page--wiki
+      section: wiki
+
+  # Start Menu Styler Wiki Sub-Scope
+  - scope:
+      path: "_wiki/start-menu-styler"
+      type: wiki
+    values:
+      layout: wiki
+      styler_title: "Start Menu Styler"
+      mod_id: "windows-11-start-menu-styler"
+      target_process: "StartMenuExperienceHost.exe"
+      framework: "UWP / WinUI 2"
+
+  # Taskbar Styler Wiki Sub-Scope
+  - scope:
+      path: "_wiki/taskbar-styler"
+      type: wiki
+    values:
+      layout: wiki
+      styler_title: "Taskbar Styler"
+      mod_id: "windows-11-taskbar-styler"
+      target_process: "explorer.exe"
+      framework: "WinUI 3 / XAML"
+
+  # Notification Center Styler Wiki Sub-Scope
+  - scope:
+      path: "_wiki/notification-center-styler"
+      type: wiki
+    values:
+      layout: wiki
+      styler_title: "Notification Center Styler"
+      mod_id: "windows-11-notification-center-styler"
+      target_process: "ShellExperienceHost.exe / ShellHost.exe"
+      framework: "UWP Windows.UI.Xaml"
+
+  # File Explorer Styler Wiki Sub-Scope
+  - scope:
+      path: "_wiki/file-explorer-styler"
+      type: wiki
+    values:
+      layout: wiki
+      styler_title: "File Explorer Styler"
+      mod_id: "windows-11-file-explorer-styler"
+      target_process: "explorer.exe"
+      framework: "WinUI 3 Microsoft.UI.Xaml"
+
+  # Settings Styler Wiki Sub-Scope
+  - scope:
+      path: "_wiki/settings-styler"
+      type: wiki
+    values:
+      layout: wiki
+      styler_title: "Settings Styler"
+      mod_id: "windows-11-settings-styler"
+      target_process: "SystemSettings.exe"
+      framework: "UWP Windows.UI.Xaml"
+
+# Theme Engineering Features & Capabilities
+theme_features:
+  name: "Windhawk Frosted Glass"
+  color_scheme: "dark"
+  brand_color: "#081426"
+  accent_color: "#48d8f2"
+  accent_strong: "#b06cff"
+  border_color: "#203750"
+  panel_bg: "#0d1b2d"
+  mermaid_enabled: true
+  translate_enabled: true
+  search_enabled: true
+  edit_on_github: true
+  repo_branch: "main"
+  repo_url: "https://github.com/HELIX-Origin/Windhawk-Themes"
+  releases_url: "https://github.com/HELIX-Origin/Windhawk-Themes/releases"
