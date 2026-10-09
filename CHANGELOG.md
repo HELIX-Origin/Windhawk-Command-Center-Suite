@@ -2,6 +2,15 @@
 
 All notable changes to **Windhawk Themes** are documented here. One entry per update (`## YYYY-MM-DD - HH:MM`), newest first. Each entry has at most one `Added`, `Removed`, `Changed`, and `Fixed` section — omit sections with no items, and put every item of a type in that type's single list (never a second section of the same type). Items are `- **Title**: description` with nested `**Title**: description` sub-items as needed. Releases use milestone tags (e.g. `M.01`, `M.02b`) with zero attached assets.
 
+## 2026-10-09 - 13:10
+
+### Added
+- **Comprehensive Development Wiki Expansion** (`docs/wiki/`): Built an extensive, deep developer wiki across all five primary styler mods with 14 dedicated documentation files. Added exhaustive visual tree topology diagrams, complete selector tables with verified Windows 11 build ranges, top-level YAML configuration schemas (`styleConstants`, `themeResourceVariables`, `controlStyles`, `webContentStyles`, `backgroundTranslucentEffect`), process host migration notes (`ShellHost.exe` vs `ShellExperienceHost.exe`), and companion mod settings guides.
+- **Nested Wiki Navigation**: Registered all 14 wiki pages in `docs/_data/navigation.yml` with structured subcategory links for seamless navigation.
+
+### Changed
+- **Mod Default Schema Standardization**: Removed all user/suite theme configurations and presets from the developer wiki. Standardized all companion and configuration reference tables to document system and official mod defaults only.
+
 ## 2026-10-09 - 12:40
 
 ### Added

@@ -3,120 +3,84 @@ layout: documentation
 title: "Wiki: File Explorer Styler"
 ---
 
-# Wiki: File Explorer Styler Targets & Configuration
+# Wiki: Windows 11 File Explorer Styler
 
-Comprehensive reference for the **Windows 11 File Explorer Styler** mod (`windows-11-file-explorer-styler`), WinUI 3 tab controls, address bar, command bar, and whole-window DWM backdrops.
+Comprehensive development and styling guide for the **Windows 11 File Explorer Styler** mod (`windows-11-file-explorer-styler`), WinUI 3 tab controls, address bar, command bar, and whole-window DWM backdrops.
 
 ---
 
-## 1. Mod Overview & Process Host
+## 1. Mod Overview & Architecture
 
-| Property | Value | Notes |
+| Specification Attribute | Detail | Technical Notes |
 |---|---|---|
-| **Mod ID** | `windows-11-file-explorer-styler` | Official Windhawk mod |
-| **Target Process** | `explorer.exe` | Main Windows shell process hosting File Explorer windows |
-| **Framework** | WinUI 3 `Microsoft.UI.Xaml` | Modern WinUI 3 top chrome |
-| **Version Floor** | `1.7+` | Direct composition and DWM background hooks |
+| **Mod ID** | `windows-11-file-explorer-styler` | Official Windhawk repository mod |
+| **Target Process** | `explorer.exe` | Windows Explorer process hosting File Explorer windows (`CabinetWClass`) |
+| **XAML Framework** | `Microsoft.UI.Xaml` | Modern WinUI 3 runtime for top chrome |
+| **Classic Shell Scope** | Win32 `DirectUIHWND` | Folder file list and tree view (styled via DWM attributes) |
+| **Windhawk Mod Floor** | `v1.7+` | DirectComposition glass and whole-window DWM backdrop hooks |
+| **Live Reload Capability** | Supported | Updates apply to newly opened or refreshed Explorer windows |
 
----
-
-## 2. Configuration Options & Top-Level Keys
-
-```yaml
-styleConstants:
-  - ConstantName=Value
-
-themeResourceVariables:
-  - variableKey: ResourceKey
-    value: "{ThemeResource ...}"
-
-controlStyles:
-  - target: Selector#TargetName
-    styles:
-      - Property=Value
-      - Property:=<XAML>
-
-# Whole-window backdrop material (DWM effects)
-backgroundTranslucentEffect: acrylic # acrylic | mica | default | tabbed | ""
-
-# Region to apply the backdrop material to
-backgroundTranslucentEffectRegion: "" # "" (Entire window) | explorerFrame
-
-# Custom top container height adjustment
-explorerFrameContainerHeight: 0
-
-# Conflict & diagnostic handling
-xamlDiagnosticsHandling: alert # alert | block | allow
+```mermaid
+flowchart LR
+    Explorer["explorer.exe\n(Host Window)"] --> WinUI["WinUI 3 Modern Chrome\n(Tabs, Address Bar, Command Bar)"]
+    Explorer --> Win32["Win32 DirectUIHWND\n(File List & Navigation Tree)"]
+    WindhawkMod["windows-11-file-explorer-styler\n(Windhawk Hook)"] -->|Injects XAML Styles| WinUI
+    WindhawkMod -->|Sets DWM Backdrop Effect| Explorer
 ```
 
-### Directives:
-* **`backgroundTranslucentEffect`**: Instructs the mod to apply DWM blur composition attributes across the Win32 window (`acrylic`, `mica`, `tabbed`, or `default`).
-* **`backgroundTranslucentEffectRegion`**: Confines the DWM effect to the top title/tab bar (`explorerFrame`) or applies it to the entire window canvas (`""`).
-* **`explorerFrameContainerHeight`**: Adjusts top container height in pixels.
-* **`xamlDiagnosticsHandling`**: Diagnostics attachment behavior (`alert`, `block`, or `allow`).
+---
+
+## 2. Detailed Wiki Subsections
+
+For in-depth technical reference documentation, explore the dedicated subcategories:
+
+* 🎯 **[Visual Tree Element Targets](targets/elements.md)**: Exhaustive catalog of every verified tab strip, `TabViewItem` states, address bar, search box, command bar buttons, and details pane target.
+* ⚙️ **[Configuration Schema & Token Directives](configurations/schema.md)**: Complete specification of YAML top-level keys, whole-window DWM blur modes (`backgroundTranslucentEffect`), and Win32 DirectUI boundary rules.
+* 🧩 **[Companion Mods & Settings Guide](companions/settings.md)**: Complete settings guide for Enhanced Disk Usage, File Operations Styler, and Fully Customizable Winver.
 
 ---
 
-## 3. Verified Visual Tree Targets
+## 3. High-Level Hierarchy & Key Control Anchors
 
-### Tab Controls & Title Bar
-| Selector | Type | Purpose & Notes |
-|---|---|---|
-| `FileExplorerExtensions.FileExplorerTabControl` | `FileExplorerTabControl` | Root tab control hosting open folder tabs. |
-| `Grid#TabContainerGrid` | `Grid` | Container grid holding the tab strip and "+" button. |
-| `TabViewItem` | `TabViewItem` | Individual tab control. |
-| `TabViewItem > Grid#LayoutRoot@CommonStates` | `Grid` | Tab layout root with hover/pressed states. |
-| `TabViewItem > Grid#LayoutRoot > Canvas > Path#SelectedBackgroundPath` | `Path` | Active selected tab card shape. |
-| `Grid#TabContainerGrid > Border > Button#AddButton` | `Button` | New tab "+" button. |
-
-### Navigation & Address Bar
-| Selector | Type | Purpose & Notes |
-|---|---|---|
-| `FileExplorerExtensions.NavigationBarControl#NavigationBarControl > Grid#NavigationBarControlGrid` | `Grid` | History arrows and address bar row. |
-| `AppBarButton#backButton` | `AppBarButton` | Back navigation arrow. |
-| `AppBarButton#forwardButton` | `AppBarButton` | Forward navigation arrow. |
-| `AppBarButton#upButton` | `AppBarButton` | Up to parent folder arrow. |
-| `Grid#FileExplorerAddressBarGrid` | `Grid` | Address bar outer pill container. |
-| `FileExplorerExtensions.AddressBarControl` | `AddressBarControl` | Breadcrumb trail navigation control. |
-| `AutoSuggestBox#PART_AutoSuggestBox > Grid#LayoutRoot > TextBox#TextBox` | `TextBox` | Editable address text field. |
-
-### Search Box
-| Selector | Type | Purpose & Notes |
-|---|---|---|
-| `AutoSuggestBox#FileExplorerSearchBox` | `AutoSuggestBox` | File Explorer search bar container. |
-| `AutoSuggestBox#FileExplorerSearchBox > Grid#LayoutRoot > TextBox#TextBox` | `TextBox` | Search input text box. |
-
-### Command Bar (Ribbon Replacement)
-| Selector | Type | Purpose & Notes |
-|---|---|---|
-| `CommandBar#FileExplorerCommandBar` | `CommandBar` | Modern command bar control (New, Cut, Copy, Paste, Share). |
-| `Grid#CommandBarControlRootGrid` | `Grid` | Command bar root layout grid on newer Windows builds. |
-| `AppBarButton[ToolTipService.ToolTip = Cut]` | `AppBarButton` | Cut action button targeted by tooltip string. |
-| `AppBarButton[ToolTipService.ToolTip = Copy]` | `AppBarButton` | Copy action button. |
-| `AppBarButton[ToolTipService.ToolTip = Paste]` | `AppBarButton` | Paste action button. |
-| `Button#MoreButton` | `Button` | "..." overflow menu button. |
-
-### Panes & Context Menus
-| Selector | Type | Purpose & Notes |
-|---|---|---|
-| `Grid#DetailsViewControlRootGrid` | `Grid` | Right-side details and metadata pane. |
-| `Grid#HomeViewRootGrid` | `Grid` | File Explorer Home landing page root grid. |
-| `FileExplorerExtensions.GalleryViewControl#GalleryViewControl` | `GalleryViewControl` | Windows Photos/Gallery view container. |
-| `MenuFlyoutPresenter > Border` | `Border` | Modern context menu popup border card. |
-| `ToolTip > ContentPresenter#LayoutRoot` | `ContentPresenter` | Hover tooltip background pill. |
+1. **Whole-Window DWM Backdrop (`backgroundTranslucentEffect: acrylic`)**:
+   * Bridges the gap between modern XAML chrome and classic Win32 file views. Applying `acrylic` makes the entire window canvas translucent.
+2. **WinUI 3 Tab Control (`FileExplorerExtensions.FileExplorerTabControl`)**:
+   * Houses the open folder tabs. Individual tabs (`TabViewItem`) feature visual states (`Normal`, `PointerOver`, `Selected`, `Pressed`) that can be styled into floating glass pills.
+3. **Address Bar & Search Box**:
+   * `Grid#FileExplorerAddressBarGrid` and `AutoSuggestBox#FileExplorerSearchBox` can be styled with frosted fills, subtle rim borders, and rounded corners (`CornerRadius=6`).
+4. **Command Bar Toolbar (`CommandBar#FileExplorerCommandBar`)**:
+   * Modern replacement for the classic ribbon containing Cut, Copy, Paste, Share, and Delete actions.
 
 ---
 
-## 4. Win32 DirectUI Boundary Invariant
+## 4. Key Recipes: Applying Translucent Glass to File Explorer
 
-> [!WARNING]
-> **XAML Scope vs Win32 Shell**:  
-> The File Explorer Styler operates exclusively on the **WinUI 3 XAML island** (tabs, navigation bar, command bar, details pane). The classic folder file list (`DirectUIHWND`), navigation tree, and classic context menus are native Win32 controls that cannot be targeted with XAML properties. Translucency for the classic file list is managed via the top-level `backgroundTranslucentEffect` setting.
+```yaml
+# Enable whole-window Acrylic blur via DWM
+backgroundTranslucentEffect: acrylic
+backgroundTranslucentEffectRegion: ""
+explorerFrameContainerHeight: 0
 
----
+styleConstants:
+  - Frosted=<WindhawkBlur BlurAmount="20" TintColor="{ThemeResource SystemChromeMediumColor}" TintOpacity="0.7" />
+  - Background=$Frosted
+  - BorderBrush=<LinearGradientBrush StartPoint="0,0" EndPoint="0,1"><GradientStop Color="#60808080" Offset="0.0" /><GradientStop Color="#50404040" Offset="0.25" /><GradientStop Color="#40808080" Offset="1" /></LinearGradientBrush>
+  - BorderThickness=0.3,1,0.3,1
 
-## 5. Integrated Companion Settings: Translucent Windows & Drive Gauges
+controlStyles:
+  # Floating address bar pill
+  - target: Grid#FileExplorerAddressBarGrid
+    styles:
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=6
 
-When styling File Explorer alongside companion mods:
-* **Enhanced Disk Usage (`enhanced-disk-usage`)**: Adjusts drive space meter percentage thresholds, warning colors, and bar heights within "This PC".
-* **Resource Redirect (`resource-redirect`)**: Intercepts `imageres.dll` and `shell32.dll` to serve custom drive, folder, and library icons.
+  # Search box pill
+  - target: AutoSuggestBox#FileExplorerSearchBox > Grid#LayoutRoot > TextBox#TextBox
+    styles:
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=6
+```

@@ -3,114 +3,80 @@ layout: documentation
 title: "Wiki: Taskbar Styler"
 ---
 
-# Wiki: Taskbar Styler Targets & Configuration
+# Wiki: Windows 11 Taskbar Styler
 
-Comprehensive reference for the **Windows 11 Taskbar Styler** mod (`windows-11-taskbar-styler`) and integrated companion utilities.
+Comprehensive development and styling guide for the **Windows 11 Taskbar Styler** mod (`windows-11-taskbar-styler`) and integrated companion desktop enhancements.
 
 ---
 
-## 1. Mod Overview & Process Host
+## 1. Mod Overview & Architecture
 
-| Property | Value | Notes |
+| Specification Attribute | Detail | Technical Notes |
 |---|---|---|
-| **Mod ID** | `windows-11-taskbar-styler` | Official Windhawk mod |
-| **Target Process** | `explorer.exe` | WinUI 3 XAML island running within Windows shell |
-| **Framework** | `Microsoft.UI.Xaml` | Modern WinUI 3 runtime |
-| **Version Floor** | `1.10+` | Full direct composition and token support |
+| **Mod ID** | `windows-11-taskbar-styler` | Official Windhawk repository mod |
+| **Target Process** | `explorer.exe` | Main Windows shell process hosting the taskbar |
+| **XAML Framework** | `Microsoft.UI.Xaml` | Modern WinUI 3 XAML island runtime |
+| **Windhawk Mod Floor** | `v1.10+` | DirectComposition glass and visual state injection |
+| **Live Reload Capability** | Supported | Direct updates apply live to the active shell |
+
+```mermaid
+flowchart LR
+    Explorer["explorer.exe\n(Host Process)"] --> Island["WinUI 3 XAML Island\n(Microsoft.UI.Xaml)"]
+    Island --> Dock["Taskbar.TaskbarFrame\n(Primary Dock)"]
+    Island --> SystemTray["SystemTray#SystemTray\n(Corner Status Area)"]
+    WindhawkMod["windows-11-taskbar-styler\n(Windhawk Hook)"] -->|Injects Styles & Tokens| Island
+```
 
 ---
 
-## 2. Configuration Options & Top-Level Keys
+## 2. Detailed Wiki Subsections
+
+For exhaustive technical reference documentation, explore the dedicated subcategories:
+
+* 🎯 **[Visual Tree Element Targets](targets/elements.md)**: Exhaustive catalog of every verified taskbar dock frame, task list button panel, active indicator pill, search box, system tray element, and snap assist flyout.
+* ⚙️ **[Configuration Schema & Token Directives](configurations/schema.md)**: Complete specification of YAML top-level keys (`styleConstants`, `themeResourceVariables`, `controlStyles`, `clickThroughTaskbar`), property operators, and XAML material definitions.
+* 🧩 **[Companion Mods & Settings Guide](companions/settings.md)**: Complete settings matrices for Taskbar Clock Customization, Taskbar Tray and Icon Tweaks, Dynamic Island for Windows, and Start Button Colorizer.
+
+---
+
+## 3. High-Level Hierarchy & Key Control Anchors
+
+1. **Floating Dock Construction**:
+   * `Taskbar.TaskbarFrame > Grid#RootGrid > Taskbar.TaskbarBackground > Grid`: Applying `Margin=8,4,8,4` and `CornerRadius=$CornerRadiusAlt1` detaches the taskbar from the display edges, transforming it into a floating dock.
+   * `Rectangle#BackgroundFill` and `Rectangle#BackgroundStroke`: The native solid color fill and top border stroke. Both must be collapsed (`Visibility=Collapsed` or `1`) to reveal the custom frosted blur foundation underneath.
+2. **App Button Visual State Matrix**:
+   * Running apps are represented by `Taskbar.TaskListButtonPanel`. The `@CommonStates` visual state group can be targeted to deliver custom state lighting across `ActiveNormal`, `ActivePointerOver`, `ActivePressed`, `InactiveNormal`, `InactivePointerOver`, and `MultiWindow` variants.
+3. **Corner System Tray & Clock**:
+   * `StackPanel#SystemTrayFrameGrid`: Can be sized and centered vertically to align with a floating dock.
+   * `Button#ShowDesktopButton`: The 1px edge strip can be collapsed or compressed to prevent accidental desktop reveals.
+
+---
+
+## 4. Key Recipes: Applying Floating Dock Glass
 
 ```yaml
 styleConstants:
-  - ConstantName=Value
-
-themeResourceVariables:
-  - variableKey: ResourceKey
-    value: "{ThemeResource ...}"
+  - Frosted=<WindhawkBlur BlurAmount="20" TintColor="{ThemeResource SystemChromeMediumColor}" TintOpacity="0.7" />
+  - Background=$Frosted
+  - BorderBrush=<LinearGradientBrush StartPoint="0,0" EndPoint="0,1"><GradientStop Color="#60808080" Offset="0.0" /><GradientStop Color="#50404040" Offset="0.25" /><GradientStop Color="#40808080" Offset="1" /></LinearGradientBrush>
+  - BorderThickness=0.3,1,0.3,1
+  - CornerRadiusAlt1=20
 
 controlStyles:
-  - target: Selector#TargetName
+  # Floating taskbar dock background card
+  - target: Taskbar.TaskbarFrame > Grid#RootGrid > Taskbar.TaskbarBackground > Grid, Taskbar.TaskbarBackground > Grid
     styles:
-      - Property=Value
-      - Property:=<XAML>
+      - Margin=8,4,8,4
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$CornerRadiusAlt1
 
-xamlDiagnosticsHandling: alert # alert | block | allow
+  # Collapse native solid color fill and top stroke
+  - target: Taskbar.TaskbarFrame > Grid#RootGrid > Taskbar.TaskbarBackground > Grid > Rectangle#BackgroundFill
+    styles:
+      - Visibility=1
+  - target: Rectangle#BackgroundStroke
+    styles:
+      - Visibility=1
 ```
-
-### Directives:
-* **`styleConstants`**: Declares named design tokens and brush snippets.
-* **`controlStyles`**: Target selectors and property rules.
-* **`xamlDiagnosticsHandling`**: Governs diagnostics hook compatibility (`alert`, `block`, or `allow`).
-
----
-
-## 3. Verified Visual Tree Targets
-
-### Root Taskbar Frame & Canvas
-| Selector | Type | Purpose & Notes |
-|---|---|---|
-| `Taskbar.TaskbarFrame#TaskbarFrame` | `TaskbarFrame` | Outer container of the primary taskbar. Setting `Height`, `Margin`, and `CornerRadius` controls the floating dock appearance. |
-| `Border#BackgroundBorder` | `Border` | Primary background border card for the taskbar dock. |
-| `Rectangle#BackgroundFill` | `Rectangle` | Native system taskbar fill rectangle. Collapse to `Transparent` or `Visibility=Collapsed` to prevent solid backgrounds. |
-| `Grid#RootGrid` | `Grid` | Master layout grid organizing Start, running apps, and the notification tray. |
-
-### Task List & App Buttons
-| Selector | Type | Purpose & Notes |
-|---|---|---|
-| `TaskListUI#TaskList` | `TaskList` | Main items control holding all application icons. |
-| `Taskbar.TaskListButtonPanel` | `TaskListButtonPanel` | Panel container for running application buttons. |
-| `TaskListButtonPanel@CommonStates > Grid > Border#BackgroundElement` | `Border` | Hover/active card background pill for taskbar icons. |
-| `Border#ActiveIndicator` | `Border` | Active window bottom pill or line indicator. |
-| `Border#ProgressIndicator` | `Border` | Real-time download/activity progress bar rendered across button cards. |
-| `TextBlock#TaskbarButtonLabel` | `TextBlock` | Text label for uncombined taskbar buttons. |
-
-### Start Button & Embedded Search
-| Selector | Type | Purpose & Notes |
-|---|---|---|
-| `StartButton#StartButton` | `StartButton` | Windows Start orb button. |
-| `FontIcon#StartButtonIcon` | `FontIcon` | Windows Start logo icon glyph. |
-| `TaskbarSearch#SearchBox` | `SearchBox` | Embedded taskbar search box pill. |
-| `Border#SearchBoxBackground` | `Border` | Search pill background surface. |
-| `TextBlock#SearchPlaceholderText` | `TextBlock` | "Search" placeholder text block. |
-
-### System Tray & Corner Area
-| Selector | Type | Purpose & Notes |
-|---|---|---|
-| `SystemTray#SystemTray` | `SystemTray` | Outer container for notification area, clock, and quick status. |
-| `Grid#QuickStatusGrid` | `Grid` | Pill cluster containing network, volume, and battery icons. |
-| `ClockControl#Clock` | `ClockControl` | Taskbar clock and calendar trigger area. |
-| `ContentPresenter#DateTimePresenter` | `ContentPresenter` | Text block presenter displaying the clock string. |
-| `NotificationArea` | `NotificationArea` | System tray notification icon overflow area. |
-| `Button#ShowDesktopButton` | `Button` | Extreme right-hand edge "Show Desktop" line. Set `Visibility=Collapsed` to remove. |
-| `Button#ChevronButton` | `Button` | Overflow arrow button for hidden tray icons. |
-
-### Secondary Taskbars (Multi-Monitor)
-| Selector | Type | Purpose & Notes |
-|---|---|---|
-| `Taskbar.SecondaryTaskbarFrame#SecondaryTaskbarFrame` | `TaskbarFrame` | Taskbar container rendered on secondary displays. |
-| `SecondaryTaskListUI#SecondaryTaskList` | `TaskList` | Running applications list on secondary monitors. |
-
----
-
-## 4. Integrated Companion Mod Settings
-
-### A. Taskbar Clock Customization (`taskbar-clock-customization`)
-* **`clockFormat`** (String): Format string for time/date (e.g. `HH:mm:ss`, `HH:mm\nMM/dd`).
-* **`fontFamily`** (String): Custom font family (e.g. `Segoe UI Variable Display`).
-* **`fontSize`** (Integer): Font size in points.
-* **`showMilliseconds`** (Boolean): Enable high-precision millisecond counters.
-
-### B. Taskbar Tray and Icon Tweaks (`taskbar-tray-and-icon-tweaks`)
-* **`hideShowDesktop`** (Boolean): Removes the 1px desktop strip at far right.
-* **`hideNotificationCenter`** (Boolean): Hides the notification bell badge.
-* **`iconPadding`** (Integer): Custom horizontal padding between tray icons in pixels.
-
-### C. Taskbar Tray Icon Spacing and Grid (`taskbar-tray-icon-spacing-and-grid`)
-* **`gridRows`** (Integer): Number of vertical rows for tray icons (e.g. `2` or `3`).
-* **`horizontalSpacing`** / **`verticalSpacing`** (Integer): Custom grid spacing in pixels.
-
-### D. Taskbar Height and Icon Size (`taskbar-height-and-icon-size`)
-* **`taskbarHeight`** (Integer): Overall taskbar height in pixels (e.g. `36`, `48`, `60`).
-* **`iconSize`** (Integer): Application icon dimension scaling in pixels (e.g. `20`, `24`, `32`).

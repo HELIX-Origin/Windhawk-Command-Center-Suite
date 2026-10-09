@@ -3,122 +3,80 @@ layout: documentation
 title: "Wiki: Notification Center Styler"
 ---
 
-# Wiki: Notification Center Styler Targets & Configuration
+# Wiki: Windows 11 Notification Center Styler
 
-Comprehensive reference for the **Windows 11 Notification Center Styler** mod (`windows-11-notification-center-styler`), Quick Settings, Calendar flyout, and system toasts.
+Comprehensive development and styling guide for the **Windows 11 Notification Center Styler** mod (`windows-11-notification-center-styler`), Quick Settings, Calendar flyout, and system toasts.
 
 ---
 
-## 1. Mod Overview & Process Host
+## 1. Mod Overview & Architecture
 
-| Property | Value | Notes |
+| Specification Attribute | Detail | Technical Notes |
 |---|---|---|
-| **Mod ID** | `windows-11-notification-center-styler` | Official Windhawk mod |
-| **Target Process (Win11 21H2–23H2)** | `ShellExperienceHost.exe` | UWP host on older Windows 11 builds |
-| **Target Process (Win11 24H2 build 26100+)** | `ShellHost.exe` | **Crucial**: Quick Settings / Action Center migrated to `ShellHost.exe` in 24H2 |
-| **XAML Framework** | `Windows.UI.Xaml` | Standard UWP XAML |
-| **Version Floor** | `1.7+` | Direct `WindhawkBlur` supported since v1.3+ |
+| **Mod ID** | `windows-11-notification-center-styler` | Official Windhawk repository mod |
+| **Target Process (Win11 21H2–23H2)** | `ShellExperienceHost.exe` | Classic UWP shell experience host |
+| **Target Process (Win11 24H2 build 26100+)** | `ShellHost.exe` | Dedicated Quick Settings and shell flyout host |
+| **XAML Framework** | `Windows.UI.Xaml` | Standard UWP runtime |
+| **Windhawk Mod Floor** | `v1.7+` | Direct `WindhawkBlur` composition support |
+| **Live Reload Capability** | Supported | Updates apply dynamically on settings save |
+
+```mermaid
+flowchart LR
+    Taskbar["explorer.exe\n(System Tray Click)"] -->|Triggers Win+A or Win+N| ShellHost["ShellHost.exe / ShellExperienceHost.exe\n(Target Process)"]
+    ShellHost --> ControlCenter["Grid#ControlCenterRegion\n(Quick Settings)"]
+    ShellHost --> Calendar["Grid#CalendarCenterGrid\n(Calendar & Notifs)"]
+    WindhawkMod["windows-11-notification-center-styler\n(Windhawk Hook)"] -->|Injects Glass & Tokens| ShellHost
+```
 
 ---
 
-## 2. Configuration Options & Top-Level Keys
+## 2. Detailed Wiki Subsections
+
+For in-depth technical reference documentation, explore the dedicated subcategories:
+
+* 🎯 **[Visual Tree Element Targets](targets/elements.md)**: Exhaustive catalog of every verified root frame, Quick Settings tile, `AsyncSlider` track/thumb, media player card, calendar day cell, and toast notification target.
+* ⚙️ **[Configuration Schema & Token Directives](configurations/schema.md)**: Complete specification of YAML top-level keys, dual-host process architecture (`ShellHost` vs `ShellExperienceHost`), token mechanics, and double-blur mitigation recipes.
+
+---
+
+## 3. High-Level Hierarchy & Key Control Anchors
+
+1. **Quick Settings Outer Frame (`Grid#ControlCenterRegion`)**:
+   * The foundation glass canvas. Setting `Background:=$Background`, `BorderBrush:=$BorderBrush`, and `Shadow:=` collapses the system drop shadow and sets up the frosted panel.
+2. **Preventing Double-Blur Artifacts**:
+   * Windows renders an internal solid plate: `ControlCenter.ControlCenterView > Grid#RootGrid > Border#RootGridBorder`. Clearing this element to `Background:=Transparent` is essential to prevent muddy visuals.
+3. **Multi-State Quick Action Tiles**:
+   * `ControlCenter.PaginatedToggleButton`: Wi-Fi, Bluetooth, and Airplane mode toggles. Targeted via `@CommonStates` (`Normal`, `PointerOver`, `Pressed`, `Checked`, `CheckedPointerOver`) to apply layered glass fills and accent glow on active tiles.
+4. **Volume & Brightness Controls (`ControlCenter.AsyncSlider`)**:
+   * Custom UWP slider wrappers where inactive tracks (`HorizontalTrackRect`) and active highlighted fills (`HorizontalDecreaseRect`) are styled into rounded pills.
+5. **Media Player & Calendar Panels**:
+   * `Grid#MediaTransportControlsRegion` embeds album art, track info, and playback buttons into a glass card.
+   * `Grid#CalendarCenterGrid` structures the month view, day number grid, and Focus Session integration card.
+
+---
+
+## 4. Key Recipes: Applying Frosted Glass to Quick Settings
 
 ```yaml
 styleConstants:
-  - ConstantName=Value
-
-themeResourceVariables:
-  - variableKey: ResourceKey
-    value: "{ThemeResource ...}"
+  - Frosted=<WindhawkBlur BlurAmount="20" TintColor="{ThemeResource SystemChromeMediumColor}" TintOpacity="0.7" />
+  - Background=$Frosted
+  - BorderBrush=<LinearGradientBrush StartPoint="0,0" EndPoint="0,1"><GradientStop Color="#60808080" Offset="0.0" /><GradientStop Color="#50404040" Offset="0.25" /><GradientStop Color="#40808080" Offset="1" /></LinearGradientBrush>
+  - BorderThickness=0.3,1,0.3,1
+  - PanelRadius=13
 
 controlStyles:
-  - target: Selector#TargetName
+  # Quick Settings outer frame
+  - target: Grid#ControlCenterRegion
     styles:
-      - Property=Value
-      - Property:=<XAML>
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
+      - CornerRadius=$PanelRadius
+      - Shadow:=
+
+  # Clear inner plate to prevent double-blur
+  - target: ControlCenter.ControlCenterView > Grid#RootGrid > Border#RootGridBorder
+    styles:
+      - Background:=<SolidColorBrush Color="Transparent"/>
 ```
-
-### Directives:
-* **`styleConstants`**: Declares shared brushes, blur objects, and radii tokens.
-* **`controlStyles`**: Direct visual tree target rules.
-* **`themeResourceVariables`**: Resource brush remappings.
-* **Unsupported Keys**: `webContentStyles`, `backgroundTranslucentEffect`, and `explorerFrameContainerHeight` are not supported.
-
----
-
-## 3. Verified Visual Tree Targets
-
-### Root Flyout Panels
-| Selector | Type | Purpose & Notes |
-|---|---|---|
-| `Grid#NotificationCenterGrid` | `Grid` | Main Notification Center window frame. |
-| `Grid#CalendarCenterGrid` | `Grid` | Calendar flyout container frame. |
-| `Grid#ControlCenterRegion` | `Grid` | Quick Settings (Win+A) outer flyout container. Primary surface for glass panel styling. |
-| `ControlCenter.ControlCenterView > Grid#RootGrid > Border#RootGridBorder` | `Border` | System-painted inner background card. Clear to `Transparent` to prevent double-blur. |
-| `Grid#L1Grid` | `Grid` | Primary layout grid inside Quick Settings. Sibling of `RootGridBorder`. |
-
-### Quick Settings Toggles & Buttons
-| Selector | Type | Purpose & Notes |
-|---|---|---|
-| `ControlCenter.PaginatedToggleButton#ToggleButton` | `ToggleButton` | Primary quick action toggle button (Wi-Fi, Bluetooth, Airplane mode, etc.). |
-| `ControlCenter.PaginatedToggleButton#SplitL2Button` | `Button` | Right-hand chevron chevron button on split quick action tiles. |
-| `QuickActions.AccessibleToggleButton#ToggleButton` | `ToggleButton` | Legacy quick action toggle button target for Windows 11 21H2–23H2. |
-| `ControlCenter.FrameWithContentChanged#L2Frame` | `Frame` | Secondary expanded panel frame (e.g. Wi-Fi network selection or Bluetooth device list). |
-| `Border#L2ContentBorder` | `Border` | Background card of the L2 expanded panel. |
-
-### Sliders (Volume & Brightness)
-| Selector | Type | Purpose & Notes |
-|---|---|---|
-| `ControlCenter.AsyncSlider` | `AsyncSlider` | Custom UWP wrapper around volume and display brightness sliders. |
-| `Grid#SliderContainer` | `Grid` | Slider track and thumb container within `AsyncSlider`. |
-| `Rectangle#HorizontalTrackRect` | `Rectangle` | Inactive slider track background rectangle. |
-| `Rectangle#HorizontalDecreaseRect` | `Rectangle` | Active highlighted portion of the slider track. |
-| `Primitives.Thumb#HorizontalThumb` | `Thumb` | Draggable slider thumb pill/circle. |
-| `FontIcon#SliderIcon` | `FontIcon` | Speaker or Sun glyph icon beside the slider. |
-
-### Media Controls
-| Selector | Type | Purpose & Notes |
-|---|---|---|
-| `Grid#MediaTransportControlsRegion` | `Grid` | Floating media playback card embedded inside Action Center. |
-| `Grid#ThumbnailImage` | `Grid` | Album artwork thumbnail image container. |
-| `Button#PlayPauseButton` | `Button` | Media play / pause toggle button. |
-| `RepeatButton#PreviousButton` | `RepeatButton` | Skip previous track button. |
-| `RepeatButton#NextButton` | `RepeatButton` | Skip next track button. |
-| `TextBlock#MediaTitleText` | `TextBlock` | Song / media title string. |
-| `TextBlock#MediaArtistText` | `TextBlock` | Artist / publisher string. |
-
-### Calendar Flyout
-| Selector | Type | Purpose & Notes |
-|---|---|---|
-| `ScrollViewer#CalendarControlScrollViewer` | `ScrollViewer` | Calendar main scrollable container. |
-| `StackPanel#CalendarHeader` | `StackPanel` | Month / year header and navigation arrows. |
-| `Border#CalendarHeaderMinimizedOverlay` | `Border` | Compact minimized calendar header overlay card. |
-| `CalendarViewDayItem > Border` | `Border` | Individual day number cell border in month grid. |
-| `Button#ExpandCollapseButton` | `Button` | Chevron button toggling full vs compact calendar height. |
-
-### Toast Notifications & Jump Lists
-| Selector | Type | Purpose & Notes |
-|---|---|---|
-| `Border#ToastBackgroundBorder` | `Border` | Primary system popup notification toast card. |
-| `Border#ToastBackgroundBorder2` | `Border` | Secondary toast popup notification card variant. |
-| `ActionCenter.FlexibleToastView#FlexibleNormalToastView` | `FlexibleToastView` | Toast interactive view hierarchy. |
-| `Button#DismissButton` | `Button` | "X" dismiss button on notification cards. |
-| `Button#ClearAll` | `Button` | "Clear all" notifications header button. |
-| `Border#JumpListRestyledAcrylic` | `Border` | Taskbar right-click jump list acrylic frame. |
-| `JumpViewUI.JumpListListViewItem > Grid#LayoutRoot > Border#BackgroundBorder` | `Border` | Individual jump list menu item card. |
-
-### Footer Row
-| Selector | Type | Purpose & Notes |
-|---|---|---|
-| `Grid#FooterGrid` | `Grid` | Bottom utility row holding battery percentage and Settings shortcut. |
-| `Button#FooterButton` | `Button` | Settings gear icon button in the Quick Settings footer. |
-| `TextBlock#BatteryPercentage` | `TextBlock` | Battery level readout label. |
-
----
-
-## 4. Integrated Companion Settings: Shell Flyout Positions
-
-When pairing Notification Center styling with `shell-flyout-positions`:
-* **`actionCenter.alignment`**: `top`, `bottom`, `right`, `left`, `center`
-* **`actionCenter.offsetY`**: Pixel offset from display edge or taskbar.
-* **`notificationCenter.alignment`**: Placement for calendar / notification flyout.
