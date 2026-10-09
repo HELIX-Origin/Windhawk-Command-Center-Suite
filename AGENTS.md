@@ -107,7 +107,7 @@ All agents have access to and must leverage the repository's standard execution 
 ## Agent Rules (`.agents/rules/`)
 
 All agent actions are bound by `.agents/rules/`:
-- **Rule 00 (`agent-safety-compliance`)**: Safety invariants, zero irreversible damage, no unauthorized Explorer restarts.
+- **Rule 00 (`agent-safety-compliance`)**: Safety invariants, zero irreversible damage, zero unauthorized Explorer restarts, zero automated dangerous Git operations (`commit`, `push`, `reset`, `restore`, `clean`, `rebase`, `branch -D`) without explicit user command.
 - **Rule 01 (`zero-unsolicited-injection`)**: Runtime boundary — five base approved styler mods (Start Menu, Taskbar, Notification Center, Settings, File Explorer); no unapproved packages or injection tools.
 - **Rule 02 (`windhawk-styler-syntax`)**: YAML and XAML syntax standards, quoting, constant declaration order.
 - **Rule 03 (`design-language-standards`)**: Canonical theme tokens, materials, layered glass hierarchy, and radius scales.

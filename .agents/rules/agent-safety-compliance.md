@@ -24,8 +24,22 @@ Rule 00 and [Rule 01](zero-unsolicited-injection.md) supersede every other rule.
    - **ShareX Screenshot Integration**: Automated screenshot captures are permitted via the `--screenshot` (`-ss`) flag. The tool dynamically reads the user's ShareX configuration (`HotkeysConfig.json` and `ApplicationConfig.json`), detects custom keybinds (including systems where PrintScreen maps to `VK_SLEEP`), and executes the configured capture chord to save images to the user's configured screenshot destination.
    - **Local Scratch Workspace Standards**: The repository's `scratch/` directory is strictly for local-only, temporary artifacts (enforced by `.gitignore`). It must always be kept organized into content-type and format subfolders (`powershell/`, `python/`, `json/`, `images/`, `docs/`, `text/`, `cpp/`, `yml/`). New format subfolders should be created dynamically as needed whenever a new file type is introduced. Loose files must never accumulate in the scratch root.
 
-3. **Repository Safety**:
-   - The repository **is** under Git — this is the current, active procedure: **never** force-push, never discard or reset uncommitted user work, and always inspect `git status` / `git diff` before staging.
+3. **Repository Safety & Dangerous Git Operations**:
+   - The repository **is** under Git — this is the current, active procedure: always inspect `git status` / `git diff` before staging. Read-only inspection commands (`git status`, `git diff`, `git log`, `git branch`, `git remote -v`) are always safe and permitted.
+   - **Zero Automated Dangerous Git Operations (Strict Per-Occurrence Authorization)**:
+     - Any Git command that modifies repository history, working tree state, branch refs, or remotes is classified as **potentially dangerous**.
+     - Dangerous Git operations are **fully permitted when the user explicitly commands or requests them**, but they must **NEVER** be automated on agent initiative or carried out opportunistically.
+     - **No Authorization Persistence**: A user's command or request to perform a dangerous operation is valid **strictly for that single, immediate occurrence**. Prior authorization **never persists** to future tasks, turns, or workflows. Each subsequent dangerous Git action requires an explicit, separate command or request from the user.
+     - **Specific Governed Operations**:
+       - `git commit`: Perform only upon direct user request; never auto-commit.
+       - `git push`: Perform only upon direct user request; never auto-push.
+       - `git reset` (hard, mixed, or soft): Perform only upon direct user request.
+       - `git checkout -- <file>` / `git restore`: Perform only upon direct user request.
+       - `git clean`: Perform only upon direct user request.
+       - `git branch -D` / `git branch -d`: Perform only upon direct user request.
+       - `git rebase` / `git merge`: Perform only upon direct user request.
+       - `git stash drop` / `git stash pop`: Perform only upon direct user request.
+       - Force-push (`git push --force` or `-f`): Prohibited unless expressly, unmistakably commanded by the user with acknowledged risk.
    - Only if the repository ever loses Git tracking (a non-git context): treat every overwrite as irreversible and fall back to the `.backups/` copy rule in §1.1.
 
 4. **Personal Data Protection**:

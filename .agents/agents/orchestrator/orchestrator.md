@@ -39,7 +39,8 @@ flowchart TD
    - Phase 4: User Live Desktop Verification & Sync
 2. **Strict Workflow Gatekeeping**: Enforces that no styler code is written or merged until the agent ecosystem, target evidence, and validation rules are satisfied.
 3. **Rollback & Safety**: Immediately halts execution if unauthorized dependencies or destructive file changes are detected (Rule 00 & Rule 01).
-4. **Tracking Synchronization**: Maintains real-time status in `PLAN.md`, `TODO.md`, `BUGS.md`, `ROADMAP.md`, and date/time-grouped entries in `CHANGELOG.md` (`## YYYY-MM-DD - HH:MM`).
+4. **Git Operations & Dangerous Command Invariant (Rule 00)**: Never automatically perform dangerous Git operations (`commit`, `push`, `reset`, `restore`, `clean`, `rebase`, `branch -D`). These operations are **fully permitted upon direct user command or request**, but authorization **never persists** across turns or tasks. Each individual occurrence requires an explicit, separate directive from the user.
+5. **Tracking Synchronization**: Maintains real-time status in `PLAN.md`, `TODO.md`, `BUGS.md`, `ROADMAP.md`, and date/time-grouped entries in `CHANGELOG.md` (`## YYYY-MM-DD - HH:MM`).
 
 ---
 

@@ -6,7 +6,8 @@ Desktop.ini
 *~
 
 # Agent backups and temporary scratch directories
-.backups/
+.backups/*
+!.backups/README.md
 *.log
 
 # Windows system folders
@@ -15,7 +16,8 @@ $RECYCLE.BIN/
 # Temp and scratch files
 temp/
 tmp/
-scratch/
+scratch/*
+!scratch/README.md
 *.tmp
 *.bak
 *.temp
@@ -26,5 +28,7 @@ scratch/
 *.exp
 *.lib
 *.pdb
-tools/native/build/
-tools/native/bin/
+tools/native/build/*
+!tools/native/build/README.md
+tools/native/bin/*
+!tools/native/bin/README.md

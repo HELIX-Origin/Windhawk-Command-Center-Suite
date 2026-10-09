@@ -1,6 +1,6 @@
-# Windhawk Command Center Suite — Bug & Issue Tracker
+# Windhawk Themes — Bug & Issue Tracker
 
-> 🐛 **Living Source of Truth**: Active tracking ledger for open bugs, quirks, external limitations, and resolution history across all styler mods.
+> 🐛 **Living Source of Truth**: Active tracking ledger for open bugs, quirks, external limitations, and resolution history across all styler mods in the Windhawk Themes framework.
 
 > [!IMPORTANT]
 > AI agents strictly required to update this page and all related pages **before** working on any new bug fixes or features and push it to the remote first, without exception. Failure to do so may result in working with outdated information and potentially introducing conflicts or redundant work. 

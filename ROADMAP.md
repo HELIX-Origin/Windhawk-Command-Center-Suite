@@ -1,6 +1,6 @@
-# Windhawk Command Center Suite — Suite Roadmap & Milestones
+# Windhawk Themes — Framework Roadmap & Milestones
 
-> 🗺️ **Living Source of Truth**: Comprehensive roadmap, phased delivery milestones, and progress status for the Windhawk Command Center Suite. The project tracks progress via milestones and sprints — it does not use versioned releases.
+> 🗺️ **Living Source of Truth**: Comprehensive roadmap, phased delivery milestones, and progress status for the Windhawk Themes framework. The project tracks progress via milestones and sprints — it does not use versioned releases.
 
 > [!IMPORTANT]
 > AI agents strictly required to update this page and all related pages **before** working on any new bug fixes or features and push it to the remote first, without exception. Failure to do so may result in working with outdated information and potentially introducing conflicts or redundant work. 

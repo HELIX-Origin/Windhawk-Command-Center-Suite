@@ -1,6 +1,6 @@
-# Windhawk Command Center Suite — Task Checklist & Workstream Tracking
+# Windhawk Themes — Task Checklist & Workstream Tracking
 
-> 📋 **Living Source of Truth**: Active workstream checklist for Windhawk Command Center Suite theming, agent ecosystem governance, and quality verification.
+> 📋 **Living Source of Truth**: Active workstream checklist for the Windhawk Themes framework, theme projects, agent ecosystem governance, and quality verification.
 
 > [!IMPORTANT]
 > AI agents strictly required to update this page and all related pages **before** working on any new bug fixes or features and push it to the remote first, without exception. Failure to do so may result in working with outdated information and potentially introducing conflicts or redundant work. 

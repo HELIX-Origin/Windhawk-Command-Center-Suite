@@ -2,6 +2,16 @@
 
 All notable changes to **Windhawk Themes** are documented here. One entry per update (`## YYYY-MM-DD - HH:MM`), newest first. Each entry has at most one `Added`, `Removed`, `Changed`, and `Fixed` section — omit sections with no items, and put every item of a type in that type's single list (never a second section of the same type). Items are `- **Title**: description` with nested `**Title**: description` sub-items as needed. Releases use milestone tags (e.g. `M.01`, `M.02b`) with zero attached assets.
 
+## 2026-10-09 - 12:40
+
+### Added
+- **Community Wiki Section** (`docs/wiki/`): Established a dedicated living knowledge base on the GitHub Pages site organized by the five base styler mods (`start-menu-styler/`, `taskbar-styler/`, `notification-center-styler/`, `file-explorer-styler/`, `settings-styler/`) with nested subcategories (`targets/`, `configurations/`, `companions/`) for community contributions.
+- **Whitelisted Gitignored Directories**: Added whitelisted `README.md` files to all repository-used gitignored directories (`.backups/`, `scratch/`, `tools/native/build/`, `tools/native/bin/`) to ensure directory structures appear on remote while internal data and binaries remain strictly untracked.
+
+### Changed
+- **Zero Automated Dangerous Git Operations (Rule 00)**: Codified strict per-occurrence user authorization for all potentially dangerous Git commands (`commit`, `push`, `reset`, `restore`, `clean`, `rebase`, `branch -D`) across `agent-safety-compliance.md`, `orchestrator.md`, and `AGENTS.md`. Mandated that permissions never persist across tasks or turns.
+- **Framework-First Documentation Sync**: Refactored `index.html`, `Getting-Started.md`, `Architecture.md`, `ROADMAP.md`, `TODO.md`, `PLAN.md`, and `BUGS.md` to center the repository on the universal theme engineering framework and tools rather than single-project specificity.
+
 ## 2026-10-09 - 11:55
 
 ### Added

@@ -1,6 +1,6 @@
-# Windhawk Command Center Suite — Active Sprint Planning
+# Windhawk Themes — Active Sprint Planning
 
-> 🗺️ **Living Source of Truth**: Active sprint roadmap and task breakdown for Windhawk Command Center Suite.
+> 🗺️ **Living Source of Truth**: Active sprint roadmap and task breakdown for the Windhawk Themes framework and theme projects.
 
 > [!IMPORTANT]
 > AI agents strictly required to update this page and all related pages **before** working on any new bug fixes or features and push it to the remote first, without exception. Failure to do so may result in working with outdated information and potentially introducing conflicts or redundant work. 
