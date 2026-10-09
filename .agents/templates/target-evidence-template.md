@@ -1,12 +1,12 @@
 # 🔬 Target Evidence Record: {{ surface.name }}
 
-This document records the empirical evidence, visual tree inspection, and verification history for target selectors used in `src/{{ target.file }}` per **Rule 04 (Target Evidence Protocol)**.
+This document records the empirical evidence, visual tree inspection, and verification history for target selectors used in `projects/{{ project }}/{{ target.file }}` per **Rule 04 (Target Evidence Protocol)**.
 
 ---
 
 ## 📋 Surface Overview
 
-- **Style File**: `src/{{ target.file }}`
+- **Style File**: `projects/{{ project }}/{{ target.file }}`
 - **Windhawk Mod**: `{{ mod.name }}` (`{{ mod.id }}`)
 - **Target Process**: `{{ target.process }}`
 - **XAML Framework**: `{{ xaml.framework }}` (UWP `Windows.UI.Xaml` or WinUI 3 `Microsoft.UI.Xaml`)

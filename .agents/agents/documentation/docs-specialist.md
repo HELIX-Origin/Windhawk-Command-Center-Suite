@@ -27,6 +27,6 @@ flowchart TD
 ## Responsibilities
 
 1. **Root Tracking Ownership**: Ensures `PLAN.md`, `TODO.md`, `BUGS.md`, `ROADMAP.md`, and `CHANGELOG.md` are updated *before* any feature or bug fix begins (Rule 08).
-2. **Target Evidence Sync**: Maintains up-to-date target evidence tables in `.agents/targets/` (interim location for former `docs/targets/` records — `docs/` is a *planned* GitHub Pages site, deferred) matching every selector in `src/`.
-3. **Milestone Summaries & Changelog**: Prepares milestone summaries per Rule 09 (`.agents/rules/milestone-standards.md`) using `.agents/templates/milestone-summary-template.md`, and records progress as date/time-grouped `CHANGELOG.md` entries (e.g. `2026-10-07 - 21:36`; one `Added`/`Removed`/`Changed`/`Fixed` section each, never repeated). Progress is tracked as milestones/sprints (`ROADMAP.md`, `PLAN.md`, `TODO.md`, `BUGS.md`) — the suite carries no version numbers.
+2. **Target Evidence Sync**: Maintains up-to-date target evidence tables in `.agents/targets/` and documentation in `docs/` matching every selector in `projects/`.
+3. **Milestone Summaries & Changelog**: Prepares milestone summaries per Rule 09 (`.agents/rules/milestone-standards.md`) using `.agents/templates/milestone-summary-template.md`, and records progress as chronological `CHANGELOG.md` entries with milestone release tags (zero attached assets).
 4. **Mermaid Compliance**: Ensures all diagrams follow Rule 06 (GitHub renderer compatible, quoted special characters, small node counts).

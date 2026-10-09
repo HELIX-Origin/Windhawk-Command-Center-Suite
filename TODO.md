@@ -124,7 +124,7 @@ Build the comprehensive, production-grade AI agent ecosystem modeled after the m
         - [x] Catalog Manager Sub-Agent (`documentation/sub-agents/catalog-manager.md`).
     - [x] Agent team catalog (`README.md`; `index.md` removed repo-wide — Surface Ownership Matrix merged into `README.md`).
 - [x] Source verified target selectors from official Windhawk mod source code and community themes without manual UWPSpy inspection burden.
-- [x] Instantiate Central Operating Manual (`AGENTS.md`), companion mod documentation (`src/extras/README.md`), and Root Tracking Ledgers (`TODO.md`, `PLAN.md`, `BUGS.md`, `ROADMAP.md`, `README.md`).
+- [x] Instantiate Central Operating Manual (`AGENTS.md`), companion mod documentation (`projects/command-center/extras/README.md`), and Root Tracking Ledgers (`TODO.md`, `PLAN.md`, `BUGS.md`, `ROADMAP.md`, `README.md`).
 
 ---
 
@@ -140,7 +140,7 @@ flowchart TD
     W3_Eval --> W3_Shelve["Shelved / Deferred per User Directive"]
 ```
 
-Historical note: the styler file was generated, then discontinued (git `1cc49e9`). This workstream is retained as a dormant record; any resumed work targets a future `src/windows-11-file-explorer-styler.yml` adhering strictly to the Safe Glass Chrome principle.
+Historical note: the styler file was generated, then discontinued (git `1cc49e9`). This workstream is retained as a dormant record; any resumed work targets a future `projects/command-center/windows-11-file-explorer-styler.yml` adhering strictly to the Safe Glass Chrome principle.
 
 **Locked user directives:**
 
@@ -151,7 +151,7 @@ Historical note: the styler file was generated, then discontinued (git `1cc49e9`
 
 **Implementation checklist:**
 
-- [x] Implement canonical Rule 03 tokens in `src/windows-11-file-explorer-styler.yml` (materials, rim gradients, radii scale).
+- [x] Implement canonical Rule 03 tokens in `projects/command-center/windows-11-file-explorer-styler.yml` (materials, rim gradients, radii scale).
 - [x] Preserve the native Explorer window frame and file list (avoid heavy/unstable Windows modifications).
 - [x] Ensure **zero** structural UI elements are made invisible or hidden (`Visibility=1` forbidden on functional controls).
 - [x] Style tab strip, active tab, inactive tab, and "+" button (`FileExplorerExtensions.FileExplorerTabControl`, `TabViewItem`) as floating glass tabs.
@@ -177,7 +177,7 @@ Historical note: the styler file was generated, then discontinued (git `1cc49e9`
 
 ### ✅ Workstream W.02: Windows 11 Notification Center Styler Generation
 
-> ✅ **Status: Completed**: Initial theme generation of `src/windows-11-notification-center-styler.yml` is complete and verified. Active follow-up fixes and polish (Quick Settings split-button state colors and chevron styling) are actively tracked under **Workstream W.04** / **Sprint 2**.
+> ✅ **Status: Completed**: Initial theme generation of `projects/command-center/windows-11-notification-center-styler.yml` is complete and verified. Active follow-up fixes and polish (Quick Settings split-button state colors and chevron styling) are actively tracked under **Workstream W.04** / **Sprint 2**.
 
 ```mermaid
 flowchart TD
@@ -188,7 +188,7 @@ flowchart TD
     W2_Validate --> W2_Handoff["Desktop Verification Handoff (Complete)"]
 ```
 
-Implement the full Command Center Glass theme for `src/windows-11-notification-center-styler.yml` targeting the `windows-11-notification-center-styler` mod.
+Implement the full Command Center Glass theme for `projects/command-center/windows-11-notification-center-styler.yml` targeting the `windows-11-notification-center-styler` mod.
 
 **Locked user directives:**
 
@@ -198,7 +198,7 @@ Implement the full Command Center Glass theme for `src/windows-11-notification-c
 
 **Implementation checklist:**
 
-- [x] Complete `src/windows-11-notification-center-styler.yml` with canonical Rule 03 tokens and materials.
+- [x] Complete `projects/command-center/windows-11-notification-center-styler.yml` with canonical Rule 03 tokens and materials.
 - [x] Implement glass styling and rim borders on `Grid#NotificationCenterGrid` and `Grid#CalendarCenterGrid`.
 - [x] Collapse native acrylic borders and double-shadows (`Border#CalendarHeaderMinimizedOverlay`, `Shadow:=`).
 - [x] Style Quick Actions grid (`Grid#L1Grid > Border`, `PaginatedToggleButton`, `SplitL2Button`).
@@ -214,7 +214,7 @@ Implement the full Command Center Glass theme for `src/windows-11-notification-c
 - Complete AI agent ecosystem ([`.agents/`](.agents/)) with Rules 00–09, Domain Skills, Agent Roles, and Templates.
 - Sourced target selectors from official Windhawk mod source code and community themes.
 - Automated static validation gate ([`tools/Test-WindhawkStyles.ps1`](tools/Test-WindhawkStyles.ps1)).
-- Central Operating Manual ([`AGENTS.md`](AGENTS.md)), companion docs ([`src/extras/README.md`](src/extras/README.md)), and root tracking ledgers ([`TODO.md`](TODO.md), [`PLAN.md`](PLAN.md), [`BUGS.md`](BUGS.md), [`ROADMAP.md`](ROADMAP.md), [`README.md`](README.md)).
+- Central Operating Manual ([`AGENTS.md`](AGENTS.md)), companion docs ([`projects/command-center/extras/README.md`](projects/command-center/extras/README.md)), and root tracking ledgers ([`TODO.md`](TODO.md), [`PLAN.md`](PLAN.md), [`BUGS.md`](BUGS.md), [`ROADMAP.md`](ROADMAP.md), [`README.md`](README.md)).
 - Remote GitHub repository initialized and synchronized at `https://github.com/HELIX-Origin/Windhawk-Command-Center-Suite`.
 
 ---
@@ -226,12 +226,12 @@ Implement the full Command Center Glass theme for `src/windows-11-notification-c
 pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1
 
 # Run validation on a specific styler file
-pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1 -Path src/windows-11-notification-center-styler.yml
+pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1 -Path projects/command-center/windows-11-notification-center-styler.yml
 ```
 
 ---
 
 ## 🔖 Metadata
 
-- **Project**: Windhawk Command Center Suite · tracked via milestones/sprints (no versioned releases)
+- **Project**: Windhawk Command Center Suite · tracked via milestones/sprints with milestone-based releases (zero attached assets)
 - **Agent Ecosystem:** [`AGENTS.md`](./AGENTS.md) and [`.agents/`](.agents/) are tracked directly in repository git tracking.

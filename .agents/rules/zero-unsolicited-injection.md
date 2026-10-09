@@ -6,26 +6,27 @@ The suite is a set of **settings files for specific Windhawk mods**. Its footpri
 
 ---
 
-## 1. Approved Runtime Surface
+## 1. Universal Multi-Mod Scope & Approved Runtime Surface
 
-This repository exists to maintain the **Command Center suite** for exactly **four approved** Windhawk styler mods. **Three** of them have an active styler file in `src/`; the fourth (File Explorer) is approved but **deferred** and has no file:
+This repository's agent ecosystem and hybrid C++/Python toolchain are designed as a **universal standard** for managing Windhawk themes. While extensible to other Windhawk mods as needed, the architecture specifies **five official Windhawk styler mods as its base intended scope**:
 
-| Style File | Windhawk Mod | Status |
-|---|---|---|
-| `src/windows-11-taskbar-styler.yml` | Windows 11 Taskbar Styler (`windows-11-taskbar-styler`) | ✅ Shipped — design reference |
-| `src/windows-11-start-menu-styler.yml` | Windows 11 Start Menu Styler (`windows-11-start-menu-styler`) | ✅ Shipped — design reference |
-| `src/windows-11-notification-center-styler.yml` | Windows 11 Notification Center Styler (`windows-11-notification-center-styler`) | ✅ Generated & Verified — follow-up polish active (ROADMAP M.02b, TODO W.04) |
-| *No styler file — deferred* | Windows 11 File Explorer Styler (`windows-11-file-explorer-styler`) | ⏸️ Deferred — no file exists (generated, then discontinued — git 1cc49e9); ROADMAP M.03 / TODO W.03 |
+| Styler File | Windhawk Mod ID | Target Process | Status |
+|---|---|---|---|
+| `projects/<project>/windows-11-taskbar-styler.yml` | `windows-11-taskbar-styler` | `explorer.exe` | ✅ Supported reference |
+| `projects/<project>/windows-11-start-menu-styler.yml` | `windows-11-start-menu-styler` | `StartMenuExperienceHost.exe` | ✅ Supported reference |
+| `projects/<project>/windows-11-notification-center-styler.yml` | `windows-11-notification-center-styler` | `ShellExperienceHost.exe` / `ShellHost.exe` | ✅ Generated & Verified (M.02b / W.04) |
+| *No styler file — deferred* | `windows-11-file-explorer-styler` | `explorer.exe` | ⏸️ Deferred (ROADMAP M.03 / TODO W.03) |
+| *No styler file — supported base* | `windows-11-settings-styler` | `SystemSettings.exe` | 🌐 In base scope (inspection & tooling supported) |
 
 > [!IMPORTANT]
-> **File Explorer stays deferred.** The mod remains inside this rule's four-mod boundary, but `src/windows-11-file-explorer-styler.yml` **does not exist** and must not be scaffolded, generated, or created without a new explicit user directive.
+> **File Explorer stays deferred.** The mod remains inside this rule's five-mod base boundary, but `projects/<project>/windows-11-file-explorer-styler.yml` **does not exist** and must not be scaffolded or created without a new explicit user directive.
 > **Locked user directive (2026-10-07)**: *"deferred due to lack of plausible customizations. there are other already existing styles that are too similar and as such there is no real benefit to having our own file explorer style just yet."*
 
-Adding a fifth mod to the suite requires explicit user approval and a [Rule 08](documentation-standards.md) catalog update. Reviving the File Explorer styler file likewise requires a new explicit user directive as noted above.
+Other Windhawk mods may be supported as requested, with corresponding target process additions and documentation updates.
 
 ### Out-of-Scope Companion Files
 
-These files live in `src/extras/` and are **not** part of the suite and are **not** maintained by this ecosystem. Agents must leave them byte-for-byte untouched unless the user explicitly asks otherwise.
+These files live in `projects/<project>/extras/` and are companion configurations. Agents must leave them byte-for-byte untouched unless the user explicitly asks otherwise.
 
 ---
 

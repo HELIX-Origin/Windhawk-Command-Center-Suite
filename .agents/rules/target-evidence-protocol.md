@@ -13,8 +13,8 @@ Every target added or changed must be backed by at least one of these, in order 
 | Tier | Evidence | How it is obtained |
 |---|---|---|
 | **T1 — Live tree** | The element was observed in the user's live visual tree | User inspects with UWPSpy (UWP surfaces) or the WinUI equivalent and shares the type/name/path, or a screenshot of the inspector |
-| **T2 — Shipped suite** | The target already works in a shipped suite file **for the same mod** | `src/windows-11-start-menu-styler.yml`, `src/windows-11-taskbar-styler.yml` |
-| **T3 — User scaffold** | The target was placed by the user in a suite file that was not yet shipped | `src/windows-11-notification-center-styler.yml` (generated & verified) |
+| **T2 — Shipped suite** | The target already works in a shipped suite file **for the same mod** | `projects/<project>/windows-11-start-menu-styler.yml`, `projects/<project>/windows-11-taskbar-styler.yml` |
+| **T3 — User scaffold** | The target was placed by the user in a suite file that was not yet shipped | `projects/<project>/windows-11-notification-center-styler.yml` (generated & verified) |
 | **T4 — Official source** | The target appears in the mod's readme or a built-in/community theme in the official styling-guide repository | `ramensoftware/windhawk-mods`, `ramensoftware/windows-11-*-styling-guide` — cite the URL |
 | **T5 — Inference** | Derived from WinUI/UWP control templates (e.g. `Border#BackgroundBorder` inside a `Button`) | Allowed **only** when paired with a T1 confirmation request in the live checklist |
 

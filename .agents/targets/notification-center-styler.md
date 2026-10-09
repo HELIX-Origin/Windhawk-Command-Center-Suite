@@ -1,6 +1,6 @@
 # 🔬 Target Evidence Record: Notification Center Styler
 
-Evidence ledger for `src/windows-11-notification-center-styler.yml` targeting `windows-11-notification-center-styler` mod per **Rule 04 (Target Evidence Protocol)**.
+Evidence ledger for `projects/<project>/windows-11-notification-center-styler.yml` targeting `windows-11-notification-center-styler` mod per **Rule 04 (Target Evidence Protocol)**.
 
 > [!NOTE]
 > **Accessibility Accommodation**: The user has poor eyesight and prefers zero manual UWPSpy inspection. All selectors below are sourced from official Windhawk mod source code (`mods/windows-11-notification-center-styler.wh.cpp`), official community themes (TranslucentShell, FrostyGlass, OS26 Tahoe Glass), and the user's initial scaffold. Manual UWPSpy inspection is avoided.
@@ -9,7 +9,7 @@ Evidence ledger for `src/windows-11-notification-center-styler.yml` targeting `w
 
 ## 📋 Surface Overview
 
-- **Style File**: `src/windows-11-notification-center-styler.yml`
+- **Style File**: `projects/<project>/windows-11-notification-center-styler.yml`
 - **Windhawk Mod**: Windows 11 Notification Center Styler (`windows-11-notification-center-styler` v1.7)
 - **Target Process**: `ShellExperienceHost.exe` (Win11 21H2–23H2) and `ShellHost.exe` (Win11 24H2)
 - **XAML Framework**: UWP `Windows.UI.Xaml`

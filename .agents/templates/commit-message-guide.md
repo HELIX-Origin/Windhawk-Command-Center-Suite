@@ -1,6 +1,6 @@
 # Git Commit & PR Message Guide
 
-Guidelines for clear, human-readable commit messages and PR titles with fitting GitHub emojis for **Windhawk Command Center Suite**. Follows conventional commits with strict surface and subsystem scoping.
+Guidelines for clear, human-readable commit messages and PR titles with fitting GitHub emojis for **Windhawk Theme Engineering**. Follows conventional commits with strict surface and subsystem scoping.
 
 ---
 
@@ -27,14 +27,14 @@ Guidelines for clear, human-readable commit messages and PR titles with fitting 
 | 🧪 | test | Static test suite or validation checks | 🧪 test(gate): add validation rule for constant declaration order |
 | ♻️ | refactor | Clean up selectors without visual change | ♻️ refactor(taskbar): deduplicate common visual state targets |
 | 🔧 | chore | Repo maintenance, tooling, templates | 🔧 chore(tools): update static check script for CRLF enforcement |
-| 🚀 | milestone | Milestone/sprint completion | 🚀 milestone: complete M.02b suite polish |
+| 🚀 | milestone | Milestone/sprint completion or release | 🚀 milestone: complete M.02b suite polish |
 
 ---
 
 ## Scopes
 
 Target the exact surface or subsystem:
-- **Surfaces**: `taskbar`, `start`, `notification`, `explorer` (File Explorer deferred — reserved)
+- **Surfaces**: `taskbar`, `start`, `notification`, `settings`, `explorer`
 - **Subsystems**: `tokens`, `materials`, `evidence`, `rules`, `agents`, `templates`, `tools`, `docs`
 
 ---

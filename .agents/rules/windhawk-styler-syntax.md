@@ -10,7 +10,7 @@ Throughout this rule, **NC** and **FE** abbreviate the Windhawk mods `windows-11
 
 ## 1. Top-Level YAML Structure
 
-Every styler file in `src/` must contain only the top-level keys supported by its specific mod (see [Rule 05](surface-scope-standards.md)).
+Every styler file in `projects/` must contain only the top-level keys supported by its specific mod (see [Rule 05](surface-scope-standards.md)).
 
 ```yaml
 # Strict key ordering:

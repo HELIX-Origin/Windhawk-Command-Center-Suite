@@ -9,7 +9,7 @@ The **Syntax Linter Agent** executes and maintains the automated static validati
 
 ## Domain Responsibilities
 
-1. **Static Gate Execution**: Runs automated parser and linting checks across all style files in `src/`.
+1. **Static Gate Execution**: Runs automated parser and linting checks across all style files in `projects/`.
 2. **Rule Enforcement**:
    - `E001`: Tabs in YAML.
    - `E002`: Non-CRLF line endings.

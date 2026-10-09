@@ -1,176 +1,82 @@
 # Tools (`tools/`)
 
-Repository tooling for **Windhawk Command Center Suite**. Everything here is
-invoked from the repository root and requires no interaction with the user's
-desktop.
+Repository tooling for **Windhawk Themes**.
 
 | Tool | Purpose | Invocation |
 |---|---|---|
-| [`Test-WindhawkStyles.ps1`](Test-WindhawkStyles.ps1) | **Static validation gate (Rule 07)** — YAML syntax, constant ordering, token checks for every styler file in `src/`. Must pass with 0 errors before handoff. | `pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1` |
-| [`style-baseline.ini`](style-baseline.ini) | Baseline ledger of pre-existing static-gate warnings in shipped files. Read by the gate; may only shrink (Rule 07 §2). | *(consumed automatically)* |
-| [`native/bin/xaml_dump.exe`](native/bin/xaml_dump.exe) | **Native C++ XAML inspector** — connects directly to UWP / WinUI 3 XAML runtimes via official Microsoft COM diagnostics (`xamlOM.h`). Dumps complete live visual trees including layout containers (`Grid`, `Border`, `Canvas`, `ContentPresenter`). | `.\tools\native\bin\xaml_dump.exe --help` |
-| [`inspect_xaml.py`](inspect_xaml.py) | **CLI wrapper** — forwards CLI commands directly to the high-performance native `xaml_dump.exe` binary. | `python tools/inspect_xaml.py --help` |
+| [`Test-WindhawkStyles.ps1`](Test-WindhawkStyles.ps1) | **Static validation gate (Rule 07)** — YAML syntax, constant ordering, and token checks for every styler file in `projects/`. | `pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1` |
+| [`style-baseline.ini`](style-baseline.ini) | Static gate baseline ledger. | *(consumed automatically)* |
+| [`inspect_xaml.py`](inspect_xaml.py) | **Hybrid XAML Inspector & Query CLI** — orchestrates UI automation, invokes the native C++ TAP engine, and parses live visual trees with rich querying. | `python tools/inspect_xaml.py --help` |
+| [`native/bin/xaml_dump.exe`](native/bin/xaml_dump.exe) | **Native C++ XAML TAP Engine** — injects `xaml_dump_agent.dll` via `xamlOM.h` to capture live XAML visual trees with zero manual UWPSpy inspection. | `.\tools\native\bin\xaml_dump.exe --help` |
 
 ---
 
-## Native C++ XAML Inspector (`tools/native/`)
+## Hybrid XAML Inspection Toolchain
 
-High-performance native toolchain for programmatically dumping the live visual trees of Windows 11 shell processes with zero manual user interaction.
+Combines high-performance native C++ TAP injection (`xamlOM.h`) with Python UI automation to guarantee that shell visual trees are actively rendered, populated, and fully captured.
 
-### Architecture
+> **Designed for AI "Vibe Coding" Workflows**:  
+> This hybrid toolchain is **not intended for manual inspection**. It is engineered specifically for developers who use AI tools and agentic coding assistants to "vibe code" themes. By utilizing UI automation to wake shell processes, open surfaces, dump their complete visual trees into machine-readable JSON, and clean up automatically, AI models can inspect trees, verify hierarchy depths, and discover selectors autonomously without requiring manual clicking in UWPSpy. Human developers wishing to inspect controls interactively should use **UWPSpy**.
 
-1. **`xaml_dump.exe`** (`tools/native/src/xaml_dump.cpp`):
-   - Command-line driver compiled with MSVC 2026.
-   - Enforces Rule 01 approved target processes (`StartMenuExperienceHost.exe`, `SearchHost.exe`, `ShellHost.exe`, `ShellExperienceHost.exe`, `explorer.exe`).
-   - Creates a non-blocking overlapped Named Pipe with AppContainer & Everyone permissions (`D:(A;;GA;;;WD)(A;;GA;;;AC)`).
-   - Injects `xaml_dump_agent.dll` via `CreateRemoteThread(..., LoadLibraryW, ...)`.
-   - Reads the serialized tree JSON stream, parses hierarchy, and formats output as text, JSON, or Markdown.
+### Key Features
+1. **Automated Surface Activation**: Automatically sends key chords (Start = Win, Notification Center = Win+N, Quick Settings = Win+A, Search = Win+S) to ensure background UWP shell processes are awake and have populated XAML trees.
+2. **Generous Permission Timeout**: Gives the user up to 30 seconds with heartbeat progress if an OS permission or UAC prompt appears, preventing premature timeouts.
+3. **Rich Visual Tree Navigation**: Search elements (`--find`), view subtrees (`--tree`), show ancestor breadcrumb paths (`--path`), and list children (`--children`).
+4. **Auto-Clean Restoration**: Automatically closes surfaces with Escape after inspection unless `--leave-open` is passed.
 
-2. **`xaml_dump_agent.dll`** (`tools/native/src/xaml_dump_agent.cpp`):
-   - In-process TAP agent implementing `IObjectWithSite`, `IClassFactory`, and `IVisualTreeServiceCallback2` from `xamlOM.h`.
-   - Discovers `InitializeXamlDiagnosticsEx` in `Windows.UI.Xaml.dll` / `Microsoft.UI.Xaml.dll`.
-   - Listens to `OnVisualTreeChange` for full element enumeration (`Handle`, `Type`, `Name`, `NumChildren`, `Parent`, `ChildIndex`).
-   - Self-unloads cleanly using `FreeLibraryAndExitThread` upon completion.
-   - Granted AppContainer permissions (`*S-1-15-2-1:(RX)`) during build.
-
-3. **Building**:
-   ```powershell
-   pwsh -NoProfile -File tools/native/build.ps1
-   ```
-
-Programmatic replacement for manual UWPSpy sessions: it reads the live UIA
-trees and writes them to stdout or a file. **Read-only by default: no
-windows are opened, nothing is drawn on screen, no screenshots are taken,
-and the mouse/keyboard are never touched** — unless the user grants
-explicit per-run consent for UI automation (below).
-
-### Safety contract (enforced, not aspirational)
-
-[`xaml_inspect/safety.py`](xaml_inspect/safety.py) whitelists every OS call
-the package may make. Anything else raises `SafetyViolation`:
-
-- **Tier 1 — read-only (always allowed)**: UIA property reads and tree
-  enumeration; Win32 calls limited to query-only enumeration (`EnumWindows`,
-  `FindWindowExW`, `GetClassNameW`, `GetWindowTextW`, `IsWindowVisible`,
-  `GetWindowThreadProcessId`, Toolhelp snapshot). No messages to other
-  processes, no screenshots — output is textual only.
-- **Tier 2 — UI automation (consent-gated)**: `SendInput`, `SetCursorPos`,
-  `mouse_event`, `keybd_event`, `SetForegroundWindow`, `ShowWindow` unlock
-  only when the run passes `--permit-ui-automation` (Rule 00). Consent is
-  process memory for that run only — never stored, never reused — and the
-  agent must ask the user directly before *each* such run. Input libraries
-  (pyautogui / pynput / keyboard / mouse / uiautomation) stay banned even
-  with consent: the tool's own gated path is the only sanctioned route.
-- **Never allowed (no consent exists)**: window move/resize/reorder
-  (`SetWindowPos`, `MoveWindow`, `SetWindowPlacement`,
-  `AttachThreadInput`), `SendMessage` / `PostMessage` traffic, clipboard
-  access — and **any automation of `LockApp.exe` / the lock screen**, which
-  locks the system and cannot be inspected as a result (lock screen
-  customization is research-only).
-
-### Consent-gated surface opening
-
-Keyboard shortcuts open the four inspectable surfaces; `--click X Y` is the
-fallback for areas with no shortcut (coordinates come from a previous
-dump's bounding rects). Surfaces opened this run are closed with one
-Escape afterwards unless `--leave-open` is passed.
-
-| Surface | Shortcut | Flag |
-|---|---|---|
-| Start menu | Win | `--open-surface start` |
-| Search | Win+S | `--open-surface search` |
-| Action Center / Quick Settings | Win+A | `--open-surface action-center` |
-| Notification Center | Win+N | `--open-surface notification-center` |
-| *(no shortcut)* | mouse click | `--click X Y` |
-
-Using `--open-surface` or `--click` **without** `--permit-ui-automation`
-is refused at the CLI (exit 3) with a message telling the agent to ask
-the user first.
-
-### Approved target processes
-
-Only these seven processes may be inspected (Rule 01 runtime boundary);
-`--process` / `--pid` reject anything else:
-
-`StartMenuExperienceHost.exe` · `SearchHost.exe` · `SearchApp.exe` ·
-`LockApp.exe` · `ShellExperienceHost.exe` · `ShellHost.exe` · `explorer.exe`
-
-### Examples
+### Usage Examples
 
 ```powershell
-# List target processes and their windows (no tree walk)
+# List active shell processes
 python tools/inspect_xaml.py --list
 
-# Taskbar XAML tree
-python tools/inspect_xaml.py -p explorer.exe --window-class Shell_TrayWnd
+# Inspect Start Menu (automatically opens Start via UI automation, dumps tree, and restores)
+python tools/inspect_xaml.py -p StartMenuExperienceHost.exe
 
-# Notification Center surface (hidden/idle windows included by default —
-# surfaces do NOT need to be opened to be inspected)
-python tools/inspect_xaml.py -p ShellHost.exe
+# Inspect Notification Center / Calendar
+python tools/inspect_xaml.py -p ShellHost.exe --surface notification-center
 
-# Search for specific elements, keep matching subtrees + context
-python tools/inspect_xaml.py -p StartMenuExperienceHost.exe -f "SearchBox|PinnedList"
+# Inspect Quick Settings / Action Center
+python tools/inspect_xaml.py -p ShellHost.exe --surface action-center
 
-# Only XAML-framework elements, capped depth, JSON to a file
-python tools/inspect_xaml.py -p explorer.exe --framework XAML --max-depth 8 --format json -o out.json
+# Inspect Windows Settings
+python tools/inspect_xaml.py -p SystemSettings.exe --surface settings
 
-# Markdown dump for pasting into a target evidence table
-python tools/inspect_xaml.py -p ShellHost.exe --format markdown -o .agents/targets/draft.md
+# Search for specific elements in live visual tree
+python tools/inspect_xaml.py -p StartMenuExperienceHost.exe --find ActionsBar
+python tools/inspect_xaml.py -p StartMenuExperienceHost.exe --tree PrimaryCardContainer --depth 4
+python tools/inspect_xaml.py -p StartMenuExperienceHost.exe --path AcrylicOverlay
 
-# --- UI automation: requires the user's explicit permission EACH run ---
-# (ask the user directly first; consent is never stored between runs — Rule 00)
-# Open the Start menu, dump it, then close it again with Escape
-python tools/inspect_xaml.py -p StartMenuExperienceHost.exe --permit-ui-automation --open-surface start
+# Save JSON dump to file
+python tools/inspect_xaml.py -p StartMenuExperienceHost.exe --format json -o tools/dumps/start_menu.json
 
-# Notification Center via Win+N, left open afterwards
-python tools/inspect_xaml.py -p ShellHost.exe --permit-ui-automation --open-surface notification-center --leave-open
+# Offline query on saved JSON dump
+python tools/inspect_xaml.py -f tools/dumps/start_menu.json --find PinnedList
 
-# Click at pixel coordinates (e.g. from a previous dump's bounding rect)
-python tools/inspect_xaml.py -p explorer.exe --permit-ui-automation --click 1870 1050
+# Capture a screenshot via ShareX while surface is open
+python tools/inspect_xaml.py -p StartMenuExperienceHost.exe --screenshot
 ```
 
-### Key options
+### ShareX Screenshot Integration
+The tool automatically parses your ShareX configuration (`HotkeysConfig.json` and `ApplicationConfig.json`) to find your custom screenshot keybinds (e.g. mapping `VK_SLEEP` if your keyboard registers PrintScreen as Sleep) and destination screenshot directories. Pass `--screenshot` (or `-ss`) to trigger a capture while the target shell surface is active.
 
-| Option | Effect |
-|---|---|
-| `-p / --process NAME` | Target process (repeatable); default = all approved targets that are running. |
-| `--pid N` | Inspect one PID (must belong to an approved target). |
-| `--window-class CLS` | Only top-level windows of this class (e.g. `Shell_TrayWnd`). |
-| `--window-title REGEX` | Only windows whose title matches. |
-| `--visible-only` | Skip hidden windows (default includes them so closed surfaces are inspectable). |
-| `-d / --max-depth N` | Depth cap (0 = unlimited). |
-| `-n / --max-nodes N` | Node budget per window (default 5000). |
-| `-f / --filter REGEX` | Keep matching elements **and their full subtree**; ancestors kept for context. |
-| `--framework SUBSTR` | Keep elements whose `frameworkId` contains the substring (e.g. `XAML`, `WinUI`). |
-| `--format {text,json,markdown}` | Output format (default `text`). |
-| `-o / --output FILE` | Write to a file instead of stdout. |
-| `--list` | Enumerate processes/windows only (fast, no UIA walk). |
-| `--permit-ui-automation` | Grant **this run** consent for tier-2 UI automation (Rule 00); required by `--open-surface` / `--click`. Never stored between runs. |
-| `--open-surface SURFACE` | Open `start`, `search`, `action-center`, or `notification-center` before capture (repeatable; requires `--permit-ui-automation`), then close it with Escape afterwards. |
-| `--click X Y` | Left-click at screen pixel `(X, Y)` before capture, for surfaces with no keyboard shortcut (requires `--permit-ui-automation`); the cursor stays at that position. |
-| `--leave-open` | Skip the closing Escape for surfaces opened by this run. |
+### Prerequisites & Setup Requirements
 
-### Output notes
+The hybrid inspection toolchain utilizes **Visual Studio's XAML Diagnostics API** (`xamlOM.h` / `IVisualTreeServiceCallback2`) to hook into running shell processes without third-party graphical debuggers.
 
-- Each element shows: control type, selector candidate
-  (`ClassName#AutomationId` from observed UIA values — evidence, not
-  guesses), framework id (`XAML` / `WinUI` / `Win32`), name, bounding rect.
-- Hung or wedged window providers fail per-window after a 3 s UIA timeout
-  (`IUIAutomation2::ConnectionTimeout` / `ResponseTimeout`) and are reported
-  as `ERROR:` lines instead of blocking the run.
-- Requires Python 3 and the `comtypes` package.
+1. **Visual Studio & C++ Requirements**:
+   - Visual Studio 2022 / 2026 (Community, Professional, or Build Tools).
+   - Workload: **Desktop development with C++**.
+   - Components: **MSVC v143/v144 - VS C++ x64/x86 build tools**, **Windows 11 SDK** (10.0.22621.0 or newer), and Visual Studio XAML Diagnostics components.
+2. **Python Requirements**:
+   - Python 3.10+ (64-bit).
+   - Dependencies: Standard libraries (`ctypes`, `subprocess`, `json`, `argparse`, `pathlib`).
+   - Install dependencies or optional speedups:
+     ```powershell
+     pip install -r tools/requirements.txt
+     ```
 
-### Package layout
-
-```
-tools/inspect_xaml.py        CLI launcher
-tools/xaml_inspect/
-  safety.py                  three-tier safety contract + call whitelists
-  activate.py                consent-gated UI automation (Win chords, click)
-  processes.py               approved-target PID resolution (Toolhelp)
-  windows.py                 top-level + message-only window enumeration
-  uia.py                     UIA3 session and element property reads
-  walk.py                    depth/budget-limited walk + filter pruning
-  render.py                  text / JSON / Markdown renderers
-  cli.py                     argparse orchestration + consent gate
+### Rebuilding Native C++ Inspector
+```powershell
+pwsh -NoProfile -File tools/native/build.ps1
 ```

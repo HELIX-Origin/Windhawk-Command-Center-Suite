@@ -1,0 +1,52 @@
+- section: Overview
+  pages:
+    - title: Documentation Home
+      path: README.md
+    - title: Getting Started
+      path: Getting-Started.md
+    - title: Architecture & Design
+      path: Architecture.md
+
+- section: Core Styler Mods
+  pages:
+    - title: Windows 11 Start Menu Styler
+      path: Start-Menu.md
+    - title: Windows 11 Taskbar Styler
+      path: Taskbar.md
+    - title: Windows 11 Notification Center Styler
+      path: Notification-Center.md
+    - title: Windows 11 Settings Styler
+      path: Settings.md
+    - title: Windows 11 File Explorer Styler
+      path: File-Explorer.md
+
+- section: Companion & Shell Mods
+  pages:
+    - title: Companion Mods Overview
+      path: Companion-Mods.md
+    - title: Taskbar Utility Mods
+      path: Companion-Taskbar.md
+    - title: Shell Flyouts & Positions
+      path: Companion-Shell.md
+    - title: System & Translucency Mods
+      path: Companion-System.md
+
+- section: Toolchain & Inspection
+  pages:
+    - title: Hybrid XAML Inspector
+      path: Toolchain.md
+    - title: Visual Tree Diagnostics
+      path: Diagnostics.md
+    - title: UWPSpy Manual Inspection
+      path: UWPSpy.md
+
+- section: Standards & Engineering
+  pages:
+    - title: Style Syntax & Tokens
+      path: Syntax-Standards.md
+    - title: Glass Material Recipes
+      path: Glass-Recipes.md
+    - title: Target Evidence Protocol
+      path: Evidence-Protocol.md
+    - title: Verification & Quality Gates
+      path: Verification.md

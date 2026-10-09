@@ -60,7 +60,7 @@ Refine spatial alignments, panel margins, split-button visual states, and intern
 
 ### ✅ Milestone M.02: Windows 11 Notification Center Styler Generation (Completed)
 
-- Implementation of `src/windows-11-notification-center-styler.yml` targeting `windows-11-notification-center-styler`.
+- Implementation of `projects/command-center/windows-11-notification-center-styler.yml` targeting `windows-11-notification-center-styler`.
 - Frosted glass and rim border applied to Notification Center, Calendar, Control Center (Quick Actions), Media Controls, Toasts, and Taskbar Jump Lists.
 - Compact media layout, ElementBackground tokens, and verified hover borders.
 - Static gate validation (0 errors, 0 warnings) and user desktop verification complete.
@@ -91,5 +91,5 @@ pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1
 
 ## 🔖 Metadata
 
-- **Project**: Windhawk Command Center Suite · tracked via milestones/sprints (no versioned releases)
+- **Project**: Windhawk Command Center Suite · tracked via milestones/sprints with milestone-based releases (zero attached assets)
 - **Agent Ecosystem:** [`AGENTS.md`](./AGENTS.md) and [`.agents/`](.agents/) are tracked directly in repository git tracking.

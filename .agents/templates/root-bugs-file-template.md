@@ -65,7 +65,7 @@
 
 - **Severity**: {{ emoji }} {{ severity }} ({{ category }})
 - **Status**: {{ emoji }} {{ status }}
-- **Affected File**: `src/{{ styler.file }}`
+- **Affected File**: `projects/{{ project }}/{{ styler.file }}`
 - **Reported Issue**: {{ short.summary }}
 
 #### Root Cause

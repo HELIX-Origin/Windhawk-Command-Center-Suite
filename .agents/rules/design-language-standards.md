@@ -1,20 +1,20 @@
-# Rule 03: Suite Design Language — "Command Center Glass"
+# Rule 03: Theme Design Language & Token Standards
 
 ## Purpose
 
-Every surface in the suite must look like it was cut from the same sheet of glass. This rule is the **canonical, extracted specification** of the visual language already shipped in `src/windows-11-start-menu-styler.yml` and `src/windows-11-taskbar-styler.yml`. The Notification Center file (`src/windows-11-notification-center-styler.yml`, generated & verified) **must** also be built from these tokens and recipes. File Explorer is **deferred** — no styler file exists, so its mentions here are reference-only (§5) and nothing may be created without a new explicit user directive. Inventing new values is a violation unless the user approves it and this rule is updated first.
+Every surface in a theme must look like it was cut from the same sheet of material. This rule is the **canonical specification** of how visual languages, design tokens, materials, and radii scales are defined and structured across the five base Windhawk styler mods.
 
 > [!IMPORTANT]
-> The shipped files are the reference implementation. If this rule and a shipped file disagree, the shipped file wins and this rule is the bug — fix the rule (and record the change in `BUGS.md`), never "correct" the shipped file to match a stale rule.
+> Project-specific token sets (such as `.agents/projects/<project-name>/`) define concrete values for a given theme. When modifying a theme, all surfaces must derive from the project's canonical tokens to preserve unified visual coherence.
 
 ---
 
 ## 1. Design Principles
 
-1. **Layered Glass Hierarchy.** Command Center Glass intentionally layers frosted glass and acrylic materials to produce visual depth, separation, and structure. Outer flyouts, floating taskbar frames, and surface roots provide the foundational frosted glass pane, while internal controls (cards, quick action tiles, calendar day cells, taskbar button pills) layer their own glassy / acrylic backgrounds, borders, and rounded corners on top. Native opaque system chrome (opaque background fills, hard drop shadows, conflicting system acrylic) is collapsed (`Visibility=1` or `Shadow:=`) so the custom glass layers shine through cleanly.
-2. **Top-lit edge.** Every panel carries the same thin vertical-gradient border, thicker on top/bottom than on the sides, which reads as light catching the rim of a glass pane.
-3. **Theme-aware tint.** Tints come from `{ThemeResource SystemChromeMediumColor}` / `SystemAltLowColor` so the suite follows light/dark mode automatically. The **accent color** (`SystemAccentColor`) is reserved for *state and emphasis*: active indicators, active window markers, slider fill, the clock, focus.
-4. **Rounded hierarchy.** Big containers are very round, interactive items are moderately round, menus/tooltips are slightly round. Radius communicates hierarchy.
+1. **Layered Glass & Material Hierarchy.** The theming architecture intentionally layers frosted glass and acrylic materials to produce visual depth, separation, and structure. Outer flyouts, floating taskbar frames, and surface roots provide the foundational glass pane, while internal controls (cards, quick action tiles, calendar day cells, taskbar button pills) layer their own glassy / acrylic backgrounds, borders, and rounded corners on top. Native opaque system chrome (opaque background fills, hard drop shadows, conflicting system acrylic) is collapsed (`Visibility=1` or `Shadow:=`) so the custom theme layers shine through cleanly.
+2. **Top-lit edge.** Panels carry a thin vertical-gradient border, thicker on top/bottom than on the sides, which reads as light catching the rim of a glass pane.
+3. **Theme-aware tint.** Tints derive from `{ThemeResource ...}` brushes so the theme follows Windows light/dark mode automatically. The **accent color** (`SystemAccentColor`) is reserved for *state and emphasis*: active indicators, active window markers, slider fill, and focus.
+4. **Rounded hierarchy.** Containers are very round, interactive items are moderately round, menus/tooltips are slightly round. Radius communicates hierarchy.
 5. **Quick, subtle motion.** 83 ms brush transitions, 0.8× press-scale on icons, short horizontal slide-in on menus. Nothing bouncy or slow.
 
 ---
@@ -165,7 +165,7 @@ Track `Fill:=$OverlayColor` (or `$Background`), decrease/fill rect `Fill:=$Accen
 
 ## 4. Token Naming for New Files
 
-1. New styler files use the **descriptive** names already used in `src/windows-11-notification-center-styler.yml` (`Background`, `BorderBrush`, `BorderBrushAlt`, `BackgroundAlt`, `BorderThickness`, `CornerRadius`, `CornerRadiusAlt1…4`), plus the taskbar's state brushes (`OverlayColor`, `OverlayColor2`, `AccentColor`, `ActiveColor`) when interaction states are needed.
+1. New styler files use the **descriptive** names already used in `projects/<project>/windows-11-notification-center-styler.yml` (`Background`, `BorderBrush`, `BorderBrushAlt`, `BackgroundAlt`, `BorderThickness`, `CornerRadius`, `CornerRadiusAlt1…4`), plus the taskbar's state brushes (`OverlayColor`, `OverlayColor2`, `AccentColor`, `ActiveColor`) when interaction states are needed.
 2. Existing shipped files are **not** renamed as a side effect of other work (Rule 00 §1.1). A token-name unification is its own workstream and needs user approval.
 3. Every declared token must be used, or commented in the file header as intentionally reserved (the four materials are always reserved-allowed).
 
@@ -175,10 +175,11 @@ Track `Fill:=$OverlayColor` (or `$Background`), decrease/fill rect `Fill:=$Accen
 
 | Surface | Panel radius | Item radius | Menu radius | Notes |
 |---|---|---|---|---|
-| Start Menu (reference) | 35 | 10 | 6 | Shipped |
-| Taskbar (reference) | 6 | 6 | 6 | Compact; 20 for pills |
-| Notification Center | 35 (`NotificationCenterGrid`, `CalendarCenterGrid`, `ControlCenterRegion`) | 10 (toasts, quick-action tiles, list items) | 6 | Pairs visually with Start; the toggle-tile accent = `$AccentColor` |
-| File Explorer *(deferred — no file; reference only, ROADMAP M.03)* | 10 (tabs, address bar, search pill) | 6 (action buttons) | 6 (context menus) | **Safe Glass Chrome** *(locked directive — future-dormant while deferred)*: The native window background remains unmolested. No elements hidden. Tabs, address bar, search box, command bar buttons, and menus styled as floating Command Center Glass controls. |
+| Start Menu | 35 | 10 | 6 | Custom layouts; separated-island flyouts; paired with theme materials |
+| Taskbar | 6 | 6 | 6 | Compact; 20 for pills |
+| Notification Center | 35 (`NotificationCenterGrid`, `CalendarCenterGrid`, `ControlCenterRegion`) | 10 (toasts, quick-action tiles, list items) | 6 | Pairs visually with Start; toggle-tile accent = `$AccentColor` |
+| Settings | 8 - 12 (navigation page / cards) | 6 - 8 (expander cards, buttons) | 6 | WinUI 3 `SystemSettings.exe`; page backgrounds, search box, card grouping |
+| File Explorer *(deferred)* | 10 (tabs, address bar, search pill) | 6 (action buttons) | 6 (context menus) | **Safe Glass Chrome**: The native window background remains untouched. Tabs, address bar, search box, command bar buttons, and menus styled as floating theme glass controls. |
 
 ---
 

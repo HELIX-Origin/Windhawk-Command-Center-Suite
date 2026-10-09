@@ -28,8 +28,7 @@ static std::vector<ProcessInfo> GetRunningProcesses() {
     if (Process32FirstW(snapshot, &entry)) {
         do {
             std::wstring name = entry.szExeFile;
-            bool approved = IsApprovedProcess(name);
-            if (approved) {
+            if (IsApprovedProcess(name)) {
                 list.push_back({ entry.th32ProcessID, name, true });
             }
         } while (Process32NextW(snapshot, &entry));
@@ -41,7 +40,6 @@ static std::vector<ProcessInfo> GetRunningProcesses() {
 
 // Find process by PID or name
 static DWORD ResolveProcess(const std::wstring& target, std::wstring& outName) {
-    // Check if target is a numeric PID
     bool isNum = !target.empty() && std::all_of(target.begin(), target.end(), ::iswdigit);
     if (isNum) {
         DWORD pid = std::stoul(target);
@@ -63,7 +61,6 @@ static DWORD ResolveProcess(const std::wstring& target, std::wstring& outName) {
         return pid;
     }
 
-    // Match by process name
     auto procs = GetRunningProcesses();
     for (const auto& p : procs) {
         if (_wcsicmp(p.name.c_str(), target.c_str()) == 0) {
@@ -72,7 +69,6 @@ static DWORD ResolveProcess(const std::wstring& target, std::wstring& outName) {
         }
     }
 
-    // Also try appending .exe
     std::wstring withExe = target + L".exe";
     for (const auto& p : procs) {
         if (_wcsicmp(p.name.c_str(), withExe.c_str()) == 0) {
@@ -84,7 +80,6 @@ static DWORD ResolveProcess(const std::wstring& target, std::wstring& outName) {
     return 0;
 }
 
-// Get directory of current executable
 static std::wstring GetExecutableDir() {
     WCHAR path[MAX_PATH];
     GetModuleFileNameW(nullptr, path, MAX_PATH);
@@ -93,13 +88,11 @@ static std::wstring GetExecutableDir() {
     return (pos != std::wstring::npos) ? s.substr(0, pos) : L"";
 }
 
-// Create Security Attributes for AppContainer & Everyone access
 static bool CreateAppContainerSecurityAttributes(SECURITY_ATTRIBUTES& sa) {
     ZeroMemory(&sa, sizeof(sa));
     sa.nLength = sizeof(sa);
     sa.bInheritHandle = FALSE;
 
-    // SDDL: D:(A;;GA;;;WD)(A;;GA;;;AC) -> Generic All for Everyone (WD) and All Application Packages (AC)
     return ConvertStringSecurityDescriptorToSecurityDescriptorW(
         L"D:(A;;GA;;;WD)(A;;GA;;;AC)",
         SDDL_REVISION_1,
@@ -108,7 +101,60 @@ static bool CreateAppContainerSecurityAttributes(SECURITY_ATTRIBUTES& sa) {
     ) != FALSE;
 }
 
-// Simple JSON Element
+// UI Automation Helper: Sends keyboard chord to open shell surfaces
+static void SendKeyChord(const std::vector<WORD>& keys) {
+    std::vector<INPUT> inputs;
+    inputs.reserve(keys.size() * 2);
+
+    for (WORD k : keys) {
+        INPUT inp = {};
+        inp.type = INPUT_KEYBOARD;
+        inp.ki.wVk = k;
+        inputs.push_back(inp);
+    }
+
+    for (auto it = keys.rbegin(); it != keys.rend(); ++it) {
+        INPUT inp = {};
+        inp.type = INPUT_KEYBOARD;
+        inp.ki.wVk = *it;
+        inp.ki.dwFlags = KEYEVENTF_KEYUP;
+        inputs.push_back(inp);
+    }
+
+    SendInput((UINT)inputs.size(), inputs.data(), sizeof(INPUT));
+}
+
+static void OpenSurface(const std::wstring& surface) {
+    if (surface == L"start") {
+        std::wcout << L"[UI-AUTOMATION] Opening Start Menu (Win)... Please do not touch your mouse/keyboard.\n";
+        SendKeyChord({ VK_LWIN });
+    } else if (surface == L"action-center" || surface == L"quick-settings") {
+        std::wcout << L"[UI-AUTOMATION] Opening Quick Settings / Action Center (Win+A)... Please wait.\n";
+        SendKeyChord({ VK_LWIN, 'A' });
+    } else if (surface == L"notification-center" || surface == L"calendar") {
+        std::wcout << L"[UI-AUTOMATION] Opening Notification Center / Calendar (Win+N)... Please wait.\n";
+        SendKeyChord({ VK_LWIN, 'N' });
+    } else if (surface == L"search") {
+        std::wcout << L"[UI-AUTOMATION] Opening Search (Win+S)... Please wait.\n";
+        SendKeyChord({ VK_LWIN, 'S' });
+    } else if (surface == L"settings") {
+        std::wcout << L"[UI-AUTOMATION] Opening Windows Settings (Win+I)... Please wait.\n";
+        SendKeyChord({ VK_LWIN, 'I' });
+    }
+    Sleep(1200); // Allow window to create and render XAML visual tree
+}
+
+static void CloseSurface() {
+    INPUT inps[2] = {};
+    inps[0].type = INPUT_KEYBOARD;
+    inps[0].ki.wVk = VK_ESCAPE;
+    inps[1].type = INPUT_KEYBOARD;
+    inps[1].ki.wVk = VK_ESCAPE;
+    inps[1].ki.dwFlags = KEYEVENTF_KEYUP;
+    SendInput(2, inps, sizeof(INPUT));
+    Sleep(300);
+}
+
 struct JsonElement {
     std::string handle;
     std::string parent;
@@ -118,7 +164,6 @@ struct JsonElement {
     unsigned int numChildren = 0;
 };
 
-// Parse element list from JSON response
 static std::vector<JsonElement> ParseElements(const std::string& json) {
     std::vector<JsonElement> elements;
     size_t pos = json.find("\"elements\":");
@@ -169,13 +214,11 @@ static std::vector<JsonElement> ParseElements(const std::string& json) {
     return elements;
 }
 
-// Tree Node for visualization
 struct TreeNode {
     JsonElement element;
     std::vector<std::shared_ptr<TreeNode>> children;
 };
 
-// Build tree hierarchy
 static std::vector<std::shared_ptr<TreeNode>> BuildTree(const std::vector<JsonElement>& elements) {
     std::map<std::string, std::shared_ptr<TreeNode>> nodeMap;
     std::vector<std::shared_ptr<TreeNode>> roots;
@@ -198,7 +241,6 @@ static std::vector<std::shared_ptr<TreeNode>> BuildTree(const std::vector<JsonEl
     return roots;
 }
 
-// Check filter match
 static bool MatchesFilter(const JsonElement& el, const std::string& filter) {
     if (filter.empty()) return true;
     auto toLower = [](std::string s) {
@@ -219,7 +261,6 @@ static bool SubtreeMatches(const std::shared_ptr<TreeNode>& node, const std::str
     return false;
 }
 
-// Print text tree
 static void PrintTextTree(const std::shared_ptr<TreeNode>& node, int depth, int maxDepth, const std::string& filter, std::ostream& out) {
     if (maxDepth >= 0 && depth > maxDepth) return;
     if (!filter.empty() && !SubtreeMatches(node, filter)) return;
@@ -237,7 +278,6 @@ static void PrintTextTree(const std::shared_ptr<TreeNode>& node, int depth, int 
     }
 }
 
-// Print markdown tree
 static void PrintMarkdownTree(const std::shared_ptr<TreeNode>& node, int depth, int maxDepth, const std::string& filter, std::ostream& out) {
     if (maxDepth >= 0 && depth > maxDepth) return;
     if (!filter.empty() && !SubtreeMatches(node, filter)) return;
@@ -254,16 +294,17 @@ static void PrintMarkdownTree(const std::shared_ptr<TreeNode>& node, int depth, 
     }
 }
 
-// Print Help
 static void PrintHelp() {
-    std::wcout << L"Windhawk Command Center Suite - Native XAML Visual Tree Inspector\n"
+    std::wcout << L"Windhawk Command Center Suite - Native Hybrid XAML Inspector\n\n"
                << L"Usage:\n"
                << L"  xaml_dump.exe [options]\n\n"
                << L"Options:\n"
-               << L"  -p, --process <name|pid>  Target process name or PID (e.g. ShellHost.exe, explorer.exe)\n"
+               << L"  -p, --process <name|pid>  Target process name or PID (e.g. StartMenuExperienceHost.exe)\n"
+               << L"  -s, --surface <name>      Auto-open surface with UI automation (start, action-center, notification-center, search)\n"
                << L"  -l, --list                List active approved shell processes\n"
                << L"  -f, --filter <text>       Filter elements by Name or Type (case-insensitive)\n"
                << L"  -d, --depth <n>           Maximum visual tree depth to display\n"
+               << L"  --leave-open              Keep opened surface visible after inspection (default: closes with Escape)\n"
                << L"  --format <text|json|md>   Output format (default: text)\n"
                << L"  -o, --output <file>       Write output to file instead of stdout\n"
                << L"  -h, --help                Show this help message\n";
@@ -294,12 +335,14 @@ static void EnsureAgentUnloaded(DWORD pid) {
 }
 
 int wmain(int argc, wchar_t* argv[]) {
-    std::wstring targetProcess = L"ShellHost.exe";
+    std::wstring targetProcess = L"StartMenuExperienceHost.exe";
+    std::wstring surface = L"";
     std::wstring filter = L"";
     int maxDepth = -1;
     std::wstring format = L"text";
     std::wstring outputFile = L"";
     bool doList = false;
+    bool leaveOpen = false;
 
     for (int i = 1; i < argc; ++i) {
         std::wstring arg = argv[i];
@@ -310,6 +353,8 @@ int wmain(int argc, wchar_t* argv[]) {
             doList = true;
         } else if ((arg == L"-p" || arg == L"--process") && i + 1 < argc) {
             targetProcess = argv[++i];
+        } else if ((arg == L"-s" || arg == L"--surface") && i + 1 < argc) {
+            surface = argv[++i];
         } else if ((arg == L"-f" || arg == L"--filter") && i + 1 < argc) {
             filter = argv[++i];
         } else if ((arg == L"-d" || arg == L"--depth") && i + 1 < argc) {
@@ -318,6 +363,8 @@ int wmain(int argc, wchar_t* argv[]) {
             format = argv[++i];
         } else if ((arg == L"-o" || arg == L"--output") && i + 1 < argc) {
             outputFile = argv[++i];
+        } else if (arg == L"--leave-open") {
+            leaveOpen = true;
         }
     }
 
@@ -331,19 +378,38 @@ int wmain(int argc, wchar_t* argv[]) {
         return 0;
     }
 
+    // Auto-map surface if not explicitly given
+    if (surface.empty()) {
+        if (_wcsicmp(targetProcess.c_str(), L"StartMenuExperienceHost.exe") == 0 ||
+            _wcsicmp(targetProcess.c_str(), L"StartMenuExperienceHost") == 0) {
+            surface = L"start";
+        } else if (_wcsicmp(targetProcess.c_str(), L"SearchHost.exe") == 0 ||
+                   _wcsicmp(targetProcess.c_str(), L"SearchHost") == 0) {
+            surface = L"search";
+        } else if (_wcsicmp(targetProcess.c_str(), L"SystemSettings.exe") == 0 ||
+                   _wcsicmp(targetProcess.c_str(), L"SystemSettings") == 0) {
+            surface = L"settings";
+        }
+    }
+
+    // UI Automation: Open surface if specified
+    bool surfaceOpened = false;
+    if (!surface.empty()) {
+        OpenSurface(surface);
+        surfaceOpened = true;
+    }
+
     std::wstring resolvedName;
     DWORD pid = ResolveProcess(targetProcess, resolvedName);
     if (!pid) {
         std::wcerr << L"[ERROR] Target process '" << targetProcess << L"' is not running.\n";
+        if (surfaceOpened && !leaveOpen) CloseSurface();
         return 1;
     }
 
     if (!IsApprovedProcess(resolvedName)) {
         std::wcerr << L"[ERROR] Process '" << resolvedName << L"' is NOT an approved target per Rule 01.\n";
-        std::wcerr << L"Approved targets are:\n";
-        for (const auto* app : APPROVED_PROCESSES) {
-            std::wcerr << L"  - " << app << L"\n";
-        }
+        if (surfaceOpened && !leaveOpen) CloseSurface();
         return 1;
     }
 
@@ -352,17 +418,17 @@ int wmain(int argc, wchar_t* argv[]) {
 
     if (GetFileAttributesW(agentDllPath.c_str()) == INVALID_FILE_ATTRIBUTES) {
         std::wcerr << L"[ERROR] Agent DLL not found at: " << agentDllPath << L"\n";
+        if (surfaceOpened && !leaveOpen) CloseSurface();
         return 1;
     }
 
-    // Clean up any stale agent DLL instance in target process before injecting
     EnsureAgentUnloaded(pid);
 
-    // Set up Named Pipe with AppContainer & Everyone permissions
     std::wstring pipeName = std::wstring(XAML_DUMP_PIPE_PREFIX) + std::to_wstring(pid);
     SECURITY_ATTRIBUTES sa;
     if (!CreateAppContainerSecurityAttributes(sa)) {
         std::wcerr << L"[ERROR] Failed to create security descriptor for named pipe.\n";
+        if (surfaceOpened && !leaveOpen) CloseSurface();
         return 1;
     }
 
@@ -371,9 +437,9 @@ int wmain(int argc, wchar_t* argv[]) {
         PIPE_ACCESS_INBOUND | FILE_FLAG_OVERLAPPED,
         PIPE_TYPE_BYTE | PIPE_WAIT,
         1,
-        256 * 1024,
-        256 * 1024,
-        4000,
+        512 * 1024,
+        512 * 1024,
+        45000,
         &sa
     );
 
@@ -383,10 +449,10 @@ int wmain(int argc, wchar_t* argv[]) {
 
     if (hPipe == INVALID_HANDLE_VALUE) {
         std::wcerr << L"[ERROR] Failed to create named pipe. Error: " << GetLastError() << L"\n";
+        if (surfaceOpened && !leaveOpen) CloseSurface();
         return 1;
     }
 
-    // Open target process
     HANDLE hProcess = OpenProcess(
         PROCESS_CREATE_THREAD | PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION | PROCESS_VM_WRITE | PROCESS_VM_READ | PROCESS_SUSPEND_RESUME,
         FALSE,
@@ -394,7 +460,6 @@ int wmain(int argc, wchar_t* argv[]) {
     );
 
     if (!hProcess) {
-        // Fallback without PROCESS_SUSPEND_RESUME if restricted
         hProcess = OpenProcess(
             PROCESS_CREATE_THREAD | PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION | PROCESS_VM_WRITE | PROCESS_VM_READ,
             FALSE,
@@ -405,23 +470,23 @@ int wmain(int argc, wchar_t* argv[]) {
     if (!hProcess) {
         std::wcerr << L"[ERROR] Failed to open process " << pid << L" (" << resolvedName << L"). Error: " << GetLastError() << L"\n";
         CloseHandle(hPipe);
+        if (surfaceOpened && !leaveOpen) CloseSurface();
         return 1;
     }
 
-    // If target process is suspended (e.g. background UWP), temporarily resume it
     typedef LONG (NTAPI *pfnNtResumeProcess)(HANDLE);
     auto pNtResume = (pfnNtResumeProcess)GetProcAddress(GetModuleHandleW(L"ntdll.dll"), "NtResumeProcess");
     if (pNtResume) {
         pNtResume(hProcess);
     }
 
-    // Allocate memory for agent DLL path
     size_t pathBytes = (agentDllPath.size() + 1) * sizeof(wchar_t);
     LPVOID remoteMem = VirtualAllocEx(hProcess, nullptr, pathBytes, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
     if (!remoteMem) {
         std::wcerr << L"[ERROR] VirtualAllocEx failed. Error: " << GetLastError() << L"\n";
         CloseHandle(hProcess);
         CloseHandle(hPipe);
+        if (surfaceOpened && !leaveOpen) CloseSurface();
         return 1;
     }
 
@@ -430,6 +495,7 @@ int wmain(int argc, wchar_t* argv[]) {
         VirtualFreeEx(hProcess, remoteMem, 0, MEM_RELEASE);
         CloseHandle(hProcess);
         CloseHandle(hPipe);
+        if (surfaceOpened && !leaveOpen) CloseSurface();
         return 1;
     }
 
@@ -446,22 +512,35 @@ int wmain(int argc, wchar_t* argv[]) {
         VirtualFreeEx(hProcess, remoteMem, 0, MEM_RELEASE);
         CloseHandle(hProcess);
         CloseHandle(hPipe);
+        if (surfaceOpened && !leaveOpen) CloseSurface();
         return 1;
     }
 
-    // Wait for connection with timeout
+    std::wcout << L"[INFO] Connecting to target process (" << resolvedName << L" PID " << pid << L")...\n";
+    std::wcout << L"[INFO] If prompted for permission, please grant it now...\n";
+
+    // Generous connection loop (up to 30 seconds with heartbeat)
     BOOL connected = FALSE;
-    DWORD waitRes = WaitForSingleObject(ov.hEvent, 4000);
-    if (waitRes == WAIT_OBJECT_0) {
-        connected = TRUE;
-    } else {
+    for (int waitSec = 0; waitSec < 30; ++waitSec) {
+        DWORD waitRes = WaitForSingleObject(ov.hEvent, 1000);
+        if (waitRes == WAIT_OBJECT_0) {
+            connected = TRUE;
+            break;
+        }
+        std::wcout << L".";
+        std::wcout.flush();
+    }
+    std::wcout << L"\n";
+
+    if (!connected) {
         CancelIo(hPipe);
-        std::wcerr << L"[ERROR] Timeout waiting for target process to respond (process may be suspended or not active).\n";
+        std::wcerr << L"[ERROR] Timeout waiting for target process connection.\n";
     }
     CloseHandle(ov.hEvent);
 
     std::string jsonPayload;
     if (connected) {
+        std::wcout << L"[INFO] Reading XAML visual tree stream...\n";
         char buffer[4096];
         DWORD bytesRead = 0;
         OVERLAPPED readOv = { 0 };
@@ -472,7 +551,7 @@ int wmain(int argc, wchar_t* argv[]) {
             if (!readOk) {
                 DWORD rerr = GetLastError();
                 if (rerr == ERROR_IO_PENDING) {
-                    if (WaitForSingleObject(readOv.hEvent, 2500) == WAIT_OBJECT_0) {
+                    if (WaitForSingleObject(readOv.hEvent, 4000) == WAIT_OBJECT_0) {
                         GetOverlappedResult(hPipe, &readOv, &bytesRead, FALSE);
                     } else {
                         CancelIo(hPipe);
@@ -491,12 +570,16 @@ int wmain(int argc, wchar_t* argv[]) {
         CloseHandle(readOv.hEvent);
     }
 
-    // Clean up remote injection handle and memory
     WaitForSingleObject(hThread, 500);
     CloseHandle(hThread);
     VirtualFreeEx(hProcess, remoteMem, 0, MEM_RELEASE);
     CloseHandle(hProcess);
     CloseHandle(hPipe);
+
+    // Close surface if opened and not requested to leave open
+    if (surfaceOpened && !leaveOpen) {
+        CloseSurface();
+    }
 
     if (jsonPayload.empty()) {
         std::wcerr << L"[ERROR] Received empty response from target process.\n";
@@ -512,52 +595,40 @@ int wmain(int argc, wchar_t* argv[]) {
         if (!outputFile.empty()) {
             std::ofstream out(outputFile);
             out << jsonPayload;
+            std::wcout << L"[INFO] Saved JSON dump to " << outputFile << L"\n";
         } else {
             std::cout << jsonPayload << "\n";
         }
         return 0;
     }
 
-    // Convert filter to UTF-8
-    int filterUtf8Len = WideCharToMultiByte(CP_UTF8, 0, filter.c_str(), (int)filter.size(), nullptr, 0, nullptr, nullptr);
-    std::string filterUtf8(filterUtf8Len, '\0');
-    if (filterUtf8Len > 0) {
-        WideCharToMultiByte(CP_UTF8, 0, filter.c_str(), (int)filter.size(), &filterUtf8[0], filterUtf8Len, nullptr, nullptr);
-    }
-
     auto elements = ParseElements(jsonPayload);
+    std::wcout << L"[INFO] Captured " << elements.size() << L" XAML visual tree elements.\n";
+
     auto roots = BuildTree(elements);
+    std::string narrowFilter(filter.begin(), filter.end());
 
-    auto toUtf8 = [](const std::wstring& ws) -> std::string {
-        if (ws.empty()) return "";
-        int len = WideCharToMultiByte(CP_UTF8, 0, ws.c_str(), (int)ws.size(), nullptr, 0, nullptr, nullptr);
-        std::string s(len, '\0');
-        WideCharToMultiByte(CP_UTF8, 0, ws.c_str(), (int)ws.size(), &s[0], len, nullptr, nullptr);
-        return s;
-    };
-
-    std::ostringstream ss;
-    if (format == L"markdown" || format == L"md") {
-        ss << "# Live XAML Visual Tree: " << toUtf8(resolvedName) << " (PID " << pid << ")\n\n";
-        ss << "Total Elements: " << elements.size() << "\n\n";
-        for (const auto& root : roots) {
-            PrintMarkdownTree(root, 0, maxDepth, filterUtf8, ss);
+    std::stringstream ss;
+    if (format == L"md" || format == L"markdown") {
+        ss << "# Visual Tree: " << std::string(resolvedName.begin(), resolvedName.end()) 
+           << " (PID " << pid << ")\n\n";
+        for (const auto& r : roots) {
+            PrintMarkdownTree(r, 0, maxDepth, narrowFilter, ss);
         }
     } else {
-        ss << "Live XAML Visual Tree: " << toUtf8(resolvedName) << " (PID " << pid << ")\n";
-        ss << "Total Elements: " << elements.size() << "\n";
-        ss << "--------------------------------------------------\n";
-        for (const auto& root : roots) {
-            PrintTextTree(root, 0, maxDepth, filterUtf8, ss);
+        ss << "=== Visual Tree: " << std::string(resolvedName.begin(), resolvedName.end()) 
+           << " (PID " << pid << ", Elements: " << elements.size() << ") ===\n\n";
+        for (const auto& r : roots) {
+            PrintTextTree(r, 0, maxDepth, narrowFilter, ss);
         }
     }
 
     if (!outputFile.empty()) {
         std::ofstream out(outputFile);
         out << ss.str();
-        std::wcout << L"Output written to: " << outputFile << L"\n";
+        std::wcout << L"[INFO] Saved visual tree to " << outputFile << L"\n";
     } else {
-        std::cout << ss.str();
+        std::cout << ss.str() << "\n";
     }
 
     return 0;

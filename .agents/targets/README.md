@@ -9,7 +9,7 @@ Per-styler-file selector evidence ledgers built from [`target-evidence-template`
 
 | Record | Styler File | Status |
 |---|---|---|
-| [notification-center-styler](notification-center-styler.md) | `src/windows-11-notification-center-styler.yml` | ✅ Active — Generated & verified |
+| [notification-center-styler](notification-center-styler.md) | `projects/<project>/windows-11-notification-center-styler.yml` | ✅ Active — Generated & verified |
 | [file-explorer-styler](file-explorer-styler.md) | *— (no styler file)* | ⏸️ Deferred (ROADMAP M.03) — dormant reference |
 
 ## Conventions

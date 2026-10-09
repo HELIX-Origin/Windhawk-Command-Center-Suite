@@ -1,0 +1,205 @@
+---
+layout: null
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Universal Windows 11 theme engineering framework, styling suites, and visual tree inspection toolchain for Windhawk styler mods. Part of HELIX Origin.">
+    <meta name="theme-color" content="#081426">
+    <title>Windhawk Themes | HELIX Origin</title>
+    <link rel="icon" href="https://github.com/HELIX-Origin.png?size=64">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+
+      <aside class="sidebar" aria-label="Project information">
+        <a class="brand" href="#about" aria-label="Windhawk Themes home">
+          <span class="brand__mark" aria-hidden="true">
+            <img src="https://github.com/HELIX-Origin.png?size=150" alt="" width="150" height="150">
+          </span>
+          <span>
+            <strong>Windhawk Themes</strong>
+            <small>Theme Engineering</small>
+          </span>
+        </a>
+        <div class="separator" aria-hidden="true"></div>
+        <p class="sidebar__summary">
+          A universal theme engineering framework, cohesive styling suites, and
+          hybrid XAML inspection toolchain for Windows 11 Windhawk styler mods.
+        </p>
+        <div class="sidebar__footer">
+          <a href="https://github.com/HELIX-Origin/Windhawk-Themes">📦 GitHub repository</a>
+          <a href="https://github.com/HELIX-Origin/Windhawk-Themes/releases">🏷️ Releases</a>
+          <a href="{{ '/README.html' | relative_url }}">📖 Documentation</a>
+          <a href="https://github.com/HELIX-Origin/Windhawk-Themes/blob/main/LICENSE">⚖️ MIT License</a>
+          <a href="https://github.com/HELIX-Origin/Windhawk-Themes/issues">🐛 Issues</a>
+          <a href="https://github.com/HELIX-Origin/Windhawk-Themes/discussions">💬 Discussions</a>
+          <a href="https://helix-origin.github.io/">🧬 HELIX Origin</a>
+        </div>
+      </aside>
+
+      <main id="main" class="main-content">
+        <header class="page-header">
+          <nav class="navbar" aria-label="Main navigation">
+            <ul class="navbar-list">
+              <li><a class="navbar-link active" href="#about" aria-current="location">About</a></li>
+              <li><a class="navbar-link" href="#surfaces">Surfaces</a></li>
+              <li><a class="navbar-link" href="#toolchain">Toolchain</a></li>
+              <li><a class="navbar-link" href="{{ '/README.html' | relative_url }}">Docs</a></li>
+              <li><a class="navbar-link" href="https://github.com/HELIX-Origin/Windhawk-Themes/releases">Releases ↗</a></li>
+            </ul>
+            {% include translate-control.html %}
+          </nav>
+
+          <p class="eyebrow">Windows 11 Customization</p>
+          <h1>Unified frosted glass styling across every Windows shell.</h1>
+          <p class="lead">
+            Windhawk Themes delivers cohesive, hardware-accelerated frosted glass and acrylic
+            theming for Windows 11 shell surfaces, backed by an autonomous multi-agent ecosystem
+            and a hybrid C++/Python visual tree inspection toolchain.
+          </p>
+          <div class="notice">
+            <p><strong>Universal Mod Support.</strong> Engineered for official Windhawk styler mods: Start Menu, Taskbar, Notification Center, Settings, and File Explorer. Zero unsolicited injection, zero external global hook dependencies.</p>
+          </div>
+          <div class="header-actions">
+            <a class="button button--primary" href="{{ '/Getting-Started.html' | relative_url }}">Get Started</a>
+            <a class="button button--secondary" href="{{ '/README.html' | relative_url }}">Read Documentation</a>
+          </div>
+        </header>
+
+        <section id="about" class="doc-section">
+          <div class="section-heading">
+            <span class="section-number">01</span>
+            <div>
+              <p class="eyebrow">Overview</p>
+              <h2>What is Windhawk Themes?</h2>
+            </div>
+          </div>
+          <p>
+            Windhawk Themes is an end-to-end theme development framework and styling suite for Windows 11.
+            Instead of fragmented, disjointed mod settings that clash across desktop updates, this project
+            unifies the shell through a single cohesive material grammar:
+          </p>
+          <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 1.5rem;">
+            <div class="feature-card" style="background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 1.25rem;">
+              <h3 style="margin-top: 0; color: var(--accent);">Unified Frosted Blur</h3>
+              <p style="margin-bottom: 0; font-size: 0.95rem; color: var(--muted);">Consistent <code>WindhawkBlur</code> direct composition shaders with theme-aware tinting that harmonizes across dark and light Windows modes.</p>
+            </div>
+            <div class="feature-card" style="background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 1.25rem;">
+              <h3 style="margin-top: 0; color: var(--accent);">Top-Lit Glass Rims</h3>
+              <p style="margin-bottom: 0; font-size: 0.95rem; color: var(--muted);">Precision vertical gradient borders that simulate natural specular light catching the polished edges of glass surfaces.</p>
+            </div>
+            <div class="feature-card" style="background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 1.25rem;">
+              <h3 style="margin-top: 0; color: var(--accent);">Harmonized Radii Scale</h3>
+              <p style="margin-bottom: 0; font-size: 0.95rem; color: var(--muted);">Proportional rounded corner hierarchies spanning XL (35) containers down to XS (6) flyouts and menus.</p>
+            </div>
+            <div class="feature-card" style="background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 1.25rem;">
+              <h3 style="margin-top: 0; color: var(--accent);">Intentional Layering</h3>
+              <p style="margin-bottom: 0; font-size: 0.95rem; color: var(--muted);">Native opaque fills are cleanly collapsed, letting layered glassy cards, pills, and interactive states stand out with depth.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="surfaces" class="doc-section">
+          <div class="section-heading">
+            <span class="section-number">02</span>
+            <div>
+              <p class="eyebrow">Shell Architecture</p>
+              <h2>Supported Styler Surfaces</h2>
+            </div>
+          </div>
+          <p>
+            The framework targets five base official Windhawk styler mods covering primary Windows 11 shell experiences:
+          </p>
+
+          <div class="surfaces-table-wrap" style="overflow-x: auto; margin-top: 1.5rem;">
+            <table style="width: 100%; border-collapse: collapse; border: 1px solid var(--line);">
+              <thead>
+                <tr style="background: var(--panel-raised); text-align: left;">
+                  <th style="padding: 0.85rem; border-bottom: 1px solid var(--line);">Surface</th>
+                  <th style="padding: 0.85rem; border-bottom: 1px solid var(--line);">Windhawk Mod ID</th>
+                  <th style="padding: 0.85rem; border-bottom: 1px solid var(--line);">Target Process</th>
+                  <th style="padding: 0.85rem; border-bottom: 1px solid var(--line);">Framework</th>
+                  <th style="padding: 0.85rem; border-bottom: 1px solid var(--line);">Documentation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--line);">
+                  <td style="padding: 0.85rem;"><strong>Start Menu</strong></td>
+                  <td style="padding: 0.85rem;"><code>windows-11-start-menu-styler</code></td>
+                  <td style="padding: 0.85rem;"><code>StartMenuExperienceHost.exe</code></td>
+                  <td style="padding: 0.85rem;">UWP / WinUI 2</td>
+                  <td style="padding: 0.85rem;"><a href="{{ '/Start-Menu.html' | relative_url }}">Start Menu Guide →</a></td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--line);">
+                  <td style="padding: 0.85rem;"><strong>Taskbar</strong></td>
+                  <td style="padding: 0.85rem;"><code>windows-11-taskbar-styler</code></td>
+                  <td style="padding: 0.85rem;"><code>explorer.exe</code></td>
+                  <td style="padding: 0.85rem;">WinUI 3 / XAML</td>
+                  <td style="padding: 0.85rem;"><a href="{{ '/Taskbar.html' | relative_url }}">Taskbar Guide →</a></td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--line);">
+                  <td style="padding: 0.85rem;"><strong>Notification Center</strong></td>
+                  <td style="padding: 0.85rem;"><code>windows-11-notification-center-styler</code></td>
+                  <td style="padding: 0.85rem;"><code>ShellExperienceHost.exe</code> / <code>ShellHost.exe</code></td>
+                  <td style="padding: 0.85rem;">UWP <code>Windows.UI.Xaml</code></td>
+                  <td style="padding: 0.85rem;"><a href="{{ '/Notification-Center.html' | relative_url }}">Notification Center Guide →</a></td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--line);">
+                  <td style="padding: 0.85rem;"><strong>Settings</strong></td>
+                  <td style="padding: 0.85rem;"><code>windows-11-settings-styler</code></td>
+                  <td style="padding: 0.85rem;"><code>SystemSettings.exe</code></td>
+                  <td style="padding: 0.85rem;">UWP / WinUI <code>Windows.UI.Xaml</code></td>
+                  <td style="padding: 0.85rem;"><a href="{{ '/Settings.html' | relative_url }}">Settings Guide →</a></td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.85rem;"><strong>File Explorer</strong></td>
+                  <td style="padding: 0.85rem;"><code>windows-11-file-explorer-styler</code></td>
+                  <td style="padding: 0.85rem;"><code>explorer.exe</code></td>
+                  <td style="padding: 0.85rem;">WinUI 3 <code>Microsoft.UI.Xaml</code></td>
+                  <td style="padding: 0.85rem;"><a href="{{ '/File-Explorer.html' | relative_url }}">File Explorer Guide →</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="toolchain" class="doc-section">
+          <div class="section-heading">
+            <span class="section-number">03</span>
+            <div>
+              <p class="eyebrow">Diagnostics & Automation</p>
+              <h2>Hybrid C++/Python Toolchain</h2>
+            </div>
+          </div>
+          <p>
+            Reliable theming requires empirical visual tree inspection without manual burden.
+            Our high-speed native inspection suite combines direct C++ TAP hooks with a flexible Python CLI:
+          </p>
+          <ul>
+            <li><strong>Automated Surface Activation</strong>: Programmatically opens and closes shell surfaces (Start, Action Center, Notification Center, Search, Settings) via UI automation to ensure UWP visual trees are fully populated.</li>
+            <li><strong>Heartbeat Resiliency</strong>: Built-in 30-second heartbeat loops accommodate OS elevation and UAC security prompts without premature timeouts.</li>
+            <li><strong>ShareX Screenshot Integration</strong>: Auto-detects user keybindings (including <code>VK_SLEEP</code> PrintScreen mappings) to capture desktop verification evidence automatically.</li>
+            <li><strong>Automated Static Gate</strong>: <code>tools/Test-WindhawkStyles.ps1</code> verifies YAML syntax, constant ordering, token definitions, and safety rules before any style is published.</li>
+          </ul>
+        </section>
+
+        <footer class="site-footer">
+          <span>Windhawk Themes · Built by HELIX Origin</span>
+          <a href="https://github.com/HELIX-Origin/Windhawk-Themes">GitHub Repository</a>
+        </footer>
+      </main>
+
+    </div>
+    <div id="google_translate_element" class="translation-host" hidden></div>
+    <script type="module" src="{{ '/assets/js/mermaid-init.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/translate.js' | relative_url }}" defer></script>
+  </body>
+</html>

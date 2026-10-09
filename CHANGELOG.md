@@ -1,6 +1,28 @@
 # Changelog
 
-All notable changes to **Windhawk Command Center Suite** are documented here. One entry per update (`## YYYY-MM-DD - HH:MM`), newest first. Each entry has at most one `Added`, `Removed`, `Changed`, and `Fixed` section — omit sections with no items, and put every item of a type in that type's single list (never a second section of the same type). Items are `- **Title**: description` with nested `**Title**: description` sub-items as needed. Tracking is done via `ROADMAP.md`, `PLAN.md`, `TODO.md`, and `BUGS.md` rather than formal releases.
+All notable changes to **Windhawk Themes** are documented here. One entry per update (`## YYYY-MM-DD - HH:MM`), newest first. Each entry has at most one `Added`, `Removed`, `Changed`, and `Fixed` section — omit sections with no items, and put every item of a type in that type's single list (never a second section of the same type). Items are `- **Title**: description` with nested `**Title**: description` sub-items as needed. Releases use milestone tags (e.g. `M.01`, `M.02b`) with zero attached assets.
+
+## 2026-10-09 - 11:55
+
+### Added
+- **GitHub Pages Documentation Site** (`docs/`): Scaffolded complete Jekyll documentation site matching HELIX-Origin architecture (`_config.yml`, `_layouts/documentation.html`, `_includes/translate-control.html`, `_data/languages.yml`, `_data/navigation.yml`, `assets/css/site.css`, `assets/js/mermaid-init.js`, `assets/js/translate.js`, `index.html`, and `README.md`).
+- **Comprehensive Surface & Tooling Guides**: Published dedicated guides covering all 5 base styler mods (`Start-Menu.md`, `Taskbar.md`, `Notification-Center.md`, `Settings.md`, `File-Explorer.md`), the hybrid inspection toolchain (`Toolchain.md`, `Diagnostics.md`), manual visual tree inspection (`UWPSpy.md`), and engineering standards (`Syntax-Standards.md`, `Glass-Recipes.md`, `Evidence-Protocol.md`, `Verification.md`).
+
+### Changed
+- **Repository Remote Rename & Metadata**: Successfully renamed repository on GitHub to `Windhawk-Themes` via GitHub CLI, synchronized local remote URLs, updated description, and configured 10 repository topics (`windhawk`, `windhawk-mod`, `windows-11`, `windows-customization`, `theme`, `xaml`, `winui`, `styling`, `shell`, `dark-theme`).
+- **Milestone-Based Releases & Tracking (Rule 09)**: Updated Rule 09 (`milestone-standards.md`) and tracking templates to codify milestone-based release versions and git tags (e.g. `M.01`, `M.02b`, `M.03`) with zero attached assets.
+- **Universal Multi-Project Structure**: Completed full repository migration from `src/` to `projects/<project>/` (`projects/command-center/`), tracked `.agents/projects/` in Git, generalized universal rules, and updated static validation tools (`Test-WindhawkStyles.ps1`).
+
+### Added
+- **Unified Hybrid XAML Inspector** (`tools/inspect_xaml.py` & `tools/native/`): Rebuilt the visual tree inspection toolchain into a high-performance hybrid system. Native C++ TAP engine (`xaml_dump.exe` + `xaml_dump_agent.dll` via `xamlOM.h`) injects into shell processes with a 30-second heartbeat wait loop to eliminate premature timeouts during OS elevation / permission prompts.
+- **Automated Surface Activation**: Automatically sends key chords (`start` = Win, `action-center` = Win+A, `notification-center` = Win+N, `search` = Win+S) to force background UWP shell processes to render and populate active visual trees, automatically closing them with Escape upon completion.
+- **ShareX Screenshot Integration**: Added `--screenshot` (`-ss`) support in `tools/inspect_xaml.py` that dynamically reads user keybinds from `HotkeysConfig.json` (supporting systems where PrintScreen maps to `VK_SLEEP`) and captures live surfaces to the configured ShareX screenshot destination.
+- **Organized Scratch Workspace**: Enforced strict format/content-type subfolder organization in `scratch/` (`powershell/`, `python/`, `json/`, `images/`, `docs/`, `text/`, `cpp/`, `yml/`) with dynamic subfolder creation for any newly introduced file types.
+
+### Changed
+- **Start Menu Styler** (`src/windows-11-start-menu-styler.yml`): Implemented Flyout separated-island architecture with transparent outer drop-shadow frame, top header island, and layered two-tone split (`Border#AcrylicOverlay` with `$ElementBackground`) hosting the hoisted navigation pane (`Grid#NavPanePlaceholder`). Preserved compact 2-column categories, 3-column pinned list, custom view pills, and Phone Link companion cards. Purged unneeded external targets (widgets, clock, media targets).
+- **Agent Ecosystem Synchronization**: Updated `AGENTS.md`, Rule 00 (`agent-safety-compliance.md`), Rule 05 (`surface-scope-standards.md`), `skills/live-visual-inspection.md`, `skills/README.md`, and sub-agent `visual-inspector.md` to reflect the hybrid inspector toolchain, UI automation conventions, ShareX integration, and scratch workspace standards.
+- **Removed Deprecated Tool Clutter**: Purged obsolete `tools/xaml_inspect/` module; cleaned and unified tools directory while strictly preserving `Test-WindhawkStyles.ps1` and `style-baseline.ini`.
 
 ## 2026-10-08 - 03:16
 

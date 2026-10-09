@@ -1,12 +1,12 @@
 <#
 .SYNOPSIS
-    Static validation gate for Windhawk Command Center Suite styler files.
+    Static validation gate for Windhawk Themes styler files.
 .DESCRIPTION
     Validates YAML syntax, constant declaration order, token reference resolution,
     design-token adherence, and surface-scope rules per Rule 02, 03, 05, and 07.
     Requires no external PowerShell modules.
 .PARAMETER Path
-    Optional path to a specific file. If omitted, checks all in-scope styler files in src/.
+    Optional path to a specific file. If omitted, checks all in-scope styler files in projects/.
 #>
 [CmdletBinding()]
 param(
@@ -17,35 +17,29 @@ $ErrorActionPreference = 'Stop'
 
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $rootDir = Split-Path -Parent $scriptDir
-$srcDir = Join-Path $rootDir 'src'
-
-# Approved styler files in scope
-$inScopeFiles = @(
-    'windows-11-notification-center-styler.yml',
-    'windows-11-file-explorer-styler.yml',
-    'windows-11-start-menu-styler.yml',
-    'windows-11-taskbar-styler.yml'
-)
+$projectsDir = Join-Path $rootDir 'projects'
 
 $filesToCheck = @()
 if ($Path) {
     if (Test-Path $Path) {
         $filesToCheck += (Resolve-Path $Path).Path
     } else {
-        $candidate = Join-Path $srcDir $Path
+        $candidate = Join-Path $projectsDir $Path
         if (Test-Path $candidate) {
             $filesToCheck += (Resolve-Path $candidate).Path
         } else {
-            Write-Error "File not found: $Path"
-            exit 1
+            $found = Get-ChildItem -Path $projectsDir -Filter $Path -Recurse -File -ErrorAction SilentlyContinue | Select-Object -First 1
+            if ($found) {
+                $filesToCheck += $found.FullName
+            } else {
+                Write-Error "File not found: $Path"
+                exit 1
+            }
         }
     }
 } else {
-    foreach ($f in $inScopeFiles) {
-        $filePath = Join-Path $srcDir $f
-        if (Test-Path $filePath) {
-            $filesToCheck += (Resolve-Path $filePath).Path
-        }
+    if (Test-Path $projectsDir) {
+        $filesToCheck = @(Get-ChildItem -Path $projectsDir -Filter '*.yml' -Recurse -File | Where-Object { $_.FullName -notmatch '[\\/]extras[\\/]' } | Select-Object -ExpandProperty FullName)
     }
 }
 
@@ -56,7 +50,7 @@ $totalErrors = 0
 $totalWarnings = 0
 
 Write-Host "==========================================================" -ForegroundColor Cyan
-Write-Host " Windhawk Command Center Suite - Static Validation Gate" -ForegroundColor Cyan
+Write-Host " Windhawk Theme Suite - Static Validation Gate" -ForegroundColor Cyan
 Write-Host " Rule 07 Compliance & Syntax Enforcement" -ForegroundColor Cyan
 Write-Host "==========================================================" -ForegroundColor Cyan
 

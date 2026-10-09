@@ -22,7 +22,7 @@ flowchart TD
 
 ```powershell
 pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1            # all in-scope styler files
-pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1 -Path src/windows-11-notification-center-styler.yml
+pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1 -Path projects/command-center/windows-11-notification-center-styler.yml
 ```
 
 The gate enforces:

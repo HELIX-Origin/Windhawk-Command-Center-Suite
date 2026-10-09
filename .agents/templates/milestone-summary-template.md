@@ -1,12 +1,13 @@
-# 📌 Milestone Summary Template
+# 📌 Milestone Summary & Release Notes Template
 
-Use this template when a milestone/sprint of the **Windhawk Command Center Suite** completes. The suite does not use versioned releases — progress is tracked via milestones/sprints in `ROADMAP.md`, `PLAN.md`, `TODO.md`, and `BUGS.md`.
+Use this template when a milestone of a **Windhawk Theme** completes. Releases use milestone identifiers as release tags and versions (e.g., `M.01`, `M.02b`), with zero attached assets, tracked via `ROADMAP.md`, `PLAN.md`, `TODO.md`, and `CHANGELOG.md`.
 
 ---
 
 # Milestone Summary — {{ milestone.id }}: {{ milestone.title }}
 
 - **Date**: {{ YYYY-MM-DD }}
+- **Release Tag**: {{ milestone.id }} (no attached assets)
 - **Status**: {{ milestone.status }}
 
 ---
@@ -21,12 +22,13 @@ Use this template when a milestone/sprint of the **Windhawk Command Center Suite
 
 | Surface / Styler File | Windhawk Mod | Mod Version | Windows 11 Build | Status |
 |---|---|---|---|---|
-| `src/windows-11-taskbar-styler.yml` | Windows 11 Taskbar Styler | 1.10+ | 23H2 / 24H2 | {{ status }} |
-| `src/windows-11-start-menu-styler.yml` | Windows 11 Start Menu Styler | 1.7+ | 23H2 / 24H2 | {{ status }} |
-| `src/windows-11-notification-center-styler.yml` | Windows 11 Notification Center Styler | 1.7+ | 23H2 / 24H2 | {{ status }} |
-| File Explorer | Windows 11 File Explorer Styler | 1.7+ | 23H2 / 24H2 | Deferred (ROADMAP M.03) — no styler file |
+| `projects/<project>/windows-11-taskbar-styler.yml` | Windows 11 Taskbar Styler | 1.10+ | 23H2 / 24H2 | {{ status }} |
+| `projects/<project>/windows-11-start-menu-styler.yml` | Windows 11 Start Menu Styler | 1.7+ | 23H2 / 24H2 | {{ status }} |
+| `projects/<project>/windows-11-notification-center-styler.yml` | Windows 11 Notification Center Styler | 1.7+ | 23H2 / 24H2 | {{ status }} |
+| `projects/<project>/windows-11-settings-styler.yml` | Windows 11 Settings Styler | 1.0+ | 23H2 / 24H2 | {{ status }} |
+| File Explorer | Windows 11 File Explorer Styler | 1.7+ | 23H2 / 24H2 | Deferred (ROADMAP M.03) |
 
-*Mod versions are external Windhawk mod versions, not suite versions.*
+*Mod versions are external Windhawk mod versions, not suite milestone versions.*
 
 ---
 
@@ -45,8 +47,8 @@ Use this template when a milestone/sprint of the **Windhawk Command Center Suite
 
 ## Verification
 
-- [ ] **Static Validation Gate**: `pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1` passed with target 0 errors.
-- [ ] **Live Checklist**: `.agents/templates/live-verification-checklist.md` completed for each changed surface (taskbar / start menu / notification center).
+- [ ] **Static Validation Gate**: `pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1` passed with 0 errors.
+- [ ] **Live Checklist**: `.agents/templates/live-verification-checklist.md` completed for each changed surface.
 
 ---
 
@@ -59,4 +61,4 @@ Use this template when a milestone/sprint of the **Windhawk Command Center Suite
 
 ## Next Steps
 
-- {{ next.step }} (see `ROADMAP.md` and `PLAN.md` for the next active milestone/sprint).
+{{ next.steps }}

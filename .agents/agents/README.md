@@ -1,6 +1,6 @@
 # 👥 Agent Ecosystem Specifications (`.agents/agents/`)
 
-This directory defines the agent team specifications for **Windhawk Command Center Suite**, organized as **primary agents** with **sub-agents** grouped by focus area.
+This directory defines the agent team specifications for **Windhawk Theme Repositories**, organized as **primary agents** with **sub-agents** grouped by focus area.
 
 ---
 
@@ -60,9 +60,10 @@ flowchart TD
 
 | Sub-Agent | Primary | Key Responsibilities | Specification |
 |---|---|---|---|
-| **Notification Center Specialist** | Style Architect | `src/windows-11-notification-center-styler.yml` (Generated & Verified — polish active), UWP XAML visual tree | [engineering/sub-agents/notification-center-specialist](engineering/sub-agents/notification-center-specialist.md) |
+| **Notification Center Specialist** | Style Architect | `projects/<project>/windows-11-notification-center-styler.yml` (Generated & Verified — polish active), UWP XAML visual tree | [engineering/sub-agents/notification-center-specialist](engineering/sub-agents/notification-center-specialist.md) |
 | **File Explorer Specialist** | Style Architect | **Deferred (ROADMAP M.03 — no styler file)**; dormant WinUI 3 XAML tabs, nav, command bar reference | [engineering/sub-agents/file-explorer-specialist](engineering/sub-agents/file-explorer-specialist.md) |
-| **Visual Inspector** | Style Architect | UWPSpy diagnostics, live visual tree discovery, target verification | [engineering/sub-agents/visual-inspector](engineering/sub-agents/visual-inspector.md) |
+| **Settings Specialist** | Style Architect | Windows 11 Settings Styler (`windows-11-settings-styler`), `SystemSettings.exe` visual tree & cards | [engineering/sub-agents/settings-specialist](engineering/sub-agents/settings-specialist.md) |
+| **Visual Inspector** | Style Architect | Live visual tree discovery, hybrid C++/Python TAP inspection, ShareX screenshots | [engineering/sub-agents/visual-inspector](engineering/sub-agents/visual-inspector.md) |
 | **Syntax Linter** | Verification Specialist | `tools/Test-WindhawkStyles.ps1` checks, constant ordering, syntax | [quality/sub-agents/syntax-linter](quality/sub-agents/syntax-linter.md) |
 | **Catalog Manager** | Docs Specialist | Folder `README.md` catalog sync, tracking file template adherence, milestone summaries | [documentation/sub-agents/catalog-manager](documentation/sub-agents/catalog-manager.md) |
 
@@ -72,9 +73,10 @@ flowchart TD
 
 | Surface / Styler File | Windhawk Mod | Status | Owner |
 |---|---|---|---|
-| `src/windows-11-taskbar-styler.yml` | `windows-11-taskbar-styler` | Shipped | Style Architect |
-| `src/windows-11-start-menu-styler.yml` | `windows-11-start-menu-styler` | Shipped | Style Architect |
-| `src/windows-11-notification-center-styler.yml` | `windows-11-notification-center-styler` | Generated & Verified (polish M.02b) | Notification Center Specialist (under Style Architect) |
-| File Explorer surface | `windows-11-file-explorer-styler` | Deferred (ROADMAP M.03) — no styler file | — (specialist spec retained for future resumption) |
+| `projects/<project>/windows-11-taskbar-styler.yml` | `windows-11-taskbar-styler` | Supported reference | Style Architect |
+| `projects/<project>/windows-11-start-menu-styler.yml` | `windows-11-start-menu-styler` | Supported reference | Style Architect |
+| `projects/<project>/windows-11-notification-center-styler.yml` | `windows-11-notification-center-styler` | Generated & Verified (polish M.02b) | Notification Center Specialist (under Style Architect) |
+| File Explorer surface | `windows-11-file-explorer-styler` | Deferred (ROADMAP M.03) — no styler file | File Explorer Specialist (retained for future resumption) |
+| Settings surface | `windows-11-settings-styler` | In Base Scope (Tooling & Inspection Supported) | Settings Specialist (under Style Architect) |
 
-> Four styler mods are approved under Rule 01's boundary; **three active styler files** exist in `src/` today. The File Explorer mod remains approved but deferred (TODO W.03).
+> Five styler mods form the canonical base scope under the universal architecture; styler files are organized per theme in `projects/<project>/`. File Explorer is deferred, and Settings is supported in the toolchain.

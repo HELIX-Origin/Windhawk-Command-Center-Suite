@@ -1,0 +1,10 @@
+# Requirements for Windhawk Themes Hybrid Python Inspection Toolchain
+#
+# Standard Python 3.10+ installation is supported.
+#
+# Note: The CLI utilizes Python standard libraries (ctypes, json, subprocess, argparse, pathlib)
+# for UI automation, named pipe communication, and ShareX configuration parsing.
+#
+# Optional enhancement packages:
+# For accelerated JSON parsing on large visual tree dumps (thousands of elements):
+# orjson>=3.9.0

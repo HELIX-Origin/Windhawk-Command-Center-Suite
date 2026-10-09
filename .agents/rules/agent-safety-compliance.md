@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This is the foundational safety rule for all AI agents working on **Windhawk Command Center Suite**. It guarantees that no irreversible damage is done to the style files, the user's live Windhawk installation, the Windows shell session, or repository history, and that agents strictly obey user instructions without regression or unintended side effects.
+This is the foundational safety rule for all AI agents working on **Windhawk Styler Theme Repositories**. It guarantees that no irreversible damage is done to the style files, the user's live Windhawk installation, the Windows shell session, or repository history, and that agents strictly obey user instructions without regression or unintended side effects.
 
 Rule 00 and [Rule 01](zero-unsolicited-injection.md) supersede every other rule.
 
@@ -11,7 +11,7 @@ Rule 00 and [Rule 01](zero-unsolicited-injection.md) supersede every other rule.
 ## 1. Zero Irreversible Damage (Safety Invariants)
 
 1. **Style File Preservation**:
-   - The YAML files in `src/` are the product. Never delete, truncate, rename, or wholesale-overwrite an existing style file without explicit user authorization.
+   - The YAML files in `projects/` are the product. Never delete, truncate, rename, or wholesale-overwrite an existing style file without explicit user authorization.
    - Edits to an existing style file are **surgical**: change only the targets/constants the task requires. Never reformat, reorder, or "clean up" unrelated blocks.
    - Never "fix" a perceived bug in a file the task does not cover. Log it in `BUGS.md` instead (see [Rule 07](verification-standards.md)).
    - The repository **is** under Git version control — Git history is the primary safety net: before any destructive or bulk edit, commit or stash current work and review `git diff` so the original state stays recoverable. Copying originals into `.backups/<yyyy-mm-dd>/<file>` is a **fallback for non-git contexts only** and is not used in this repository.
@@ -20,7 +20,9 @@ Rule 00 and [Rule 01](zero-unsolicited-injection.md) supersede every other rule.
    - Agents **never** write to the user's live Windhawk configuration (`%ProgramData%\Windhawk\`, the `HKLM\SOFTWARE\Windhawk` registry tree, or any mod settings store).
    - Agents **never** kill, restart, or inject into `explorer.exe`, `StartMenuExperienceHost.exe`, `ShellExperienceHost.exe`, `ShellHost.exe`, or `windhawk.exe` without explicit, per-occurrence user consent. Restarting Explorer closes every open File Explorer window the user has.
    - Agents never install, uninstall, enable, or disable Windhawk mods on the user's machine. Applying a style is a **user action**: the agent hands over YAML; the user pastes/imports it into the mod's **Advanced → Settings** editor.
-   - **UI automation (keyboard chords, mouse clicks, opening shell surfaces over the user's screen) is allowed only with the user's explicit, per-instance permission**: the agent must ask the user directly *before each such run* — never automatically, never pre-batched, never unattended — and then pass the tool's per-run consent flag (`tools/inspect_xaml.py --permit-ui-automation ...`). Consent lives in process memory for that run only and is never stored or reused; without it the tool refuses at the safety layer (exit code 3). The one absolute bar is `LockApp.exe`: the lock screen is **never automated** — opening it locks the user's machine and it cannot be inspected as a result — so lock screen customization remains research-only (Rule 04 sources).
+   - **Visual Tree Inspection & UI Automation**: The suite provides a unified hybrid C++/Python inspector (`tools/inspect_xaml.py` driving `tools/native/bin/xaml_dump.exe`). To ensure UWP background processes render populated visual trees, the inspector automatically activates shell surfaces on screen (`start` = Win, `action-center` = Win+A, `notification-center` = Win+N, `search` = Win+S) and automatically restores them with Escape afterwards. The operator is notified in the console before opening so they know not to interact while inspection runs. The driver employs a generous 30-second heartbeat loop to accommodate OS elevation or permission prompts without premature failure. The lock screen (`LockApp.exe`) is **strictly barred from automation** under all circumstances.
+   - **ShareX Screenshot Integration**: Automated screenshot captures are permitted via the `--screenshot` (`-ss`) flag. The tool dynamically reads the user's ShareX configuration (`HotkeysConfig.json` and `ApplicationConfig.json`), detects custom keybinds (including systems where PrintScreen maps to `VK_SLEEP`), and executes the configured capture chord to save images to the user's configured screenshot destination.
+   - **Local Scratch Workspace Standards**: The repository's `scratch/` directory is strictly for local-only, temporary artifacts (enforced by `.gitignore`). It must always be kept organized into content-type and format subfolders (`powershell/`, `python/`, `json/`, `images/`, `docs/`, `text/`, `cpp/`, `yml/`). New format subfolders should be created dynamically as needed whenever a new file type is introduced. Loose files must never accumulate in the scratch root.
 
 3. **Repository Safety**:
    - The repository **is** under Git — this is the current, active procedure: **never** force-push, never discard or reset uncommitted user work, and always inspect `git status` / `git diff` before staging.

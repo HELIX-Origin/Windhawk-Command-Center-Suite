@@ -4,11 +4,10 @@
 #include <mutex>
 #include <sstream>
 #include <iomanip>
+#include <vector>
 
-// Global Module Handle
 static HMODULE g_hModule = nullptr;
 
-// Element Record
 struct ElementRecord {
     InstanceHandle handle;
     InstanceHandle parent;
@@ -24,7 +23,6 @@ static std::atomic<ULONGLONG> g_lastElementTime{ 0 };
 static std::atomic<size_t> g_elementCount{ 0 };
 static IVisualTreeService* g_pVisualTreeService = nullptr;
 
-// Helper: Escape JSON string
 static std::wstring EscapeJson(const std::wstring& s) {
     std::wostringstream o;
     for (wchar_t c : s) {
@@ -47,7 +45,6 @@ static std::wstring EscapeJson(const std::wstring& s) {
 static std::atomic<bool> g_siteCalled{ false };
 static std::atomic<HRESULT> g_adviseHr{ E_FAIL };
 
-// Callback implementation
 class VisualTreeCallback : public IVisualTreeServiceCallback2 {
 public:
     std::atomic<ULONG> m_refCount{ 1 };
@@ -100,7 +97,6 @@ public:
 
 static VisualTreeCallback* g_pCallback = nullptr;
 
-// TAP Site implementation
 class XamlDumpTap : public IObjectWithSite {
 public:
     std::atomic<ULONG> m_refCount{ 1 };
@@ -159,7 +155,6 @@ public:
                 g_pVisualTreeService = vts;
                 g_pCallback = new VisualTreeCallback();
 
-                // Advise on a separate thread to prevent hang in Advising::RunOnUIThread
                 HANDLE hThread = CreateThread(nullptr, 0, [](LPVOID) -> DWORD {
                     if (g_pVisualTreeService && g_pCallback) {
                         g_adviseHr = g_pVisualTreeService->AdviseVisualTreeChange(g_pCallback);
@@ -181,7 +176,6 @@ public:
     }
 };
 
-// Class Factory
 class TapFactory : public IClassFactory {
 public:
     HRESULT STDMETHODCALLTYPE QueryInterface(REFIID riid, void** ppvObject) override {
@@ -223,17 +217,16 @@ STDAPI DllCanUnloadNow() {
     return S_OK;
 }
 
-// Background Worker Thread
 using PFN_INITIALIZE_XAML_DIAGNOSTICS_EX = decltype(&InitializeXamlDiagnosticsEx);
 
-static DWORD WINarianceWorkerThread(LPVOID) {
+static DWORD WINAPI AgentWorkerThread(LPVOID) {
     CoInitializeEx(nullptr, COINIT_MULTITHREADED);
 
-    // Open connection to named pipe created by xaml_dump.exe
     std::wstring pipeName = std::wstring(XAML_DUMP_PIPE_PREFIX) + std::to_wstring(GetCurrentProcessId());
     HANDLE hPipe = INVALID_HANDLE_VALUE;
 
-    for (int i = 0; i < 50; i++) {
+    // Retry connecting to named pipe created by driver for up to 10 seconds
+    for (int i = 0; i < 100; i++) {
         hPipe = CreateFileW(pipeName.c_str(), GENERIC_WRITE, 0, nullptr, OPEN_EXISTING, 0, nullptr);
         if (hPipe != INVALID_HANDLE_VALUE) break;
         Sleep(100);
@@ -244,7 +237,6 @@ static DWORD WINarianceWorkerThread(LPVOID) {
         return 1;
     }
 
-    // Try Windows.UI.Xaml.dll first, then Microsoft.UI.Xaml.dll
     HMODULE hXaml = GetModuleHandleW(L"Windows.UI.Xaml.dll");
     if (!hXaml) {
         hXaml = GetModuleHandleW(L"Microsoft.UI.Xaml.dll");
@@ -297,21 +289,20 @@ static DWORD WINarianceWorkerThread(LPVOID) {
         return 1;
     }
 
-    // Wait for tree enumeration to settle
+    // Wait for visual tree enumeration to populate and settle
     ULONGLONG startWait = GetTickCount64();
-    while (GetTickCount64() - startWait < 2500) {
+    while (GetTickCount64() - startWait < 3000) {
         Sleep(50);
-        if (g_elementCount > 0 && (GetTickCount64() - g_lastElementTime > 200)) {
+        if (g_elementCount > 0 && (GetTickCount64() - g_lastElementTime > 300)) {
             break;
         }
     }
 
-    // Unadvise callback
     if (g_pVisualTreeService && g_pCallback) {
         g_pVisualTreeService->UnadviseVisualTreeChange(g_pCallback);
     }
 
-    // Serialize tree to JSON
+    // Serialize elements to JSON
     std::wostringstream json;
     json << L"{\"pid\": " << GetCurrentProcessId()
          << L", \"siteCalled\": " << (g_siteCalled.load() ? L"true" : L"false")
@@ -336,7 +327,6 @@ static DWORD WINarianceWorkerThread(LPVOID) {
     }
     json << L"]}";
 
-    // Convert to UTF-8
     std::wstring wstr = json.str();
     int utf8Len = WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), (int)wstr.size(), nullptr, 0, nullptr, nullptr);
     if (utf8Len > 0) {
@@ -348,10 +338,9 @@ static DWORD WINarianceWorkerThread(LPVOID) {
 
     FlushFileBuffers(hPipe);
     CloseHandle(hPipe);
-
     CoUninitialize();
 
-    // Cleanly self-unload so the module is never pinned in the host process
+    // Self-unload cleanly
     FreeLibraryAndExitThread(g_hModule, 0);
     return 0;
 }
@@ -360,7 +349,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID) {
     if (fdwReason == DLL_PROCESS_ATTACH) {
         DisableThreadLibraryCalls(hinstDLL);
         g_hModule = (HMODULE)hinstDLL;
-        HANDLE hThread = CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)WINarianceWorkerThread, nullptr, 0, nullptr);
+        HANDLE hThread = CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)AgentWorkerThread, nullptr, 0, nullptr);
         if (hThread) {
             CloseHandle(hThread);
         }

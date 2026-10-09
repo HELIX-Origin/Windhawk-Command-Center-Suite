@@ -1,8 +1,6 @@
 # Skill: Glass Material & Chrome Recipes
 
-## Purpose
-
-Technical guide for mastering `WindhawkBlur`, `AcrylicBrush`, gradient rim borders, and chrome collapsing within Windows 11 shell surfaces to achieve the canonical Command Center Glass aesthetic.
+Technical guide for mastering `WindhawkBlur`, `AcrylicBrush`, gradient rim borders, and chrome collapsing within Windows 11 shell surfaces to achieve high-performance frosted glass and acrylic aesthetics.
 
 ---
 
@@ -89,7 +87,7 @@ controlStyles:
 
 ## 6. Recipe R5: Intentional Layered Glass Cards & Controls (Depth & Hierarchy)
 
-Command Center Glass intentionally layers glass and acrylic elements over the base surface pane to establish visual structure (e.g. notification cards, calendar controls, quick settings tiles, floating taskbar button pills):
+Modern frosted glass theming intentionally layers glass and acrylic elements over the base surface pane to establish visual structure (e.g. notification cards, calendar controls, quick settings tiles, floating taskbar button pills):
 ```yaml
   - target: Selector#ChildCard
     styles:

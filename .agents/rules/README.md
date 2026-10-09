@@ -1,6 +1,6 @@
 # 📜 Mandatory Agent Rules (`.agents/rules/`)
 
-This directory contains the permanent, non-negotiable architectural, safety, syntax, and design rules governing all automated agents, coding assistants, and contributors working on **Windhawk Command Center Suite**.
+This directory contains the permanent, non-negotiable architectural, safety, syntax, and design rules governing all automated agents, coding assistants, and contributors working on **Windhawk Theme Repositories**.
 
 ---
 
@@ -18,9 +18,9 @@ This directory contains the permanent, non-negotiable architectural, safety, syn
 | Rule | Title | Scope & Invariants | Specification File |
 |---|---|---|---|
 | **Rule 00** | Agent Safety, Instruction Compliance & Damage Prevention | Core Safety, Data Protection & System Invariants | [agent-safety-compliance](agent-safety-compliance.md) |
-| **Rule 01** | Dependency, Mod & Asset Approval (Zero Unsolicited Injection) | Runtime Boundary — 4 Approved Mods, 3 Active Styler Files | [zero-unsolicited-injection](zero-unsolicited-injection.md) |
+| **Rule 01** | Dependency, Mod & Asset Approval (Zero Unsolicited Injection) | Runtime Boundary — 5 Base Approved Mods (Universal Scope) | [zero-unsolicited-injection](zero-unsolicited-injection.md) |
 | **Rule 02** | Windhawk Styler YAML & XAML Syntax Standards | Parser Grammar, Quoting, Constant Order & Styles Format | [windhawk-styler-syntax](windhawk-styler-syntax.md) |
-| **Rule 03** | Suite Design Language — "Command Center Glass" | Canonical Glass Tokens, Radii Scale & Recipes | [design-language-standards](design-language-standards.md) |
+| **Rule 03** | Theme Design Language & Token Standards | Canonical Glass Tokens, Radii Scale & Recipes | [design-language-standards](design-language-standards.md) |
 | **Rule 04** | Target Evidence Protocol (No Guessed Selectors) | Sourced Selectors Only, UWPSpy & Verification Tiers | [target-evidence-protocol](target-evidence-protocol.md) |
 | **Rule 05** | Surface Scope, Mod Capabilities & Invariants | Process Targets (explorer.exe vs ShellExperienceHost), WinUI 3 vs UWP | [surface-scope-standards](surface-scope-standards.md) |
 | **Rule 06** | GitHub-Flavored Mermaid & Diagram Standards | GitHub-Compatible Syntax, Quoted Selectors, Max 12 Nodes | [mermaid-standards](mermaid-standards.md) |

@@ -2,18 +2,19 @@
 
 ## Mandatory Standards
 
-1. **Documentation Locations** — permanent documentation lives in root Markdown files, `src/extras/README.md`, and `.agents/`. The `docs/` folder is a **planned future GitHub Pages site** and must not be created until style work is complete:
-   - `README.md` — user-facing: what the suite is, desktop hero preview, primary and companion mod tables, and installation guide.
-   - `src/extras/README.md` — companion mods technical documentation: full configuration breakdown, themes, modules, and options for all 8 companion mods.
+1. **Documentation Locations** — documentation lives in root Markdown files, the GitHub Pages documentation site (`docs/`), `projects/<project>/extras/README.md`, and `.agents/`:
+   - `docs/` — active Jekyll GitHub Pages documentation site (deployed from `/docs` on `main`; includes theme guides, surface specifications, toolchain docs, and engineering standards).
+   - `README.md` — user-facing: what the framework is, shell architecture overview, and quick installation guide.
+   - `projects/<project>/extras/README.md` — companion mods technical documentation: configuration breakdown, themes, modules, and options for companion mods.
    - `AGENTS.md` + `.agents/` — agent operating manual, rules (Rules 00–09), domain skills, templates, and agent specs. Each `.agents/` subdirectory's `README.md` is its canonical index (`index.md` files are not used).
-   - Root tracking files — `PLAN.md`, `TODO.md`, `BUGS.md`, `ROADMAP.md`, plus `CHANGELOG.md` (date/time-grouped entries, `## YYYY-MM-DD - HH:MM`; no version numbers).
+   - Root tracking files — `PLAN.md`, `TODO.md`, `BUGS.md`, `ROADMAP.md`, plus `CHANGELOG.md` (chronological entries with milestone release tags; no semantic versioning).
 
 2. **Synchronization Triggers** — update all affected locations in the same change when:
 
    | Change | Must update |
    |---|---|
    | New/changed design token or recipe | Rule 03, affected styler files' headers |
-   | New/changed companion mod config | `src/extras/README.md`, `README.md`, `TODO.md` |
+   | New/changed companion mod config | `projects/<project>/extras/README.md`, `README.md`, `TODO.md` |
    | Surface status change (e.g. deferred → active, generated & verified → shipped) | Rule 01 table, `AGENTS.md`, `README.md`, `ROADMAP.md` |
    | New agent/rule/skill/template | The folder's `README.md` (its canonical index), `AGENTS.md`, `.agents/README.md` |
    | Windows update breaks a target | `BUGS.md` (with build number), `PLAN.md`, `TODO.md` |

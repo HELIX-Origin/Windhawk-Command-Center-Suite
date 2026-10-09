@@ -1,6 +1,6 @@
 # 🤖 AI Agent Ecosystem (`.agents/`)
 
-This directory contains the operational specifications, mandatory engineering rules, domain skills, and code templates for AI agents, coding assistants, and contributors working on **Windhawk Command Center Suite**.
+This directory contains the operational specifications, mandatory engineering rules, domain skills, and code templates for AI agents, coding assistants, and contributors working on **Windhawk Styler Theme Repositories**.
 
 > 📖 **Primary Operating Manual**: For high-level project status, architectural mandates, and current issue tracking, refer to the root entry point: [**`AGENTS.md`**](../AGENTS.md).  
 > 📝 **Tracking Files**: `PLAN.md` (current sprint plan), `TODO.md` (workstream checklist), `BUGS.md` (bug & issue tracker), `ROADMAP.md` (milestone roadmap), and `CHANGELOG.md` (date/time-grouped history) hold active workstream state.
@@ -50,7 +50,7 @@ flowchart TD
 ## 🛡️ Core Governance & Principles
 
 1. **Safety First (Rule 00)**: Zero irreversible damage to files or live shell sessions; no unverified bulk overwrites.
-2. **Zero Unsolicited Injection (Rule 01)**: No unapproved third-party tools, packages, or mods. The suite strictly targets the four approved styler mods (three active files; File Explorer deferred).
-3. **Command Center Glass Standard (Rule 03)**: Canonical glass materials (`WindhawkBlur`), vertical gradient rim borders, and standard radius tiers across all surfaces.
+2. **Zero Unsolicited Injection (Rule 01)**: No unapproved third-party tools, packages, or mods. The architecture strictly targets the five approved base styler mods.
+3. **Harmonized Design System (Rule 03)**: Canonical glass materials (`WindhawkBlur`), vertical gradient rim borders, and standard radius tiers across all surfaces defined per theme.
 4. **Target Evidence Protocol (Rule 04)**: No guessed selectors. Every selector must trace to documented visual tree evidence in `.agents/targets/` (interim location for former `docs/targets/` records; `docs/` is a *planned* GitHub Pages site, deferred).
 5. **Mandatory Static Gate (Rule 07)**: All changes must pass `tools/Test-WindhawkStyles.ps1` before completion.

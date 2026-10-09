@@ -17,7 +17,7 @@ Windhawk stylers work by injecting a dynamic XAML visual tree watcher into targe
 
 ```mermaid
 flowchart TD
-    Config["Styler YAML (src/)"] --> ModParser["Windhawk Mod Parser"]
+    Config["Styler YAML (projects/)"] --> ModParser["Windhawk Mod Parser"]
     ModParser --> Constants["Parse styleConstants"]
     ModParser --> TargetRules["Compile Selector Rules"]
     TargetRules --> VisualTreeWatcher["Visual Tree Watcher (ExplorerTAP)"]

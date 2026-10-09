@@ -1,11 +1,3 @@
-<#
-.SYNOPSIS
-    Builds the native XAML inspection toolchain for Windhawk Command Center Suite.
-.DESCRIPTION
-    Compiles xaml_dump.exe (CLI driver) and xaml_dump_agent.dll (in-process XAML TAP agent)
-    using Microsoft Visual Studio 2026 MSVC and Windows 11 SDK.
-    Applies AppContainer permissions (*S-1-15-2-1:RX) to the agent DLL.
-#>
 [CmdletBinding()]
 param(
     [switch]$Clean
@@ -27,21 +19,15 @@ if ($Clean) {
 New-Item -ItemType Directory -Force -Path $buildDir | Out-Null
 New-Item -ItemType Directory -Force -Path $binDir | Out-Null
 
-# Stop any running xaml_dump CLI
 Get-Process -Name "xaml_dump" -ErrorAction SilentlyContinue | Stop-Process -Force
 
-# Auto-eject old agent DLL if in use
-$ejectScript = Join-Path $scriptDir 'eject_agent.ps1'
-if (Test-Path $ejectScript) {
-    try { & $ejectScript | Out-Null } catch {}
-}
-
-# Locate Visual Studio 2026 vcvars64.bat
+# Locate vcvars64.bat
 $vcvarsCandidates = @(
     "C:\Program Files\Microsoft Visual Studio\18\Insiders\VC\Auxiliary\Build\vcvars64.bat",
     "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Auxiliary\Build\vcvars64.bat",
+    "C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\VC\Auxiliary\Build\vcvars64.bat",
     "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars64.bat",
-    "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
+    "C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
 )
 
 $vcvarsPath = $null
@@ -53,12 +39,21 @@ foreach ($cand in $vcvarsCandidates) {
 }
 
 if (-not $vcvarsPath) {
+    $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+    if (Test-Path $vswhere) {
+        $vsInst = & $vswhere -latest -products * -property installationPath
+        if ($vsInst -and (Test-Path (Join-Path $vsInst 'VC\Auxiliary\Build\vcvars64.bat'))) {
+            $vcvarsPath = Join-Path $vsInst 'VC\Auxiliary\Build\vcvars64.bat'
+        }
+    }
+}
+
+if (-not $vcvarsPath) {
     throw "Visual Studio Developer Environment (vcvars64.bat) could not be located."
 }
 
 Write-Host "[BUILD] Using compiler environment: $vcvarsPath" -ForegroundColor Cyan
 
-# Batch compile script running inside vcvars64 context
 $compileBatch = Join-Path $buildDir 'compile.bat'
 $batchContent = @"
 @echo off
@@ -80,7 +75,6 @@ if ($LASTEXITCODE -ne 0) {
     throw "Compilation failed with exit code $LASTEXITCODE"
 }
 
-# Grant ALL APPLICATION PACKAGES access to xaml_dump_agent.dll for UWP/AppContainer
 $agentDll = Join-Path $binDir 'xaml_dump_agent.dll'
 if (Test-Path $agentDll) {
     Write-Host "[BUILD] Granting AppContainer permissions to $agentDll..." -ForegroundColor Cyan

@@ -1,9 +1,9 @@
 # 🔬 Target Evidence Record: File Explorer Styler
 
 > [!WARNING]
-> **⏸️ DEFERRED (ROADMAP M.03)** — No styler file exists (`src/windows-11-file-explorer-styler.yml` was generated, then discontinued — git `1cc49e9`). Official rationale (2026-10-07): deferred due to a lack of plausible customizations; existing styles too similar, no real benefit yet. This ledger is retained as dormant reference material for a possible resumption.
+> **⏸️ DEFERRED (ROADMAP M.03)** — No styler file exists (`projects/<project>/windows-11-file-explorer-styler.yml` was generated, then discontinued — git `1cc49e9`). Official rationale (2026-10-07): deferred due to a lack of plausible customizations; existing styles too similar, no real benefit yet. This ledger is retained as dormant reference material for a possible resumption.
 
-Evidence ledger for the (currently nonexistent) `src/windows-11-file-explorer-styler.yml` targeting `windows-11-file-explorer-styler` mod per **Rule 04 (Target Evidence Protocol)**.
+Evidence ledger for the (currently nonexistent) `projects/<project>/windows-11-file-explorer-styler.yml` targeting `windows-11-file-explorer-styler` mod per **Rule 04 (Target Evidence Protocol)**.
 
 > [!NOTE]
 > **Accessibility Accommodation**: The user has poor eyesight and prefers zero manual UWPSpy inspection. All selectors below are sourced from official Windhawk mod source code (`mods/windows-11-file-explorer-styler.wh.cpp`), official community themes (Translucent Explorer11, WindowGlass, LiquidGlass, TintedGlass), and official mod documentation. Manual UWPSpy inspection is avoided.
@@ -12,7 +12,7 @@ Evidence ledger for the (currently nonexistent) `src/windows-11-file-explorer-st
 
 ## 📋 Surface Overview
 
-- **Style File**: `src/windows-11-file-explorer-styler.yml`
+- **Style File**: `projects/<project>/windows-11-file-explorer-styler.yml`
 - **Windhawk Mod**: Windows 11 File Explorer Styler (`windows-11-file-explorer-styler` v1.7)
 - **Target Process**: `explorer.exe`
 - **XAML Framework**: WinUI 3 `Microsoft.UI.Xaml`

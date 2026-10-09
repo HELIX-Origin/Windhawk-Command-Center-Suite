@@ -1,12 +1,13 @@
 # 📐 Engineering & Governance Templates (`.agents/templates/`)
 
-This directory provides standardized blueprints, tracking file schemas, and quality checklists for the **Windhawk Command Center Suite**.
+This directory provides standardized blueprints, tracking file schemas, and quality checklists for the **Windhawk Theme Engineering Framework**.
 
 All templates adhere strictly to:
 - **Rule 02**: Windhawk Styler YAML & XAML Syntax Standards.
-- **Rule 03**: Suite Design Language ("Command Center Glass").
+- **Rule 03**: Theme Design Language & Token Standards.
 - **Rule 04**: Target Evidence Protocol.
 - **Rule 07**: Verification Standards (Static Gate + Live Checklist).
+- **Rule 09**: Milestone & Release Standards (Milestone-based release versioning, zero attached assets).
 
 ---
 
@@ -37,4 +38,4 @@ All templates adhere strictly to:
 | [**`root-todo-file-template`**](root-todo-file-template.md) | `TODO.md` | Active workstreams, locked user directives, and implementation checklists |
 | [**`root-bugs-file-template`**](root-bugs-file-template.md) | `BUGS.md` | Open bug ledger, severity markers, root causes, and wontfix limitations |
 | [**`root-roadmap-file-template`**](root-roadmap-file-template.md) | `ROADMAP.md` | High-level suite vision, phased milestones, and milestone status |
-| [**`root-changelog-file-template`**](root-changelog-file-template.md) | `CHANGELOG.md` | Date/time-grouped change log blueprint (`Added`/`Removed`/`Changed`/`Fixed`, no versioned releases) |
+| [**`root-changelog-file-template`**](root-changelog-file-template.md) | `CHANGELOG.md` | Chronological change log blueprint (`Added`/`Removed`/`Changed`/`Fixed`, milestone release tags) |

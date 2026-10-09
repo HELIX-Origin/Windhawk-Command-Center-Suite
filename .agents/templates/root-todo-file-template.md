@@ -145,12 +145,12 @@ flowchart TD
 pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1
 
 # Run validation on a specific styler file
-pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1 -Path src/windows-11-notification-center-styler.yml
+pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1 -Path projects/{{ project }}/{{ styler.file }}
 ```
 
 ---
 
 ## 🔖 Metadata
 
-- **Project**: {{ project.name }} · tracked via milestones/sprints (no versioned releases)
+- **Project**: {{ project.name }} · tracked via milestones/sprints with milestone-based releases (zero attached assets)
 - **Agent Ecosystem:** [`AGENTS.md`](./AGENTS.md) and [`.agents/`](.agents/) are tracked directly in repository git tracking.
