@@ -2,6 +2,19 @@
 
 All notable changes to **Windhawk Themes** are documented here. One entry per update (`## YYYY-MM-DD - HH:MM`), newest first. Each entry has at most one `Added`, `Removed`, `Changed`, and `Fixed` section — omit sections with no items, and put every item of a type in that type's single list (never a second section of the same type). Items are `- **Title**: description` with nested `**Title**: description` sub-items as needed. Releases use milestone tags (e.g. `M.01`, `M.02b`) with zero attached assets.
 
+## 2026-10-09 - 13:45
+
+### Added
+- **Multi-Collection Jekyll Architecture** (`docs/_docs/`, `docs/_wiki/`): Transitioned GitHub Pages site to first-class Jekyll collections with dedicated directories `_docs/` (developer guides) and `_wiki/` (technical styler targets & schemas), providing clean routing (`/docs/:path.html` and `/wiki/:path.html`).
+- **Dedicated Page Layouts** (`docs/_layouts/`):
+  - **`default.html`**: Default layout for root pages outside collections (`index.md`), featuring the original responsive sidebar shell, brand mark, navbar, and footer.
+  - **`docs.html`**: Specialized developer guide layout with reading flow, section breadcrumbs, reading pagers, and quick-jump banner to the wiki.
+  - **`wiki.html`**: Just-the-Docs inspired wiki layout with an interactive client-side target search/filter box, hierarchical styler navigation tree, deep breadcrumbs, GitHub edit links, and topic pagers using the custom frosted dark palette.
+
+### Changed
+- **Pure Markdown Site Migration**: Converted all pages to pure GitHub Flavored Markdown (`index.md`) with explicit YAML frontmatter.
+- **Detailed Jekyll Configuration** (`docs/_config.yml`): Fully expanded configuration with Kramdown GFM, Rouge syntax highlighting, plugin whitelisting, and per-collection/per-scope cascade defaults for `default`, `docs`, and `wiki` layouts.
+
 ## 2026-10-09 - 13:15
 
 ### Changed
