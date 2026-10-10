@@ -2,7 +2,7 @@
 
 This directory contains the core Windhawk Styler mod configurations that implement the **"Command Center Glass"** unified dark/light frosted-glass design language for Windows 11.
 
-> **Note:** The File Explorer styler is **deferred** (ROADMAP M.03) — no styler file exists in this directory. The mod remains approved under Rule 01's four-mod boundary, but the file was generated and then discontinued (git `1cc49e9`) due to a lack of plausible customizations (existing styles too similar; no real benefit yet). See the [File Explorer](#4-windows-11-file-explorer-styler-yml-deferred) section.
+> **Note:** The File Explorer styler is **deferred** (Milestone M.03) — no styler file exists in this directory. The mod remains approved under Rule 01's four-mod boundary, but the file was generated and then discontinued (git `1cc49e9`) due to a lack of plausible customizations (existing styles too similar; no real benefit yet). See the [File Explorer](#4-windows-11-file-explorer-styler-yml-deferred) section.
 
 ## Table of Contents
 
@@ -33,7 +33,7 @@ The suite is approved for exactly **four** official Windhawk Styler mods — **t
 | `windows-11-taskbar-styler.yml` | `windows-11-taskbar-styler` | `explorer.exe` | WinUI 3 / XAML | ✅ Shipped reference |
 | `windows-11-start-menu-styler.yml` | `windows-11-start-menu-styler` | `StartMenuExperienceHost.exe` (LockApp surfaces also targeted) | UWP / WinUI 2 | ✅ Shipped reference |
 | `windows-11-notification-center-styler.yml` | `windows-11-notification-center-styler` | `ShellExperienceHost.exe` / `ShellHost.exe` | UWP `Windows.UI.Xaml` | ✅ Generated & verified (polish active — M.02b / W.04) |
-| *— (no styler file)* | `windows-11-file-explorer-styler` | `explorer.exe` | WinUI 3 `Microsoft.UI.Xaml` | ⏸️ Deferred (ROADMAP M.03) |
+| *— (no styler file)* | `windows-11-file-explorer-styler` | `explorer.exe` | WinUI 3 `Microsoft.UI.Xaml` | ⏸️ Deferred (Milestone M.03) |
 
 All active surfaces share the same canonical tokens and materials to preserve a unified "Command Center" look across taskbar, Start menu/lock widgets, and Notification Center/Quick Settings.
 
@@ -160,10 +160,10 @@ All active surfaces share the same canonical tokens and materials to preserve a 
 - **Windhawk Mod ID:** `windows-11-file-explorer-styler`
 - **Target Process:** `explorer.exe`
 - **Framework:** WinUI 3 `Microsoft.UI.Xaml`
-- **Status:** ⏸️ Deferred (ROADMAP M.03) — **no styler file exists** in this directory.
+- **Status:** ⏸️ Deferred (Milestone M.03) — **no styler file exists** in this directory.
 - **Rationale (user directive, 2026-10-07):** Deferred due to a lack of plausible customizations — other already-existing styles are too similar, so there is no real benefit to having our own File Explorer style just yet. The styler file was generated, then discontinued (git `1cc49e9`).
 
-**Dormant reference:** Should the surface be resumed, intended coverage is WinUI 3 tabs, navigation, command bar, address bar, file list chrome, panes, and flyouts, respecting the Win32 file list boundary and the Safe Glass Chrome principle. Domain selector reference lives in [`.agents/skills/file-explorer-theming.md`](../.agents/skills/file-explorer-theming.md).
+**Dormant reference:** Should the surface be resumed, intended coverage is WinUI 3 tabs, navigation, command bar, address bar, file list chrome, panes, and flyouts, respecting the Win32 file list boundary and the Safe Glass Chrome principle.
 
 **Notes:** Any future attempt must avoid intrusive third-party translucency injectors (e.g. TranslucentWindows) that affect other programs. Do not scaffold a File Explorer styler file without a new explicit user directive.
 
@@ -215,15 +215,13 @@ This repo enforces static validation and live verification.
 
   The suite must pass with `0 errors` before considering changes complete.
 
-- **Live verification:** Use the template checklist to validate on desktop:
-  - Template: `.agents/templates/live-verification-checklist.md`
-  - Covers each active surface (Taskbar, Start Menu/Lock, Notification Center/Quick Settings), states (normal/hover/active), theme switching, and regression spots. (File Explorer sections in the template are reference-only — that surface is deferred.)
+- **Live verification:** Validate on desktop against a manual checklist covering each active surface (Taskbar, Start Menu/Lock, Notification Center/Quick Settings), states (normal/hover/active), theme switching, and regression spots. File Explorer remains deferred and is not covered.
 
 - **Target evidence (Rule 04):** Selectors must be sourced from official Windhawk mod source code, settings schemas, or community theme references. Avoid guessing; prefer evidence-backed targets.
 
 ## Conventions & Compliance
 
-All changes must comply with `.agents/rules/` and repo standards:
+All changes must comply with the repository standards below:
 
 - **Rule 01 – Zero unsolicited injection:** Four approved styler mods (three active files; File Explorer deferred); no unapproved packages/tools.
 - **Rule 02 – Windhawk Styler syntax:** YAML/XAML syntax, quoting, constant declaration order, no inline syntax errors.
@@ -231,14 +229,12 @@ All changes must comply with `.agents/rules/` and repo standards:
 - **Rule 04 – Target evidence protocol:** Sourced selectors only; document evidence when adding/changing targets.
 - **Rule 05 – Surface scope standards:** Respect process targets and WinUI 3 vs UWP boundaries.
 - **Rule 07 – Verification standards:** Mandatory static gate + user live checklist.
-- **Rule 08 – Documentation standards:** Root Markdown files + `src/extras/README.md` + `.agents/` (folder `README.md` files are the canonical indexes); `docs/` is a planned future GitHub Pages site, deferred until style work is complete.
-- **Rule 09 – Milestone & sprint tracking:** Work is tracked via milestones/sprints in the planning files (`ROADMAP.md`, `PLAN.md`, `TODO.md`, `BUGS.md`) and date/time-grouped `CHANGELOG.md` entries — the project does not use formal versioned releases.
+- **Rule 08 – Documentation standards:** Root Markdown files + per-project `README.md` files are the canonical indexes; `docs/` hosts the GitHub Pages documentation site.
+- **Rule 09 – Milestone & sprint tracking:** Work is tracked via milestones/sprints and date/time-grouped `CHANGELOG.md` entries — the project does not use formal versioned releases. (Roadmap, sprint, and task ledgers live in the workspace agents ecosystem.)
 
 ## Related Documentation
 
-- **Repository root:** [`README.md`](../README.md), [`AGENTS.md`](../AGENTS.md), [`PLAN.md`](../PLAN.md), [`TODO.md`](../TODO.md), [`BUGS.md`](../BUGS.md), [`ROADMAP.md`](../ROADMAP.md)
-- **Extras & assets:** [`src/extras/README.md`](extras/README.md)
-- **Agent ecosystem:** [`.agents/agents/README.md`](../.agents/agents/README.md), [`.agents/rules/`](../.agents/rules/)
+- **Repository root:** [`README.md`](../README.md)
+- **Extras & assets:** [`extras/README.md`](extras/README.md)
 - **Validation tool:** [`tools/Test-WindhawkStyles.ps1`](../tools/Test-WindhawkStyles.ps1)
-- **Live checklist template:** [`.agents/templates/live-verification-checklist.md`](../.agents/templates/live-verification-checklist.md)
 - **Changelog:** [`CHANGELOG.md`](../CHANGELOG.md) — chronological log of completed work (entries grouped by date and time; tracked via milestones/sprints, not versioned releases)

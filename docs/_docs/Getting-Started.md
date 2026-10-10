@@ -6,7 +6,7 @@ title: Getting Started
 
 # Getting Started with the Theme Engineering Framework
 
-The **Windhawk Themes** repository provides the scaffolding, multi-agent ecosystem, and hybrid inspection toolset for creating, testing, and maintaining your own custom Windows 11 theme suites.
+The **Windhawk Themes** repository provides the scaffolding, engineering standards, and hybrid inspection toolset for creating, testing, and maintaining your own custom Windows 11 theme suites.
 
 ---
 
@@ -14,7 +14,7 @@ The **Windhawk Themes** repository provides the scaffolding, multi-agent ecosyst
 
 When engineering theme suites for Windhawk, this repository equips you with:
 1. **Hybrid C++/Python Visual Tree Inspector**: Uses UI automation to wake shell processes and dump XAML trees to structured JSON for AI vibe coding without manual inspection burden.
-2. **Multi-Agent Architecture**: Dedicated agent specifications (`.agents/agents/`) and skills (`.agents/skills/`) to collaborate with AI coding assistants.
+2. **Design Language & Evidence Standards**: Canonical "Command Center Glass" tokens, proportional radius scales, and an evidence protocol requiring selectors sourced from official reference material.
 3. **Automated Static Quality Gate**: `tools/Test-WindhawkStyles.ps1` verifies YAML syntax, constant ordering, and token references across all projects.
 4. **Universal Surface Target Reference**: Empirical selector documentation across the 5 base Windhawk stylers and companion mods.
 

@@ -55,7 +55,7 @@ Traditionally, replacing system icons, shell branding images, cursors, or notifi
 ```mermaid
 flowchart LR
     Caller["explorer.exe"] -->|"LoadImage(imageres.dll, ID 100)"| Mod["resource-redirect Hook"]
-    Mod -->|"Match found"| LocalFile["Custom Glass Icon (scratch/...)"]
+    Mod -->|"Match found"| LocalFile["Custom Glass Icon (local file)"]
     Mod -->|"No match"| OrigDLL["Original imageres.dll"]
 ```
 

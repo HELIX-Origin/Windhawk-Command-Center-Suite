@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Windhawk Themes
-summary: The universal framework for building custom Windhawk theme suites. A complete developer framework, autonomous multi-agent ecosystem, and hybrid C++/Python inspection toolchain designed for engineering, validating, and maintaining your own cohesive theme suites across Windows 11 shell surfaces.
+summary: The universal framework for building custom Windhawk theme suites. A complete developer framework with strict engineering standards, a hybrid C++/Python inspection toolchain, and automated validation gates designed for engineering, validating, and maintaining your own cohesive theme suites across Windows 11 shell surfaces.
 nav_order: 1
 notice: "<strong>Framework & Ecosystem.</strong> Built for developers and AI vibe coders creating custom theme suites. Provides full coverage for the 5 base Windhawk styler mods, companion mods, empirical visual tree inspection, and static syntax gates."
 header_actions:
@@ -30,8 +30,8 @@ Building custom Windows 11 theme suites across multiple Windhawk mods often lead
 
 <div class="feature-grid">
 <div class="feature-card">
-<h3>Multi-Agent Ecosystem</h3>
-<p>Specialized AI agents for style architecture, visual inspection, syntax linting, and surface engineering working under strict safety rules.</p>
+<h3>Engineering Standards</h3>
+<p>Canonical "Command Center Glass" tokens, proportional radius scales, and an evidence protocol requiring selectors sourced from official reference material.</p>
 </div>
 <div class="feature-card">
 <h3>Hybrid Inspection Toolchain</h3>

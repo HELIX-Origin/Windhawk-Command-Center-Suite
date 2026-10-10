@@ -5,19 +5,15 @@ Desktop.ini
 *.tmp
 *~
 
-# Agent backups and temporary scratch directories
-.backups/*
-!.backups/README.md
+# Temporary scratch files
 *.log
 
 # Windows system folders
 $RECYCLE.BIN/
 
-# Temp and scratch files
+# Temp files
 temp/
 tmp/
-scratch/*
-!scratch/README.md
 *.tmp
 *.bak
 *.temp

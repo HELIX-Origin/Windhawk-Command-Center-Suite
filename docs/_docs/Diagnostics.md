@@ -43,17 +43,17 @@ Displays all currently running candidate processes with their PIDs, architecture
 ### Capturing a Surface Tree
 ```powershell
 # Capture Notification Center
-python tools/inspect_xaml.py -p ShellHost.exe --surface notification-center -o scratch/json/nc_tree.json
+python tools/inspect_xaml.py -p ShellHost.exe --surface notification-center -o dumps/nc_tree.json
 ```
 
 ### Searching Elements Offline
 Once a tree is captured to JSON, query elements without re-injecting into the process:
 ```powershell
 # Search for quick action toggles
-python tools/inspect_xaml.py --query scratch/json/nc_tree.json --find QuickActionTile
+python tools/inspect_xaml.py --query dumps/nc_tree.json --find QuickActionTile
 
 # Search for specific automation names or IDs
-python tools/inspect_xaml.py --query scratch/json/nc_tree.json --find BrightnessSlider
+python tools/inspect_xaml.py --query dumps/nc_tree.json --find BrightnessSlider
 ```
 
 ---

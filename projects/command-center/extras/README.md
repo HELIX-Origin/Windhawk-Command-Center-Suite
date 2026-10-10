@@ -124,5 +124,4 @@ The companion set is intentionally scoped to augment the Command Center theme wi
 - **Root overview:** [`../../README.md`](../../README.md)
 - **Base styles:** [`../README.md`](../README.md) (canonical tokens, per-mod coverage)
 - **Validation:** [`../../tools/Test-WindhawkStyles.ps1`](../../tools/Test-WindhawkStyles.ps1)
-- **Agent ecosystem:** [`../../AGENTS.md`](../../AGENTS.md), [`.agents/rules/`](../../.agents/rules/)
-- **Tracking:** [`../../CHANGELOG.md`](../../CHANGELOG.md), [`../../PLAN.md`](../../PLAN.md), [`../../TODO.md`](../../TODO.md)
+- **Tracking:** [`../../CHANGELOG.md`](../../CHANGELOG.md)

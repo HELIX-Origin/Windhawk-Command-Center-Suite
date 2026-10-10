@@ -18,7 +18,6 @@ The framework delivers unified, dark/light-adaptive frosted glass and modern acr
 - [Companion & Supplemental Mods](#companion--supplemental-mods)
 - [Design Architecture & Materials](#design-architecture--materials)
 - [Hybrid Inspection Toolchain](#hybrid-inspection-toolchain)
-- [AI Agent Ecosystem](#ai-agent-ecosystem)
 - [Quality Gates & Validation](#quality-gates--validation)
 - [Milestones & Releases](#milestones--releases)
 - [License](#license)
@@ -51,7 +50,7 @@ The framework defines **five primary official Windhawk styler mods** as its cano
 | **Taskbar** | [`windows-11-taskbar-styler`](https://windhawk.net/mods/windows-11-taskbar-styler) | [`projects/command-center/windows-11-taskbar-styler.yml`](projects/command-center/windows-11-taskbar-styler.yml) | `explorer.exe` | WinUI 3 / XAML | ✅ Supported reference |
 | **Notification Center** | [`windows-11-notification-center-styler`](https://windhawk.net/mods/windows-11-notification-center-styler) | [`projects/command-center/windows-11-notification-center-styler.yml`](projects/command-center/windows-11-notification-center-styler.yml) | `ShellExperienceHost.exe` / `ShellHost.exe` | UWP `Windows.UI.Xaml` | ✅ Generated & verified |
 | **Settings** | [`windows-11-settings-styler`](https://windhawk.net/mods/windows-11-settings-styler) | *— (styler file optional)* | `SystemSettings.exe` | UWP / WinUI `Windows.UI.Xaml` | 🌐 In base scope (Tooling supported) |
-| **File Explorer** | [`windows-11-file-explorer-styler`](https://windhawk.net/mods/windows-11-file-explorer-styler) | *— (styler file optional)* | `explorer.exe` | WinUI 3 `Microsoft.UI.Xaml` | ⏸️ Deferred (ROADMAP M.03) |
+| **File Explorer** | [`windows-11-file-explorer-styler`](https://windhawk.net/mods/windows-11-file-explorer-styler) | *— (styler file optional)* | `explorer.exe` | WinUI 3 `Microsoft.UI.Xaml` | ⏸️ Deferred (Milestone M.03) |
 
 ---
 
@@ -115,17 +114,6 @@ The repository includes a native C++ and Python visual tree inspection toolchain
 
 ---
 
-## AI Agent Ecosystem
-
-This repository is governed by an automated multi-agent team:
-- [**`AGENTS.md`**](AGENTS.md) — Central operating manual and multi-agent coordination model.
-- [**`.agents/rules/`**](.agents/rules/) — Mandatory architectural, safety, syntax, design, evidence, scope, verification, documentation, and milestone rules (Rules 00–09).
-- [**`.agents/skills/`**](.agents/skills/) — Subsystem technical skills and material recipes.
-- [**`.agents/agents/`**](.agents/agents/) — Agent catalog and specification files.
-- [**`.agents/templates/`**](.agents/templates/) — Governance blueprints and verification checklists.
-
----
-
 ## Quality Gates & Validation
 
 All style files must pass repository quality gates before deployment:
@@ -143,7 +131,7 @@ Target: `0 errors, 0 warnings`.
 Progress is tracked via **Milestones** (`M.01`, `M.02`, `M.02b`, `M.03`) with sprint tracking for active steps:
 - **Milestone-Based Releases**: Releases use milestone tags as release identifiers rather than standard semantic versioning.
 - **Zero Asset Attachments**: Releases carry no attached binary or zip assets; the release is strictly the verified git tag checkpoint.
-- Active planning and progress ledgers: [`ROADMAP.md`](ROADMAP.md), [`PLAN.md`](PLAN.md), [`TODO.md`](TODO.md), [`BUGS.md`](BUGS.md), and [`CHANGELOG.md`](CHANGELOG.md).
+- Active progress is recorded in [`CHANGELOG.md`](CHANGELOG.md); milestone and task tracking live in the workspace agents ecosystem ledgers (`ROADMAP.md`, `PLAN.md`, `TODO.md`, `BUGS.md`).
 
 ---
 

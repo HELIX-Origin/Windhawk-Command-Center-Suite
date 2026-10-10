@@ -4,7 +4,7 @@ title: Documentation Home
 
 # Windhawk Themes Documentation
 
-Welcome to the **Windhawk Themes** engineering documentation. This site covers the developer framework, multi-agent ecosystem, hybrid inspection toolchain, and universal target references for creating and maintaining your own custom Windows 11 theme suites using official Windhawk styler mods.
+Welcome to the **Windhawk Themes** engineering documentation. This site covers the developer framework, hybrid inspection toolchain, and universal target references for creating and maintaining your own custom Windows 11 theme suites using official Windhawk styler mods.
 
 ---
 
@@ -50,7 +50,7 @@ Welcome to the **Windhawk Themes** engineering documentation. This site covers t
 | **Taskbar Styler** | `windows-11-taskbar-styler` | `explorer.exe` | WinUI 3 / XAML | ✅ Reference supported |
 | **Notification Center Styler** | `windows-11-notification-center-styler` | `ShellExperienceHost.exe` / `ShellHost.exe` | UWP `Windows.UI.Xaml` | ✅ Reference supported |
 | **Settings Styler** | `windows-11-settings-styler` | `SystemSettings.exe` | UWP / WinUI `Windows.UI.Xaml` | 🌐 In base scope |
-| **File Explorer Styler** | `windows-11-file-explorer-styler` | `explorer.exe` | WinUI 3 `Microsoft.UI.Xaml` | ⏸️ Deferred (ROADMAP M.03) |
+| **File Explorer Styler** | `windows-11-file-explorer-styler` | `explorer.exe` | WinUI 3 `Microsoft.UI.Xaml` | ⏸️ Deferred (Milestone M.03) |
 
 ---
 
