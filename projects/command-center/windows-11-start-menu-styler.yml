@@ -34,9 +34,6 @@ controlStyles:
   - target: Border#StartDropShadow, Border#RightCompanionDropShadow, Border#RootGridDropShadow, Border#dropshadow
     styles:
       - Visibility=Collapsed
-  - target: Border#MainMenuHighContrastBorder, Border#RightCompanionHighContrastBorder
-    styles:
-      - Visibility=Collapsed
   - target: Border#LayerBorder, Border#AccentLayerBorder, Border#AccentAppBorder
     styles:
       - Visibility=Collapsed

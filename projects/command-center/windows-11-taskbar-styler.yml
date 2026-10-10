@@ -192,33 +192,12 @@ controlStyles:
     styles:
       - RadiusX=4
       - RadiusY=4
-  - target: FlyoutPresenter > Border#BackgroundElement, FlyoutPresenter > Border, FlyoutPresenter
-    styles:
-      - Background:=$Background
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$CornerRadius
-  - target: MenuFlyoutPresenter > Border
-    styles:
-      - Background:=$Background
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$CornerRadius
-  - target: MenuFlyoutSubItem
-    styles:
-      - Background:=$Background
-      - BorderBrush:=$BorderBrush
-      - BorderThickness=$BorderThickness
-      - CornerRadius=$CornerRadius
   - target: Grid#HoverFlyoutGrid > Border#HoverFlyoutBackground
     styles:
       - Background:=$Background
       - BorderBrush:=$BorderBrush
       - BorderThickness=$BorderThickness
       - CornerRadius=$CornerRadius
-  - target: Taskbar.TaskbarExtensionElement
-    styles:
-      - RenderTransform:=<TranslateTransform X="0" Y="0" />
   - target: Windows.UI.Xaml.Controls.Border#SnapBarBorder, Border#SnapBarBorder
     styles:
       - Background:=$Background
@@ -299,7 +278,6 @@ controlStyles:
   - target: Taskbar.TaskListButtonPanel#ExperienceToggleButtonRootPanel
     styles:
       - VerticalAlignment=Center
-      - RenderTransform:=<TranslateTransform X="0" Y="0" />
   - target: SearchUx.SearchUI.SearchPillButton#SearchPill > SearchUx.SearchUI.SearchButtonRootGrid#SearchBoxButtonRootPanel
     styles:
       - BorderBrush:=Transparent
