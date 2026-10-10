@@ -73,7 +73,7 @@ UWP shell flyouts (Start Menu, Action Center, Notification Center) defer visual 
 
 The CLI includes built-in integration with ShareX via the `--screenshot` (`-ss`) flag:
 - Dynamically parses the user's `HotkeysConfig.json` and `ApplicationConfig.json`.
-- Detects custom hardware keybinds (such as keyboards mapping PrintScreen to `VK_SLEEP`).
+- Auto-detects custom hardware keybinds even when the OS reassigns the usual PrintScreen chord.
 - Triggers active window or region capture chords automatically, saving screenshots directly to the user's configured destination.
 
 ---

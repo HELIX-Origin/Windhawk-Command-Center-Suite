@@ -58,7 +58,7 @@ python tools/inspect_xaml.py -p StartMenuExperienceHost.exe --screenshot
 ```
 
 ### ShareX Screenshot Integration
-The tool automatically parses your ShareX configuration (`HotkeysConfig.json` and `ApplicationConfig.json`) to find your custom screenshot keybinds (e.g. mapping `VK_SLEEP` if your keyboard registers PrintScreen as Sleep) and destination screenshot directories. Pass `--screenshot` (or `-ss`) to trigger a capture while the target shell surface is active.
+The tool automatically parses your ShareX configuration (`HotkeysConfig.json` and `ApplicationConfig.json`) to find your custom screenshot keybinds and destination screenshot directories. Pass `--screenshot` (or `-ss`) to trigger a capture while the target shell surface is active.
 
 ### Prerequisites & Setup Requirements
 

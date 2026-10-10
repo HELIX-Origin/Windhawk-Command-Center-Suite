@@ -127,7 +127,7 @@ Our high-speed native inspection suite combines direct C++ TAP hooks with a flex
 <ul>
 <li><strong>Automated Surface Activation</strong>: Programmatically opens and closes shell surfaces (Start, Action Center, Notification Center, Search, Settings) via UI automation to ensure UWP visual trees are fully populated.</li>
 <li><strong>Heartbeat Resiliency</strong>: Built-in 30-second heartbeat loops accommodate OS elevation and UAC security prompts without premature timeouts.</li>
-<li><strong>ShareX Screenshot Integration</strong>: Auto-detects user keybindings (including <code>VK_SLEEP</code> PrintScreen mappings) to capture desktop verification evidence automatically.</li>
+<li><strong>ShareX Screenshot Integration</strong>: Auto-detects user keybindings to capture desktop verification evidence automatically.</li>
 <li><strong>Automated Static Gate</strong>: <code>tools/Test-WindhawkStyles.ps1</code> verifies YAML syntax, constant ordering, token definitions, and safety rules before any style is published.</li>
 </ul>
 </section>
