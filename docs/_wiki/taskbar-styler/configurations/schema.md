@@ -1,6 +1,8 @@
 ---
+parent: Taskbar Styler
+grand_parent: Target & Configuration Wiki
 layout: wiki
-title: "Wiki: Taskbar Configurations"
+title: Taskbar Configurations
 ---
 
 # Taskbar Styler Configuration Schema & Options

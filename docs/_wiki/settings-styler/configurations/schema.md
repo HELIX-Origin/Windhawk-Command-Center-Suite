@@ -1,6 +1,8 @@
 ---
+parent: Settings Styler
+grand_parent: Target & Configuration Wiki
 layout: wiki
-title: "Wiki: Settings Configurations"
+title: Settings Configurations
 ---
 
 # Settings Styler Configuration Schema & Options

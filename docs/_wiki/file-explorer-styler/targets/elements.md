@@ -1,6 +1,8 @@
 ---
+parent: File Explorer Styler
+grand_parent: Target & Configuration Wiki
 layout: wiki
-title: "Wiki: File Explorer Element Targets"
+title: File Explorer Element Targets
 ---
 
 # File Explorer Visual Tree Element Targets

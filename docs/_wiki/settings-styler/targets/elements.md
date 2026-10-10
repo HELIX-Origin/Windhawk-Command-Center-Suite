@@ -1,6 +1,8 @@
 ---
+parent: Settings Styler
+grand_parent: Target & Configuration Wiki
 layout: wiki
-title: "Wiki: Settings Element Targets"
+title: Settings Element Targets
 ---
 
 # Settings Visual Tree Element Targets

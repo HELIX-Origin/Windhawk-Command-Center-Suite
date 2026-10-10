@@ -1,5 +1,6 @@
 ---
 layout: docs
+parent: Documentation Directory
 title: Companion Mods Overview
 ---
 

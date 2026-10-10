@@ -1,6 +1,7 @@
 ---
 layout: wiki
-title: "Wiki: Settings Styler"
+title: Settings Styler
+parent: Target & Configuration Wiki
 ---
 
 # Wiki: Windows 11 Settings Styler

@@ -1,6 +1,8 @@
 ---
+parent: Start Menu Styler
+grand_parent: Target & Configuration Wiki
 layout: wiki
-title: "Wiki: Start Menu Element Targets"
+title: Start Menu Element Targets
 ---
 
 # Start Menu Visual Tree Element Targets
@@ -96,11 +98,11 @@ Controls managing recent documents, recommended apps, and expander toggles.
 |---|---|---|---|
 | `Windows.UI.Xaml.Controls.GridView#RecommendedList` | `GridView` | Win11 21H2 – 24H2 | Recommended items list. In minimal layouts, collapse with `Visibility=Collapsed`. |
 | `Grid#TopLevelSuggestionsRoot` | `Windows.UI.Xaml.Controls.Grid` | Win11 22H2 – 24H2 | Container hosting suggestion items. Layout: `Grid.Row=1`. |
-| `Grid#ShowMoreSuggestions` | `Windows.UI.Xaml.Controls.Grid` | Win11 22H2 – 24H2 | Expander container. Supports reactive visibility binding: `Visibility={{showMoreSuggestionsVisible}}`. |
+| `Grid#ShowMoreSuggestions` | `Windows.UI.Xaml.Controls.Grid` | Win11 22H2 – 24H2 | Expander container. Supports reactive visibility binding: `Visibility={% raw %}{{showMoreSuggestionsVisible}}{% endraw %}`. |
 | `Button#ShowMoreSuggestionsButton` | `Windows.UI.Xaml.Controls.Button` | Win11 22H2 – 24H2 | "More" chevron button. Styled with `Margin=0,-77,335,0`, `Height=32`, and custom corner rounding. |
 | `Button#ShowMoreSuggestionsButton > Windows.UI.Xaml.Controls.Grid@CommonStates` | `Windows.UI.Xaml.Controls.Grid` | Win11 22H2 – 24H2 | Interactive state border: `BorderBrush:=$RecommendedBorderBrush`, `BorderThickness=2,2,0,2`, `CornerRadius=15,0,0,15`. |
 | `Button#HideMoreSuggestionsButton` | `Windows.UI.Xaml.Controls.Button` | Win11 22H2 – 24H2 | Back chevron button when recommendations are expanded. `Margin=33,30,0,0`, `Height=32`, `Width=32`, `CornerRadius=6`. |
-| `Microsoft.UI.Xaml.Controls.DropDownButton` | WinUI DropDownButton | Win11 23H2 – 24H2 | Category drop-down button in recommendations header. Styled with `RenderTransform:=<TranslateTransform X="-235" Y="{{-224 - pinnedListHeight}}" />`. |
+| `Microsoft.UI.Xaml.Controls.DropDownButton` | WinUI DropDownButton | Win11 23H2 – 24H2 | Category drop-down button in recommendations header. Styled with `RenderTransform:=<TranslateTransform X="-235" Y="{% raw %}{{-224 - pinnedListHeight}}{% endraw %}" />`. |
 
 ---
 

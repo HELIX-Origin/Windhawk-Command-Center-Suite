@@ -1,6 +1,8 @@
 ---
+parent: Taskbar Styler
+grand_parent: Target & Configuration Wiki
 layout: wiki
-title: "Wiki: Taskbar Element Targets"
+title: Taskbar Element Targets
 ---
 
 # Taskbar Visual Tree Element Targets

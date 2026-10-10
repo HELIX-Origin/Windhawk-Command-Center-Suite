@@ -1,6 +1,8 @@
 ---
+parent: File Explorer Styler
+grand_parent: Target & Configuration Wiki
 layout: wiki
-title: "Wiki: File Explorer Companions"
+title: File Explorer Companions
 ---
 
 # File Explorer Companion Mods: Technical Settings Reference

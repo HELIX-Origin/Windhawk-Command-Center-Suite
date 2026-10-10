@@ -1,6 +1,8 @@
 ---
+parent: Taskbar Styler
+grand_parent: Target & Configuration Wiki
 layout: wiki
-title: "Wiki: Taskbar Companions"
+title: Taskbar Companions
 ---
 
 # Taskbar Companion Mods: Technical Settings Reference

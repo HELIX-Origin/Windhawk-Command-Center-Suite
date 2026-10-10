@@ -1,5 +1,6 @@
 ---
 layout: docs
+parent: Documentation Directory
 title: Shell Flyouts & Positions
 ---
 

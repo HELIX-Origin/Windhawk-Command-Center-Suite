@@ -1,6 +1,8 @@
 ---
+parent: Notification Center Styler
+grand_parent: Target & Configuration Wiki
 layout: wiki
-title: "Wiki: Notification Center Configurations"
+title: Notification Center Configurations
 ---
 
 # Notification Center Styler Configuration Schema & Options

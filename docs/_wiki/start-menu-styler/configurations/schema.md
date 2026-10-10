@@ -1,6 +1,8 @@
 ---
+parent: Start Menu Styler
+grand_parent: Target & Configuration Wiki
 layout: wiki
-title: "Wiki: Start Menu Configurations"
+title: Start Menu Configurations
 ---
 
 # Start Menu Styler Configuration Schema & Options
@@ -102,7 +104,7 @@ The `controlStyles` block applies styling directives to XAML visual tree nodes d
       - Visibility=Collapsed
   ```
 * **Property Filtering**: `[AutomationProperties.Name = Show all]` matches by attached dependency properties.
-* **Windhawk Dynamic State Binding**: `ActualHeight=>pinnedListHeight` captures dynamic control height into a variable, which can then be referenced in relative layout math like `RenderTransform:=<TranslateTransform Y="{{-224 - pinnedListHeight}}" />`.
+* **Windhawk Dynamic State Binding**: `ActualHeight=>pinnedListHeight` captures dynamic control height into a variable, which can then be referenced in relative layout math like `RenderTransform:=<TranslateTransform Y="{% raw %}{{-224 - pinnedListHeight}}{% endraw %}" />`.
 
 ### Property Assignment Operators
 | Operator | Syntax Example | Behavior |

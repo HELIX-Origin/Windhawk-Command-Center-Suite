@@ -1,6 +1,7 @@
 ---
 layout: wiki
-title: "Wiki: Taskbar Styler"
+title: Taskbar Styler
+parent: Target & Configuration Wiki
 ---
 
 # Wiki: Windows 11 Taskbar Styler

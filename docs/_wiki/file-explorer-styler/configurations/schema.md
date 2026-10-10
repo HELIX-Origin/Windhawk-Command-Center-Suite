@@ -1,6 +1,8 @@
 ---
+parent: File Explorer Styler
+grand_parent: Target & Configuration Wiki
 layout: wiki
-title: "Wiki: File Explorer Configurations"
+title: File Explorer Configurations
 ---
 
 # File Explorer Styler Configuration Schema & Options

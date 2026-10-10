@@ -32,3 +32,9 @@ tools/native/build/*
 !tools/native/build/README.md
 tools/native/bin/*
 !tools/native/bin/README.md
+
+# Jekyll and GitHub Pages build artifacts
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata

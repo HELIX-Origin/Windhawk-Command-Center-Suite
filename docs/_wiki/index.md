@@ -1,7 +1,9 @@
 ---
 layout: wiki
 title: Target & Configuration Wiki
+summary: Comprehensive development knowledge base cataloging verified visual tree targets, configuration schemas, and companion mod settings across Windows 11 shell surfaces.
 permalink: /wiki/
+nav_order: 1
 ---
 
 # Windhawk Styler Wiki: Development Knowledge Base

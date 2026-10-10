@@ -1,6 +1,7 @@
 ---
 layout: wiki
-title: "Wiki: File Explorer Styler"
+title: File Explorer Styler
+parent: Target & Configuration Wiki
 ---
 
 # Wiki: Windows 11 File Explorer Styler

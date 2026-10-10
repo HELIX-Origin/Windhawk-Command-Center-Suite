@@ -1,7 +1,9 @@
 ---
 layout: docs
 title: Documentation Directory
+summary: Welcome to the Windhawk Themes Documentation Guides covering architecture, surface guides, companion tools, and quality gates.
 permalink: /docs/
+nav_order: 1
 ---
 
 # Developer Documentation Directory

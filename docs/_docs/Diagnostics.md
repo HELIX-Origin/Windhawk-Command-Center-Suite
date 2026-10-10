@@ -1,4 +1,6 @@
 ---
+layout: docs
+parent: Documentation Directory
 title: Visual Tree Diagnostics
 ---
 

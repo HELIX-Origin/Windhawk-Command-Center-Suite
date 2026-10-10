@@ -1,8 +1,0 @@
-<div class="translate-control notranslate" translate="no">
-  <label for="translate-select">🌐 <span class="visually-hidden">Language</span></label>
-  <select id="translate-select" aria-label="Translate this page" disabled>
-    {%- for language in site.data.languages %}
-    <option value="{{ language.code }}" lang="{{ language.code }}">{{ language.name }}</option>
-    {%- endfor %}
-  </select>
-</div>

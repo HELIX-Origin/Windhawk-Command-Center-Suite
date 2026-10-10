@@ -1,6 +1,7 @@
 ---
 layout: wiki
-title: "Wiki: Start Menu Styler"
+title: Start Menu Styler
+parent: Target & Configuration Wiki
 ---
 
 # Wiki: Windows 11 Start Menu Styler

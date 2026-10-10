@@ -1,6 +1,7 @@
 ---
 layout: wiki
-title: "Wiki: Notification Center Styler"
+title: Notification Center Styler
+parent: Target & Configuration Wiki
 ---
 
 # Wiki: Windows 11 Notification Center Styler

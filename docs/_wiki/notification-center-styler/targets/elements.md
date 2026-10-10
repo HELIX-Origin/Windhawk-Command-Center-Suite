@@ -1,6 +1,8 @@
 ---
+parent: Notification Center Styler
+grand_parent: Target & Configuration Wiki
 layout: wiki
-title: "Wiki: Notification Center Element Targets"
+title: Notification Center Element Targets
 ---
 
 # Notification Center Visual Tree Element Targets
