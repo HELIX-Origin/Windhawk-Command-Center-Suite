@@ -6,6 +6,7 @@ category: Frosted Glass
 badge: Featured Suite
 version: M.02b
 author: HELIX Origin
+image: assets/images/command-center-header.png
 tags:
   - Frosted Glass
   - WindhawkBlur
@@ -20,8 +21,6 @@ github_url: https://github.com/HELIX-Origin/Windhawk-Themes/tree/main/projects/c
 ## 🧭 Overview
 
 The **Command Center Suite** is our premier unified theme suite implementing the signature **"Command Center Glass"** design language for Windows 11. Engineered with precision mathematical tokens, it eliminates visual dissonance across disconnected shell surfaces and replaces flat, opaque Windows 11 chrome with high-performance translucent glass materials.
-
-<img width="80%" align="center" src="{{ 'assets/images/command-center-header.png' | relative_url }}" alt="Command Center Suite Header">
 
 ---
 
