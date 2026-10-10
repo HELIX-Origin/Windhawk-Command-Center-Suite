@@ -65,6 +65,32 @@ The **Command Center Suite** is our premier unified theme suite implementing the
 
 ---
 
+## 🧩 Configuring the Companion Extras
+
+Beyond the three core styler mods, the suite ships an optional **extras** set: curated companion-mod configurations that extend the Command Center Glass aesthetic into supplemental shell utilities, status indicators, dialogs, and flyouts. Each extra is non-invasive — it applies only to its own official Windhawk mod and never replaces the core styler YAMLs.
+
+| Companion Mod | Mod ID | Configuration File | Targeted Process / Scope |
+|---|---|---|---|
+| **Dynamic Island for Windows** | [`dynamic-island-for-windows`](https://windhawk.net/mods/dynamic-island-for-windows) | [`dynamic-island-for-windows.yml`](https://github.com/HELIX-Origin/Windhawk-Themes/blob/main/projects/command-center/extras/dynamic-island-for-windows.yml) | Floating top-center pill: media, volume HUD, hardware stats, weather, privacy indicators |
+| **Enhanced Disk Usage** | [`enhanced-disk-usage`](https://windhawk.net/mods/enhanced-disk-usage) | [`enhanced-disk-usage.yml`](https://github.com/HELIX-Origin/Windhawk-Themes/blob/main/projects/command-center/extras/enhanced-disk-usage.yml) | `explorer.exe` — rounded glass drive-capacity bars in File Explorer |
+| **File Operations Styler** | [`file-operations-styler`](https://windhawk.net/mods/file-operations-styler) | [`file-operations-styler.yml`](https://github.com/HELIX-Origin/Windhawk-Themes/blob/main/projects/command-center/extras/file-operations-styler.yml) | `explorer.exe` — circular progress and typography for copy/move/delete dialogs |
+| **Fully Customizable Winver** | [`fully-customizeable-winver`](https://windhawk.net/mods/fully-customizeable-winver) | [`fully-customizeable-winver.yml`](https://github.com/HELIX-Origin/Windhawk-Themes/blob/main/projects/command-center/extras/fully-customizeable-winver.yml) | `winver.exe` — minimalist slate "About Windows" card |
+| **Shell Flyout Positions** | [`shell-flyout-positions`](https://windhawk.net/mods/shell-flyout-positions) | [`shell-flyout-positions.yml`](https://github.com/HELIX-Origin/Windhawk-Themes/blob/main/projects/command-center/extras/shell-flyout-positions.yml) | `explorer.exe` — tray-aligned Notification/Action Center and bottom-anchored Start Menu |
+| **Start Button Colorizer** | [`start-button-colorizer`](https://windhawk.net/mods/start-button-colorizer) | [`start-button-colorizer.yml`](https://github.com/HELIX-Origin/Windhawk-Themes/blob/main/projects/command-center/extras/start-button-colorizer.yml) | `explorer.exe` — tints the taskbar Start glyph to the system accent |
+| **Taskbar Clock Customization** | [`taskbar-clock-customization`](https://windhawk.net/mods/taskbar-clock-customization) | [`taskbar-clock-customization.yml`](https://github.com/HELIX-Origin/Windhawk-Themes/blob/main/projects/command-center/extras/taskbar-clock-customization.yml) | `explorer.exe` — seconds display, custom format, and hover telemetry HUD |
+| **Taskbar Tray and Icon Tweaks** | [`taskbar-tray-and-icon-tweaks`](https://windhawk.net/mods/taskbar-tray-and-icon-tweaks) | [`taskbar-tray-and-icon-tweaks.yml`](https://github.com/HELIX-Origin/Windhawk-Themes/blob/main/projects/command-center/extras/taskbar-tray-and-icon-tweaks.yml) | `explorer.exe` — tray declutter, smart bell visibility, compact Show Desktop area |
+
+### Installing an Extra
+
+1. Open **Windhawk** → **Explore** and install the desired companion mod (e.g. *Taskbar Clock Customization*, *Dynamic Island for Windows*).
+2. Open the mod's **Details → Settings** and switch to **Advanced / Textual** mode if needed.
+3. Copy the entire contents of the matching YAML from [`projects/command-center/extras/`](https://github.com/HELIX-Origin/Windhawk-Themes/tree/main/projects/command-center/extras) and paste it into the mod's settings editor.
+4. Click **Save settings**. The configuration applies immediately — no Explorer or system restart required.
+
+> **Note:** Extras are optional and independent — install only the ones you want, and each applies to a separate official mod. Companion mod updates can add or rename fields, so re-validate a config after updating its mod. For per-mod design notes and the exact values each YAML applies, see the [extras reference ↗](https://github.com/HELIX-Origin/Windhawk-Themes/blob/main/projects/command-center/extras/README.md).
+
+---
+
 ## 🧪 Verification & Gate Status
 
 - **Static Validation Gate**: `pwsh -NoProfile -File tools/Test-WindhawkStyles.ps1` verified with **0 errors**.
