@@ -16,6 +16,11 @@ baseurl: "/Windhawk-Themes"
 repository: "HELIX-Origin/Windhawk-Themes"
 github_username: "HELIX-Origin"
 
+# Site branding — squircle artwork in assets/images/ (derived from windhawk.jpg)
+logo: "assets/images/logo.svg"
+favicon: "assets/images/favicon.ico"
+icon: "assets/images/icon.png"
+
 # Author & Publisher Metadata
 author:
   name: "HELIX Origin"
