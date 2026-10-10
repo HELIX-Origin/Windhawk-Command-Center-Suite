@@ -40,12 +40,13 @@ flowchart TD
 
 ## 1. Root & Master Framing Targets
 
-The outermost visual tree controls manage window bounds and shell drop-shadow generation.
+The outermost visual tree controls manage window bounds, shell drop-shadow generation, and high-contrast system borders.
 
 | Element Selector | Class Type | Verified Builds | Behavior & Styling Notes |
 |---|---|---|---|
 | `Border#DropShadowDismissTarget` | `Windows.UI.Xaml.Controls.Border` | Win11 21H2 – 24H2 | Root drop-shadow and dismiss host. Setting `Shadow:=`, `BorderThickness=0.3,1,0.3,1`, `Background:=$Background`, and `CornerRadius=$CardRadius` applies unified glass styling and collapses the native dark halo. |
 | `Border#StartDropShadow`, `Border#RightCompanionDropShadow`, `Border#RootGridDropShadow`, `Border#dropshadow` | `Windows.UI.Xaml.Controls.Border` | Win11 21H2 – 24H2 | Native system drop-shadow borders. Typically set to `Visibility=Collapsed` in custom themes to eliminate opaque black silhouettes behind transparent glass. |
+| `Border#MainMenuHighContrastBorder`, `Border#RightCompanionHighContrastBorder` | `Windows.UI.Xaml.Controls.Border` | Win11 21H2 – 24H2 | High-contrast accessibility boundary borders. Collapsed (`Visibility=Collapsed`) for pure modern aesthetic. |
 | `Border#LayerBorder`, `Border#AccentLayerBorder`, `Border#AccentAppBorder` | `Windows.UI.Xaml.Controls.Border` | Win11 22H2 – 24H2 | Internal accent highlighting layers. Collapsed (`Visibility=Collapsed`) to eliminate unwanted solid color bars. |
 | `Border#AcrylicBorder`, `Grid#MainMenu > Border#AcrylicBorder`, `Grid#CompanionRoot > Border#AcrylicBorder` | `Windows.UI.Xaml.Controls.Border` | Win11 21H2 – 24H2 | Default system acrylic background plate. When using `WindhawkBlur` on `DropShadowDismissTarget`, set this element to `Background:=Transparent`, `BorderBrush:=Transparent`, and `BorderThickness=0` to prevent opaque double-acrylic stacking. |
 | `Border#AcrylicOverlay` | `Windows.UI.Xaml.Controls.Border` | Win11 21H2 – 24H2 | Two-tone navigation split overlay card that covers the bottom third of the Start Menu. Set to `Visibility=Collapsed` or `Background:=Transparent` for a seamless single-pane glass surface. |

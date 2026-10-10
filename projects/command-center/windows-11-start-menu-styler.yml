@@ -1,5 +1,3 @@
-theme: ''
-disableNewStartMenuLayout: ''
 styleConstants:
   - Translucent=<WindhawkBlur BlurAmount="15" TintColor="#10808080"/>
   - Glass=<WindhawkBlur BlurAmount="5" TintColor="{ThemeResource SystemChromeMediumColor}" TintOpacity="0.7" />
@@ -32,6 +30,9 @@ controlStyles:
       - Margin=0
       - Padding=0
   - target: Border#StartDropShadow, Border#RightCompanionDropShadow, Border#RootGridDropShadow, Border#dropshadow
+    styles:
+      - Visibility=Collapsed
+  - target: Border#MainMenuHighContrastBorder, Border#RightCompanionHighContrastBorder
     styles:
       - Visibility=Collapsed
   - target: Border#LayerBorder, Border#AccentLayerBorder, Border#AccentAppBorder
@@ -480,9 +481,9 @@ controlStyles:
       - BorderThickness=0
   - target: Cortana.UI.Views.TaskbarSearchPage > Grid#RootGrid > Grid#OuterBorderGrid
     styles:
-      - Background:=Transparent
-      - BorderBrush:=Transparent
-      - BorderThickness=o
+      - Background:=$Background
+      - BorderBrush:=$BorderBrush
+      - BorderThickness=$BorderThickness
       - CornerRadius=$PanelRadius
   - target: StackPanel#TimeAndDatePanel
     styles:
@@ -533,8 +534,6 @@ controlStyles:
   - target: Border#BackgroundBorder, Grid#LayoutRoot
     styles:
       - BackgroundTransition:=<BrushTransition Duration="0:0:0.083" />
-themeResourceVariables:
-  - ''
 webContentStyles:
   - target: '*'
     styles:

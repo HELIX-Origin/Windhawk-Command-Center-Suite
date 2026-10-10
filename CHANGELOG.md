@@ -2,6 +2,16 @@
 
 All notable changes to **Windhawk Themes** are documented here. One entry per update (`## YYYY-MM-DD - HH:MM`), newest first. Each entry has at most one `Added`, `Removed`, `Changed`, and `Fixed` section — omit sections with no items, and put every item of a type in that type's single list (never a second section of the same type). Items are `- **Title**: description` with nested `**Title**: description` sub-items as needed. Releases use milestone tags (e.g. `M.01`, `M.02b`) with zero attached assets.
 
+## 2026-10-10 - 12:38
+
+### Removed
+- **Start Menu High-Contrast Fix (Rolled Back)**: The removal of the `Border#MainMenuHighContrastBorder` / `Border#RightCompanionHighContrastBorder` `Visibility=Collapsed` override was reverted — it damaged the actual Start Menu styling (the borders affect normal-mode rendering). The override remains in the config; a correct high-contrast-neutral fix is a pending task.
+- **Taskbar Selector & Transform Cleanup (Rolled Back)**: The bare-type `FlyoutPresenter` / `MenuFlyoutPresenter > Border` / `MenuFlyoutSubItem` targets and the two `RenderTransform` overrides in `windows-11-taskbar-styler.yml` were restored. They were not the `explorer.exe` crash source — root cause is the external `file-operations-styler` companion mod — and their removal undid intended styling.
+
+### Changed
+- **Styler Config Tidiness**: Dropped empty scaffolding keys (`theme: ''`, `themeResourceVariables:`, `clickThroughTaskbar: 0`, `xamlDiagnosticsHandling: ''`, `disableNewStartMenuLayout: ''`) and applied theme tokens (`$Background` / `$BorderBrush` / `$BorderThickness`) to the `TaskbarSearchPage` `OuterBorderGrid` block.
+- **Target Catalog**: Restored the high-contrast border row in `docs/_wiki/start-menu-styler/targets/elements.md` to match the current Start Menu config.
+
 ## 2026-10-09 - 13:55
 
 ### Added
