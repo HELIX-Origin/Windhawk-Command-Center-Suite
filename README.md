@@ -149,4 +149,4 @@ Progress is tracked via **Milestones** (`M.01`, `M.02`, `M.02b`, `M.03`) with sp
 
 ## License
 
-MIT License. See [LICENSE](LICENSE).
+⚖️ BSD-3-Clause License — see [`LICENSE`](LICENSE.md) file for details.
