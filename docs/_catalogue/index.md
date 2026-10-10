@@ -2,8 +2,9 @@
 layout: catalogue
 title: Theme Suites Catalogue
 permalink: /catalogue/
+page_class: page--catalogue
+section: catalogue
 summary: Browse, explore, and download cohesive Windows 11 theme suites engineered for official Windhawk styler mods.
-nav_order: 2
 categories:
   - Frosted Glass
   - Dark Theme
