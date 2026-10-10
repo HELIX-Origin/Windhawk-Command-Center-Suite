@@ -5,9 +5,12 @@ summary: The universal framework for building custom Windhawk theme suites. A co
 nav_order: 1
 notice: "<strong>Framework & Ecosystem.</strong> Built for developers and AI vibe coders creating custom theme suites. Provides full coverage for the 5 base Windhawk styler mods, companion mods, empirical visual tree inspection, and static syntax gates."
 header_actions:
+  - title: Browse Catalogue
+    url: /catalogue/
+    class: button--primary
   - title: Read Documentation
     url: /docs/
-    class: button--primary
+    class: button--secondary
   - title: Explore Wiki ↗
     url: /wiki/
     class: button--secondary

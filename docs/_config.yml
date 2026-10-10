@@ -47,6 +47,7 @@ optional_front_matter:
 # Jekyll Collections Registration
 # - docs: Developer documentation guides (_docs/ -> /docs/:path/)
 # - wiki: Technical target catalogs and schemas (_wiki/ -> /wiki/:path/)
+# - catalogue: Theme suites catalogue (_catalogue/ -> /catalogue/:path/)
 collections:
   docs:
     output: true
@@ -54,6 +55,9 @@ collections:
   wiki:
     output: true
     permalink: /wiki/:path/
+  catalogue:
+    output: true
+    permalink: /catalogue/:path/
 
 # Build Inclusions & Exclusions
 
@@ -114,4 +118,14 @@ defaults:
       layout: wiki
       page_class: page--wiki
       section: wiki
+
+  # Catalogue Collection Default (All Documents in _catalogue/)
+  - scope:
+      path: ""
+      type: catalogue
+    values:
+      layout: catalogue-item
+      page_class: page--catalogue-item
+      section: catalogue
+
   
